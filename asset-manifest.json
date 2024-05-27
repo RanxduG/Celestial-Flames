@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Celestial-Flames/static/css/main.3048672b.css",
-    "main.js": "/Celestial-Flames/static/js/main.882d52e1.js",
+    "main.css": "/Celestial-Flames/static/css/main.c4d60d90.css",
+    "main.js": "/Celestial-Flames/static/js/main.baf91ab2.js",
     "static/js/453.8ab44547.chunk.js": "/Celestial-Flames/static/js/453.8ab44547.chunk.js",
     "static/media/Cement Chic 2.jpg": "/Celestial-Flames/static/media/Cement Chic 2.4d55132be2ad6273e7e9.jpg",
     "static/media/Celestial Glow 2.jpg": "/Celestial-Flames/static/media/Celestial Glow 2.b17019f979704c7cdf66.jpg",
@@ -17,7 +17,6 @@
     "static/media/Baby bear 2.jpg": "/Celestial-Flames/static/media/Baby bear 2.741841c8d98f5cfaad51.jpg",
     "static/media/Tower 2.jpg": "/Celestial-Flames/static/media/Tower 2.a74a18be5ea6ea23570c.jpg",
     "static/media/Pine cone.jpg": "/Celestial-Flames/static/media/Pine cone.9bd8d900ef32c03fc716.jpg",
-    "static/media/Tower.jpg": "/Celestial-Flames/static/media/Tower.dbe2a636a9af112877d6.jpg",
     "static/media/Cement Chic.jpg": "/Celestial-Flames/static/media/Cement Chic.cd0e2e0ab861af8c0aae.jpg",
     "static/media/hand-icon.jpeg": "/Celestial-Flames/static/media/hand-icon.90ed03b8edba1c885600.jpeg",
     "static/media/Elemental banner.jpg": "/Celestial-Flames/static/media/Elemental banner.d64423030460b36ced24.jpg",
@@ -29,16 +28,17 @@
     "static/media/pintrest-logo.png": "/Celestial-Flames/static/media/pintrest-logo.a83f42f80083e7044112.png",
     "static/media/instagram.png": "/Celestial-Flames/static/media/instagram.b4ff9be06a8f84fada1b.png",
     "static/media/remove.png": "/Celestial-Flames/static/media/remove.3c662b752278fc52f408.png",
+    "static/media/nav-dropdown.png": "/Celestial-Flames/static/media/nav-dropdown.49711722576479c26ae4.png",
     "static/media/Arrow.png": "/Celestial-Flames/static/media/Arrow.4113a57c48d7bc5ce717.png",
     "static/media/star-icon-dull.png": "/Celestial-Flames/static/media/star-icon-dull.190d870d386afd29523a.png",
     "static/media/star-icon.png": "/Celestial-Flames/static/media/star-icon.d0cbd94e0a4a62fc2bf4.png",
     "index.html": "/Celestial-Flames/index.html",
-    "main.3048672b.css.map": "/Celestial-Flames/static/css/main.3048672b.css.map",
-    "main.882d52e1.js.map": "/Celestial-Flames/static/js/main.882d52e1.js.map",
+    "main.c4d60d90.css.map": "/Celestial-Flames/static/css/main.c4d60d90.css.map",
+    "main.baf91ab2.js.map": "/Celestial-Flames/static/js/main.baf91ab2.js.map",
     "453.8ab44547.chunk.js.map": "/Celestial-Flames/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3048672b.css",
-    "static/js/main.882d52e1.js"
+    "static/css/main.c4d60d90.css",
+    "static/js/main.baf91ab2.js"
   ]
 }
