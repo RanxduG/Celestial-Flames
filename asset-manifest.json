@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/Celestial-Flames/static/css/main.a13919f3.css",
-    "main.js": "/Celestial-Flames/static/js/main.7cc04d8f.js",
+    "main.css": "/Celestial-Flames/static/css/main.3048672b.css",
+    "main.js": "/Celestial-Flames/static/js/main.882d52e1.js",
     "static/js/453.8ab44547.chunk.js": "/Celestial-Flames/static/js/453.8ab44547.chunk.js",
     "static/media/Cement Chic 2.jpg": "/Celestial-Flames/static/media/Cement Chic 2.4d55132be2ad6273e7e9.jpg",
     "static/media/Celestial Glow 2.jpg": "/Celestial-Flames/static/media/Celestial Glow 2.b17019f979704c7cdf66.jpg",
     "static/media/Twirlling hearts 3.jpg": "/Celestial-Flames/static/media/Twirlling hearts 3.5c27038fddece8bf5ec1.jpg",
     "static/media/Xmas tree 2.jpg": "/Celestial-Flames/static/media/Xmas tree 2.55ab10d7a603a65edfa0.jpg",
-    "static/media/Hexa light 3.jpg": "/Celestial-Flames/static/media/Hexa light 3.910e7c34a1ed6736e33e.jpg",
+    "static/media/Pink Hexa Light.jpg": "/Celestial-Flames/static/media/Pink Hexa Light.c8c680e2baa9fc1b9f39.jpg",
+    "static/media/Hexa Light Editted.jpg": "/Celestial-Flames/static/media/Hexa Light Editted.d769cfc13aa8a998587f.jpg",
+    "static/media/Blue Hexa Light.jpg": "/Celestial-Flames/static/media/Blue Hexa Light.0188034416834c33b88b.jpg",
+    "static/media/Purple Hexa Light.jpg": "/Celestial-Flames/static/media/Purple Hexa Light.6f316ce34b97da716827.jpg",
     "static/media/Cubist Candle 5.jpg": "/Celestial-Flames/static/media/Cubist Candle 5.179bd09f2087e5c470c1.jpg",
     "static/media/Cloud nine.jpg": "/Celestial-Flames/static/media/Cloud nine.0a8a16c89418c58a5e6f.jpg",
     "static/media/Wobbly.jpg": "/Celestial-Flames/static/media/Wobbly.eb9e839ea9996e3d4901.jpg",
     "static/media/Baby bear 2.jpg": "/Celestial-Flames/static/media/Baby bear 2.741841c8d98f5cfaad51.jpg",
     "static/media/Tower 2.jpg": "/Celestial-Flames/static/media/Tower 2.a74a18be5ea6ea23570c.jpg",
     "static/media/Pine cone.jpg": "/Celestial-Flames/static/media/Pine cone.9bd8d900ef32c03fc716.jpg",
-    "static/media/Wobbly and cloud nine.jpg": "/Celestial-Flames/static/media/Wobbly and cloud nine.bb6f5f2c5594055d6879.jpg",
-    "static/media/Celestial Glow.jpg": "/Celestial-Flames/static/media/Celestial Glow.82a76aad77a553b3f173.jpg",
     "static/media/Tower.jpg": "/Celestial-Flames/static/media/Tower.dbe2a636a9af112877d6.jpg",
     "static/media/Cement Chic.jpg": "/Celestial-Flames/static/media/Cement Chic.cd0e2e0ab861af8c0aae.jpg",
     "static/media/hand-icon.jpeg": "/Celestial-Flames/static/media/hand-icon.90ed03b8edba1c885600.jpeg",
@@ -32,12 +33,12 @@
     "static/media/star-icon-dull.png": "/Celestial-Flames/static/media/star-icon-dull.190d870d386afd29523a.png",
     "static/media/star-icon.png": "/Celestial-Flames/static/media/star-icon.d0cbd94e0a4a62fc2bf4.png",
     "index.html": "/Celestial-Flames/index.html",
-    "main.a13919f3.css.map": "/Celestial-Flames/static/css/main.a13919f3.css.map",
-    "main.7cc04d8f.js.map": "/Celestial-Flames/static/js/main.7cc04d8f.js.map",
+    "main.3048672b.css.map": "/Celestial-Flames/static/css/main.3048672b.css.map",
+    "main.882d52e1.js.map": "/Celestial-Flames/static/js/main.882d52e1.js.map",
     "453.8ab44547.chunk.js.map": "/Celestial-Flames/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a13919f3.css",
-    "static/js/main.7cc04d8f.js"
+    "static/css/main.3048672b.css",
+    "static/js/main.882d52e1.js"
   ]
 }
