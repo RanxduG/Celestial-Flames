@@ -1,0 +1,20 @@
+.Collection{
+    width: 350px;
+
+}
+.Collection p{
+    margin: 6px 0px;
+
+}
+
+.Collection img{
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+
+}
+
+.Collection:hover{
+    transform: scale(1.05);
+    transition: all 0.6s ease-in-out;
+}

@@ -1,0 +1,41 @@
+.all-products {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+}
+
+.p-wrapper {
+    width: 73%; /* Ensure the wrapper takes the full width */
+    display: flex;
+    justify-content:flex-start; /* Align items to the start (left) */
+}
+
+.p-wrapper p {
+    color: #171717;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.all-products h1 {
+    color: #171717;
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.all-products hr {
+    width: 200px;
+    height: 6px;
+    border-radius: 10px;
+    background: #252525;
+}
+
+.collection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 50px;
+    gap: 30px;
+}
