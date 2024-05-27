@@ -24,7 +24,8 @@ let all_data = [
         dimensions: '12cm x 5cm x 5cm',
         soy_price : 2500,
         half_n_half_price: 2300,
-        paraffin_price: 2100
+        paraffin_price: 2100,
+        popular: true
 
     },
     {
@@ -38,6 +39,7 @@ let all_data = [
         half_n_half_price: 1900,
         paraffin_price: 1800,
         tags: ['cubist', 'candle', 'tower']
+
     },
     {
         id: 'CLC2024020',
@@ -82,7 +84,8 @@ let all_data = [
         dimensions: '5cm x 6cm x 6cm',
         soy_price: 1000,
         half_n_half_price: 900,
-        paraffin_price: 850
+        paraffin_price: 850,
+        popular: true
     },
     {
         id: 'CLC2024027',
@@ -126,7 +129,8 @@ let all_data = [
         dimensions: '9cm x 7.2cm x 7.2cm',
         soy_price: 2600,
         half_n_half_price: 2200,
-        paraffin_price: 1800
+        paraffin_price: 1800,
+        popular: true
     },
     {
         id: 'EC2024023',
@@ -135,9 +139,10 @@ let all_data = [
         image: cementchic,
         description: 'Experience urban elegance with the Cement Chic candle, a 7.5cm tall contemporary masterpiece in a handcrafted cement container. Enjoy 18-20 hours of burn time, adding sophistication and fragrance to any space.',
         dimensions: '7.5cm x 7.5cm x 7.5cm',
-        soy_price: 3600,
-        half_n_half_price: 2900,
-        paraffin_price: 2500
+        soy_price: 3000,
+        half_n_half_price: 2500,
+        paraffin_price: 2000,
+        popular: true
     }
 
 ]

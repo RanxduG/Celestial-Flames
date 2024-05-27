@@ -1,14 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import "./Navbar.css";
 import logo from "../Assets/Celestial flames logo 2.0.jpg";
 import shoppingcart from "../Assets/shopping-cart.jpg";
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
+import nav_dropdown from "../Assets/nav-dropdown.png";
 
 const Navbar = () => {
     const {getTotalCartItems} = useContext(ShopContext)
     const [menu, setMenu] = useState("main")
+    const menuRef  = useRef();
 
+    const dropdown_toggle = (e) => {
+        menuRef.current.classList.toggle('nav-menu-visible')
+        e.target.classList.toggle('open')
+    
+    }
 
   return (
     <div className='navbar'>
@@ -16,7 +23,8 @@ const Navbar = () => {
             <Link to='/'><img onClick={()=>{setMenu("main")}} src={logo} alt="logo" id='mainLogo'/></Link>
             <p>Celestial Flames</p>
         </div>
-        <ul className="nav-menu">
+        <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="" />
+        <ul ref={menuRef} className="nav-menu">
             <li onClick={()=>{setMenu("shop")}}><Link style={{textDecoration:'none'}} to='/shop'>Shop</Link>{menu ==="shop"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("classic")}}><Link style={{textDecoration:'none'}} to='/classic'>Classic</Link>{menu ==="classic"?<hr/>:<></>}</li>
             <li onClick={()=>{setMenu("cement")}}><Link style={{textDecoration:'none'}} to='/cement'>Elemental</Link>{menu ==="cement"?<hr/>:<></>}</li>

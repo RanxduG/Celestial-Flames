@@ -1,6 +1,8 @@
 .item{
-    width: 350px;
-
+    width: 280px;
+}
+.item img{
+    width: 280px;
 }
 .item p{
     margin: 6px 0px;
@@ -30,4 +32,37 @@
 .item:hover{
     transform: scale(1.05);
     transition: all 0.6s ease-in-out;
+}
+@media(max-width: 1280px){
+    .item{
+        width:  230px;
+        font-size: 14px;
+    }
+    .item img{
+        width: 230px;
+        height: 320px;
+    }
+    
+}
+@media(max-width: 1024px){
+    .item{
+        width:  220;
+        font-size: 13px;
+    }
+    .item img{
+        width: 220px;
+        height: 270px;
+    }
+    
+}
+@media(max-width: 800px){
+    .item{
+        width:  200px;
+        font-size: 12px;
+    }
+    .item img{
+        width: 200px;
+        height: 250px;
+    }
+    
 }

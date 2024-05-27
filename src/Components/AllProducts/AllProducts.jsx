@@ -17,12 +17,7 @@ const AllProducts = () => {
         {all_product.map((item, i) => {
             if ('Classic Collection' === item.category) {
               return (
-                <Item
-                  key={i}
-                  id={item.id}
-                  name={item.name}
-                  image={item.image}
-                />
+                <Item key={i} id={item.id} name={item.name} image={item.image}/>
               );
             }
             return null;
