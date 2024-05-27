@@ -6,8 +6,7 @@ import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_
 
 const ProductDisplay = (props) => {
     const { product } = props;
-    const {addToCart} = useContext(ShopContext);
-
+    const { addToCart } = useContext(ShopContext);
 
     const [selectedWaxType, setSelectedWaxType] = useState(null);
     const [selectedFragranceType, setSelectedFragranceType] = useState(null);
@@ -55,34 +54,38 @@ const ProductDisplay = (props) => {
         return selected === current ? 'option selected' : 'option';
     };
 
+    const areAllOptionsSelected = () => {
+        return selectedWaxType && selectedFragranceType && selectedColor && selectedFragrance;
+    };
+
     return (
         <div className='productdisplay'>
             <div className="productdisplay-left">
                 <div className="productdisplay-img-list">
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
-                    <img src={product.image} alt="" />
+                    <img src={product.image} alt={product.name} />
+                    {product.other_images && product.other_images.map((img, index) => (
+                        <img key={index} src={img} alt={`${product.name} ${index + 1}`} />
+                    ))}
                 </div>
                 <div className="productdisplay-img">
-                    <img className='productdisplay-main-img' src={product.image} alt="" />
+                    <img className='productdisplay-main-img' src={product.image} alt={product.name} />
                 </div>
             </div>
             <div className="productdisplay-right">
                 <h1>{product.name}</h1>
                 <div className="productdisplay-right-star">
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_icon} alt="" />
-                    <img src={star_dull_icon} alt="" />
+                    <img src={star_icon} alt="star icon" />
+                    <img src={star_icon} alt="star icon" />
+                    <img src={star_icon} alt="star icon" />
+                    <img src={star_icon} alt="star icon" />
+                    <img src={star_dull_icon} alt="dull star icon" />
                     <p>122</p>
                 </div>
                 <div className="productdisplay-right-description">
                     {product.description}
                 </div>
                 <div className="productdisplay-right-feature">
-                    <h1>Select Wax Type</h1>
+                    <h1>Select Wax Type*</h1>
                     <div className="productdisplay-right-options">
                         <div className={getOptionClass(selectedWaxType, 'Paraffin Wax')} onClick={() => handleWaxTypeChange('Paraffin Wax')}>Paraffin Wax</div>
                         <div className={getOptionClass(selectedWaxType, 'Soy Wax')} onClick={() => handleWaxTypeChange('Soy Wax')}>Soy Wax</div>
@@ -90,7 +93,7 @@ const ProductDisplay = (props) => {
                     </div>
                 </div>
                 <div className="productdisplay-right-feature">
-                    <h1>Select Fragrance Type</h1>
+                    <h1>Select Fragrance Type*</h1>
                     <div className="productdisplay-right-options">
                         <div className={getOptionClass(selectedFragranceType, 'Chemical')} onClick={() => handleFragranceTypeChange('Chemical')}>Chemical Fragrance</div>
                         <div className={getOptionClass(selectedFragranceType, 'Essential Oil')} onClick={() => handleFragranceTypeChange('Essential Oil')}>Essential Oil</div>
@@ -117,7 +120,12 @@ const ProductDisplay = (props) => {
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
                 </div>
-                <button onClick={() => {addToCart(product.id)}}>ADD TO CART</button>
+                <button 
+                    onClick={() => { addToCart(product.id, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice()) }} 
+                    disabled={!areAllOptionsSelected()}>
+                    ADD TO CART
+                </button>
+
                 <p className='productdisplay-right-category'><span>Category :</span>Crystal Collection, Celestial Glow</p>
                 <p className='productdisplay-right-category'><span>Tags :</span>Latest, Glass Candles</p>
             </div>

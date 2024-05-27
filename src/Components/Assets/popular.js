@@ -1,11 +1,14 @@
 import tower from './Tower.jpg';
 import celestialglow from './Celestial Glow 2.jpg';
 import cementchic from './Cement Chic 2.jpg';
-import bubble_candles from './Wobbly and cloud nine.jpg';
+import Hexa_light from './Hexa Light Editted.jpg';
+import Hexa_lght_pink from './Pink Hexa Light.jpg';
+import Hexa_lght_blue from './Blue Hexa Light.jpg';
+import Hexa_lght_green from './Purple Hexa Light.jpg';
 
 let data_product = [
     {
-        id: 'CLSC-001',
+        id: 'CLC2024004',
         category: 'Classic Collection',
         name: 'Tower',
         image: tower,
@@ -28,18 +31,27 @@ let data_product = [
         paraffin_price: 1800
     },
     {
-        id: 'CMT-001',
+        id: 'EC2024023',
+        category: 'Elemental Collection',
         name: 'Cement Chic',
         image: cementchic,
-        old_price: 3000,
-        new_price: 2500
+        description: 'Experience urban elegance with the Cement Chic candle, a 7.5cm tall contemporary masterpiece in a handcrafted cement container. Enjoy 18-20 hours of burn time, adding sophistication and fragrance to any space.',
+        dimensions: '7.5cm x 7.5cm x 7.5cm',
+        soy_price: 3600,
+        half_n_half_price: 2900,
+        paraffin_price: 2500
     },
     {
-        id: 'CLSC-004',
-        name: 'Bubble Candles',
-        image: bubble_candles,
-        old_price: 2500,
-        new_price: 2000
+        id: 'CLC2024022',
+        category: 'Classic Collection',
+        name: 'Hexa Light',
+        image: Hexa_light,
+        other_images: [Hexa_lght_pink, Hexa_lght_blue, Hexa_lght_green],
+        description: 'Our Hexa Light candle, featuring a unique rhombohedral shape. Measuring 5cm in height and 6cm in width, this candle offers 3 hours of burn time, creating a radiant glow for moments of tranquility and beauty.',
+        dimensions: '5cm x 6cm x 6cm',
+        soy_price: 1000,
+        half_n_half_price: 900,
+        paraffin_price: 850
     }
 ]
 

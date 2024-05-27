@@ -10,6 +10,7 @@ const Product = () => {
   const { productId } = useParams();
 
   const product = all_product.find((e) => e.id === productId);
+  // console.log(product);
 
   return (
     <div>

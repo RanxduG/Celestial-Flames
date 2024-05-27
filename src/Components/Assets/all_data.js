@@ -4,7 +4,10 @@ import twirlling_hearts from './Twirlling hearts 3.jpg';
 import Cloud_nine from './Cloud nine.jpg';
 import Wobbly from './Wobbly.jpg';
 import Xmas_tree from './Xmas tree 2.jpg';
-import Hexa_light from './Hexa light 3.jpg';
+import Hexa_light from './Hexa Light Editted.jpg';
+import Hexa_lght_pink from './Pink Hexa Light.jpg';
+import Hexa_lght_blue from './Blue Hexa Light.jpg';
+import Hexa_lght_green from './Purple Hexa Light.jpg';
 import Pine_cone from './Pine cone.jpg';
 import Baby_bear from './Baby bear 2.jpg';
 import celestialglow from './Celestial Glow 2.jpg';
@@ -33,7 +36,8 @@ let all_data = [
         description: 'Our Cubist candle is a smaller version of the Tower candle. It measures 8.5cm in height and 5cm in width, offering contemporary elegance with a 7-hour burn time for moments of serenity. ',
         dimensions: '8.5cm x 5cm x 5cm',
         half_n_half_price: 1900,
-        paraffin_price: 1800
+        paraffin_price: 1800,
+        tags: ['cubist', 'candle', 'tower']
     },
     {
         id: 'CLC2024020',
@@ -73,6 +77,7 @@ let all_data = [
         category: 'Classic Collection',
         name: 'Hexa Light',
         image: Hexa_light,
+        other_images: [Hexa_lght_pink, Hexa_lght_blue, Hexa_lght_green],
         description: 'Our Hexa Light candle, featuring a unique rhombohedral shape. Measuring 5cm in height and 6cm in width, this candle offers 3 hours of burn time, creating a radiant glow for moments of tranquility and beauty.',
         dimensions: '5cm x 6cm x 6cm',
         soy_price: 1000,
