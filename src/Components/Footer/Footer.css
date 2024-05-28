@@ -66,3 +66,33 @@
     height: 3px;
     background: #c7c7c7;
 }
+@media(max-width: 800px){
+    .footer-logo img{
+        width: 200px;
+        height: 200px;
+    }
+    .footer-logo p{
+        font-size: 30px;
+    }
+    .footer-links{
+        gap: 30px;
+    }
+    .footer-links li{
+        font-size: 18px;
+    }
+    .footer-social-icons{
+        gap: 10px;
+    }
+    .footer-icons-container img{
+        width: 25px;
+        height: 25px;
+    }
+    .footer-copywrite{
+        gap: 20px;
+        font-size: 18px;
+    }
+    .footer-copywrite hr{
+        width: 70%;
+        height: 2px;
+    }
+}

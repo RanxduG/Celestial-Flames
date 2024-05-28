@@ -1,4 +1,5 @@
 .new-collections{
+    height: 50vh;
     padding-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -24,18 +25,42 @@
     gap: 30px;
 }
 @media(max-width: 1024px){
-    
+
     .collections{
         grid-template-columns: 1fr 1fr 1fr;
+    }
+    .new-collections h1{
+        font-size: 40px;
+    }
+    .new-collections hr{
+        width: 200px;
+        height: 6px;
     }
 }
 @media(max-width: 800px){
     .collections{
         grid-template-columns: 1fr 1fr;
     }
+    .new-collections h1{
+        font-size: 35px;
+    }
+    .new-collections hr{
+        width: 150px;
+        height: 4px;
+    }
 }
 @media(max-width: 500px){
+    .new-collections{
+        height: 80vh;
+    }
     .collections{
         grid-template-columns: 1fr;
+    }
+    .new-collections h1{
+        font-size: 30px;
+    }
+    .new-collections hr{
+        width: 150px;
+        height: 4px;
     }
 }

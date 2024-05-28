@@ -1,23 +1,24 @@
-.Collection{
-    width: 350px;
-
-}
-.Collection p{
-    margin: 6px 0px;
-
+.Collection {   
+    width:  280px;
+    text-decoration: none; /* Ensure no underline from the link itself */
 }
 
-.Collection img{
-    width: 300px;
-    height: 400px;
-    object-fit: cover;
-
+.Collection img {
+    width: 100%;
+    height: auto;
 }
 
-.Collection:hover{
+.Collection p {
+    text-decoration: none; /* Ensure no underline for the text */
+    color: black; /* Inherit the color to maintain consistent styling */
+}
+
+
+.Collection :hover{
     transform: scale(1.05);
     transition: all 0.6s ease-in-out;
 }
+
 @media(max-width: 1280px){
     .Collection{
         width:  230px;
@@ -29,7 +30,7 @@
     }
     
 }
-@media(max-width: 1024px){
+@media(max-width: 1280px){
     .Collection{
         width:  230;
         font-size: 13px;
@@ -40,7 +41,7 @@
     }
     
 }
-@media(max-width: 800px){
+@media(max-width: 1024px){
     .Collection{
         width:  220px;
         font-size: 12px;
@@ -51,7 +52,7 @@
     }
     
 }
-@media(max-width: 500px){
+@media(max-width: 800px){
     .Collection{
         width:  200px;
         font-size: 10px;

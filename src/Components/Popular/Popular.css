@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    height: 90vh;
+    height: 80vh;
 }
 
 .popular h1 {
@@ -29,7 +29,10 @@
 
 @media(max-width: 1024px) {
     .popular{
-        height: 100vh;
+        height: 90vh;
+    }
+    .popular h1 {
+        font-size: 40px;
     }
     .popular-item {
         grid-template-columns: 1fr 1fr 1fr;
@@ -38,7 +41,10 @@
 
 @media(max-width: 800px) {
     .popular{
-        height: 110vh;
+        height: 90vh;
+    }
+    .popular h1 {
+        font-size: 35px;
     }
     .popular-item {
         grid-template-columns: 1fr 1fr;
@@ -47,7 +53,10 @@
 
 @media(max-width: 500px) {
     .popular{
-        height: 165vh;
+        height: 150vh;
+    }
+    .popular h1 {
+        font-size: 30px;
     }
     .popular-item {
         grid-template-columns: 1fr;
