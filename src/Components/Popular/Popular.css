@@ -53,7 +53,7 @@
 
 @media(max-width: 500px) {
     .popular{
-        height: 150vh;
+        height: 180vh;
     }
     .popular h1 {
         font-size: 30px;

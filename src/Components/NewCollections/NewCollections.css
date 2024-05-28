@@ -51,7 +51,7 @@
 }
 @media(max-width: 500px){
     .new-collections{
-        height: 80vh;
+        height: 100vh;
     }
     .collections{
         grid-template-columns: 1fr;

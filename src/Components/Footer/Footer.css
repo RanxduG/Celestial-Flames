@@ -67,9 +67,12 @@
     background: #c7c7c7;
 }
 @media(max-width: 800px){
+    .footer{
+        width: 400px;
+    }
     .footer-logo img{
-        width: 200px;
-        height: 200px;
+        width: 150px;
+        height: 150px;
     }
     .footer-logo p{
         font-size: 30px;
