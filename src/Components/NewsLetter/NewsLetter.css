@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     margin: auto;
-    padding: 0px 140px;
+    padding: 0px 100px;
     margin-bottom: 150px;
     background: linear-gradient(45deg, #090808, #e1ffea22 60%);
     gap: 30px;
@@ -127,28 +127,30 @@
 @media(max-width: 500px){
     .newsletter{
         height: 30vh;
+        width: 400px;
         padding: 0px 5px;
-        margin-bottom: 80px;
+        margin: 50px 15px;
         gap:10px;
     }
     .newsletter h1{
-        font-size: 20px;
+        font-size: 18px;
     }
     .newsletter p{
         font-size: 12px;
     }
     .newsletter div{
-        width: 200px;
-        padding: 0px 20px;
+        width: 300px;
+        margin: 10px 20px;
+        /* padding: 0px 50px; */
     }
     .newsletter input{
         font-size: 12px;
         height: 40px;
-        width: 130px;
+        width: 200px;
     }
     .newsletter div button{
         font-size: 12px;
-        margin-right:-10px;
+        /* margin-right:-10px; */
         width: 100px;
         height: 40px;
     }
