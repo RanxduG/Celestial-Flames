@@ -59,3 +59,108 @@
     font-size: 18px;
     font-weight: 500;
 }
+@media(max-width: 1280px){
+    .loginsignup-container{
+        width: 500px;
+        height: 550px;
+        padding: 40px 50px;
+    }
+    .loginsignup-container h1{
+        font-size: 30px;
+    }
+    .loginsignup-fields input{
+        height: 60px;
+        font-size: 16px;
+    }
+    .loginsignup-container button{
+        height: 60px;
+        font-size: 20px;
+    }
+    .loginsignup-login{
+        font-size: 16px;
+    }
+    .loginsignup-agree{
+        font-size: 16px;
+    }
+
+}
+@media(max-width: 1024px){
+    .loginsignup-container{
+        width: 450px;
+        height: 500px;
+        padding: 40px 40px;
+    }
+    .loginsignup-container h1{
+        font-size: 25px;
+    }
+    .loginsignup-fields input{
+        height: 50px;
+        font-size: 14px;
+    }
+    .loginsignup-container button{
+        height: 50px;
+        font-size: 18px;
+    }
+    .loginsignup-login{
+        font-size: 14px;
+    }
+    .loginsignup-agree{
+        font-size: 14px;
+    }
+}
+@media(max-width: 800px){
+    .loginsignup-container{
+        width: 400px;
+        height: 450px;
+        padding: 40px 30px;
+    }
+    .loginsignup-container h1{
+        font-size: 20px;
+    }
+    .loginsignup-fields input{
+        height: 40px;
+        font-size: 12px;
+    }
+    .loginsignup-container button{
+        height: 40px;
+        font-size: 16px;
+    }
+    .loginsignup-login{
+        font-size: 12px;
+    }
+    .loginsignup-agree{
+        font-size: 12px;
+    }
+}
+@media(max-width: 500px){
+    .loginsignup{
+        width: 450px;
+        height: 70vh ;
+        background: linear-gradient(180deg, #090808, grey 70%);
+        padding-top: 100px;
+    }
+    .loginsignup-container{
+        width: 300px;
+        height: 400px;
+        padding: 40px 20px;
+    }
+    .loginsignup-container h1{
+        font-size: 18px;
+    }
+    .loginsignup-fields input{
+        height: 30px;
+        width: 90%;
+        font-size: 10px;
+    }
+    .loginsignup-container button{
+        height: 30px;
+        width: 300px;
+        font-size: 14px;
+    }
+    .loginsignup-login{
+        font-size: 10px;
+    }
+    .loginsignup-agree{
+        font-size: 10px;
+    }
+}
