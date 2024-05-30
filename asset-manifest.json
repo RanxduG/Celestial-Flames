@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Celestial-Flames/static/css/main.d7d9d8cd.css",
+    "main.css": "/Celestial-Flames/static/css/main.7bba1284.css",
     "main.js": "/Celestial-Flames/static/js/main.1ae1708e.js",
     "static/js/453.8ab44547.chunk.js": "/Celestial-Flames/static/js/453.8ab44547.chunk.js",
     "static/media/Cement Chic 2.jpg": "/Celestial-Flames/static/media/Cement Chic 2.4d55132be2ad6273e7e9.jpg",
@@ -32,12 +32,12 @@
     "static/media/star-icon-dull.png": "/Celestial-Flames/static/media/star-icon-dull.190d870d386afd29523a.png",
     "static/media/star-icon.png": "/Celestial-Flames/static/media/star-icon.d0cbd94e0a4a62fc2bf4.png",
     "index.html": "/Celestial-Flames/index.html",
-    "main.d7d9d8cd.css.map": "/Celestial-Flames/static/css/main.d7d9d8cd.css.map",
+    "main.7bba1284.css.map": "/Celestial-Flames/static/css/main.7bba1284.css.map",
     "main.1ae1708e.js.map": "/Celestial-Flames/static/js/main.1ae1708e.js.map",
     "453.8ab44547.chunk.js.map": "/Celestial-Flames/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d7d9d8cd.css",
+    "static/css/main.7bba1284.css",
     "static/js/main.1ae1708e.js"
   ]
 }
