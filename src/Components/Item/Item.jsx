@@ -9,9 +9,13 @@ const Item = (props) => {
   };
 
   return (
+    console.log(props),
     <div className='item'>
       <Link to={`/product/${props.id}`} onClick={handleClick}>
-        <img src={props.image} alt="" />
+        <div className='image-container'>
+          <img src={props.image} alt="" className='main-image'/>
+          <img src={props.secondImage} alt="" className='hover-image'/>
+        </div>
       </Link>
       <p>{props.name}</p>
     </div>

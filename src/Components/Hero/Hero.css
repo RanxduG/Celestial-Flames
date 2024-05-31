@@ -19,13 +19,11 @@
     font-weight: 600;
     
 }
-
 .hero-left p{
     color: #171717;
     font-size: 100px;
     font-weight: 700;
 }
-
 .hero-latest-btn{
     text-decoration: none;
     display: flex;
@@ -46,6 +44,7 @@
     width: 30px;
 }
 .hero-right img{
+    border-radius: 50px;
     width: 600px;
     height: 700px;
     object-fit: cover;

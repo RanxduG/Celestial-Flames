@@ -27,6 +27,7 @@ const ShopCategory = (props) => {
                 id={item.id}
                 name={item.name}
                 image={item.image}
+                secondImage={item.secondImage}
               />
             );
           }

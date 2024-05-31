@@ -14,7 +14,7 @@ const Popular = () => {
           {all_product.map((item, i) => {
               if (item.popular===true) {
                 return (
-                  <Item key={i} id={item.id} name={item.name} image={item.image}/>
+                  <Item key={i} id={item.id} name={item.name} image={item.image} secondImage={item.secondImage} />
                 );
               }
               return null;
