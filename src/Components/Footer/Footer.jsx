@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.css';
 import footer_logo from '../Assets/Celestial flames logo 2.0.jpg';
 import instagram_icon from '../Assets/instagram.png';
-import pintrest_icon from '../Assets/pintrest-logo.png';
+import facebook_icon from '../Assets/facebook.png';
 import whatsapp_icon from '../Assets/whatsapp.png';
 
 const Footer = () => {
@@ -15,7 +15,6 @@ const Footer = () => {
         </div>
         <ul className="footer-links">
             <li>Company</li>
-            <li>Products</li>
             <li>About</li>
             <li>Contact</li>
         </ul>
@@ -26,12 +25,12 @@ const Footer = () => {
                 </a>
             </div>
             <div className="footer-icons-container">
-                <a href="https://www.pinterest.com/yourprofile" target="_blank" rel="noopener noreferrer">
-                    <img src={pintrest_icon} alt="Pinterest" />
+                <a href="https://www.facebook.com/profile.php?id=61560314546678" target="_blank" rel="noopener noreferrer">
+                    <img src={facebook_icon} alt="Facebook" />
                 </a>
             </div>
             <div className="footer-icons-container">
-                <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/+94770081559" target="_blank" rel="noopener noreferrer">
                     <img src={whatsapp_icon} alt="WhatsApp" />
                 </a>
             </div>

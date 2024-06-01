@@ -267,9 +267,10 @@
     }
     .productdisplay-img-list img{
         height: 75px;
+        width: 80px;
     }
     .productdisplay-main-img{
-        width: auto;
+        width: 300px;
         height: 330px;
     }
     .productdisplay-right{
