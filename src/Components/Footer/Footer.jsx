@@ -21,15 +21,22 @@ const Footer = () => {
         </ul>
         <div className="footer-social-icons">
             <div className="footer-icons-container">
-                <img src={instagram_icon} alt="" />
+                <a href="https://www.instagram.com/celestial.flames.candles.co/" target="_blank" rel="noopener noreferrer">
+                    <img src={instagram_icon} alt="Instagram" />
+                </a>
             </div>
             <div className="footer-icons-container">
-                <img src={pintrest_icon} alt="" />
+                <a href="https://www.pinterest.com/yourprofile" target="_blank" rel="noopener noreferrer">
+                    <img src={pintrest_icon} alt="Pinterest" />
+                </a>
             </div>
             <div className="footer-icons-container">
-                <img src={whatsapp_icon} alt="" />
+                <a href="https://wa.me/yourphonenumber" target="_blank" rel="noopener noreferrer">
+                    <img src={whatsapp_icon} alt="WhatsApp" />
+                </a>
             </div>
         </div>
+
         <div className="footer-copywrite">
             <hr />
             <p>Copywrite @ 2023 - All Rights Reserved.</p>
