@@ -46,7 +46,7 @@ const LoginSignup = () => {
   const handleSignup = () => {
     if (formData.name && formData.email && formData.password && formData.agreed) {
       setUser({ name: formData.name, email: formData.email }); // Save user details
-      navigate('/Celestial-Flames');
+      navigate('/');
     } else {
       setError('Please fill in all fields and agree to the terms.');
     }
@@ -58,7 +58,7 @@ const LoginSignup = () => {
     );
     if (user) {
       setUser({ name: user.name, email: user.email }); // Save user details
-      navigate('/Celestial-Flames');
+      navigate('/');
     } else {
       setError('Invalid email or password.');
     }

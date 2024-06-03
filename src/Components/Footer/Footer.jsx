@@ -4,8 +4,12 @@ import footer_logo from '../Assets/Celestial flames logo 2.0.jpg';
 import instagram_icon from '../Assets/instagram.png';
 import facebook_icon from '../Assets/facebook.png';
 import whatsapp_icon from '../Assets/whatsapp.png';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
+    const handleClick = () => {
+        window.scrollTo(0, 0);
+      };
 
   return (
     <div className='footer'>
@@ -14,9 +18,9 @@ const Footer = () => {
             <p>Celestial Flames</p>
         </div>
         <ul className="footer-links">
-            <li>Company</li>
-            <li>About</li>
-            <li>Contact</li>
+            <Link onClick={handleClick()}><li>Company</li></Link>
+            <Link onClick={handleClick()}><li>About</li></Link>
+            <Link onClick={handleClick()} to={'/contactus'}><li>Contact</li></Link>
         </ul>
         <div className="footer-social-icons">
             <div className="footer-icons-container">
@@ -39,6 +43,11 @@ const Footer = () => {
         <div className="footer-copywrite">
             <hr />
             <p>Copywrite @ 2023 - All Rights Reserved.</p>
+        </div>
+        <div className='go-up'>
+            <a href="#top" className="go_top" data-go-top>
+                <button>Go Back up</button>
+            </a>
         </div>
     </div>
   );

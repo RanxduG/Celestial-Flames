@@ -49,7 +49,7 @@ const Navbar = () => {
     return (
         <div className='navbar' ref={navbarRef}>
             <div className="nav-logo">
-                <Link to='/Celestial-Flames'><img onClick={() => { setMenu("main") }} src={logo} alt="logo" id='mainLogo' /></Link>
+                <Link to='/'><img onClick={() => { setMenu("main") }} src={logo} alt="logo" id='mainLogo' /></Link>
                 <p>Celestial Flames</p>
             </div>
             <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="Menu" />
