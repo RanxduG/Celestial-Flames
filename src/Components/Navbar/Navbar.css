@@ -94,7 +94,6 @@
     display: none;
 }
 
-
 /* Added styles for navbar-scrolled */
 .navbar-scrolled .nav-menu,
 .navbar-scrolled .nav-login-cart {
@@ -136,6 +135,7 @@
     font-size: 38px;
     font-weight: 600;
 }
+
 @media(max-width: 1280px) {
     .navbar {
         padding: 10px 50px;
@@ -218,8 +218,7 @@
         margin-bottom: 15px;
     }
     .nav-close-button {
-        align-self: flex-end;
-        cursor: pointer;
+        display: none; /* Initially hide the close button */
     }
     .nav-login-cart {
         display: flex;
@@ -283,10 +282,7 @@
     cursor: pointer;
 }
 
-/* Specific media queries for further adjustments */
-
 @media(max-width: 800px) {
-
     .nav-logo img {
         width: 80px;
     }
@@ -305,8 +301,12 @@
         height: 16px;
         font-size: 10px;
     }
-    .nav-dropdown{
+    .nav-dropdown {
         width: 50px;
+    }
+    .nav-close-button {
+        display: block; /* Show the close button on small screens */
+        align-self: flex-end;
     }
 }
 
@@ -329,7 +329,7 @@
         height: 14px;
         font-size: 8px;
     }
-    .nav-dropdown{
+    .nav-dropdown {
         width: 30px;
     }
 }

@@ -13,6 +13,7 @@ const getDefaultCart = () => {
 
 const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [userDetails, setUserDetails] = useState(null); // Add userDetails state
 
     const addToCart = (itemId, waxType, fragrancetype, color, fragrance, total) => {
         setCartItems((prev) => ({
@@ -59,13 +60,19 @@ const ShopContextProvider = (props) => {
         return totalItems;
     };
 
+    const setUser = (user) => { // Function to set user details
+        setUserDetails(user);
+    };
+
     const contextValue = {
         all_product,
         cartItems,
         addToCart,
         removeFromCart,
         getTotalCartAmount,
-        getTotalCartItems
+        getTotalCartItems,
+        userDetails, // Expose userDetails
+        setUser // Expose setUser function
     };
 
     return (

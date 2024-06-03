@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './CSS/LoginSignup.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
 
 const LoginSignup = () => {
   const { state } = useParams();
   const navigate = useNavigate();
+  const { setUser } = useContext(ShopContext); // Get setUser function from context
 
   // State management for form fields and validation
   const [formData, setFormData] = useState({
@@ -21,8 +23,8 @@ const LoginSignup = () => {
 
   // Sample user data for login validation
   const sampleUsers = [
-    { email: 'ranidu.h.gurusinghe@gmail.com', password: 'Hansaka@123' },
-    { email: 'user2@example.com', password: 'password2' },
+    { name: "Ranidu Gurusinghe", email: 'ranidu.h.gurusinghe@gmail.com', password: 'Hansaka@123' },
+    { name: "Celine Fernando", email: 'celinefdo77@gmail.com', password: 'Celine@123' },
   ];
 
   const handleChange = (e) => {
@@ -43,7 +45,8 @@ const LoginSignup = () => {
 
   const handleSignup = () => {
     if (formData.name && formData.email && formData.password && formData.agreed) {
-      navigate('/');
+      setUser({ name: formData.name, email: formData.email }); // Save user details
+      navigate('/Celestial-Flames');
     } else {
       setError('Please fill in all fields and agree to the terms.');
     }
@@ -54,7 +57,8 @@ const LoginSignup = () => {
       (user) => user.email === loginData.email && user.password === loginData.password
     );
     if (user) {
-      navigate('/');
+      setUser({ name: user.name, email: user.email }); // Save user details
+      navigate('/Celestial-Flames');
     } else {
       setError('Invalid email or password.');
     }
