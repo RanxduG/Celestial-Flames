@@ -3,7 +3,7 @@ import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_
 import './WelcomeBanner.css';
 import { Link } from 'react-router-dom';
 
-import image1 from '../Assets/Welcome-banner-image-1.png';
+import image1 from '../Assets/Celestial Glow.jpg';
 import image2 from '../Assets/Welcome-banner-image-2.png';
 import image3 from '../Assets/Welcome-banner-image-3.png';
 
@@ -14,7 +14,7 @@ const WelcomeBanner = () => {
   const [isTyping, setIsTyping] = useState(true);
 
   const slides = [image1, image2, image3];
-  const textToType = userDetails ? `Welcome to Celestial Flames, ${userDetails.name}!` : 'Welcome to Celestial Flames';
+  const textToType = userDetails ? `Hii there,\n${userDetails.name}!` : 'Weelcome to \nCelestial Flames';
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,9 +58,13 @@ const WelcomeBanner = () => {
           ))}
         </div>
       </div>
-      <div className='welcome-message'>
+      <div className={`welcome-message ${isTyping ? 'typing' : ''}`}>
         <h1>{typedText}</h1>
-        {!userDetails && !isTyping && <p>Please <Link to='/loginsignup/login'>login</Link> to continue.</p>}
+        {!userDetails && !isTyping && (
+          <div>
+            <p>Please login to continue. <button><Link to='/loginsignup/login'>Login</Link></button></p>
+          </div>
+        )}
       </div>
     </div>
   );
