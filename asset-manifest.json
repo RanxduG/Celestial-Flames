@@ -1,9 +1,12 @@
 {
   "files": {
-    "main.css": "/Celestial-Flames/static/css/main.b8212a0b.css",
-    "main.js": "/Celestial-Flames/static/js/main.8265ab2a.js",
+    "main.css": "/Celestial-Flames/static/css/main.0886373a.css",
+    "main.js": "/Celestial-Flames/static/js/main.ec96de01.js",
     "static/js/453.8ab44547.chunk.js": "/Celestial-Flames/static/js/453.8ab44547.chunk.js",
+    "static/media/Welcome-banner-image-1.png": "/Celestial-Flames/static/media/Welcome-banner-image-1.563e562945f9c6e8f85d.png",
     "static/media/Cement Chic 2.jpg": "/Celestial-Flames/static/media/Cement Chic 2.4d55132be2ad6273e7e9.jpg",
+    "static/media/Welcome-banner-image-3.png": "/Celestial-Flames/static/media/Welcome-banner-image-3.7b14b8a047603d05c72e.png",
+    "static/media/Welcome-banner-image-2.png": "/Celestial-Flames/static/media/Welcome-banner-image-2.feacc7c1e9991a64ebdb.png",
     "static/media/Celestial Glow 2.jpg": "/Celestial-Flames/static/media/Celestial Glow 2.b17019f979704c7cdf66.jpg",
     "static/media/Twirlling Hearts second.jpg": "/Celestial-Flames/static/media/Twirlling Hearts second.b7a12c5f76ace2bf257f.jpg",
     "static/media/Twirlling hearts 3.jpg": "/Celestial-Flames/static/media/Twirlling hearts 3.5c27038fddece8bf5ec1.jpg",
@@ -36,12 +39,12 @@
     "static/media/star-icon.png": "/Celestial-Flames/static/media/star-icon.d0cbd94e0a4a62fc2bf4.png",
     "static/media/facebook.png": "/Celestial-Flames/static/media/facebook.bfd1cfff9f9521198b26.png",
     "index.html": "/Celestial-Flames/index.html",
-    "main.b8212a0b.css.map": "/Celestial-Flames/static/css/main.b8212a0b.css.map",
-    "main.8265ab2a.js.map": "/Celestial-Flames/static/js/main.8265ab2a.js.map",
+    "main.0886373a.css.map": "/Celestial-Flames/static/css/main.0886373a.css.map",
+    "main.ec96de01.js.map": "/Celestial-Flames/static/js/main.ec96de01.js.map",
     "453.8ab44547.chunk.js.map": "/Celestial-Flames/static/js/453.8ab44547.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b8212a0b.css",
-    "static/js/main.8265ab2a.js"
+    "static/css/main.0886373a.css",
+    "static/js/main.ec96de01.js"
   ]
 }
