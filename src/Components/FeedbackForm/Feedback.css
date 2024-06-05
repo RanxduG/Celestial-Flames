@@ -92,4 +92,17 @@
     color: #e4e4e4;
     cursor: pointer;
   }
-  
+  .container button[type="reset"] {
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .container button[type="submit"] {
+    margin-top: 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}

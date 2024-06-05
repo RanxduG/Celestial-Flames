@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Feedback.css';
+import emailjs from '@emailjs/browser';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import veryBadEmoji from '../Assets/Emojis/veryBad.png';
 import badEmoji from '../Assets/Emojis/bad.png';
@@ -9,6 +10,7 @@ import excellentEmoji from '../Assets/Emojis/exellent.png';
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState('');
+  const form = useRef();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -34,14 +36,37 @@ const FeedbackForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { name, email, comment } = formData;
-    
-    if (!name || !comment || !rating || !email) {
-      alert('Please fill in all the fields!');
-    } else {
-      alert(`Dear ${name}, Thank you very much for your feedback. You have rated our site as ${rating}, and your comment was ${comment}.`);
+    if (!formData.name || !formData.email || !formData.comment || !rating) {
+      alert('Please fill in all required fields.');
+      return;
     }
+
+    
+    // Append rating to the comment in the formData
+    const messageWithRating = `${formData.comment}\n\nRating: ${rating}`;
+    setFormData((prevData) => ({
+      ...prevData,
+      comment: messageWithRating,
+    }));
+  
+    // Update textarea value directly with the new message content
+    const textarea = document.getElementById('comment');
+    textarea.value = messageWithRating;
+  
+    emailjs.sendForm('service_sr64m22', 'template_d1t1wpp', form.current, 'lbErQTJUSof4R6PYe')
+        .then(
+            () => {
+                console.log('SUCCESS!');
+                alert('Your message has been sent successfully!');
+                handleReset();
+            },
+            (error) => {
+                console.log('FAILED...', error.text);
+                alert('Failed to send the message, please try again later.');
+            }
+        );
   };
+  
 
   const handleReset = () => {
     setFormData({
@@ -65,12 +90,13 @@ const FeedbackForm = () => {
       [id]: value,
     }));
   };
+  
 
   return (
     <div>
 
       <div className="container">
-        <form onSubmit={handleSubmit}>
+        <form ref={form} onSubmit={handleSubmit}>
           <h3>FEEDBACK</h3>
           <div className="feedbackbox">
             <div className="emoji">
@@ -92,29 +118,13 @@ const FeedbackForm = () => {
               ))}
             </div>
           </div>
+          <label>Name</label>
+          <input type="text" id='name' name="from_name" placeholder="Your name" value={formData.name} onChange={handleChange} required />
+          <label>Email</label>
+          <input type="email" id='email' name="email" placeholder="Your email address" value={formData.email} onChange={handleChange} required />
+          <label>Message</label>
+          <textarea name="message" id='comment' placeholder="Your message" value={formData.comment} onChange={handleChange} required />
 
-          <input
-            type="text"
-            id="name"
-            placeholder="Your name"
-            value={formData.name}
-            onChange={handleChange}
-          />
-          <input
-            type="email"
-            id="email"
-            placeholder="Your email address"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <textarea
-            id="message"
-            cols="30"
-            rows="4"
-            placeholder="Enter your comment here..."
-            value={formData.comment}
-            onChange={handleChange}
-          ></textarea>
           <div className="button-container">
             <button type="reset" id="reset" className="button" onClick={handleReset}>
               Reset

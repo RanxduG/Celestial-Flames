@@ -28,6 +28,15 @@
     color: #252525;
     font-size: 20px;
 }
+.footer-links a {
+    text-decoration: none; /* Remove underline */
+    color: black; /* Set link color to black */
+  }
+  
+  /* Optionally, you can style the links on hover */
+  .footer-links a:hover {
+    text-decoration: underline; /* Add underline on hover */
+  }
 .footer-links li{
     cursor: pointer;
 }

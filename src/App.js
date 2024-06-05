@@ -12,6 +12,7 @@ import classic_banner from './Components/Assets/Classic banner.jpg';
 import elemental_banner from './Components/Assets/Elemental banner.jpg';
 import crystal_banner from './Components/Assets/Crystal banner.jpg';
 import ContactUs from './Pages/ContactUs';
+import AboutUs from './Pages/AboutUs';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route index path="/Celestial-Flames" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
           <Route path="/Classic Collection" element={<ShopCategory banner={classic_banner} category='Classic Collection' />} />
           <Route path="/Elemental Collection" element={<ShopCategory banner={elemental_banner} category='Elemental Collection' />} />
@@ -34,6 +35,7 @@ function App() {
             <Route path=":state" element={<LoginSignup />} />
           </Route>
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/aboutus" element={<AboutUs />} />
         </Routes>
         <Footer />
       </BrowserRouter>
