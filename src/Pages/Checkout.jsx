@@ -1,12 +1,14 @@
 import React from 'react';
-import ContactUsForm from '../Components/ContactUsForm/ContactUsForm.jsx';
+import OrderSummary from '../Components/OrderSummary/OrderSummary.jsx';
+import Invoice from '../Components/Invoice/Invoice.jsx';
 
 
 const ContactUs = () => {
 
   return (
     <div>
-      <ContactUsForm/>
+      <OrderSummary/>
+      <Invoice/>
 
         
     </div>

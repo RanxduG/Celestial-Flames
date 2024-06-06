@@ -18,22 +18,39 @@ const ShopContextProvider = (props) => {
     const [userDetails, setUserDetails] = useState(null);
     const [reviews, setReviews] = useState(initialReviews);
 
-    const addToCart = (itemId, waxType, fragrancetype, color, fragrance, total) => {
-        setCartItems((prev) => ({
-            ...prev,
-            [itemId]: [
-                ...prev[itemId],
-                {
+    const addToCart = (itemId, waxType, fragranceType, color, fragrance, total) => {
+        setCartItems((prev) => {
+            const updatedItems = [...prev[itemId]];
+
+            // Find if there's an existing item with the same attributes
+            const existingItemIndex = updatedItems.findIndex(item => 
+                item.waxType === waxType && 
+                item.fragranceType === fragranceType && 
+                item.color === color && 
+                item.fragrance === fragrance
+            );
+
+            if (existingItemIndex !== -1) {
+                // If the item exists, increase the quantity
+                updatedItems[existingItemIndex].quantity += 1;
+            } else {
+                // Otherwise, add a new item
+                updatedItems.push({
                     waxType: waxType,
-                    fragranceType: fragrancetype,
+                    fragranceType: fragranceType,
                     color: color,
                     fragrance: fragrance,
                     quantity: 1,
                     total: total
-                }
-            ]
-        }));
-        console.log(waxType + fragrancetype);
+                });
+            }
+
+            return {
+                ...prev,
+                [itemId]: updatedItems
+            };
+        });
+        console.log(waxType + fragranceType);
     };
 
     const removeFromCart = (itemId, index) => {
@@ -70,12 +87,12 @@ const ShopContextProvider = (props) => {
     const addReview = (newReview) => {
         setReviews((prevReviews) => [...prevReviews, newReview]);
     };
+
     const verifyPromoCode = (code) => {
-        if(code === promocode){
-            return 0.9
-        }
-        else{
-            return 1
+        if (code === promocode) {
+            return 0.9;
+        } else {
+            return 1;
         }
     };
 
@@ -90,7 +107,8 @@ const ShopContextProvider = (props) => {
         setUser,
         reviews,
         addReview,
-        verifyPromoCode
+        verifyPromoCode,
+        setCartItems
     };
 
     return (

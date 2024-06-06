@@ -13,6 +13,7 @@ import elemental_banner from './Components/Assets/Elemental banner.jpg';
 import crystal_banner from './Components/Assets/Crystal banner.jpg';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
+import Checkout from './Pages/Checkout';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           </Route>
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </BrowserRouter>

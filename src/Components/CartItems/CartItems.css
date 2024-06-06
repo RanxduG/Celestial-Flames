@@ -95,6 +95,18 @@
     color: white;
     cursor: pointer;
 }
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.carticon-quantity-control {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
 @media(max-width: 1280px){
     .cartitems{
         margin: 100px 100px;

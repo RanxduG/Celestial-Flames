@@ -1,7 +1,7 @@
 .navbar {
     background-color: white;
     box-shadow: 0 1px 3px -2px black;
-    padding: 10px 100px;
+    padding: 10px 20px; /* Adjusted padding for better responsiveness */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,21 +10,25 @@
     z-index: 1000;
     transition: all 0.3s ease-in-out;
 }
+
 .nav-logo {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .nav-logo p {
     color: black;
     font-size: 38px;
     font-weight: 600;
 }
+
 .nav-logo img {
     width: 150px;
     height: auto;
     transition: all 0.3s ease-in-out;
 }
+
 .nav-menu {
     display: flex;
     align-items: center;
@@ -32,7 +36,10 @@
     list-style: none;
     font-size: 20px;
     font-weight: 500;
+    flex: 1; /* Allows the nav menu to take up available space */
+    justify-content: center; /* Centers the nav menu items */
 }
+
 .nav-menu li {
     display: flex;
     flex-direction: column;
@@ -41,13 +48,16 @@
     gap: 3px;
     cursor: pointer;
 }
+
 .nav-menu li a {
     color: black;
     text-decoration: none;
 }
+
 .nav-menu li a:hover {
     color: red;
 }
+
 .nav-menu hr {
     border: none;
     width: 80%;
@@ -55,11 +65,13 @@
     border-radius: 10px;
     background-color: red;
 }
+
 .nav-login-cart {
     display: flex;
     align-items: center;
-    gap: 45px;
+    gap: 20px; /* Reduced gap for better alignment */
 }
+
 .nav-login-cart button {
     padding: 10px 20px;
     border: none;
@@ -70,42 +82,48 @@
     font-weight: 500;
     cursor: pointer;
 }
+
 .nav-login-cart button:active {
     transform: scale(0.95);
 }
+
 .nav-cart-count {
     width: 22px;
     height: 22px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: -35px;
-    margin-left: -55px;
+    margin-top: -40px;
+    margin-left: -40px;
     border-radius: 11px;
     font-size: 14px;
     background-color: red;
     color: #fff;
 }
+
 .nav-login-cart img {
     width: 70px;
     height: auto;
 }
+
 .nav-dropdown {
     display: none;
 }
 
-/* Added styles for navbar-scrolled */
 .navbar-scrolled .nav-menu,
 .navbar-scrolled .nav-login-cart {
     display: none;
 }
+
 .navbar-scrolled .nav-logo {
     justify-content: center;
     width: 100%;
 }
+
 .navbar-scrolled .nav-logo img {
     width: 100px;
 }
+
 .navbar-scrolled .nav-dropdown {
     display: none;
 }
@@ -114,27 +132,33 @@
 .navbar-scrolled:hover .nav-login-cart {
     display: flex;
 }
+
 .navbar-scrolled:hover .nav-login-cart {
     justify-content: flex-end;
 }
+
 .navbar-scrolled:hover .nav-menu {
     display: flex;
     margin-right: 333px;
 }
+
 .navbar-scrolled:hover .nav-logo {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
 }
+
 .navbar-scrolled:hover .nav-logo img {
     width: 150px;
 }
+
 .navbar-scrolled:hover .nav-logo p {
     color: black;
     font-size: 38px;
     font-weight: 600;
 }
+
 .logged-user {
     display: flex;
     justify-content: center; /* Horizontally center */
@@ -150,7 +174,7 @@
 
 @media(max-width: 1280px) {
     .navbar {
-        padding: 10px 50px;
+        padding: 10px 30px; /* Adjusted padding */
     }
     .nav-menu {
         gap: 30px;
@@ -174,9 +198,10 @@
         font-size: 12px;
     }
 }
+
 @media(max-width: 1024px) {
     .navbar {
-        padding: 10px 30px;
+        padding: 10px 20px; /* Adjusted padding */
     }
     .nav-menu {
         gap: 20px;
@@ -200,9 +225,11 @@
         font-size: 10px;
     }
 }
+
 @media(max-width: 800px), (max-width: 500px) {
     .navbar {
-        align-items: center;
+        display: flex;
+
         padding: 10px 20px;
     }
     .nav-menu {
@@ -215,7 +242,7 @@
         flex-direction: column;
         align-items: flex-start;
         background-color: white;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
         padding: 20px;
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
@@ -239,7 +266,6 @@
     }
     .nav-dropdown {
         display: block;
-        margin: 0 auto;
         cursor: pointer;
     }
     .nav-logo {
@@ -340,6 +366,8 @@
         width: 14px;
         height: 14px;
         font-size: 8px;
+        margin-top: -30px;
+        margin-left: -30px;
     }
     .nav-dropdown {
         width: 30px;

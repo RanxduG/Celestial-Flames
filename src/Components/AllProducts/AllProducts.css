@@ -1,5 +1,5 @@
 .all-products {
-    height: 350vh;
+    width: 100%;
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -9,31 +9,30 @@
 }
 
 .p-wrapper {
-    width: 73%; /* Ensure the wrapper takes the full width */
+    width: 100%;
     display: flex;
-    justify-content:flex-start; /* Align items to the start (left) */
+    justify-content: center;
+    margin: 10px 0;
 }
 
-.p-wrapper a{
+.p-wrapper a {
     color: #171717;
     text-decoration: none;
     font-size: 22px;
     font-weight: 600;
 }
-.linkbar{
-    padding-top: 15px;
-    padding-left: 650px;
-    width: 1500px;
+
+.linkbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 60px;
     background: #bec1c6;
     border-radius: 20px;
+    text-align: center;
 }
-.linkbar div{
-    background:grey;
-    width: 250px;
-    border-radius: 10px;
-    align-items: center;
-}
+
 .all-products h1 {
     color: #171717;
     font-size: 50px;
@@ -54,82 +53,107 @@
     margin: 50px;
     gap: 30px;
 }
+
 @media(max-width: 1280px) {
     .collection {
         margin: 20px 100px;
         gap: 20px;
     }
+
     .all-products {
-        height: 230vh;
+        height: auto;
         margin: 20px 100px;
     }
+
     .all-products h1 {
         font-size: 40px;
     }
+
     .all-products hr {
         width: 200px;
         height: 6px;
     }
+
     .p-wrapper p {
         font-size: 18px;
     }
+
+    .linkbar {
+        width: 100%;
+        height: 60px;
+    }
 }
+
 @media(max-width: 1024px) {
-    .all-products{
-        height: 200vh;
+    .all-products {
+        height: auto;
         margin: 20px 50px;
     }
+
     .collection {
         margin: 20px 50px;
         grid-template-columns: 1fr 1fr 1fr;
     }
+
     .all-products h1 {
         font-size: 40px;
     }
+
     .all-products hr {
         width: 200px;
         height: 6px;
     }
+
     .p-wrapper p {
         font-size: 18px;
     }
 }
+
 @media(max-width: 800px) {
-    .all-products{
-        height: 255vh;
-        margin: 20px 50px;
+    .all-products {
+        height: auto;
+        margin: 0px;
     }
+
     .collection {
         margin: 20px 50px;
         padding: 0px;
         grid-template-columns: 1fr 1fr;
     }
+
     .all-products h1 {
         font-size: 35px;
     }
+
     .all-products hr {
         width: 150px;
         height: 4px;
     }
+
     .p-wrapper p {
         font-size: 16px;
     }
 }
+
 @media(max-width: 500px) {
-    .all-products{
-        height: 420vh;
+    .all-products {
+        height: auto;
         margin: 40px 30px;
     }
+
     .collection {
         grid-template-columns: 1fr;
     }
+
     .all-products h1 {
         font-size: 30px;
     }
+
     .all-products hr {
         width: 150px;
         height: 4px;
     }
+
     .p-wrapper p {
         font-size: 14px;
     }
