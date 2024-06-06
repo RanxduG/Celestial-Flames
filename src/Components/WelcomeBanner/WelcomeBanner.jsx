@@ -38,6 +38,10 @@ const WelcomeBanner = () => {
     return () => clearInterval(typingInterval);
   }, [textToType]);
 
+  const handleDotClick = (index) => {
+    setCurrentSlide(index);
+  };
+
   return (
     <div className='welcomebanner'>
       <div className='slideshow'>
@@ -54,6 +58,7 @@ const WelcomeBanner = () => {
             <span
               key={index}
               className={index === currentSlide ? 'dot active' : 'dot'}
+              onClick={() => handleDotClick(index)}
             />
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import all_product from '../Components/Assets/all_data.js';
+import initialReviews from '../Components/Assets/reviews.js';
 
 export const ShopContext = createContext(null);
 
@@ -12,8 +13,10 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
+    const promocode = 'CF202406';
     const [cartItems, setCartItems] = useState(getDefaultCart());
-    const [userDetails, setUserDetails] = useState(null); // Add userDetails state
+    const [userDetails, setUserDetails] = useState(null);
+    const [reviews, setReviews] = useState(initialReviews);
 
     const addToCart = (itemId, waxType, fragrancetype, color, fragrance, total) => {
         setCartItems((prev) => ({
@@ -60,8 +63,20 @@ const ShopContextProvider = (props) => {
         return totalItems;
     };
 
-    const setUser = (user) => { // Function to set user details
+    const setUser = (user) => {
         setUserDetails(user);
+    };
+
+    const addReview = (newReview) => {
+        setReviews((prevReviews) => [...prevReviews, newReview]);
+    };
+    const verifyPromoCode = (code) => {
+        if(code === promocode){
+            return 0.9
+        }
+        else{
+            return 1
+        }
     };
 
     const contextValue = {
@@ -71,8 +86,11 @@ const ShopContextProvider = (props) => {
         removeFromCart,
         getTotalCartAmount,
         getTotalCartItems,
-        userDetails, // Expose userDetails
-        setUser // Expose setUser function
+        userDetails,
+        setUser,
+        reviews,
+        addReview,
+        verifyPromoCode
     };
 
     return (

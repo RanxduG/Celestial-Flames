@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import './AllProducts.css';
 import Item from '../Item/Item';
 import {ShopContext} from '../../Context/ShopContext';
+import { Link } from 'react-router-dom';
 
 const AllProducts = () => {
   const {all_product} = useContext(ShopContext);
@@ -11,7 +12,9 @@ const AllProducts = () => {
       <hr />
       
       <div className="p-wrapper">
-        <p>Classic Collection</p>
+        <Link to={'/Classic Collection'}><div className='linkbar'>
+          Classic Collection
+        </div></Link>
       </div>
       <div className='collection'>
         {all_product.map((item, i) => {
@@ -30,7 +33,9 @@ const AllProducts = () => {
       </div>
       
       <div className="p-wrapper">
-        <p>Crystal Collection</p>
+        <Link to={'/Crystal Collection'}><div className='linkbar'>
+          Crystal Collection
+        </div></Link>
       </div>
       <div className='collection'>
         {all_product.map((item, i) => {
@@ -50,7 +55,9 @@ const AllProducts = () => {
       </div>
       
       <div className="p-wrapper">
-        <p>Elemental Collection</p>
+        <Link to={'/Elemental Collection'}><div className='linkbar'>
+          Elemental Collection
+        </div></Link>
       </div>
       <div className='collection'>
       {all_product.map((item, i) => {

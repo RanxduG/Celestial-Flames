@@ -5,10 +5,11 @@ import shoppingcart from "../Assets/shopping-cart.jpg";
 import { Link } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import nav_dropdown from "../Assets/nav-dropdown.png";
-import close_icon from '../Assets/remove.png'; // Add your close icon image
+import close_icon from '../Assets/remove.png';
+import user_icon from '../Assets/user.png';
 
 const Navbar = () => {
-    const { getTotalCartItems } = useContext(ShopContext);
+    const { getTotalCartItems, userDetails } = useContext(ShopContext);
     const [menu, setMenu] = useState("main");
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const menuRef = useRef();
@@ -65,7 +66,8 @@ const Navbar = () => {
                 )}
             </ul>
             <div className="nav-login-cart">
-                <Link onClick={() => { setMenu("login") }} to='/loginsignup/login'><button>Login</button></Link>
+                {userDetails ? <div className='logged-user'><img src={user_icon} alt="user icon" /><p>{userDetails.name}</p></div> : <Link onClick={() => { setMenu("login") }} to='/loginsignup/login'><button>Login</button></Link>}
+                
                 <Link onClick={() => { setMenu("cart") }} to='/cart'><img src={shoppingcart} alt="shopping cart" /></Link>
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
             </div>

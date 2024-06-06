@@ -1,22 +1,24 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import { useParams } from 'react-router-dom';
 import Breadcrums from '../Components/Breadcrums/Breadcrums';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 import DescriptionBox from '../Components/DescriptionBox/DescriptionBox';
+import FeedbackForm from '../Components/FeedbackForm/Feedback';
 
 const Product = () => {
-  const { all_product } = useContext(ShopContext);
+  const { all_product, reviews, userDetails } = useContext(ShopContext);
   const { productId } = useParams();
 
   const product = all_product.find((e) => e.id === productId);
-  // console.log(product);
+  const productReviews = reviews.filter((review) => review.product_id === productId);
 
   return (
     <div>
-        <Breadcrums product={product}/>
-        <ProductDisplay product={product}/>
-        <DescriptionBox product={product}/>
+        <Breadcrums product={product} />
+        <ProductDisplay product={product} />
+        <DescriptionBox product={product} reviews={productReviews} />
+        <FeedbackForm product={product} userDetails={userDetails} productId={productId} />
     </div>
   );
 }

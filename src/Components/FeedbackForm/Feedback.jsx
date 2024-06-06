@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import './Feedback.css';
 import emailjs from '@emailjs/browser';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -7,25 +7,26 @@ import badEmoji from '../Assets/Emojis/bad.png';
 import goodEmoji from '../Assets/Emojis/good.png';
 import veryGoodEmoji from '../Assets/Emojis/veryGood.png';
 import excellentEmoji from '../Assets/Emojis/exellent.png';
+import { ShopContext } from '../../Context/ShopContext';
+import { useParams } from 'react-router-dom';
 
 const FeedbackForm = () => {
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(0);
   const form = useRef();
+  const { userDetails, addReview } = useContext(ShopContext);
+  const { productId } = useParams();
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: userDetails?.name || '',
+    email: userDetails?.email || '',
     comment: '',
   });
 
   const handleStarClick = (index) => {
-    const colors = ['red', 'red', 'red', 'red', 'red'];
-    const translations = ['0px', '-100px', '-200px', '-300px', '-400px'];
-    const ratings = ['very bad', 'bad', 'good', 'very good', 'excellent'];
-    
-    setRating(ratings[index]);
-    
+    setRating(index + 1);
     const stars = document.getElementsByClassName('fas');
     const emoji = document.getElementById('emoji');
+    const colors = ['red', 'red', 'red', 'red', 'red'];
+    const translations = ['0px', '-100px', '-200px', '-300px', '-400px'];
     
     for (let i = 0; i < stars.length; i++) {
       stars[i].style.color = i <= index ? colors[i] : '#e4e4e4';
@@ -36,37 +37,23 @@ const FeedbackForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.comment || !rating) {
+    if (!formData.comment || !rating) {
       alert('Please fill in all required fields.');
       return;
     }
-
     
-    // Append rating to the comment in the formData
-    const messageWithRating = `${formData.comment}\n\nRating: ${rating}`;
-    setFormData((prevData) => ({
-      ...prevData,
-      comment: messageWithRating,
-    }));
-  
-    // Update textarea value directly with the new message content
-    const textarea = document.getElementById('comment');
-    textarea.value = messageWithRating;
-  
-    emailjs.sendForm('service_sr64m22', 'template_d1t1wpp', form.current, 'lbErQTJUSof4R6PYe')
-        .then(
-            () => {
-                console.log('SUCCESS!');
-                alert('Your message has been sent successfully!');
-                handleReset();
-            },
-            (error) => {
-                console.log('FAILED...', error.text);
-                alert('Failed to send the message, please try again later.');
-            }
-        );
+    const newReview = {
+      product_id: productId,
+      customer_name: userDetails?.name || 'Anonymous',
+      rating: rating,
+      comment: formData.comment,
+    };
+
+    // Add the new review to the context
+    addReview(newReview);
+    console.log('Review added:', newReview);
+    handleReset()
   };
-  
 
   const handleReset = () => {
     setFormData({
@@ -74,7 +61,7 @@ const FeedbackForm = () => {
       email: '',
       comment: '',
     });
-    setRating('');
+    setRating(0);
     const stars = document.getElementsByClassName('fas');
     for (let i = 0; i < stars.length; i++) {
       stars[i].style.color = '#e4e4e4';
@@ -90,11 +77,9 @@ const FeedbackForm = () => {
       [id]: value,
     }));
   };
-  
 
   return (
     <div>
-
       <div className="container">
         <form ref={form} onSubmit={handleSubmit}>
           <h3>FEEDBACK</h3>
@@ -118,10 +103,6 @@ const FeedbackForm = () => {
               ))}
             </div>
           </div>
-          <label>Name</label>
-          <input type="text" id='name' name="from_name" placeholder="Your name" value={formData.name} onChange={handleChange} required />
-          <label>Email</label>
-          <input type="email" id='email' name="email" placeholder="Your email address" value={formData.email} onChange={handleChange} required />
           <label>Message</label>
           <textarea name="message" id='comment' placeholder="Your message" value={formData.comment} onChange={handleChange} required />
 
@@ -135,8 +116,6 @@ const FeedbackForm = () => {
           </div>
         </form>
       </div>
-
-
     </div>
   );
 };

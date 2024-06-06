@@ -18,6 +18,7 @@ const ProductDisplay = (props) => {
     };
     const handleFragranceTypeChange = (fragranceType) => {
         setSelectedFragranceType(fragranceType);
+        setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
     const handleColorChange = (color) => {
         setSelectedColor(color);
@@ -32,8 +33,6 @@ const ProductDisplay = (props) => {
                 return product.paraffin_price;
             case 'Soy Wax':
                 return product.soy_price;
-            case "Half n' Half":
-                return product.half_n_half_price;
             default:
                 return product.paraffin_price;
         }
@@ -89,7 +88,6 @@ const ProductDisplay = (props) => {
                     <div className="productdisplay-right-options">
                         <div className={getOptionClass(selectedWaxType, 'Paraffin Wax')} onClick={() => handleWaxTypeChange('Paraffin Wax')}>Paraffin Wax</div>
                         <div className={getOptionClass(selectedWaxType, 'Soy Wax')} onClick={() => handleWaxTypeChange('Soy Wax')}>Soy Wax</div>
-                        <div className={getOptionClass(selectedWaxType, "Half n' Half")} onClick={() => handleWaxTypeChange("Half n' Half")}>Half n' Half</div>
                     </div>
                 </div>
                 <div className="productdisplay-right-feature">
@@ -99,6 +97,34 @@ const ProductDisplay = (props) => {
                         <div className={getOptionClass(selectedFragranceType, 'Essential Oil')} onClick={() => handleFragranceTypeChange('Essential Oil')}>Essential Oil</div>
                     </div>
                 </div>
+                {selectedFragranceType && (
+                    <div className="productdisplay-right-feature">
+                        <h1>Select Fragrance*</h1>
+                        <div className="productdisplay-right-options">
+                            {selectedFragranceType === 'Chemical' && (
+                                <>
+                                    <div className={getOptionClass(selectedFragrance, 'Jasmine')} onClick={() => handleFragranceChange('Jasmine')}>Jasmine</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Visible')} onClick={() => handleFragranceChange('Visible')}>Visible</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Lavender')} onClick={() => handleFragranceChange('Lavender')}>Lavender</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Lemon lime')} onClick={() => handleFragranceChange('Lemon lime')}>Lemon lime</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Orchid and lotus')} onClick={() => handleFragranceChange('Orchid and lotus')}>Orchid and lotus</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Tutti Frutti')} onClick={() => handleFragranceChange('Tutti Frutti')}>Tutti Frutti</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Aquatic Lady')} onClick={() => handleFragranceChange('Aquatic Lady')}>Aquatic Lady</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Coffee')} onClick={() => handleFragranceChange('Coffee')}>Coffee</div>
+                                </>
+                            )}
+                            {selectedFragranceType === 'Essential Oil' && (
+                                <>
+                                    <div className={getOptionClass(selectedFragrance, 'Cinnamon')} onClick={() => handleFragranceChange('Cinnamon')}>Cinnamon</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Vanilla')} onClick={() => handleFragranceChange('Vanilla')}>Vanilla</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Nina Ricci')} onClick={() => handleFragranceChange('Nina Ricci')}>Nina Ricci</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Apple')} onClick={() => handleFragranceChange('Apple')}>Apple</div>
+                                    <div className={getOptionClass(selectedFragrance, 'Poise')} onClick={() => handleFragranceChange('Poise')}>Poise</div>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
                 <div className="productdisplay-right-feature">
                     <h1>Select Color</h1>
                     <div className="productdisplay-right-options">
@@ -106,15 +132,6 @@ const ProductDisplay = (props) => {
                         <div className={getOptionClass(selectedColor, 'Green')} onClick={() => handleColorChange('Green')}>Green</div>
                         <div className={getOptionClass(selectedColor, 'Blue')} onClick={() => handleColorChange('Blue')}>Blue</div>
                         <div className={getOptionClass(selectedColor, 'Yellow')} onClick={() => handleColorChange('Yellow')}>Yellow</div>
-                    </div>
-                </div>
-                <div className="productdisplay-right-feature">
-                    <h1>Select Fragrance</h1>
-                    <div className="productdisplay-right-options">
-                        <div className={getOptionClass(selectedFragrance, 'Apple')} onClick={() => handleFragranceChange('Apple')}>Apple</div>
-                        <div className={getOptionClass(selectedFragrance, 'Orange')} onClick={() => handleFragranceChange('Orange')}>Orange</div>
-                        <div className={getOptionClass(selectedFragrance, 'Strawberry')} onClick={() => handleFragranceChange('Strawberry')}>Strawberry</div>
-                        <div className={getOptionClass(selectedFragrance, 'Vanilla')} onClick={() => handleFragranceChange('Vanilla')}>Vanilla</div>
                     </div>
                 </div>
                 <div className="productdisplay-right-prices">

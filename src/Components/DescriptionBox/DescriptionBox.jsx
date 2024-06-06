@@ -1,20 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './DescriptionBox.css';
 
 const DescriptionBox = (props) => {
-    const {product} = props;
-  return (
-    <div className='descriptionbox'>
-        <div className="descriptionbox-navigator">
-            <div className="descriptionbox-nav-box">Description</div>
-            <div className="descriptionbox-nav-box fade">Reviews (122)</div>
+    const { product, reviews } = props;
+    const [activeTab, setActiveTab] = useState('description');
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+    };
+
+    return (
+        <div className='descriptionbox'>
+            <div className="descriptionbox-navigator">
+                <div 
+                    className={`descriptionbox-nav-box ${activeTab === 'description' ? '' : 'fade'}`} 
+                    onClick={() => handleTabClick('description')}
+                >
+                    Description
+                </div>
+                <div 
+                    className={`descriptionbox-nav-box ${activeTab === 'reviews' ? '' : 'fade'}`} 
+                    onClick={() => handleTabClick('reviews')}
+                >
+                    Reviews ({reviews.length})
+                </div>
+            </div>
+            <div className="descriptionbox-content">
+                {activeTab === 'description' && (
+                    <div className="descriptionbox-description">
+                        <p>{product.description}</p>
+                        <p>{product.dimensions}</p>
+                    </div>
+                )}
+                {activeTab === 'reviews' && (
+                    <div className="descriptionbox-reviews">
+                        {reviews.map((review, index) => (
+                            <div key={index} className="review">
+                                <h4>{review.customer_name}</h4>
+                                <div className="review-rating">
+                                    {Array.from({ length: review.rating }).map((_, i) => (
+                                        <span key={i}>&#9733;</span>
+                                    ))}
+                                </div>
+                                <p>{review.comment}</p>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
-        <div className="descriptionbox-description">
-            <p>{product.description}</p>
-            <p>{product.dimensions}</p>
-        </div>
-    </div>
-  );
+    );
 }
 
 export default DescriptionBox;

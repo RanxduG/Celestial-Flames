@@ -14,12 +14,26 @@
     justify-content:flex-start; /* Align items to the start (left) */
 }
 
-.p-wrapper p {
+.p-wrapper a{
     color: #171717;
+    text-decoration: none;
     font-size: 22px;
     font-weight: 600;
 }
-
+.linkbar{
+    padding-top: 15px;
+    padding-left: 650px;
+    width: 1500px;
+    height: 60px;
+    background: #bec1c6;
+    border-radius: 20px;
+}
+.linkbar div{
+    background:grey;
+    width: 250px;
+    border-radius: 10px;
+    align-items: center;
+}
 .all-products h1 {
     color: #171717;
     font-size: 50px;
