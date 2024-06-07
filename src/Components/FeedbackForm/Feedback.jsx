@@ -1,6 +1,5 @@
 import React, { useState, useRef, useContext } from 'react';
 import './Feedback.css';
-import emailjs from '@emailjs/browser';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import veryBadEmoji from '../Assets/Emojis/veryBad.png';
 import badEmoji from '../Assets/Emojis/bad.png';

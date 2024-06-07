@@ -138,7 +138,7 @@ const ProductDisplay = (props) => {
                     <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
                 </div>
                 <button 
-                    onClick={() => { addToCart(product.id, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice()) }} 
+                    onClick={() => { addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice()) }} 
                     disabled={!areAllOptionsSelected()}>
                     ADD TO CART
                 </button>

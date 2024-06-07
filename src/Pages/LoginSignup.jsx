@@ -23,8 +23,8 @@ const LoginSignup = () => {
 
   // Sample user data for login validation
   const sampleUsers = [
-    { name: "Ranidu Gurusinghe", email: 'ranidu.h.gurusinghe@gmail.com', password: 'Hansaka@123' },
-    { name: "Celine Fernando", email: 'celinefdo77@gmail.com', password: 'Celine@123' },
+    { name: "Ranidu Gurusinghe", email: 'ranidu.h.gurusinghe@gmail.com', address:"123/4 Nugegoda Ratmalana", password: 'Hansaka@123' },
+    { name: "Celine Fernando", email: 'celinefdo77@gmail.com', address:"123/4 Nugegoda Ratmalana", password: 'Celine@123' },
   ];
 
   const handleChange = (e) => {
@@ -45,7 +45,7 @@ const LoginSignup = () => {
 
   const handleSignup = () => {
     if (formData.name && formData.email && formData.password && formData.agreed) {
-      setUser({ name: formData.name, email: formData.email }); // Save user details
+      setUser({ name: formData.name, email: formData.email, password: formData.password, address: formData.address }); // Save user details
       navigate('/Celestial-Flames');
     } else {
       setError('Please fill in all fields and agree to the terms.');
@@ -57,7 +57,7 @@ const LoginSignup = () => {
       (user) => user.email === loginData.email && user.password === loginData.password
     );
     if (user) {
-      setUser({ name: user.name, email: user.email }); // Save user details
+      setUser({ name: user.name, email: user.email, password: user.password, address: user.address }); // Save user details
       navigate('/Celestial-Flames');
     } else {
       setError('Invalid email or password.');
@@ -115,6 +115,13 @@ const LoginSignup = () => {
                 placeholder='Password'
                 name="password"
                 value={formData.password}
+                onChange={handleChange}
+              />
+              <input
+                type="address"
+                placeholder='Address'
+                name="address"
+                value={formData.address}
                 onChange={handleChange}
               />
             </div>

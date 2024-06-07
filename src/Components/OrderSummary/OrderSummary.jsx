@@ -1,20 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './OrderSummary.css';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import { ShopContext } from '../../Context/ShopContext';
 
 const OrderSummary = () => {
-    const { all_product, cartItems, getTotalCartAmount, verifyPromoCode } = useContext(ShopContext);
-    const [promocode, setPromocode] = useState(null);
-    const [discount, setDiscount] = useState(1); // Initialize with no discount
-
-    const handlePromoCodeChange = (event) => {
-        setPromocode(event.target.value);
-    };
-
-    const handlePromoCodeSubmit = () => {
-        const discountValue = verifyPromoCode(promocode);
-        setDiscount(discountValue);
-    };
+    const { all_product, cartItems, getTotalCartAmount, discount } = useContext(ShopContext);
 
     const subtotal = getTotalCartAmount();
     const shippingFee = 500;
@@ -30,7 +19,7 @@ const OrderSummary = () => {
                         <div key={`${product.id}-${index}`} className='summary-item'>
                             <img src={product.image} alt={item.name} className='summary-item-image' />
                             <div className='summary-item-info'>
-                                <p>{item.color} {item.fragrance} Scented {product.name} made with {item.waxType} & {item.fragranceType}</p>
+                                <p className='item-title'>{item.color}, {item.fragranceType} {item.fragrance} Scented {product.name} made with {item.waxType}</p>
                                 <p>Quantity: {item.quantity}</p>
                                 <p>Price: Rs.{item.total}</p>
                                 <p>Total: Rs.{item.total * item.quantity}</p>
@@ -58,19 +47,6 @@ const OrderSummary = () => {
                 <div className="summary-total-item">
                     <h3>Total</h3>
                     <h3>Rs.{total}</h3>
-                </div>
-                <hr />
-                <div className="summary-promocode">
-                    <p>If you have a promo code, enter it here</p>
-                    <div className="summary-promo-box">
-                        <input 
-                            type="text" 
-                            placeholder='Enter Promo Code' 
-                            value={promocode || ''} 
-                            onChange={handlePromoCodeChange} 
-                        />
-                        <button onClick={handlePromoCodeSubmit}>Submit</button>
-                    </div>
                 </div>
             </div>
         </div>

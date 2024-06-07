@@ -2,20 +2,17 @@ import React, { useContext, useState } from 'react';
 import './CartItems.css';
 import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
 import remove_icon from '../Assets/remove.png';
-import plus_icon from '../Assets/plus.png'; // Import the plus icon
-import minus_icon from '../Assets/minus.png'; // Import the minus icon
+import plus_icon from '../Assets/plus.png'; 
+import minus_icon from '../Assets/minus.png'; 
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {
-    const { all_product, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems } = useContext(ShopContext);
-    const [promocode, setPromocode] = useState(null);
-
-    const handlePromoCodeChange = (event) => {
-        setPromocode(event.target.value); // Update the promo code state when the user types in the input field
-    };
+    const { all_product, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, userDetails, discount } = useContext(ShopContext);
+    const [promocode, setPromocode] = useState('');
+    const [showDiscount, setShowDiscount] = useState(false); // State to control the discount display
 
     const handleIncreaseQuantity = (itemId, item) => {
-        addToCart(itemId, item.waxType, item.fragranceType, item.color, item.fragrance, item.total);
+        addToCart(itemId, item.itemName, item.waxType, item.fragranceType, item.color, item.fragrance, item.total);
     };
 
     const handleDecreaseQuantity = (itemId, item, index) => {
@@ -30,6 +27,18 @@ const CartItems = () => {
         }
     };
 
+    const handlePromoCodeChange = (e) => {
+        setPromocode(e.target.value);
+    };
+
+    const handlePromoCodeSubmit = () => {
+        verifyPromoCode(promocode);
+        setShowDiscount(true); // Show discount after promo code is verified
+    };
+
+    const totalAmount = getTotalCartAmount();
+    const discountedAmount = totalAmount * discount + 500; // Apply discount and add shipping fee
+
     return (
         <div className='cartitems'>
             <div className="cartitems-format-main">
@@ -41,12 +50,12 @@ const CartItems = () => {
                 <p>Remove</p>
             </div>
             <hr />
-            {all_product.map((product) => {
-                return cartItems[product.id].map((item, index) => (
+            {all_product.map((product) => (
+                cartItems[product.id].map((item, index) => (
                     <div key={`${product.id}-${index}`}>
                         <div className="cartitems-format cartitems-format-main">
                             <img src={product.image} alt="" className='carticon-product-icon' />
-                            <p>{item.color} {item.fragrance} Scented {product.name} made with {item.waxType} & {item.fragranceType}</p>
+                            <p>{item.color}, {item.fragranceType} {item.fragrance} Scented {product.name} made with {item.waxType}</p>
                             <p>Rs.{item.total}</p>
                             <div className='quantity-control'>
                                 <img src={minus_icon} alt="-" className='carticon-quantity-control' onClick={() => handleDecreaseQuantity(product.id, item, index)} />
@@ -58,22 +67,23 @@ const CartItems = () => {
                         </div>
                         <hr />
                     </div>
-                ));
-            })}
+                ))
+            ))}
             <div className="carticons-down">
                 <div className="carticons-total">
                     <h1>Cart Total</h1>
                     <div>
                         <div className="carticons-total-item">
                             <p>Subtotal</p>
-                            <p>Rs.{getTotalCartAmount()}</p>
+                            <p>Rs.{totalAmount}</p>
                         </div>
                         <hr />
                         <div className="carticons-total-item">
                             <p>Promo code Discount</p>
-                            <p>{100 - (verifyPromoCode(promocode) * 100)}%</p>
+                            <p>{100 - (discount * 100)}%</p>
                         </div>
                         <hr />
+
                         <div className="carticons-total-item">
                             <p>Shipping Fee</p>
                             <p>Rs.500</p>
@@ -81,17 +91,17 @@ const CartItems = () => {
                         <hr />
                         <div className="carticons-total-item">
                             <h3>Total</h3>
-                            <h3>Rs.{getTotalCartAmount() * verifyPromoCode(promocode) + 500}</h3>
+                            <h3>Rs.{discountedAmount.toFixed(2)}</h3>
                         </div>
                         <p>*Our trusted courier partner is Prompto Express (PVT) ltd Nugegoda</p>
-                        <Link to={'/checkout'}><button>PROCEED TO CHECKOUT</button></Link>
+                        {userDetails ? <Link to={'/checkout'}><button>PROCEED TO CHECKOUT</button></Link> : <Link to={'/loginsignup/login'}><button>LOGIN TO CHECKOUT</button></Link>}
                     </div>
                 </div>
                 <div className="carticons-promocode">
                     <p>If you have promo code, Enter it here</p>
                     <div className="carticons-promo-box">
                         <input type="text" placeholder='Enter Promo code' value={promocode} onChange={handlePromoCodeChange} />
-                        <button onClick={() => verifyPromoCode(promocode)}>Submit</button>
+                        <button onClick={handlePromoCodeSubmit}>Submit</button>
                     </div>
                 </div>
             </div>

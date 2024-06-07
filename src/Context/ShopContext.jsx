@@ -17,13 +17,15 @@ const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
     const [userDetails, setUserDetails] = useState(null);
     const [reviews, setReviews] = useState(initialReviews);
+    const [discount, setDiscount] = useState(1);
 
-    const addToCart = (itemId, waxType, fragranceType, color, fragrance, total) => {
+    const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
             const updatedItems = [...prev[itemId]];
 
             // Find if there's an existing item with the same attributes
             const existingItemIndex = updatedItems.findIndex(item => 
+                item.itemName === itemName &&
                 item.waxType === waxType && 
                 item.fragranceType === fragranceType && 
                 item.color === color && 
@@ -36,6 +38,7 @@ const ShopContextProvider = (props) => {
             } else {
                 // Otherwise, add a new item
                 updatedItems.push({
+                    itemName: itemName,
                     waxType: waxType,
                     fragranceType: fragranceType,
                     color: color,
@@ -50,7 +53,6 @@ const ShopContextProvider = (props) => {
                 [itemId]: updatedItems
             };
         });
-        console.log(waxType + fragranceType);
     };
 
     const removeFromCart = (itemId, index) => {
@@ -90,8 +92,10 @@ const ShopContextProvider = (props) => {
 
     const verifyPromoCode = (code) => {
         if (code === promocode) {
+            setDiscount(0.9); // 10% discount (90% of original price
             return 0.9;
         } else {
+            setDiscount(1);
             return 1;
         }
     };
@@ -108,7 +112,8 @@ const ShopContextProvider = (props) => {
         reviews,
         addReview,
         verifyPromoCode,
-        setCartItems
+        setCartItems,
+        discount
     };
 
     return (
