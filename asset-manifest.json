@@ -1,7 +1,9 @@
 {
   "files": {
-    "main.css": "/Celestial-Flames/static/css/main.705a8178.css",
-    "main.js": "/Celestial-Flames/static/js/main.3529516f.js",
+    "main.css": "/Celestial-Flames/static/css/main.5f26ea52.css",
+    "main.js": "/Celestial-Flames/static/js/main.cfbf78b7.js",
+    "static/js/213.7c76c3c0.chunk.js": "/Celestial-Flames/static/js/213.7c76c3c0.chunk.js",
+    "static/js/732.3606bc40.chunk.js": "/Celestial-Flames/static/js/732.3606bc40.chunk.js",
     "static/js/453.d855a71b.chunk.js": "/Celestial-Flames/static/js/453.d855a71b.chunk.js",
     "static/media/Cement Chic 2.jpg": "/Celestial-Flames/static/media/Cement Chic 2.4d55132be2ad6273e7e9.jpg",
     "static/media/Welcome-banner-image-3.png": "/Celestial-Flames/static/media/Welcome-banner-image-3.7b14b8a047603d05c72e.png",
@@ -54,12 +56,14 @@
     "static/media/facebook.png": "/Celestial-Flames/static/media/facebook.bfd1cfff9f9521198b26.png",
     "static/media/fa-v4compatibility.woff2": "/Celestial-Flames/static/media/fa-v4compatibility.cf7f5903d06b79ad60f1.woff2",
     "index.html": "/Celestial-Flames/index.html",
-    "main.705a8178.css.map": "/Celestial-Flames/static/css/main.705a8178.css.map",
-    "main.3529516f.js.map": "/Celestial-Flames/static/js/main.3529516f.js.map",
+    "main.5f26ea52.css.map": "/Celestial-Flames/static/css/main.5f26ea52.css.map",
+    "main.cfbf78b7.js.map": "/Celestial-Flames/static/js/main.cfbf78b7.js.map",
+    "213.7c76c3c0.chunk.js.map": "/Celestial-Flames/static/js/213.7c76c3c0.chunk.js.map",
+    "732.3606bc40.chunk.js.map": "/Celestial-Flames/static/js/732.3606bc40.chunk.js.map",
     "453.d855a71b.chunk.js.map": "/Celestial-Flames/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.705a8178.css",
-    "static/js/main.3529516f.js"
+    "static/css/main.5f26ea52.css",
+    "static/js/main.cfbf78b7.js"
   ]
 }
