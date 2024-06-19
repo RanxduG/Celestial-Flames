@@ -1,13 +1,14 @@
 import React, { createContext, useState } from "react";
-import all_product from '../Components/Assets/all_data.js';
+import ready_made_products from '../Components/Assets/readymade.js';
 import initialReviews from '../Components/Assets/reviews.js';
+import all_products from '../Components/Assets/all_data.js';
 
 export const ShopContext = createContext(null);
 
 const getDefaultCart = () => {
     let cart = {};
-    for (let i = 0; i < all_product.length; i++) {
-        cart[all_product[i].id] = [];
+    for (let i = 0; i < all_products.length; i++) {
+        cart[all_products[i].id] = [];
     }
     return cart;
 };
@@ -23,20 +24,17 @@ const ShopContextProvider = (props) => {
         setCartItems((prev) => {
             const updatedItems = [...prev[itemId]];
 
-            // Find if there's an existing item with the same attributes
-            const existingItemIndex = updatedItems.findIndex(item => 
+            const existingItemIndex = updatedItems.findIndex(item =>
                 item.itemName === itemName &&
-                item.waxType === waxType && 
-                item.fragranceType === fragranceType && 
-                item.color === color && 
+                item.waxType === waxType &&
+                item.fragranceType === fragranceType &&
+                item.color === color &&
                 item.fragrance === fragrance
             );
 
             if (existingItemIndex !== -1) {
-                // If the item exists, increase the quantity
                 updatedItems[existingItemIndex].quantity += 1;
             } else {
-                // Otherwise, add a new item
                 updatedItems.push({
                     itemName: itemName,
                     waxType: waxType,
@@ -69,7 +67,7 @@ const ShopContextProvider = (props) => {
                 totalAmount += item.total * item.quantity;
             });
         }
-        return totalAmount;
+        return totalAmount * discount;
     };
 
     const getTotalCartItems = () => {
@@ -92,7 +90,7 @@ const ShopContextProvider = (props) => {
 
     const verifyPromoCode = (code) => {
         if (code === promocode) {
-            setDiscount(0.9); // 10% discount (90% of original price
+            setDiscount(0.9); // 10% discount
             return 0.9;
         } else {
             setDiscount(1);
@@ -101,7 +99,8 @@ const ShopContextProvider = (props) => {
     };
 
     const contextValue = {
-        all_product,
+        all_products,
+        ready_made_products,
         cartItems,
         addToCart,
         removeFromCart,

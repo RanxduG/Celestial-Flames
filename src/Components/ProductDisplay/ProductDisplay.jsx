@@ -1,28 +1,49 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './ProductDisplay.css';
 import star_icon from '../Assets/star-icon.png';
 import star_dull_icon from '../Assets/star-icon-dull.png';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import { ShopContext } from '../../Context/ShopContext'; // Adjust the import path as necessary
 
 const ProductDisplay = (props) => {
-    const { product } = props;
+    const { product, reviews } = props;
     const { addToCart } = useContext(ShopContext);
 
     const [selectedWaxType, setSelectedWaxType] = useState(null);
     const [selectedFragranceType, setSelectedFragranceType] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedColor, setSelectedColor] = useState('#ffffff');
     const [selectedFragrance, setSelectedFragrance] = useState(null);
+    const [alertVisible, setAlertVisible] = useState(false);
+
+    useEffect(() => {
+        const color = document.querySelector('.color');
+        const colorInput = document.querySelector('.color-input');
+
+        if (colorInput) {
+            const handleColorChange = () => {
+                color.style.backgroundColor = colorInput.value;
+            };
+            colorInput.addEventListener('input', handleColorChange);
+
+            // Cleanup event listener
+            return () => {
+                colorInput.removeEventListener('input', handleColorChange);
+            };
+        }
+    }, []);
 
     const handleWaxTypeChange = (waxType) => {
         setSelectedWaxType(waxType);
     };
+
     const handleFragranceTypeChange = (fragranceType) => {
         setSelectedFragranceType(fragranceType);
         setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
-    const handleColorChange = (color) => {
-        setSelectedColor(color);
+
+    const handleColorChange = (event) => {
+        setSelectedColor(event.target.value);
     };
+
     const handleFragranceChange = (fragrance) => {
         setSelectedFragrance(fragrance);
     };
@@ -57,17 +78,21 @@ const ProductDisplay = (props) => {
         return selectedWaxType && selectedFragranceType && selectedColor && selectedFragrance;
     };
 
+    const handleAddToCart = () => {
+        addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice());
+        setAlertVisible(true);
+        setTimeout(() => {
+            setAlertVisible(false);
+        }, 3000); // Hide the alert after 3 seconds
+    };
+
     return (
         <div className='productdisplay'>
             <div className="productdisplay-left">
-                <div className="productdisplay-img-list">
-                    <img src={product.image} alt={product.name} />
-                    {product.other_images && product.other_images.map((img, index) => (
-                        <img key={index} src={img} alt={`${product.name} ${index + 1}`} />
-                    ))}
-                </div>
                 <div className="productdisplay-img">
-                    <img className='productdisplay-main-img' src={product.image} alt={product.name} />
+                    <img className='img-1' src={product.img_1} alt="Product" />
+                    <img className='img-2' src={product.img_2} alt="Product Background" />
+                    <div className='color'></div>
                 </div>
             </div>
             <div className="productdisplay-right">
@@ -78,7 +103,7 @@ const ProductDisplay = (props) => {
                     <img src={star_icon} alt="star icon" />
                     <img src={star_icon} alt="star icon" />
                     <img src={star_dull_icon} alt="dull star icon" />
-                    <p>122</p>
+                    <p>({reviews.length})</p>
                 </div>
                 <div className="productdisplay-right-description">
                     {product.description}
@@ -128,24 +153,25 @@ const ProductDisplay = (props) => {
                 <div className="productdisplay-right-feature">
                     <h1>Select Color</h1>
                     <div className="productdisplay-right-options">
-                        <div className={getOptionClass(selectedColor, 'Red')} onClick={() => handleColorChange('Red')}>Red</div>
-                        <div className={getOptionClass(selectedColor, 'Green')} onClick={() => handleColorChange('Green')}>Green</div>
-                        <div className={getOptionClass(selectedColor, 'Blue')} onClick={() => handleColorChange('Blue')}>Blue</div>
-                        <div className={getOptionClass(selectedColor, 'Yellow')} onClick={() => handleColorChange('Yellow')}>Yellow</div>
+                        <input type="color" className='color-input' value={selectedColor} onChange={handleColorChange} />
                     </div>
                 </div>
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
                 </div>
                 <button 
-                    onClick={() => { addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice()) }} 
+                    onClick={handleAddToCart} 
                     disabled={!areAllOptionsSelected()}>
                     ADD TO CART
                 </button>
 
-                <p className='productdisplay-right-category'><span>Category :</span>Crystal Collection, Celestial Glow</p>
-                <p className='productdisplay-right-category'><span>Tags :</span>Latest, Glass Candles</p>
+                <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
             </div>
+            {alertVisible && (
+                <div className="alert">
+                    <p>Added to cart successfully!</p>
+                </div>
+            )}
         </div>
     );
 };

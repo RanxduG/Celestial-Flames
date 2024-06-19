@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import "./Navbar.css";
 import logo from "../Assets/logo background removed.png";
 import shoppingcart from "../Assets/shopping-cart.jpg";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import nav_dropdown from "../Assets/nav-dropdown.png";
 import close_icon from '../Assets/remove.png';
@@ -10,12 +10,12 @@ import user_icon from '../Assets/user.png';
 
 const Navbar = () => {
     const { getTotalCartItems, userDetails } = useContext(ShopContext);
-    const [menu, setMenu] = useState("main");
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const menuRef = useRef();
     const navbarRef = useRef();
+    const location = useLocation();
 
-    const dropdown_toggle = (e) => {
+    const dropdown_toggle = () => {
         setIsMenuVisible(!isMenuVisible);
     };
 
@@ -50,15 +50,23 @@ const Navbar = () => {
     return (
         <div className='navbar' ref={navbarRef}>
             <div className="nav-logo">
-                <Link to='/Celestial-Flames'><img onClick={() => { setMenu("main") }} src={logo} alt="logo" id='mainLogo' /></Link>
+                <Link to='/Celestial-Flames'><img src={logo} alt="logo" id='mainLogo' /></Link>
                 <p>Celestial Flames</p>
             </div>
             <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="Menu" />
             <ul ref={menuRef} className={`nav-menu ${isMenuVisible ? 'visible' : ''}`}>
-                <li onClick={() => { setMenu("shop"); setIsMenuVisible(false); }}><Link style={{ textDecoration: 'none' }} to='/Shop'>Shop</Link>{menu === "shop" ? <hr /> : null}</li>
-                <li onClick={() => { setMenu("classic"); setIsMenuVisible(false); }}><Link style={{ textDecoration: 'none' }} to='/Classic Collection'>Classic</Link>{menu === "classic" ? <hr /> : null}</li>
-                <li onClick={() => { setMenu("cement"); setIsMenuVisible(false); }}><Link style={{ textDecoration: 'none' }} to='/Elemental Collection'>Elemental</Link>{menu === "cement" ? <hr /> : null}</li>
-                <li onClick={() => { setMenu("glass"); setIsMenuVisible(false); }}><Link style={{ textDecoration: 'none' }} to='/Crystal Collection'>Crystal</Link>{menu === "glass" ? <hr /> : null}</li>
+                <li onClick={() => setIsMenuVisible(false)}>
+                    <Link style={{ textDecoration: 'none' }} to='/Shop'>Shop</Link>
+                    {location.pathname === '/Shop' && <hr />}
+                </li>
+                <li onClick={() => setIsMenuVisible(false)}>
+                    <Link style={{ textDecoration: 'none' }} to='/Seasonal Collection'>Seasonal Releases</Link>
+                    {location.pathname === '/Seasonal%20Collection' && <hr />}
+                </li>
+                <li onClick={() => setIsMenuVisible(false)}>
+                    <Link style={{ textDecoration: 'none' }} to='/Catalog'>Catalog</Link>
+                    {location.pathname === '/Catalog' && <hr />}
+                </li>
                 {isMenuVisible && (
                     <li className="nav-close-button" onClick={() => setIsMenuVisible(false)}>
                         <img src={close_icon} alt="Close menu" />
@@ -66,9 +74,19 @@ const Navbar = () => {
                 )}
             </ul>
             <div className="nav-login-cart">
-                {userDetails ? <div className='logged-user'><img src={user_icon} alt="user icon" /><p>{userDetails.name}</p></div> : <Link onClick={() => { setMenu("login") }} to='/loginsignup/login'><button>Login</button></Link>}
-                
-                <Link onClick={() => { setMenu("cart") }} to='/cart'><img src={shoppingcart} alt="shopping cart" /></Link>
+                {userDetails ? (
+                    <div className='logged-user'>
+                        <img src={user_icon} alt="user icon" />
+                        <p>{userDetails.name}</p>
+                    </div>
+                ) : (
+                    <Link to='/loginsignup/login'>
+                        <button>Login</button>
+                    </Link>
+                )}
+                <Link to='/cart'>
+                    <img src={shoppingcart} alt="shopping cart" />
+                </Link>
                 <div className="nav-cart-count">{getTotalCartItems()}</div>
             </div>
         </div>

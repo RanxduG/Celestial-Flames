@@ -6,7 +6,7 @@ import html2canvas from 'html2canvas';
 import logo from '../Assets/Celestial flames logo 2.0.jpg';
 
 const Invoice = () => {
-  const { cartItems, getTotalCartAmount, userDetails, all_product, discount } = useContext(ShopContext);
+  const { cartItems, getTotalCartAmount, userDetails, ready_made_products, discount } = useContext(ShopContext);
   const [useAccountAddress, setUseAccountAddress] = useState(true);
   const [deliveryAddress, setDeliveryAddress] = useState(userDetails.address);
 
@@ -85,7 +85,7 @@ const Invoice = () => {
           <tbody>
             {Object.keys(cartItems).map((itemId) => (
               cartItems[itemId].map((item, index) => {
-                const product = all_product.find((e) => e.id === itemId);
+                const product = ready_made_products.find((e) => e.id === itemId);
                 return (
                   <tr key={`${itemId}-${index}`}>
                     <td>{product.name}</td>

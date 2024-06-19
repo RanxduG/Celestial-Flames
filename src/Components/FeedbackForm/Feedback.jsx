@@ -11,6 +11,7 @@ import { useParams } from 'react-router-dom';
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
+  const [alertVisible, setAlertVisible] = useState(false);
   const form = useRef();
   const { userDetails, addReview } = useContext(ShopContext);
   const { productId } = useParams();
@@ -51,7 +52,14 @@ const FeedbackForm = () => {
     // Add the new review to the context
     addReview(newReview);
     console.log('Review added:', newReview);
-    handleReset()
+
+    // Show the success alert
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000); // Hide the alert after 3 seconds
+
+    handleReset();
   };
 
   const handleReset = () => {
@@ -115,6 +123,12 @@ const FeedbackForm = () => {
           </div>
         </form>
       </div>
+      
+      {alertVisible && (
+        <div className="alert">
+          Review submitted successfully!
+        </div>
+      )}
     </div>
   );
 };

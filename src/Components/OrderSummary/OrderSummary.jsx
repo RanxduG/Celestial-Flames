@@ -3,7 +3,7 @@ import './OrderSummary.css';
 import { ShopContext } from '../../Context/ShopContext';
 
 const OrderSummary = () => {
-    const { all_product, cartItems, getTotalCartAmount, discount } = useContext(ShopContext);
+    const { ready_made_products, cartItems, getTotalCartAmount, discount } = useContext(ShopContext);
 
     const subtotal = getTotalCartAmount();
     const shippingFee = 500;
@@ -14,7 +14,7 @@ const OrderSummary = () => {
             <h1>Order Summary</h1>
             <hr />
             <div className='summary'>
-                {all_product.map((product) => (
+                {ready_made_products.map((product) => (
                     cartItems[product.id].map((item, index) => (
                         <div key={`${product.id}-${index}`} className='summary-item'>
                             <img src={product.image} alt={item.name} className='summary-item-image' />

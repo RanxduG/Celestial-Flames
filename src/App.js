@@ -14,6 +14,7 @@ import crystal_banner from './Components/Assets/Crystal banner.jpg';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import Checkout from './Pages/Checkout';
+import Catalog from './Pages/Catalog';
 
 function App() {
   return (
@@ -23,9 +24,7 @@ function App() {
         <Routes>
           <Route index path="/Celestial-Flames" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
-          <Route path="/Classic Collection" element={<ShopCategory banner={classic_banner} category='Classic Collection' />} />
-          <Route path="/Elemental Collection" element={<ShopCategory banner={elemental_banner} category='Elemental Collection' />} />
-          <Route path="/Crystal Collection" element={<ShopCategory banner={crystal_banner} category='Crystal Collection' />} />
+          <Route path="/Seasonal Collection" element={<ShopCategory banner={classic_banner} category='Seasonal Collection'  />} />
           <Route path="/product">
             <Route index element={<Product />} />
             <Route path=":productId" element={<Product />} />
@@ -38,6 +37,7 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/Catalog" element={<Catalog />} />
         </Routes>
         <Footer />
       </BrowserRouter>

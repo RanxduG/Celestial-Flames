@@ -53,6 +53,33 @@
     margin: 50px;
     gap: 30px;
 }
+.create-candle-link {
+    text-align: center;
+    margin: 50px 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun-looking font family */
+}
+
+.create-candle-link h3 {
+    font-size: 1.5em; /* Increase font size */
+    color: #333; /* Text color */
+    margin-bottom: 20px;
+}
+
+.create-candle-link button {
+    background-color: #000; /* Black button background */
+    color: #fff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.create-candle-link button:hover {
+    background-color: #444; /* Slightly lighter black on hover */
+}
+
 
 @media(max-width: 1280px) {
     .collection {

@@ -7,7 +7,7 @@ import minus_icon from '../Assets/minus.png';
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {
-    const { all_product, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, userDetails, discount } = useContext(ShopContext);
+    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, userDetails, discount } = useContext(ShopContext);
     const [promocode, setPromocode] = useState('');
     const [showDiscount, setShowDiscount] = useState(false); // State to control the discount display
 
@@ -50,7 +50,7 @@ const CartItems = () => {
                 <p>Remove</p>
             </div>
             <hr />
-            {all_product.map((product) => (
+            {ready_made_products.map((product) => (
                 cartItems[product.id].map((item, index) => (
                     <div key={`${product.id}-${index}`}>
                         <div className="cartitems-format cartitems-format-main">

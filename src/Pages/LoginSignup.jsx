@@ -2,17 +2,18 @@ import React, { useState, useContext } from 'react';
 import './CSS/LoginSignup.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import axios from 'axios';
 
 const LoginSignup = () => {
   const { state } = useParams();
   const navigate = useNavigate();
   const { setUser } = useContext(ShopContext); // Get setUser function from context
 
-  // State management for form fields and validation
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
+    address: '',
     agreed: false
   });
   const [loginData, setLoginData] = useState({
@@ -20,12 +21,6 @@ const LoginSignup = () => {
     password: ''
   });
   const [error, setError] = useState('');
-
-  // Sample user data for login validation
-  const sampleUsers = [
-    { name: "Ranidu Gurusinghe", email: 'ranidu.h.gurusinghe@gmail.com', address:"123/4 Nugegoda Ratmalana", password: 'Hansaka@123' },
-    { name: "Celine Fernando", email: 'celinefdo77@gmail.com', address:"123/4 Nugegoda Ratmalana", password: 'Celine@123' },
-  ];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,23 +40,29 @@ const LoginSignup = () => {
 
   const handleSignup = () => {
     if (formData.name && formData.email && formData.password && formData.agreed) {
-      setUser({ name: formData.name, email: formData.email, password: formData.password, address: formData.address }); // Save user details
-      navigate('/Celestial-Flames');
+      axios.post('http://localhost:5000/signup', formData)
+        .then(response => {
+          setUser({ name: formData.name, email: formData.email, password: formData.password, address: formData.address }); // Save user details
+          navigate('/Celestial-Flames');
+        })
+        .catch(error => {
+          setError('Error signing up. Please try again.');
+        });
     } else {
       setError('Please fill in all fields and agree to the terms.');
     }
   };
 
   const handleLogin = () => {
-    const user = sampleUsers.find(
-      (user) => user.email === loginData.email && user.password === loginData.password
-    );
-    if (user) {
-      setUser({ name: user.name, email: user.email, password: user.password, address: user.address }); // Save user details
-      navigate('/Celestial-Flames');
-    } else {
-      setError('Invalid email or password.');
-    }
+    axios.post('http://localhost:5000/login', loginData)
+      .then(response => {
+        setUser(response.data.user); // Save user details
+        navigate('/Celestial-Flames');
+      })
+      .catch(error => {
+        // Set the error state with the message from the backend
+        setError(error.response.data.message || 'Invalid email or password.');
+      });
   };
 
   return (
@@ -118,7 +119,7 @@ const LoginSignup = () => {
                 onChange={handleChange}
               />
               <input
-                type="address"
+                type="text"
                 placeholder='Address'
                 name="address"
                 value={formData.address}

@@ -106,3 +106,16 @@
     border: none;
     cursor: pointer;
 }
+.alert {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  background-color: black;
+  color: green;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  opacity: 0.9;
+}
