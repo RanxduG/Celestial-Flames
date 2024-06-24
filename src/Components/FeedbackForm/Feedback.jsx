@@ -8,12 +8,13 @@ import veryGoodEmoji from '../Assets/Emojis/veryGood.png';
 import excellentEmoji from '../Assets/Emojis/exellent.png';
 import { ShopContext } from '../../Context/ShopContext';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const FeedbackForm = () => {
   const [rating, setRating] = useState(0);
   const [alertVisible, setAlertVisible] = useState(false);
   const form = useRef();
-  const { userDetails, addReview } = useContext(ShopContext);
+  const { userDetails } = useContext(ShopContext);
   const { productId } = useParams();
   const [formData, setFormData] = useState({
     name: userDetails?.name || '',
@@ -27,39 +28,43 @@ const FeedbackForm = () => {
     const emoji = document.getElementById('emoji');
     const colors = ['red', 'red', 'red', 'red', 'red'];
     const translations = ['0px', '-100px', '-200px', '-300px', '-400px'];
-    
+
     for (let i = 0; i < stars.length; i++) {
       stars[i].style.color = i <= index ? colors[i] : '#e4e4e4';
     }
-    
+
     emoji.style.transform = `translateX(${translations[index]})`;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.comment || !rating) {
       alert('Please fill in all required fields.');
       return;
     }
-    
+
     const newReview = {
+      user_id: userDetails.id,
       product_id: productId,
-      customer_name: userDetails?.name || 'Anonymous',
+      review: formData.comment,
       rating: rating,
-      comment: formData.comment,
     };
 
-    // Add the new review to the context
-    addReview(newReview);
-    console.log('Review added:', newReview);
+    try {
+      const response = await axios.post('http://localhost:5000/add_review', newReview);
+      console.log('Review added:', response.data);
 
-    // Show the success alert
-    setAlertVisible(true);
-    setTimeout(() => {
-      setAlertVisible(false);
-    }, 3000); // Hide the alert after 3 seconds
+      // Show the success alert
+      setAlertVisible(true);
+      setTimeout(() => {
+        setAlertVisible(false);
+      }, 3000); // Hide the alert after 3 seconds
 
-    handleReset();
+      handleReset();
+    } catch (error) {
+      console.error('Error adding review:', error);
+      alert('Error adding review');
+    }
   };
 
   const handleReset = () => {
@@ -123,7 +128,7 @@ const FeedbackForm = () => {
           </div>
         </form>
       </div>
-      
+
       {alertVisible && (
         <div className="alert">
           Review submitted successfully!

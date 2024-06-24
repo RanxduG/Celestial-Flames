@@ -28,6 +28,7 @@ import Wobbly_second from './Wobbly.jpg';
 let ready_made = [
     {
         id: 'CLC2024004',
+        item_id: 1,
         category: 'Classic Collection',
         name: 'Tower',
         scent: 'Unscented',
@@ -35,11 +36,12 @@ let ready_made = [
         image: tower,
         secondImage: towersecond,
         waxtype: 'Soy Wax',
-        fragrancetype: null,
+        fragrancetype: 'None',
         description: 'Elevate your ambiance with our 12cm tall Tower candle, featuring custom molds for a personalized touch. Made from Soy Wax and Unscented, this elegant candle adds sophistication to any space and offers 10 hours of burn time for moments of tranquility and inspiration.',
         dimensions: '12cm x 5cm x 5cm',
         new_price: 2800,
         old_price: 3000,
+        color_id: '#FFFFFF',
         product_color: 'White',
         popular: true,
         tags: ['tower', 'candle', 'classic']
@@ -47,6 +49,7 @@ let ready_made = [
     },
     {
         id: 'CLC2024031',
+        item_id: 2,
         category: 'Classic Collection',
         name: 'Cubist Candle',
         scent: 'Coffee scented',
@@ -59,6 +62,7 @@ let ready_made = [
         dimensions: '8.5cm x 5cm x 5cm',
         new_price: 1800,
         old_price: 2000,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['cubist', 'candle', 'tower']
@@ -66,6 +70,7 @@ let ready_made = [
     },
     {
         id: 'CLC2024020',
+        item_id: 3,
         category: 'Classic Collection',
         seasonal: true,
         name: 'Twirling Hearts',
@@ -79,12 +84,14 @@ let ready_made = [
         dimensions: '4.5cm x 5cm x 5cm',
         new_price: 1000,
         old_price: 1150,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['twirling', 'hearts', 'candle']
     },
     {
         id: 'CLC2024002',
+        item_id: 4,
         category: 'Classic Collection',
         name: 'Cloud Nine',
         scent: 'Vanilla scented',
@@ -97,12 +104,14 @@ let ready_made = [
         dimensions: '5.5cm x 5.6cm x 5.6cm',
         new_price: 1800,
         old_price: 2000,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['cloud', 'nine', 'candle']
     },
     {
         id: 'CLC2024016',
+        item_id: 5,
         category: 'Classic Collection',
         seasonal: true,
         name: 'Xmas Tree',
@@ -117,11 +126,13 @@ let ready_made = [
         new_price: 750,
         old_price: 1000,
         popular: false,
+        color_id: '#FFFFFF',
         product_color: 'white',
         tags: ['xmas', 'tree', 'candle']
     },
     {
         id: 'CLC2024022',
+        item_id: 6,
         category: 'Classic Collection',
         name: 'Hexa Light',
         scent: 'Unscented',
@@ -129,18 +140,20 @@ let ready_made = [
         image: Hexa_light,
         secondImage: Hexa_lght_second,
         waxtype: 'Soy Wax',
-        fragrancetype: null,
+        fragrancetype: 'None',
         other_images: [Hexa_lght_pink, Hexa_lght_blue, Hexa_lght_green],
         description: 'Our Hexa Light candle, featuring a unique rhombohedral shape. Made from Soy Wax and Unscented, measuring 5cm in height and 6cm in width, this candle offers 3 hours of burn time, creating a radiant glow for moments of tranquility and beauty.',
         dimensions: '5cm x 6cm x 6cm',
         new_price: 1000,
         old_price: 1150,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: true,
         tags: ['hexa', 'light', 'candle']
     },
     {
         id: 'CLC2024027',
+        item_id: 7,
         seasonal: true,
         category: 'Classic Collection',
         name: 'Pine Cone',
@@ -154,12 +167,14 @@ let ready_made = [
         dimensions: '7cm x 5.5cm x 5.5cm',
         new_price: 850,
         old_price: 1000,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['pine', 'cone', 'candle']
     },
     {
         id: 'CLC2024023',
+        item_id: 8,
         category: 'Classic Collection',
         seasonal: true,
         name: 'Baby Bear',
@@ -173,6 +188,7 @@ let ready_made = [
         dimensions: '4.5cm x 3cm x 3cm',
         new_price: 300,
         old_price: 500,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['baby', 'bear', 'candle']
@@ -180,6 +196,7 @@ let ready_made = [
     },
     {
         id: 'CLC2024001',
+        item_id: 9,
         category: 'Classic Collection',
         name: 'Wobbly',
         scent: 'Cinnamon scented',
@@ -192,12 +209,14 @@ let ready_made = [
         dimensions: '2cm x 2cm x 2cm',
         new_price: 500,
         old_price: 650,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CC2024017',
+        item_id: 10,
         category: 'Crystal Collection',
         name: 'Celestial Glow',
         scent: 'Coffee scented',
@@ -210,12 +229,14 @@ let ready_made = [
         dimensions: '9cm x 7.2cm x 7.2cm',
         new_price: 2600,
         old_price: 2800,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: true,
         tags: ['celestial', 'glow', 'candle']
     },
     {
         id: 'EC2024023',
+        item_id: 11,
         category: 'Elemental Collection',
         name: 'Cement Chic',
         scent: 'Cinnamon scented',
@@ -228,6 +249,7 @@ let ready_made = [
         dimensions: '7.5cm x 7.5cm x 7.5cm',
         new_price: 3000,
         old_price: 3200,
+        color_id: '#FFFFFF',
         product_color: 'white',
         popular: true,
         tags: ['cement', 'chic', 'candle']

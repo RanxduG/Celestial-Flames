@@ -14,7 +14,7 @@ const Popular = () => {
           {ready_made_products.map((item, i) => {
               if (item.popular===true) {
                 return (
-                  <Item key={i} id={item.id} name={item.name} scent={item.scent} image={item.image} secondImage={item.secondImage} stock={item.stock} waxtype={item.waxtype} fragrancetype={item.fragrancetype} color={item.product_color} old_price={item.old_price} new_price={item.new_price}/>
+                  <Item key={i} id={item.id} name={item.name} scent={item.scent} image={item.image} secondImage={item.secondImage} stock={item.stock} waxtype={item.waxtype} fragrancetype={item.fragrancetype} color={item.product_color} color_id={item.color_id} old_price={item.old_price} new_price={item.new_price}/>
                 );
               }
               return null;

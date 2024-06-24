@@ -62,7 +62,7 @@ const AllProducts = () => {
         <h3>
           Couldn't Find Anything To Your Liking?<br/>
           We Got You!!<br/>
-          <Link to={'/Catalog'}><button>Create The Candle You Want</button></Link>
+          <Link to={'/Catalog'}><button onClick={() => window.scroll(0,0)}>Create The Candle You Want</button></Link>
         </h3>
       </div>
     </div>

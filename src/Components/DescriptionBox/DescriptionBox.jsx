@@ -8,6 +8,13 @@ const DescriptionBox = (props) => {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
+    const get_username = (user_id) => {
+        fetch(`http://localhost:5000/get_username/${user_id}`)
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        });
+    }
 
     return (
         <div className='descriptionbox'>
@@ -36,13 +43,13 @@ const DescriptionBox = (props) => {
                     <div className="descriptionbox-reviews">
                         {reviews.map((review, index) => (
                             <div key={index} className="review">
-                                <h4>{review.customer_name}</h4>
+                                <h4>{review.name}</h4>
                                 <div className="review-rating">
                                     {Array.from({ length: review.rating }).map((_, i) => (
                                         <span key={i}>&#9733;</span>
                                     ))}
                                 </div>
-                                <p>{review.comment}</p>
+                                <p>{review.review}</p>
                             </div>
                         ))}
                     </div>

@@ -19,7 +19,7 @@ const CatalogItems = () => {
                         <div className='catalog-product-details'>
                             <p id='title'>{item.name}</p>
                             <p>{item.description}<br/><br/><br/></p>
-                            <Link to={`/product/${item.id}`}><button>Select</button></Link>
+                            <Link to={`/product/${item.id}`}><button onClick={() => window.scrollTo(0, 0)}>Customize</button></Link>
                         </div>
                     </div>
 

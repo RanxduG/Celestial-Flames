@@ -2,6 +2,8 @@ import tower from './Tower 2.jpg';
 import cubist_candle from './Cubist Candle 5.jpg';
 import twirlling_hearts from './Twirlling hearts 3.jpg';
 import Cloud_nine from './Cloud nine.jpg';
+import Cloud_nine_image from './Cloud nine image.jpg';
+import Cloud_nine_background from './Cloud nine background.jpg';
 import Wobbly from './Wobbly.jpg';
 import Xmas_tree from './Xmas tree 2.jpg';
 import Hexa_light from './Hexa Light Editted.jpg';
@@ -74,6 +76,8 @@ let all_data = [
         category: 'Classic Collection',
         name: 'Cloud Nine',
         image: Cloud_nine,
+        img_1: Cloud_nine_image,
+        img_2: Cloud_nine_background,
         secondImage: Cloud_nine_second,
         description: 'Cloud Nine, a 3x3 cube candle measuring 5.5cm in height and 5.6cm in width, providing 5-6 hours of burn time for a serene experience.',
         dimensions: '5.5cm x 5.6cm x 5.6cm',

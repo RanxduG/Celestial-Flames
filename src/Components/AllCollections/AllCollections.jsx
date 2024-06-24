@@ -3,7 +3,6 @@ import './AllCollections.css';
 import all_collection from '../Assets/collections.js';
 import Collections from '../Collections/Collections.jsx';
 const NewCollections = () => {
-  console.log(all_collection[0]);
 
   return (
     <div className='new-collections'>

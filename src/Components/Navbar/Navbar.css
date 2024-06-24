@@ -1,6 +1,6 @@
 .navbar {
     background-color: white;
-    box-shadow: 0 1px 3px -2px black;
+    box-shadow: 0 5px 1px -2px rgba(0, 0, 0, 0.2);
     padding: 10px 20px; /* Adjusted padding for better responsiveness */
     display: flex;
     justify-content: space-between;
@@ -109,10 +109,52 @@
 .nav-dropdown {
     display: none;
 }
+.logged-user {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.logged-user img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.profile-dropdown {
+    margin-top: 10px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: black;
+    width: 200px;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-button:hover {
+    background-color: #333;
+}
 
 .navbar-scrolled .nav-menu,
 .navbar-scrolled .nav-login-cart {
     display: none;
+}
+.navbar-scrolled{
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px -2px rgba(0, 0, 0, 0.2);
+
 }
 
 .navbar-scrolled .nav-logo {
@@ -132,7 +174,11 @@
 .navbar-scrolled:hover .nav-login-cart {
     display: flex;
 }
+.navbar-scrolled:hover{
+    background-color: white;
+    box-shadow: 0 5px 1px -2px rgba(0, 0, 0, 0.2);
 
+}
 .navbar-scrolled:hover .nav-login-cart {
     justify-content: flex-end;
 }

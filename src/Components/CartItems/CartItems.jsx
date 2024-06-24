@@ -41,6 +41,7 @@ const CartItems = () => {
 
     return (
         <div className='cartitems'>
+            <h1>Shopping Cart</h1>
             <div className="cartitems-format-main">
                 <p>Products</p>
                 <p>Title</p>
@@ -94,7 +95,7 @@ const CartItems = () => {
                             <h3>Rs.{discountedAmount.toFixed(2)}</h3>
                         </div>
                         <p>*Our trusted courier partner is Prompto Express (PVT) ltd Nugegoda</p>
-                        {userDetails ? <Link to={'/checkout'}><button>PROCEED TO CHECKOUT</button></Link> : <Link to={'/loginsignup/login'}><button>LOGIN TO CHECKOUT</button></Link>}
+                        {userDetails ? <Link to={'/checkout'}><button onClick={() => window.scrollTo(0, 0)}>PROCEED TO CHECKOUT</button></Link> : <Link to={'/loginsignup/login'}><button>LOGIN TO CHECKOUT</button></Link>}
                     </div>
                 </div>
                 <div className="carticons-promocode">

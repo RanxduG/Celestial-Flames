@@ -15,6 +15,7 @@ import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import Checkout from './Pages/Checkout';
 import Catalog from './Pages/Catalog';
+import ReadyMadeItems from './Pages/ReadyMadeItems';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
             <Route index element={<Product />} />
             <Route path=":productId" element={<Product />} />
           </Route>
+          <Route path="/readymade">
+            <Route index element={<ReadyMadeItems />} />
+            <Route path=":productId" element={<ReadyMadeItems />} />
+          </Route>
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/loginsignup">
             <Route index element={<LoginSignup />} />

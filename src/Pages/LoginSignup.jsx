@@ -12,6 +12,7 @@ const LoginSignup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     password: '',
     address: '',
     agreed: false
@@ -42,7 +43,7 @@ const LoginSignup = () => {
     if (formData.name && formData.email && formData.password && formData.agreed) {
       axios.post('http://localhost:5000/signup', formData)
         .then(response => {
-          setUser({ name: formData.name, email: formData.email, password: formData.password, address: formData.address }); // Save user details
+          setUser({ name: formData.name, email: formData.email, phone: formData.phone ,password: formData.password, address: formData.address }); // Save user details
           navigate('/Celestial-Flames');
         })
         .catch(error => {
@@ -111,6 +112,13 @@ const LoginSignup = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
+              <input
+                type="text"
+                placeholder='Phone Number'
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+               />
               <input
                 type="password"
                 placeholder='Password'

@@ -1,6 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import ready_made_products from '../Components/Assets/readymade.js';
-import initialReviews from '../Components/Assets/reviews.js';
 import all_products from '../Components/Assets/all_data.js';
 
 export const ShopContext = createContext(null);
@@ -17,15 +16,33 @@ const ShopContextProvider = (props) => {
     const promocode = 'CF202406';
     const [cartItems, setCartItems] = useState(getDefaultCart());
     const [userDetails, setUserDetails] = useState(null);
-    const [reviews, setReviews] = useState(initialReviews);
+    const [reviews, setReviews] = useState([]);
     const [discount, setDiscount] = useState(1);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:5000/get_reviews');
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log('Reviews:', data);
+                setReviews(data);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        };
+
+        fetchReviews();
+    }, []);
 
     const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
             const updatedItems = [...prev[itemId]];
-
             const existingItemIndex = updatedItems.findIndex(item =>
-                item.itemName === itemName &&
+
+                item.id === itemId &&
                 item.waxType === waxType &&
                 item.fragranceType === fragranceType &&
                 item.color === color &&
@@ -36,6 +53,7 @@ const ShopContextProvider = (props) => {
                 updatedItems[existingItemIndex].quantity += 1;
             } else {
                 updatedItems.push({
+                    id: itemId,
                     itemName: itemName,
                     waxType: waxType,
                     fragranceType: fragranceType,

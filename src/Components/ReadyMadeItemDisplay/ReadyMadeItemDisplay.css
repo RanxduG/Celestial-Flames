@@ -1,150 +1,98 @@
 .productdisplay {
     display: flex;
-    margin: 0px 170px;
+    margin: 100px 170px;
     padding-left: 100px;
 }
-
 .productdisplay-left {
     width: 50%;
     display: flex;
     gap: 17px;
 }
-
 .productdisplay-img {
     width: 600px;
     height: 600px;
     position: relative;
     box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
     border-radius: 1em;
-    overflow: hidden;
 }
-
-.img-1 {
+.productdisplay-img img {
     width: 100%;
     height: 100%;
-    z-index: 0;
+    object-fit: cover;
+    border-radius: 1em;
 }
-
-.img-2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    mix-blend-mode: screen; /* Apply screen blend mode to remove white shade */
-}
-
-.color {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 90%;
-    height: 90%;
-    background-color: red;
-    mix-blend-mode: multiply;
-    z-index: 1;
-}
-
 .productdisplay-right {
     margin-left: 30px;
     max-width: 45%;
 }
-
 .productdisplay-right-star img {
     width: 17px;
 }
-
 .productdisplay-right-star p {
     font-size: 17px;
     display: inline-block;
     padding-left: 10px;
     color: rgba(0, 0, 0, 0.6);
 }
-
 .productdisplay-right-star {
     margin-bottom: 12px;
 }
-
 .productdisplay-right h1 {
     margin: 5px 0px;
     font-size: 23px;
 }
-
 .productdisplay-right-description {
     font-size: 15px;
     line-height: 1.4;
 }
-
 .productdisplay-right-feature h1 {
     margin: 13px 0px;
     font-size: 17px;
 }
-
-.productdisplay-right-feature .productdisplay-right-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+.productdisplay-right-stock{
+    padding: 10px 0px;
+    font-size: 20px;
+    color: red;
 }
-
-.productdisplay-right-feature .option {
-    flex: 1 1 calc(25% - 10px);
-    padding: 10px 20px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    cursor: pointer;
-    text-align: center;
-    background-color: white; /* Default background color */
+.productdisplay-right-description{
+    margin: 10px 0px;
+    font-size: 16px;
 }
-
-.productdisplay-right-feature .option.selected {
-    background-color: black;
-    color: white;
-}
-
-.productdisplay-right-feature input {
-    padding: 5px 9px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .productdisplay-right-prices {
     margin: 20px 0px;
 }
-
 .productdisplay-right-price-new {
     display: inline-block;
     font-size: 24px;
     font-weight: 600;
     color: black;
 }
-
-.productdisplay-right button {
+.productdisplay-right-price-old{
+    display: inline-block;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+.productdisplay-right button{
     height: 50px;
     width: 200px;
-    border-radius: 25px;
+    border-radius: 5px;
     background: black;
     color: white;
     font-size: 16px;
     font-weight: 500;
     outline: none;
     cursor: pointer;
-}
 
-.productdisplay-right button:disabled {
-    background: grey;
-    cursor: not-allowed;
 }
-
 .productdisplay-right-category {
     font-size: 16px;
 }
-
 .productdisplay-right-category span {
     font-weight: 600;
     font-size: 17px;
 }
-
 .alert {
     position: fixed;
     top: 10px;
@@ -156,3 +104,4 @@
     border-radius: 5px;
     z-index: 100;
 }
+

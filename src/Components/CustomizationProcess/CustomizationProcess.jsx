@@ -41,7 +41,7 @@ const CustomizationProcess = () => {
           <div className='step-content'>
             <h1>Step 1: Choose Your Candle</h1>
             <p>Choose the candle you want to customize. You can choose from our Classic Collection, Elemental Collection, or Crystal Collection.</p>
-            <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
+            <Link to='/Catalog' onClick={() => window.scrollTo(0, 0)} className='step-button'>
               Shop Now
             </Link>
           </div>

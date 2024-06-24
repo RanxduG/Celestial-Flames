@@ -4,32 +4,35 @@ import star_icon from '../Assets/star-icon.png';
 import star_dull_icon from '../Assets/star-icon-dull.png';
 import { ShopContext } from '../../Context/ShopContext'; // Adjust the import path as necessary
 
+const pastelColors = [
+    { name: 'Light Pink', code: '#FFB3BA' },
+    { name: 'Peach', code: '#FFDFBA' },
+    { name: 'Light Yellow', code: '#FFFFBA' },
+    { name: 'Light Green', code: '#BAFFC9' },
+    { name: 'Light Blue', code: '#BAE1FF' },
+    { name: 'Lavender', code: '#E2C2FF' },
+    { name: 'Pink', code: '#FF99C8' },
+    { name: 'Beige', code: '#FCF6BD' },
+    { name: 'Mint', code: '#D0F4DE' },
+    { name: 'Sky Blue', code: '#A9DEF9' }
+];
+
 const ProductDisplay = (props) => {
     const { product, reviews } = props;
     const { addToCart } = useContext(ShopContext);
 
     const [selectedWaxType, setSelectedWaxType] = useState(null);
     const [selectedFragranceType, setSelectedFragranceType] = useState(null);
-    const [selectedColor, setSelectedColor] = useState('#ffffff');
+    const [selectedColor, setSelectedColor] = useState(null);
     const [selectedFragrance, setSelectedFragrance] = useState(null);
     const [alertVisible, setAlertVisible] = useState(false);
 
     useEffect(() => {
         const color = document.querySelector('.color');
-        const colorInput = document.querySelector('.color-input');
-
-        if (colorInput) {
-            const handleColorChange = () => {
-                color.style.backgroundColor = colorInput.value;
-            };
-            colorInput.addEventListener('input', handleColorChange);
-
-            // Cleanup event listener
-            return () => {
-                colorInput.removeEventListener('input', handleColorChange);
-            };
+        if (color) {
+            color.style.backgroundColor = selectedColor;
         }
-    }, []);
+    }, [selectedColor]);
 
     const handleWaxTypeChange = (waxType) => {
         setSelectedWaxType(waxType);
@@ -40,8 +43,8 @@ const ProductDisplay = (props) => {
         setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
 
-    const handleColorChange = (event) => {
-        setSelectedColor(event.target.value);
+    const handleColorChange = (colorCode) => {
+        setSelectedColor(colorCode);
     };
 
     const handleFragranceChange = (fragrance) => {
@@ -75,7 +78,7 @@ const ProductDisplay = (props) => {
     };
 
     const areAllOptionsSelected = () => {
-        return selectedWaxType && selectedFragranceType && selectedColor && selectedFragrance;
+        return selectedWaxType && selectedColor;
     };
 
     const handleAddToCart = () => {
@@ -153,7 +156,19 @@ const ProductDisplay = (props) => {
                 <div className="productdisplay-right-feature">
                     <h1>Select Color</h1>
                     <div className="productdisplay-right-options">
-                        <input type="color" className='color-input' value={selectedColor} onChange={handleColorChange} />
+                        {pastelColors.map(color => (
+                            <div
+                                key={color.code}
+                                className={getOptionClass(selectedColor, color.code)}
+                                style={{
+                                backgroundColor: selectedColor === color.code ? color.code : 'white',
+                                color: 'black'
+                                 }}
+                                onClick={() => handleColorChange(color.code)}
+                            >
+                                <span>{color.name}</span>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="productdisplay-right-prices">
@@ -162,7 +177,7 @@ const ProductDisplay = (props) => {
                 <button 
                     onClick={handleAddToCart} 
                     disabled={!areAllOptionsSelected()}>
-                    ADD TO CART
+                    Create Candle
                 </button>
 
                 <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
