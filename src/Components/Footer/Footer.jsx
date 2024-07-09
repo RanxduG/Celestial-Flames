@@ -1,9 +1,9 @@
 import React from 'react';
 import './Footer.css';
-import footer_logo from '../Assets/Celestial flames logo 2.0.jpg';
-import instagram_icon from '../Assets/instagram.png';
-import facebook_icon from '../Assets/facebook.png';
-import whatsapp_icon from '../Assets/whatsapp.png';
+import footer_logo from '../Assets/Logo/Celestial flames logo 2.0.jpg';
+import instagram_icon from '../Assets/SocialIcons/instagram.png';
+import facebook_icon from '../Assets/SocialIcons/facebook.png';
+import whatsapp_icon from '../Assets/SocialIcons/whatsapp.png';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {

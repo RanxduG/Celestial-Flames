@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './ProductDisplay.css';
-import star_icon from '../Assets/star-icon.png';
-import star_dull_icon from '../Assets/star-icon-dull.png';
+import star_icon from '../Assets/Icons/star-icon.png';
+import star_dull_icon from '../Assets/Icons/star-icon-dull.png';
 import { ShopContext } from '../../Context/ShopContext'; // Adjust the import path as necessary
 
 const pastelColors = [

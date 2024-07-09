@@ -3,9 +3,9 @@ import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_
 import './WelcomeBanner.css';
 import { Link } from 'react-router-dom';
 
-import image1 from '../Assets/Celestial Glow.jpg';
-import image2 from '../Assets/Welcome-banner-image-2.png';
-import image3 from '../Assets/Welcome-banner-image-3.png';
+import image1 from '../Assets/Good/Celestial Glow/Celestial Glow.jpg';
+import image2 from '../Assets/Banners/Welcome-banner-image-2.png';
+import image3 from '../Assets/Banners/Welcome-banner-image-3.png';
 
 const WelcomeBanner = () => {
   const { userDetails } = useContext(ShopContext);

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import ready_made_products from '../Components/Assets/readymade.js';
-import all_products from '../Components/Assets/all_data.js';
+import ready_made_products from '../Components/Assets/Data/readymade.js';
+import all_products from '../Components/Assets/Data/all_data.js';
 
 export const ShopContext = createContext(null);
 

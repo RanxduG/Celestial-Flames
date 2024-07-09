@@ -1,7 +1,7 @@
 import React from 'react';
 import './Hero.css';
-import arrow_icon from '../Assets/Arrow.png';
-import hero_img from '../Assets/Cement Chic.jpg';
+import arrow_icon from '../Assets/Icons/Arrow.png';
+import hero_img from '../Assets/Good/Cement Chic/Cement Chic.jpg';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import './AllCollections.css';
-import all_collection from '../Assets/collections.js';
+import all_collection from '../Assets/Data/collections.js';
 import Collections from '../Collections/Collections.jsx';
 const NewCollections = () => {
 

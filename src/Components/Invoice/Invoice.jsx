@@ -3,7 +3,7 @@ import './Invoice.css';
 import { ShopContext } from '../../Context/ShopContext';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import logo from '../Assets/Celestial flames logo 2.0.jpg';
+import logo from '../Assets/Logo/Celestial flames logo 2.0.jpg';
 
 const Invoice = () => {
   const { cartItems, getTotalCartAmount, userDetails, ready_made_products, discount } = useContext(ShopContext);

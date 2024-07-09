@@ -1,12 +1,12 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import "./Navbar.css";
-import logo from "../Assets/logo background removed.png";
-import shoppingcart from "../Assets/shopping-cart.jpg";
+import logo from "../Assets/Logo/logo background removed.png";
+import shoppingcart from "../Assets/Icons/shopping-cart.jpg";
 import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
-import nav_dropdown from "../Assets/nav-dropdown.png";
-import close_icon from '../Assets/remove.png';
-import user_icon from '../Assets/user.png';
+import nav_dropdown from "../Assets/Icons/nav-dropdown.png";
+import close_icon from '../Assets/Icons/remove.png';
+import user_icon from '../Assets/Icons/user.png';
 
 const Navbar = () => {
     const { getTotalCartItems, userDetails, setUser } = useContext(ShopContext);
