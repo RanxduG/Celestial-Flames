@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import './CartItems.css';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
-import remove_icon from '../Assets/Icons/remove.png';
-import plus_icon from '../Assets/Icons/plus.png';
-import minus_icon from '../Assets/Icons/minus.png';
+import { ShopContext } from '../../Context/ShopContext';
+import remove_icon from '../Assets/remove.png';
+import plus_icon from '../Assets/plus.png'; 
+import minus_icon from '../Assets/minus.png'; 
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {
@@ -70,6 +70,7 @@ const CartItems = () => {
                     </div>
                 ))
             ))}
+            
             <div className="carticons-down">
                 <div className="carticons-total">
                     <h1>Cart Total</h1>

@@ -4,13 +4,15 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    height: 80vh;
+    height: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .popular h1 {
     color: #171717;
     font-size: 50px;
     font-weight: 600;
+    text-align: center;
 }
 
 .popular hr {
@@ -18,47 +20,93 @@
     height: 6px;
     border-radius: 10px;
     background: #252525;
+    border: none;
 }
 
 .popular-item {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin-top: 50px;
     display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 50px;
     gap: 30px;
+    justify-items: center; /* Center the items horizontally */
 }
 
 @media(max-width: 1024px) {
-    .popular{
-        height: 90vh;
-    }
     .popular h1 {
         font-size: 40px;
     }
     .popular-item {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media(max-width: 800px) {
-    .popular{
-        height: 90vh;
-    }
     .popular h1 {
         font-size: 35px;
     }
     .popular-item {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media(max-width: 500px) {
-    .popular{
-        height: 180vh;
+    .popular {
+        height: auto;
     }
     .popular h1 {
         font-size: 30px;
     }
     .popular-item {
         grid-template-columns: 1fr;
+    }
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%; /* Ensure the item takes full width of the grid cell */
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    position: relative; /* Allow absolute positioning within the item */
+    height: auto; /* Ensure the height adjusts based on content */
+}
+
+.item img {
+    max-width: 100%; /* Ensure the image does not overflow */
+    height: auto;
+    border-radius: 10px;
+}
+
+.item .item-details {
+    margin-top: 10px; /* Add some spacing between the image and the details */
+}
+
+.item .add-to-cart {
+    position: absolute;
+    bottom: 10px; /* Position the button at the bottom of the item */
+    width: calc(100% - 20px); /* Account for padding */
+    left: 10px;
+    right: 10px;
+}
+
+/* Media query adjustments */
+@media(max-width: 500px) {
+    .item {
+        padding: 5px; /* Reduce padding on smaller screens */
+    }
+
+    .item img {
+        width: 100%; /* Ensure the image takes full width of the item */
+        height: auto;
+    }
+
+    .item .add-to-cart {
+        bottom: 5px; /* Adjust button position */
+        width: calc(100% - 10px); /* Adjust button width */
     }
 }
