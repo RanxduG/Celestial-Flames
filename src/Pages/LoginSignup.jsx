@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './CSS/LoginSignup.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import { ShopContext } from '../Context/ShopContext';
 import axios from 'axios';
 
 const LoginSignup = () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './CartItems.css';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/remove.png';
 import plus_icon from '../Assets/plus.png'; 
 import minus_icon from '../Assets/minus.png'; 
@@ -70,6 +70,7 @@ const CartItems = () => {
                     </div>
                 ))
             ))}
+            
             <div className="carticons-down">
                 <div className="carticons-total">
                     <h1>Cart Total</h1>

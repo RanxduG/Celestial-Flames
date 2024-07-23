@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { ShopContext } from 'C:/Ranidu/Personal/Celestial_Flames_And_Candles_By_K/WebApp/frontend/src/Context/ShopContext.jsx';
+import { ShopContext } from '../../Context/ShopContext';
 import './WelcomeBanner.css';
 import { Link } from 'react-router-dom';
 
