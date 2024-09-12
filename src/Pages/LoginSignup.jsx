@@ -44,7 +44,7 @@ const LoginSignup = () => {
       axios.post('http://localhost:5000/signup', formData)
         .then(response => {
           setUser({ name: formData.name, email: formData.email, phone: formData.phone ,password: formData.password, address: formData.address }); // Save user details
-          navigate('/Celestial-Flames');
+          navigate('/');
         })
         .catch(error => {
           setError('Error signing up. Please try again.');
@@ -58,7 +58,7 @@ const LoginSignup = () => {
     axios.post('http://localhost:5000/login', loginData)
       .then(response => {
         setUser(response.data.user); // Save user details
-        navigate('/Celestial-Flames');
+        navigate('/');
       })
       .catch(error => {
         // Set the error state with the message from the backend

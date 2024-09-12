@@ -18,9 +18,9 @@ const Footer = () => {
             <p>Celestial Flames</p>
         </div>
         <ul className="footer-links">
-            <Link onClick={handleClick()}><li>Company</li></Link>
-            <Link onClick={handleClick()} to={'/aboutus'}><li>About</li></Link>
-            <Link onClick={handleClick()} to={'/contactus'}><li>Contact</li></Link>
+            <Link onClick={() => window.scrollTo(0, 0)}><li>Company</li></Link>
+            <Link onClick={() => window.scrollTo(0, 0)} to={'/aboutus'}><li>About</li></Link>
+            <Link onClick={() => window.scrollTo(0, 0)} to={'/contactus'}><li>Contact</li></Link>
         </ul>
         <div className="footer-social-icons">
             <div className="footer-icons-container">

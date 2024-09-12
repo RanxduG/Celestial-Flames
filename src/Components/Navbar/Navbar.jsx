@@ -22,7 +22,7 @@ const Navbar = () => {
     };
 
     const handleScroll = () => {
-        if (window.scrollY > 5) {
+        if (window.scrollY > 100) {
             navbarRef.current.classList.add('navbar-scrolled');
         } else {
             navbarRef.current.classList.remove('navbar-scrolled');
@@ -66,7 +66,7 @@ const Navbar = () => {
     return (
         <div className='navbar' ref={navbarRef}>
             <div className="nav-logo">
-                <Link to='/Celestial-Flames'><img src={logo} alt="logo" id='mainLogo' /></Link>
+                <Link to='/'><img src={logo} alt="logo" id='mainLogo' /></Link>
                 <p>Celestial Flames</p>
             </div>
             <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="Menu" />
@@ -96,7 +96,7 @@ const Navbar = () => {
                         <p>{userDetails.name}</p>
                         {isProfileDropdownVisible && (
                             <div className="profile-dropdown" ref={profileDropdownRef}>
-                                <Link to='/Celestial-Flames'><button onClick={logout} className="logout-button">Logout</button></Link>
+                                <Link to='/'><button onClick={logout} className="logout-button">Logout</button></Link>
                             </div>
                         )}
                     </div>

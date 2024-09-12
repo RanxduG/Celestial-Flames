@@ -13,7 +13,8 @@ const Home = () => {
     <div>
       <WelcomeBanner />
       <CustomizationProcess/>
-      
+
+
     </div>
       
 

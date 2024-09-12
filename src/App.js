@@ -23,7 +23,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route index path="/Celestial-Flames" element={<Home />} />
+          <Route index path="/" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
           <Route path="/Seasonal Collection" element={<ShopCategory banner={classic_banner} category='Seasonal Collection'  />} />
           <Route path="/product">

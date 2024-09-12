@@ -8,11 +8,12 @@
     width: 50%;
     display: flex;
     gap: 17px;
+    height: 800px;
 }
 
 .productdisplay-img {
     width: 600px;
-    height: 600px;
+    height: 800px;
     position: relative;
     box-shadow: 0 0 2em rgba(0, 0, 0, 0.2);
     border-radius: 1em;
@@ -37,11 +38,10 @@
 
 .color {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 5px;
     width: 90%;
-    height: 90%;
-    background-color: red;
+    height: 100%;
+    background-color: #A9DEF9;
     mix-blend-mode: multiply;
     z-index: 1;
 }

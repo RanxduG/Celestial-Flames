@@ -16,7 +16,7 @@ const CustomizationProcess = () => {
           ref.style.transform = `translateX(0)`;
           ref.style.opacity = 1;
         } else {
-          const direction = ref.classList.contains('step-right') ? '100%' : '-100%';
+          const direction = ref.classList.contains('step-right') ? '30%' : '-30%';
           ref.style.transform = `translateX(${direction})`;
           ref.style.opacity = 0;
         }
@@ -42,7 +42,7 @@ const CustomizationProcess = () => {
             <h1>Step 1: Choose Your Candle</h1>
             <p>Choose the candle you want to customize. You can choose from our Classic Collection, Elemental Collection, or Crystal Collection.</p>
             <Link to='/Catalog' onClick={() => window.scrollTo(0, 0)} className='step-button'>
-              Shop Now
+              Customize
             </Link>
           </div>
         </div>
@@ -55,7 +55,7 @@ const CustomizationProcess = () => {
             <h1>Step 2: Choose Your Wax Type</h1>
             <p>Choose the wax type you want for your candle. We offer soy wax, beeswax, and paraffin wax.</p>
             <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
-              Shop Now
+              Customize
             </Link>
           </div>
         </div>
@@ -68,7 +68,7 @@ const CustomizationProcess = () => {
             <h1>Step 3: Choose Your Fragrance</h1>
             <p>Choose the fragrance you want for your candle. We offer a variety of fragrances to choose from.</p>
             <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
-              Shop Now
+              Customize
             </Link>
           </div>
         </div>
@@ -81,7 +81,7 @@ const CustomizationProcess = () => {
             <h1>Step 4: Choose Your Color</h1>
             <p>Choose the color you want for your candle. We offer a variety of colors to choose from.</p>
             <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
-              Shop Now
+              Customize
             </Link>
           </div>
         </div>

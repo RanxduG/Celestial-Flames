@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
-import remove_icon from '../Assets/remove.png';
-import plus_icon from '../Assets/plus.png'; 
-import minus_icon from '../Assets/minus.png'; 
+import remove_icon from '../Assets/Icons/remove.png';
+import plus_icon from '../Assets/Icons/plus.png';
+import minus_icon from '../Assets/Icons/minus.png';
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {

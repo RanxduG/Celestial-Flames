@@ -13,9 +13,9 @@ const Collections = (props) => {
       <div className='Collection'>
         <img src={props.image} alt={props.name} />
         <p>{props.name}</p>
-        <div className='hover-details'>
-            {props.total === 0 ? 'Collection Not Released' : `Total Products Released: ${props.total}`}
-        </div>
+{/*         <div className='hover-details'> */}
+{/*             {props.total === 0 ? 'Collection Not Released' : `Total Products Released: ${props.total}`} */}
+{/*         </div> */}
       </div>
     </Link>
   );
