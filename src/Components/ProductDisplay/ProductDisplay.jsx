@@ -64,9 +64,9 @@ const ProductDisplay = (props) => {
 
     const getFragrancePrice = () => {
         switch (selectedFragranceType) {
-            case 'Chemical':
+            case 'Chemical1':
                 return 50;
-            case 'Essential Oil':
+            case 'Essential Oil1':
                 return 150;
             default:
                 return 0;

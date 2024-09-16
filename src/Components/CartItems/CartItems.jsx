@@ -37,7 +37,7 @@ const CartItems = () => {
     };
 
     const totalAmount = getTotalCartAmount();
-    const discountedAmount = totalAmount * discount + 500; // Apply discount and add shipping fee
+    const discountedAmount = totalAmount * discount; // Apply discount and add shipping fee
 
     return (
         <div className='cartitems'>
@@ -88,7 +88,7 @@ const CartItems = () => {
 
                         <div className="carticons-total-item">
                             <p>Shipping Fee</p>
-                            <p>Rs.500</p>
+                            <p>Rs.0</p>
                         </div>
                         <hr />
                         <div className="carticons-total-item">
