@@ -54,7 +54,7 @@ const CustomizationProcess = () => {
           <div className='step-content'>
             <h1>Step 2: Choose Your Wax Type</h1>
             <p>Choose the wax type you want for your candle. We offer soy wax, beeswax, and paraffin wax.</p>
-            <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
+            <Link to='/Catalog' onClick={() => window.scrollTo(0, 0)} className='step-button'>
               Customize
             </Link>
           </div>
@@ -67,7 +67,7 @@ const CustomizationProcess = () => {
           <div className='step-content'>
             <h1>Step 3: Choose Your Fragrance</h1>
             <p>Choose the fragrance you want for your candle. We offer a variety of fragrances to choose from.</p>
-            <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
+            <Link to='/Catalog' onClick={() => window.scrollTo(0, 0)} className='step-button'>
               Customize
             </Link>
           </div>
@@ -80,7 +80,7 @@ const CustomizationProcess = () => {
           <div className='step-content'>
             <h1>Step 4: Choose Your Color</h1>
             <p>Choose the color you want for your candle. We offer a variety of colors to choose from.</p>
-            <Link to='/Shop' onClick={() => window.scrollTo(0, 0)} className='step-button'>
+            <Link to='/Catalog' onClick={() => window.scrollTo(0, 0)} className='step-button'>
               Customize
             </Link>
           </div>

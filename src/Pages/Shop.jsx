@@ -8,7 +8,7 @@ const Shop = () => {
 
   return (
     <div>
-      <Hero/>
+{/*       <Hero/> */}
       <Popular/>
       <AllCollections/>
       <AllProducts/>

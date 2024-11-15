@@ -3,9 +3,13 @@ import { ShopContext } from '../../Context/ShopContext';
 import './WelcomeBanner.css';
 import { Link } from 'react-router-dom';
 
-import image1 from '../Assets/Good/Celestial Glow/Celestial Glow.jpg';
-import image2 from '../Assets/Banners/Welcome-banner-image-2.png';
-import image3 from '../Assets/Banners/Welcome-banner-image-3.png';
+import image1 from '../Assets/Banners/All gel wax candles.jpg';
+import image2 from '../Assets/Banners/Her fav.jpg';
+import image3 from '../Assets/Banners/Candle pouring.jpg';
+import image4 from '../Assets/Banners/Bubble candles.jpg';
+import image5 from '../Assets/Banners/Candle Ingredients.jpg';
+import image6 from '../Assets/Banners/Candles burning.jpg';
+// import image7 from '../Assets/Banners/Cement CHic.jpg';
 
 const WelcomeBanner = () => {
   const { userDetails } = useContext(ShopContext);
@@ -13,7 +17,7 @@ const WelcomeBanner = () => {
   const [typedText, setTypedText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
 
-  const slides = [image1, image2, image3];
+  const slides = [image1, image2, image3, image4, image5, image6];
   const textToType = userDetails ? `Hii there,\n${userDetails.name}!` : 'Weelcome to \nCelestial Flames';
 
   useEffect(() => {
@@ -65,11 +69,6 @@ const WelcomeBanner = () => {
       </div>
       <div className={`welcome-message ${isTyping ? 'typing' : ''}`}>
         <h1>{typedText}</h1>
-        {!userDetails && !isTyping && (
-          <div>
-            <p>Please login to continue. <button><Link to='/loginsignup/login'>Login</Link></button></p>
-          </div>
-        )}
       </div>
     </div>
   );

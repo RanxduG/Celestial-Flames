@@ -22,6 +22,7 @@
 
 .item p {
     margin: 6px 0;
+    text-decoration: none;
 }
 
 /* Hover effect for image change */

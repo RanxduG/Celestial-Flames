@@ -6,10 +6,10 @@ import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import nav_dropdown from "../Assets/Icons/nav-dropdown.png";
 import close_icon from '../Assets/Icons/remove.png';
-import user_icon from '../Assets/Icons/user.png';
+// import user_icon from '../Assets/Icons/user.png';
 
 const Navbar = () => {
-    const { getTotalCartItems, userDetails, setUser } = useContext(ShopContext);
+    const { getTotalCartItems } = useContext(ShopContext);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
     const menuRef = useRef();
@@ -21,20 +21,20 @@ const Navbar = () => {
         setIsMenuVisible(!isMenuVisible);
     };
 
-    const handleScroll = () => {
-        if (window.scrollY > 100) {
-            navbarRef.current.classList.add('navbar-scrolled');
-        } else {
-            navbarRef.current.classList.remove('navbar-scrolled');
-        }
-    };
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
+//     const handleScroll = () => {
+//         if (window.scrollY > 100) {
+//             navbarRef.current.classList.add('navbar-scrolled');
+//         } else {
+//             navbarRef.current.classList.remove('navbar-scrolled');
+//         }
+//     };
+//
+//     useEffect(() => {
+//         window.addEventListener('scroll', handleScroll);
+//         return () => {
+//             window.removeEventListener('scroll', handleScroll);
+//         };
+//     }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -53,15 +53,6 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-
-    const toggleProfileDropdown = () => {
-        setIsProfileDropdownVisible(!isProfileDropdownVisible);
-    };
-    const logout = () => {
-        setUser(null);
-        setIsProfileDropdownVisible(false);
-        window.location.reload();
-    };
 
     return (
         <div className='navbar' ref={navbarRef}>
@@ -90,21 +81,6 @@ const Navbar = () => {
                 )}
             </ul>
             <div className="nav-login-cart">
-                {userDetails ? (
-                    <div className='logged-user' onClick={toggleProfileDropdown}>
-                        <img src={user_icon} alt="user icon" />
-                        <p>{userDetails.name}</p>
-                        {isProfileDropdownVisible && (
-                            <div className="profile-dropdown" ref={profileDropdownRef}>
-                                <Link to='/'><button onClick={logout} className="logout-button">Logout</button></Link>
-                            </div>
-                        )}
-                    </div>
-                ) : (
-                    <Link to='/loginsignup/login'>
-                        <button>Login</button>
-                    </Link>
-                )}
                 <Link to='/cart'>
                     <img src={shoppingcart} alt="shopping cart" onClick={()=> window.scroll(0,0)}/>
                 </Link>

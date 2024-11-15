@@ -4,12 +4,11 @@ import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/Icons/remove.png';
 import plus_icon from '../Assets/Icons/plus.png';
 import minus_icon from '../Assets/Icons/minus.png';
-import { Link } from 'react-router-dom';
 
 const CartItems = () => {
-    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, userDetails, discount } = useContext(ShopContext);
+    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, discount, setCartTotal } = useContext(ShopContext);
     const [promocode, setPromocode] = useState('');
-    const [showDiscount, setShowDiscount] = useState(false); // State to control the discount display
+    const [showDiscount, setShowDiscount] = useState(false);
 
     const handleIncreaseQuantity = (itemId, item) => {
         addToCart(itemId, item.itemName, item.waxType, item.fragranceType, item.color, item.fragrance, item.total);
@@ -33,11 +32,37 @@ const CartItems = () => {
 
     const handlePromoCodeSubmit = () => {
         verifyPromoCode(promocode);
-        setShowDiscount(true); // Show discount after promo code is verified
+        setShowDiscount(true);
     };
 
     const totalAmount = getTotalCartAmount();
-    const discountedAmount = totalAmount * discount; // Apply discount and add shipping fee
+    const discountedAmount = totalAmount * discount;
+    setCartTotal(discountedAmount);
+
+    // Function to generate the WhatsApp message with cart items
+    const generateWhatsAppMessage = () => {
+        let message = "Hello, I'd like to place an order for the following candles:\n\n";
+        let itemIndex = 1;
+
+        ready_made_products.forEach((product) => {
+            cartItems[product.id].forEach((item) => {
+                message += `${itemIndex}. ${product.name}\n`;
+                message += `   - Scent: ${item.fragranceType} ${item.fragrance}\n`;
+                message += `   - Color: ${item.color}\n`;
+                message += `   - Wax Type: ${item.waxType}\n`;
+                message += `   - Quantity: ${item.quantity}\n`;
+                message += `   - Price per unit: Rs.${item.total}\n`;
+                message += `   - Total: Rs.${item.total * item.quantity}\n\n`;
+                itemIndex++;
+            });
+        });
+
+        message += `Grand Total: Rs.${discountedAmount.toFixed(2)}`;
+        return encodeURIComponent(message);
+    };
+
+
+    const whatsappMessage = generateWhatsAppMessage();
 
     return (
         <div className='cartitems'>
@@ -70,7 +95,7 @@ const CartItems = () => {
                     </div>
                 ))
             ))}
-            
+
             <div className="carticons-down">
                 <div className="carticons-total">
                     <h1>Cart Total</h1>
@@ -96,7 +121,9 @@ const CartItems = () => {
                             <h3>Rs.{discountedAmount.toFixed(2)}</h3>
                         </div>
                         <p>*Our trusted courier partner is Prompto Express (PVT) ltd Nugegoda</p>
-                        {userDetails ? <Link to={'/checkout'}><button onClick={() => window.scrollTo(0, 0)}>PROCEED TO CHECKOUT</button></Link> : <Link to={'/loginsignup/login'}><button>LOGIN TO CHECKOUT</button></Link>}
+                        <a href={`https://wa.me/+94770081559?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">
+                            <button>PLACE ORDER ON WHATSAPP</button>
+                        </a>
                     </div>
                 </div>
                 <div className="carticons-promocode">

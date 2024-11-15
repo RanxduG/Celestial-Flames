@@ -11,46 +11,46 @@ const UploadReceipt = () => {
         setReceipt(e.target.files[0]);
     };
 
-    const handleOrderConfirmation = () => {
+    const handleOrderConfirmation = async () => {
         if (!userDetails) {
             setMessage('User is not logged in');
             return;
         }
-
+    
         const formData = new FormData();
-        console.log("User Details: ", userDetails)
-        console.log("User ID: ", userDetails.id);
-        console.log("Total Price: ", getTotalCartAmount());
-
-        formData.append('user_id', userDetails.id); // Ensure this matches the correct user ID property
-        formData.append('totalPrice', getTotalCartAmount());
-        formData.append('receipt', receipt);
-        console.log("Cart Items: ", cartItems);
-
+        formData.append('user_id', userDetails.id);  // User ID
+        formData.append('totalPrice', getTotalCartAmount());  // Total price
+        formData.append('receipt', receipt);  // Receipt file
+    
         Object.keys(cartItems).forEach(itemId => {
-        console.log("Item ID: ", itemId);
             cartItems[itemId].forEach(item => {
-
+                // Append each cart item as a JSON string
                 formData.append('items', JSON.stringify(item));
             });
         });
-
-        console.log("FormData being sent: ", formData);
-
-        axios.post('http://localhost:5000/place_orders', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
+    
+        try {
+            const response = await fetch('http://localhost:5000/api/orders', {
+                method: 'POST',
+                body: formData,
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setMessage('Order placed successfully');
+                console.log(data);
+            } else {
+                const errorData = await response.json();
+                setMessage(errorData.message || 'Error placing order');
+                console.error(errorData);
             }
-        })
-        .then(response => {
-            setMessage('Order placed successfully');
-            console.log(response.data);
-        })
-        .catch(error => {
+        } catch (error) {
             setMessage('Error placing order');
-            console.error(error);
-        });
+            console.error('Error:', error);
+        }
     };
+    
+    
 
     return (
         <div>

@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import './CSS/LoginSignup.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ShopContext } from '../Context/ShopContext';
-import axios from 'axios';
 
 const LoginSignup = () => {
   const { state } = useParams();
@@ -12,15 +11,18 @@ const LoginSignup = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
+    phoneNumber: '',
     password: '',
     address: '',
+    gender: '',
     agreed: false
   });
+
   const [loginData, setLoginData] = useState({
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -39,31 +41,70 @@ const LoginSignup = () => {
     }));
   };
 
-  const handleSignup = () => {
-    if (formData.name && formData.email && formData.password && formData.agreed) {
-      axios.post('http://localhost:5000/signup', formData)
-        .then(response => {
-          setUser({ name: formData.name, email: formData.email, phone: formData.phone ,password: formData.password, address: formData.address }); // Save user details
-          navigate('/');
-        })
-        .catch(error => {
-          setError('Error signing up. Please try again.');
+  const handleSignup = async () => {
+    console.log({
+            name: formData.name,
+            email: formData.email,
+            gender: formData.gender,
+            phoneNumber: formData.phoneNumber,
+            password: formData.password,
+            address: formData.address
+          });
+    if (formData.name && formData.email && formData.password && formData.gender && formData.agreed) {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            gender: formData.gender,
+            phoneNumber: formData.phoneNumber,
+            password: formData.password,
+            address: formData.address
+          })
         });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUser(data.user); // Save user details
+          navigate('/');
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message || 'Error signing up. Please try again.');
+        }
+      } catch (error) {
+        console.log(error);
+        setError('Error signing up. Please try again.');
+      }
     } else {
       setError('Please fill in all fields and agree to the terms.');
     }
   };
 
-  const handleLogin = () => {
-    axios.post('http://localhost:5000/login', loginData)
-      .then(response => {
-        setUser(response.data.user); // Save user details
-        navigate('/');
-      })
-      .catch(error => {
-        // Set the error state with the message from the backend
-        setError(error.response.data.message || 'Invalid email or password.');
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData)
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data.user); // Save user details
+        navigate('/');
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Invalid email or password.');
+      }
+    } catch (error) {
+      setError('Error logging in. Please try again.');
+    }
   };
 
   return (
@@ -115,10 +156,10 @@ const LoginSignup = () => {
               <input
                 type="text"
                 placeholder='Phone Number'
-                name="phone"
-                value={formData.phone}
+                name="phoneNumber"
+                value={formData.phoneNumber}
                 onChange={handleChange}
-               />
+              />
               <input
                 type="password"
                 placeholder='Password'
@@ -133,7 +174,15 @@ const LoginSignup = () => {
                 value={formData.address}
                 onChange={handleChange}
               />
+              
+              {/* Gender dropdown */}
+              <select name="gender" value={formData.gender} onChange={handleChange}>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
+
             <div className="loginsignup-agree">
               <input
                 type="checkbox"

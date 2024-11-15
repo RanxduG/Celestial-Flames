@@ -24,6 +24,7 @@ const ProductDisplay = (props) => {
     const [selectedWaxType, setSelectedWaxType] = useState(null);
     const [selectedFragranceType, setSelectedFragranceType] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedColorName, setSelectedColorName] = useState(null);
     const [selectedFragrance, setSelectedFragrance] = useState(null);
     const [alertVisible, setAlertVisible] = useState(false);
 
@@ -43,8 +44,9 @@ const ProductDisplay = (props) => {
         setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
 
-    const handleColorChange = (colorCode) => {
-        setSelectedColor(colorCode);
+    const handleColorChange = (color) => {
+        setSelectedColor(color.code);
+        setSelectedColorName(color.name);
     };
 
     const handleFragranceChange = (fragrance) => {
@@ -82,7 +84,7 @@ const ProductDisplay = (props) => {
     };
 
     const handleAddToCart = () => {
-        addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColor, selectedFragrance, getPrice() + getFragrancePrice());
+        addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColorName, selectedFragrance, getPrice() + getFragrancePrice());
         setAlertVisible(true);
         setTimeout(() => {
             setAlertVisible(false);
@@ -164,7 +166,7 @@ const ProductDisplay = (props) => {
                                 backgroundColor: selectedColor === color.code ? color.code : 'white',
                                 color: 'black'
                                  }}
-                                onClick={() => handleColorChange(color.code)}
+                                onClick={() => handleColorChange(color)}
                             >
                                 <span>{color.name}</span>
                             </div>

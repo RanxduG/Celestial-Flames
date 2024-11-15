@@ -18,11 +18,12 @@ const ShopContextProvider = (props) => {
     const [userDetails, setUserDetails] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [discount, setDiscount] = useState(1);
+    const [cartTotal, setCartTotal] = useState(0);
 
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await fetch('http://127.0.0.1:5000/get_reviews');
+                const response = await fetch('http://127.0.0.1:5000/api/reviews');
                 if (!response.ok) {
                     throw new Error(`Error: ${response.status}`);
                 }
@@ -85,7 +86,7 @@ const ShopContextProvider = (props) => {
                 totalAmount += item.total * item.quantity;
             });
         }
-        return totalAmount * discount;
+        return totalAmount;
     };
 
     const getTotalCartItems = () => {
@@ -130,7 +131,9 @@ const ShopContextProvider = (props) => {
         addReview,
         verifyPromoCode,
         setCartItems,
-        discount
+        discount,
+        cartTotal,
+        setCartTotal
     };
 
     return (

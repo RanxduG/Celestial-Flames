@@ -1,6 +1,7 @@
 .Collection {   
     width:  280px;
     text-decoration: none; /* Ensure no underline from the link itself */
+    padding: 20px 0px;
 }
 
 .Collection img {

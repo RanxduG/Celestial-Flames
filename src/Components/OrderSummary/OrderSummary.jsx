@@ -3,7 +3,7 @@ import './OrderSummary.css';
 import { ShopContext } from '../../Context/ShopContext';
 
 const OrderSummary = () => {
-    const { ready_made_products, cartItems, getTotalCartAmount, discount } = useContext(ShopContext);
+    const { ready_made_products, cartItems, getTotalCartAmount, discount, cartTotal } = useContext(ShopContext);
 
     const subtotal = getTotalCartAmount();
     const shippingFee = 500;
@@ -46,7 +46,7 @@ const OrderSummary = () => {
                 <hr />
                 <div className="summary-total-item">
                     <h3>Total</h3>
-                    <h3>Rs.{total}</h3>
+                    <h3>Rs.{cartTotal}</h3>
                 </div>
             </div>
         </div>
