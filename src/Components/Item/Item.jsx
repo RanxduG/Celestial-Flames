@@ -35,7 +35,7 @@ const Item = (props) => {
               {props.stock === 0 ? 'Out of stock' : `Remaining stock: ${props.stock}`}
             </div>
           </div>
-          <p>{props.scent}, {props.name}</p>
+          <p>{props.scent} {props.name}</p>
         </Link>
         <button onClick={handleAddToCart}>ADD TO CART</button>
         {alertVisible && <div className="alert">{alertMessage}</div>}

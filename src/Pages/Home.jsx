@@ -6,15 +6,10 @@ import CustomizationProcess from '../Components/CustomizationProcess/Customizati
 
 
 const Home = () => {
-  const { userDetails } = useContext(ShopContext);
-  console.log(userDetails);
-
   return (
     <div>
       <WelcomeBanner />
       <CustomizationProcess/>
-
-
     </div>
       
 

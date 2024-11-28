@@ -77,24 +77,65 @@
     height: 3px;
     background: #c7c7c7;
 }
-.go-up{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #000;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 50px;
-    cursor: pointer;
-    z-index: 1000;
+/* WhatsApp button container styles */
+.whatsapp {
+  position: fixed; /* Fixes the position relative to the viewport */
+  bottom: 20px; /* Adjust to your desired position */
+  right: 20px; /* Adjust to your desired position */
+  z-index: 1000; /* Ensures it stays on top of other content */
 }
-.go-up button{
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
+
+/* Default styles for the WhatsApp button */
+.whatsapp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: green; /* Changed to black */
+  border: none;
+  border-radius: 50px; /* Makes it circular when icon-only */
+  padding: 20px 20px; /* Increased height with padding */
+  cursor: pointer;
+  color: white;
+  font-size: 18px; /* Slightly larger font */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
+  position: relative;
+  overflow: hidden;
 }
+
+/* Hide the text initially */
+.whatsapp-text {
+  display: none;
+  margin-left: 10px;
+  font-size: 16px; /* Increased text size */
+  font-weight: bold;
+}
+
+/* WhatsApp icon styles */
+.whatsapp-icon {
+  width: 30px; /* Increased icon size */
+  height: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* On hover, show the text and adjust padding */
+.whatsapp-btn:hover {
+  background-color: Green; /* Keep black even on hover */
+  padding: 20px 25px; /* Larger button on hover */
+  border-radius: 30px; /* Makes the button more elongated */
+}
+
+/* Show the text on hover */
+.whatsapp-btn:hover .whatsapp-text {
+  display: inline;
+}
+
+/* Add rotation effect to the icon */
+.whatsapp-btn:hover .whatsapp-icon {
+  transform: rotate(360deg);
+}
+
+
 @media(max-width: 800px){
 
     .footer-logo img{

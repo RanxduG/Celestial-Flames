@@ -8,7 +8,6 @@ const ReadyMadeItemDisplay = (props) => {
     const { product, reviews } = props;
     const { addToCart } = useContext(ShopContext);
     const [alertVisible, setAlertVisible] = useState(false);
-    console.log(product);
 
     const handleAddToCart = () => {
         addToCart(product.id, product.name, product.waxtype, product.getFragranceType, product.color_id, product.scent, product.new_price, product.old_price);

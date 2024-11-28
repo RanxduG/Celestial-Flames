@@ -15,28 +15,9 @@ const getDefaultCart = () => {
 const ShopContextProvider = (props) => {
     const promocode = 'CF202406';
     const [cartItems, setCartItems] = useState(getDefaultCart());
-    const [userDetails, setUserDetails] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [discount, setDiscount] = useState(1);
     const [cartTotal, setCartTotal] = useState(0);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const response = await fetch('http://127.0.0.1:5000/api/reviews');
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.status}`);
-                }
-                const data = await response.json();
-                console.log('Reviews:', data);
-                setReviews(data);
-            } catch (error) {
-                console.error('Error fetching reviews:', error);
-            }
-        };
-
-        fetchReviews();
-    }, []);
 
     const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
@@ -98,15 +79,6 @@ const ShopContextProvider = (props) => {
         }
         return totalItems;
     };
-
-    const setUser = (user) => {
-        setUserDetails(user);
-    };
-
-    const addReview = (newReview) => {
-        setReviews((prevReviews) => [...prevReviews, newReview]);
-    };
-
     const verifyPromoCode = (code) => {
         if (code === promocode) {
             setDiscount(0.9); // 10% discount
@@ -125,10 +97,7 @@ const ShopContextProvider = (props) => {
         removeFromCart,
         getTotalCartAmount,
         getTotalCartItems,
-        userDetails,
-        setUser,
         reviews,
-        addReview,
         verifyPromoCode,
         setCartItems,
         discount,

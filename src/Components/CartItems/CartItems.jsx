@@ -6,7 +6,7 @@ import plus_icon from '../Assets/Icons/plus.png';
 import minus_icon from '../Assets/Icons/minus.png';
 
 const CartItems = () => {
-    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, discount, setCartTotal } = useContext(ShopContext);
+    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, discount, setCartTotal, all_products } = useContext(ShopContext);
     const [promocode, setPromocode] = useState('');
     const [showDiscount, setShowDiscount] = useState(false);
 
@@ -44,7 +44,7 @@ const CartItems = () => {
         let message = "Hello, I'd like to place an order for the following candles:\n\n";
         let itemIndex = 1;
 
-        ready_made_products.forEach((product) => {
+        all_products.forEach((product) => {
             cartItems[product.id].forEach((item) => {
                 message += `${itemIndex}. ${product.name}\n`;
                 message += `   - Scent: ${item.fragranceType} ${item.fragrance}\n`;
@@ -76,7 +76,7 @@ const CartItems = () => {
                 <p>Remove</p>
             </div>
             <hr />
-            {ready_made_products.map((product) => (
+            {all_products.map((product) => (
                 cartItems[product.id].map((item, index) => (
                     <div key={`${product.id}-${index}`}>
                         <div className="cartitems-format cartitems-format-main">

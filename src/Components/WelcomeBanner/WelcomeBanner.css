@@ -67,19 +67,14 @@
   max-width: 90%;
 }
 
-.welcome-message.typing {
-  border-right: 4px solid white;
-  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: white; }
+.welcome-message.typing::after {
+  content: ""; /* Adds the blinking caret */
+  display: inline-block;
+  width: 4px; /* Adjust width for the caret */
+  height: 1.2em; /* Matches the height of text */
+  background-color: white; /* Caret color */
+  margin-left: 5px;
+  animation: blink-caret 0.7s step-end infinite; /* Blinking effect */
 }
 
 .welcome-message h1 {
@@ -89,32 +84,13 @@
   margin: 0;
 }
 
-.welcome-message div {
-  font-size: 2vw; /* Adjusted for responsiveness */
-  padding-left: 10px;
-}
-
-.welcome-message p, .welcome-message button {
-  margin-top: 10px;
-}
-
-.welcome-message button {
-  background-color: black;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 1.2vw; /* Adjusted for responsiveness */
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 50px;
-}
-
-button a {
-  color: white;
-  text-decoration: none;
+@keyframes blink-caret {
+  from, to {
+    background-color: transparent; /* Caret is invisible */
+  }
+  50% {
+    background-color: white; /* Caret is visible */
+  }
 }
 
 /* Media Queries for responsiveness */

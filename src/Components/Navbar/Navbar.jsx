@@ -21,21 +21,6 @@ const Navbar = () => {
         setIsMenuVisible(!isMenuVisible);
     };
 
-//     const handleScroll = () => {
-//         if (window.scrollY > 100) {
-//             navbarRef.current.classList.add('navbar-scrolled');
-//         } else {
-//             navbarRef.current.classList.remove('navbar-scrolled');
-//         }
-//     };
-//
-//     useEffect(() => {
-//         window.addEventListener('scroll', handleScroll);
-//         return () => {
-//             window.removeEventListener('scroll', handleScroll);
-//         };
-//     }, []);
-
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (

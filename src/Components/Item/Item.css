@@ -20,9 +20,10 @@
     transition: opacity 0.3s ease-in-out;
 }
 
-.item p {
+.item a {
     margin: 6px 0;
     text-decoration: none;
+    color: black;
 }
 
 /* Hover effect for image change */

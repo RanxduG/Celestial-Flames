@@ -176,19 +176,22 @@ const ProductDisplay = (props) => {
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
                 </div>
-                <button 
-                    onClick={handleAddToCart} 
-                    disabled={!areAllOptionsSelected()}>
-                    Create Candle
-                </button>
-
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <button
+                        onClick={handleAddToCart}
+                        disabled={!areAllOptionsSelected()}
+                    >
+                        Create Candle
+                    </button>
+                    {alertVisible && (
+                        <div className="alert">
+                            <p>Added to cart successfully!</p>
+                        </div>
+                    )}
+                </div>
                 <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
             </div>
-            {alertVisible && (
-                <div className="alert">
-                    <p>Added to cart successfully!</p>
-                </div>
-            )}
+
         </div>
     );
 };

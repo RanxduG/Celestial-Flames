@@ -9,10 +9,8 @@ import FeedbackForm from '../Components/FeedbackForm/Feedback';
 const ReadyMadeItems = () => {
   const { all_products, reviews, userDetails, ready_made_products } = useContext(ShopContext);
   const { productId } = useParams();
-  console.log('productId', productId);
 
   const product = ready_made_products.find((e) => e.id.toString() === productId);
-  console.log('product', product);
   const productReviews = reviews.filter((review) => review.product_id === productId);
 
   return (

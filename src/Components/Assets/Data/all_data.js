@@ -70,7 +70,7 @@ import Crystal_Pear from '../Good/Crystal Pear/Crystal Pear.jpg';
 import Crystal_Pear_background from '../Good/Crystal Pear/Crystal Pear background.jpg';
 import Crystal_Pear_grayscaled from '../Good/Crystal Pear/Crystal Pear gray scaled.jpg';
 
-import Miniglow from '../Good/Mini Glow/Mini Glow.jpg'
+import Gentleglow from '../Good/Gentle Glow/Gentle Glow.jpg'
 let all_data = [
     {
         id: 'CLC2024004',
@@ -81,31 +81,29 @@ let all_data = [
         img_2: tower_background,
         secondImage: towersecond,
         description: 'Elevate your ambiance with our 12cm tall Tower candle, featuring custom molds for a personalized touch. This elegant candle adds sophistication to any space and offers 10 hours of burn time for moments of tranquility and inspiration.',
-        dimensions: '12cm x 5cm x 5cm',
-        soy_price : 3500,
-        paraffin_price: 2100,
+        dimensions: '12cm x 6cm',
+        soy_price: 2200,
+        paraffin_price: 1800,
         popular: true,
         tags: ['tower', 'candle', 'classic']
-
     },
     {
-        id: 'CLC2024031',
+        id: 'CLC2024003',
         category: 'Classic Collection',
         name: 'Cubist Candle',
         image: cubist_candle,
         img_1: cubist_candle_grayscaled,
         img_2: cubist_candle_background,
         secondImage: cubistcandlesecond,
-        description: 'Our Cubist candle is a smaller version of the Tower candle. It measures 8.5cm in height and 5cm in width, offering contemporary elegance with a 7-hour burn time for moments of serenity. ',
-        dimensions: '8.5cm x 5cm x 5cm',
-        soy_price: 2600,
+        description: 'Our Cubist candle is a smaller version of the Tower candle. It measures 8.5cm in height and 5cm in width, offering contemporary elegance with a 7-hour burn time for moments of serenity.',
+        dimensions: '8.5cm x 5cm',
+        soy_price: 1500,
         paraffin_price: 1150,
         popular: false,
-        tags: ['cubist', 'candle', 'tower']
-
+        tags: ['cubist', 'candle', 'classic']
     },
     {
-        id: 'CLC2024020',
+        id: 'CLC2024005',
         category: 'Classic Collection',
         name: 'Twirling Hearts',
         image: twirlling_hearts,
@@ -113,9 +111,9 @@ let all_data = [
         img_2: twirlling_hearts_background,
         secondImage: twirlling_hearts_second,
         description: 'Rekindle passion with the Twirling Hearts candle, a symbol of love measuring 4.5cm x 5cm. Burn time of 2 hours for intimate moments and celebrating love.',
-        dimensions: '4.5cm x 5cm x 5cm',
-        soy_price: 1150,
-        paraffin_price: 650,
+        dimensions: '4.5cm x 5cm',
+        soy_price: 600,
+        paraffin_price: 500,
         popular: false,
         tags: ['twirling', 'hearts', 'candle']
     },
@@ -128,9 +126,9 @@ let all_data = [
         img_2: Cloud_nine_background,
         secondImage: Cloud_nine_second,
         description: 'Cloud Nine, a 3x3 cube candle measuring 5.5cm in height and 5.6cm in width, providing 5-6 hours of burn time for a serene experience.',
-        dimensions: '5.5cm x 5.6cm x 5.6cm',
-        soy_price: 1400,
-        paraffin_price: 1000,
+        dimensions: '5.5cm x 5.6cm',
+        soy_price: 1000,
+        paraffin_price: 800,
         popular: false,
         tags: ['cloud', 'nine', 'candle']
     },
@@ -142,7 +140,7 @@ let all_data = [
         secondImage: Xmas_tree_second,
         description: 'Introducing the X-mas Tree candle, shaped like a festive Christmas tree, measuring 9.5-10cm in height and 4.5cm in width. This dual-purpose candle and ornament offers a 30-minute burn time, creating a cozy holiday atmosphere.',
         dimensions: '9.5cm x 4.5cm x 4.5cm',
-        soy_price: 900,
+        soy_price: 800,
         paraffin_price: 650,
         popular: false,
         tags: ['xmas', 'tree', 'candle']
@@ -156,13 +154,13 @@ let all_data = [
         img_2: Hexa_lght_img_2,
         description: 'Our Hexa Light candle, featuring a unique rhombohedral shape. Measuring 5cm in height and 6cm in width, this candle offers 3 hours of burn time, creating a radiant glow for moments of tranquility and beauty.',
         dimensions: '5cm x 6cm x 6cm',
-        soy_price: 900,
-        paraffin_price: 650,
+        soy_price: 600,
+        paraffin_price: 500,
         popular: true,
         tags: ['hexa', 'light', 'candle']
     },
-    {
-        id: 'CLC2024027',
+{
+        id: 'CLC2024006',
         category: 'Classic Collection',
         name: 'Pine Cone',
         image: Pine_cone,
@@ -170,9 +168,9 @@ let all_data = [
         img_2: Pine_cone_background,
         secondImage: Pine_cone_second,
         description: 'Our Pine Cone candle, shaped like a charming pine cone. Measuring 7cm in height and 5.5cm in width. Enjoy 4 hours of burn time, creating a cozy atmosphere for festive celebrations and memorable moments.',
-        dimensions: '7cm x 5.5cm x 5.5cm',
-        soy_price: 1150,
-        paraffin_price: 780,
+        dimensions: '7cm x 5.5cm',
+        soy_price: 800,
+        paraffin_price: 600,
         popular: false,
         tags: ['pine', 'cone', 'candle']
     },
@@ -186,8 +184,8 @@ let all_data = [
         secondImage: Baby_bear_second,
         description: 'The Baby Bear candle is an adorable gift, measuring 4.5cm in height and 3cm in width, emitting a warm glow when lit. It burns for 10-15 minutes, providing a cozy and charming experience.',
         dimensions: '4.5cm x 3cm x 3cm',
-        soy_price: 400,
-        paraffin_price: 350,
+        soy_price: 200,
+        paraffin_price: 150,
         popular: false,
         tags: ['baby', 'bear', 'candle']
 
@@ -200,8 +198,8 @@ let all_data = [
         secondImage: Wobbly_second,
         description: 'Introducing Wobbly, a 2x2 cube candle with a 2-3 hour burn time for a playful touch, ',
         dimensions: '2cm x 2cm x 2cm',
-        soy_price: 550,
-        paraffin_price: 400,
+        soy_price: 450,
+        paraffin_price: 350,
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
@@ -213,8 +211,8 @@ let all_data = [
         secondImage: frosty,
         description: 'Introducing Wobbly, a 2x2 cube candle with a 2-3 hour burn time for a playful touch, ',
         dimensions: '2cm x 2cm x 2cm',
-        soy_price: 1070,
-        paraffin_price: 730,
+        soy_price: 800,
+        paraffin_price: 600,
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
@@ -226,8 +224,8 @@ let all_data = [
         secondImage: frosty_forest,
         description: 'Introducing Wobbly, a 2x2 cube candle with a 2-3 hour burn time for a playful touch, ',
         dimensions: '2cm x 2cm x 2cm',
-        soy_price: 1070,
-        paraffin_price: 730,
+        soy_price: 900,
+        paraffin_price: 700,
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
@@ -256,8 +254,8 @@ let all_data = [
         secondImage: Wobbly_second,
         description: 'Introducing Wobbly, a 2x2 cube candle with a 2-3 hour burn time for a playful touch, ',
         dimensions: '2cm x 2cm x 2cm',
-        soy_price: 1500,
-        paraffin_price: 1000,
+        soy_price: 1200,
+        paraffin_price: 900,
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
@@ -271,8 +269,8 @@ let all_data = [
         secondImage: Wobbly_second,
         description: 'Introducing Wobbly, a 2x2 cube candle with a 2-3 hour burn time for a playful touch, ',
         dimensions: '2cm x 2cm x 2cm',
-        soy_price: 1500,
-        paraffin_price: 1000,
+        soy_price: 1000,
+        paraffin_price: 800,
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
@@ -284,27 +282,72 @@ let all_data = [
         img_1: celestialglowgrayscaled,
         img_2: celestialglowbackground,
         secondImage: celestialglowsecond,
-        description: ' A 9cm tall and 7.2cm wide candle in a sleek glass container. With 18-20 hours burn time. Choose from various colors, wax types, and scents for a personalized experience. Let your space shine with celestial charm.', 
+        description: ' A 9cm tall and 7.2cm wide candle in a sleek glass container. With 18-20 hours burn time. Choose from various colors, wax types, and scents for a personalized experience. Let your space shine with celestial charm.',
         dimensions: '9cm x 7.2cm x 7.2cm',
-        soy_price: 2600,
-        paraffin_price: 1800,
+        soy_price: 2000,
+        paraffin_price: 1500,
         popular: true,
         tags: ['celestial', 'glow', 'candle']
     },
     {
-        id: 'CC2024018',
+        id: 'CC202400',
         category: 'Crystal Collection',
-        name: 'Mini Glow',
-        image: Miniglow,
+        name: 'Oasis',
+        image: celestialglow,
         img_1: celestialglowgrayscaled,
         img_2: celestialglowbackground,
         secondImage: celestialglowsecond,
-        description: ' A 9cm tall and 7.2cm wide candle in a sleek glass container. With 18-20 hours burn time. Choose from various colors, wax types, and scents for a personalized experience. Let your space shine with celestial charm.',
-        dimensions: '9cm x 7.2cm x 7.2cm',
-        soy_price: 1350,
-        paraffin_price: 1000,
+        description: 'A candle in a sleek glass container with a burn time of 36-48 hours. Choose from a variety of colors, wax types, and scents for a personalized experience. Bring celestial elegance to your space.',
+        dimensions: '300 ML',
+        soy_price: 3000,
+        paraffin_price: 2500,
         popular: true,
-        tags: ['celestial', 'glow', 'candle']
+        tags: ['oasis', 'glass', 'candle']
+    },
+    {
+        id: 'CC2024003',
+        category: 'Crystal Collection',
+        name: 'Gentle Glow',
+        image: Gentleglow,
+        img_1: celestialglowgrayscaled,
+        img_2: celestialglowbackground,
+        secondImage: celestialglowsecond,
+        description: 'A candle with 18-24 hours of burn time, crafted for a sleek and elegant look. Personalize your experience with a variety of colors, wax types, and enchanting scents. Add celestial elegance to your space.',
+        dimensions: '150 ML',
+        soy_price: 1200,
+        paraffin_price: 900,
+        popular: true,
+        tags: ['gentle', 'glass', 'candle']
+    },
+    {
+        id: 'CC2024004',
+        category: 'Crystal Collection',
+        name: 'Cutsie',
+        image: Gentleglow,
+        img_1: celestialglowgrayscaled,
+        img_2: celestialglowbackground,
+        secondImage: celestialglowsecond,
+        description: 'A compact candle with 8-10 hours of burn time, perfect for small spaces or as a thoughtful gift. Choose from a variety of colors, wax types, and captivating scents to suit your style. Bring a touch of celestial charm to any corner.',
+        dimensions: '50 ML',
+        soy_price: 550,
+        paraffin_price: 450,
+        popular: true,
+        tags: ['cutsie', 'glass', 'candle']
+    },
+    {
+        id: 'EC2024004',
+        category: 'Elemental Collection',
+        name: 'Tin Candle',
+        image: frosty,
+        img_1: frosty_forest,
+        img_2: frosty_forest,
+        secondImage: frosty_forest,
+        description: 'A beautifully crafted tin candle, combining portability with style. With a burn time of 12-15 hours, it’s ideal for cozy evenings or gifting. Enhanced with a sleek lid, this compact design ensures freshness and charm.',
+        dimensions: '4cm (Height) x 6.2cm (Width)',
+        soy_price: 1000,
+        paraffin_price: 800,
+        popular: true,
+        tags: ['tin', 'candle', 'portable']
     },
     {
         id: 'EC2024023',
@@ -320,7 +363,7 @@ let all_data = [
         tags: ['cement', 'chic', 'candle']
     },
     {
-        id: 'EC2024023',
+        id: 'EC2024024',
         category: 'Elemental Collection',
         name: 'Cement Cutie',
         image: cementchic,
@@ -333,7 +376,7 @@ let all_data = [
         tags: ['cement', 'chic', 'candle']
     },
     {
-        id: 'EC2024023',
+        id: 'EC2024025',
         category: 'Elemental Collection',
         name: 'Celestial Soul',
         image: cementchic,
