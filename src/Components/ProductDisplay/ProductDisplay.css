@@ -41,10 +41,13 @@
     top: 5px;
     width: 90%;
     height: 100%;
-    background-color: #A9DEF9;
+    background: linear-gradient(to top, transparent 100%, var(--selected-color, #A9DEF9) 0%);
     mix-blend-mode: multiply;
     z-index: 1;
+    transition: background-position 0.5s ease, background-color 0.5s ease;
 }
+
+
 
 .productdisplay-right {
     margin-left: 30px;
@@ -145,15 +148,26 @@
     font-size: 17px;
 }
 
-.alert {
-    background-color: black;
+.alert-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4caf50;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
-    white-space: nowrap;
-    display: inline-block; /* Ensure it's visible */
-    z-index: 100; /* Ensure it's on top of other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    animation: fadeInOut 3s ease-in-out;
 }
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+
 
 

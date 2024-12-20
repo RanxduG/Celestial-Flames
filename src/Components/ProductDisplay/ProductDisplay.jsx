@@ -14,7 +14,17 @@ const pastelColors = [
     { name: 'Pink', code: '#FF99C8' },
     { name: 'Beige', code: '#FCF6BD' },
     { name: 'Mint', code: '#D0F4DE' },
-    { name: 'Sky Blue', code: '#A9DEF9' }
+    { name: 'Sky Blue', code: '#A9DEF9' },
+    { name: 'Soft Coral', code: '#FFD1DC' },
+    { name: 'Pale Peach', code: '#FFE5B4' },
+    { name: 'Lemon Chiffon', code: '#FFFACD' },
+    { name: 'Pastel Lime', code: '#D4F1C5' },
+    { name: 'Powder Blue', code: '#B0E0E6' },
+    { name: 'Periwinkle', code: '#CCCCFF' },
+    { name: 'Mauve', code: '#F3D9FA' },
+    { name: 'Cream', code: '#FFFDD0' },
+    { name: 'Seafoam', code: '#BDFCC9' },
+    { name: 'Baby Blue', code: '#E0FFFF' }
 ];
 
 const ProductDisplay = (props) => {
@@ -26,7 +36,7 @@ const ProductDisplay = (props) => {
     const [selectedColor, setSelectedColor] = useState(null);
     const [selectedColorName, setSelectedColorName] = useState(null);
     const [selectedFragrance, setSelectedFragrance] = useState(null);
-    const [alertVisible, setAlertVisible] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
 
     useEffect(() => {
         const color = document.querySelector('.color');
@@ -85,14 +95,22 @@ const ProductDisplay = (props) => {
 
     const handleAddToCart = () => {
         addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColorName, selectedFragrance, getPrice() + getFragrancePrice());
-        setAlertVisible(true);
-        setTimeout(() => {
-            setAlertVisible(false);
-        }, 3000); // Hide the alert after 3 seconds
+        // Show success message
+        setSuccessMessage('Item added to cart successfully!');
+
+        // Clear message after 3 seconds
+        setTimeout(() => setSuccessMessage(''), 3000);
     };
 
     return (
         <div className='productdisplay'>
+            {/* Alert Message */}
+            {successMessage && (
+                <div className="alert-message">
+                    {successMessage}
+                </div>
+            )}
+
             <div className="productdisplay-left">
                 <div className="productdisplay-img">
                     <img className='img-1' src={product.img_1} alt="Product" />
@@ -155,6 +173,7 @@ const ProductDisplay = (props) => {
                         </div>
                     </div>
                 )}
+
                 <div className="productdisplay-right-feature">
                     <h1>Select Color</h1>
                     <div className="productdisplay-right-options">
@@ -183,15 +202,9 @@ const ProductDisplay = (props) => {
                     >
                         Create Candle
                     </button>
-                    {alertVisible && (
-                        <div className="alert">
-                            <p>Added to cart successfully!</p>
-                        </div>
-                    )}
                 </div>
                 <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
             </div>
-
         </div>
     );
 };

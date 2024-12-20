@@ -56,7 +56,7 @@ const CartItems = () => {
                 itemIndex++;
             });
         });
-
+        message += `Promo Discount: ${100-(discount*100)}%\n\n`
         message += `Grand Total: Rs.${discountedAmount.toFixed(2)}`;
         return encodeURIComponent(message);
     };
@@ -120,7 +120,7 @@ const CartItems = () => {
                             <h3>Total</h3>
                             <h3>Rs.{discountedAmount.toFixed(2)}</h3>
                         </div>
-                        <p>*Our trusted courier partner is Prompto Express (PVT) ltd Nugegoda</p>
+                        <p>*Our trusted courier partner is Prompt Express (PVT) ltd Nugegoda</p>
                         <a href={`https://wa.me/+94770081559?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">
                             <button>PLACE ORDER ON WHATSAPP</button>
                         </a>
