@@ -4,8 +4,13 @@ import Item from '../Item/Item';
 import { ShopContext } from '../../Context/ShopContext';
 
 const Popular = () => {
-    const { ready_made_products } = useContext(ShopContext);
-    const [loading, setLoading] = useState(true); // Loading state
+    const { allStocks, allProducts } = useContext(ShopContext);
+    const [loading, setLoading] = useState(true); // Loading state    
+    
+      const getProductNameByStockId = (stockId) => {
+        const correspondingProduct = allProducts.find((product) => product.id === stockId);
+        return correspondingProduct ? correspondingProduct.name : null;
+      }
 
     // Simulate a delay to represent fetching/loading data
     useEffect(() => {
@@ -18,20 +23,20 @@ const Popular = () => {
             <h1>MOST POPULAR PRODUCTS</h1>
             <hr />
             <div className="popular-item">
-                {ready_made_products
+                {allStocks
                     .filter(item => item.popular)
                     .map((item) => (
                         <Item
                             key={item.id}
                             id={item.id}
-                            name={item.name}
+                            name={getProductNameByStockId(item.id)}
                             scent={item.scent}
-                            image={item.image}
+                            image={item.imageUrl}
                             secondImage={item.secondImage}
                             stock={item.stock}
                             waxtype={item.waxtype}
                             fragrancetype={item.fragrancetype}
-                            color={item.product_color}
+                            color={item.color}
                             color_id={item.color_id}
                             old_price={item.old_price}
                             new_price={item.new_price}

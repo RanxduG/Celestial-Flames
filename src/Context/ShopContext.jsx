@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import ready_made_products from '../Components/Assets/Data/readymade.js';
 import all_products from '../Components/Assets/Data/all_data.js';
+import { getAllStock, getAllProducts, getHomeBanner, getCategoryBanner, getSeasonalBanner } from './api';
 
 export const ShopContext = createContext(null);
 
@@ -13,11 +14,40 @@ const getDefaultCart = () => {
 };
 
 const ShopContextProvider = (props) => {
+
+    const [allProducts, setProducts] = useState([]);
+    const [allStocks, setStocks] = useState([]);
+
     const promocode = 'CF202406';
     const [cartItems, setCartItems] = useState(getDefaultCart());
     const [reviews, setReviews] = useState([]);
     const [discount, setDiscount] = useState(1);
     const [cartTotal, setCartTotal] = useState(0);
+    const [homeBanners, setHomeBanners] = useState([]);
+    const [categoryBanners, setCategoryBanners] = useState([]);
+    const [seasonalBanners, setSeasonalBanners] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+        try {
+            const stocksData = await getAllStock();
+            setStocks(stocksData.data);
+            const productsData = await getAllProducts();
+            setProducts(productsData.data);
+            const homeBannerUrl = await getHomeBanner();
+            // console.log(homeBannerUrl);
+            setHomeBanners(homeBannerUrl.data.sildesUrl);
+            const categoryBannerUrl = await getCategoryBanner();
+            console.log(categoryBannerUrl);
+            setCategoryBanners(categoryBannerUrl.data.sildesUrl);
+            const seasonalBannerUrl = await getSeasonalBanner();
+            setSeasonalBanners(seasonalBannerUrl.data.sildesUrl);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+        };
+        fetchData();
+    }, []);
 
     const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
@@ -102,7 +132,12 @@ const ShopContextProvider = (props) => {
         setCartItems,
         discount,
         cartTotal,
-        setCartTotal
+        setCartTotal,
+        allProducts,
+        allStocks,
+        homeBanners,
+        categoryBanners,
+        seasonalBanners
     };
 
     return (

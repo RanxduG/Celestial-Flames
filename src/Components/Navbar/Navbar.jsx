@@ -7,6 +7,7 @@ import { ShopContext } from '../../Context/ShopContext';
 import nav_dropdown from "../Assets/Icons/nav-dropdown.png";
 import close_icon from '../Assets/Icons/remove.png';
 // import user_icon from '../Assets/Icons/user.png';
+import { getLogo } from '../../Context/api';
 
 const Navbar = () => {
     const { getTotalCartItems } = useContext(ShopContext);
@@ -38,6 +39,19 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+    // const [logo, setLogo] = useState('')
+    //   useEffect(() => {
+    //       const fetchLogo = async () => {
+    //           try {
+    //               const { data } = await getLogo()
+    //               console.log(data)
+    //               setLogo(data.logoUrl)
+    //           } catch (error) {
+    //               console.log(error)
+    //           }
+    //       }
+    //       fetchLogo()
+    //   }, [])
 
     return (
         <div className='navbar' ref={navbarRef}>
@@ -52,8 +66,8 @@ const Navbar = () => {
                     {location.pathname === '/Shop' && <hr />}
                 </li>
                 <li onClick={() => setIsMenuVisible(false)} onClick={() => window.scrollTo(0, 0)}>
-                    <Link style={{ textDecoration: 'none' }} to='/Seasonal Collection'>Seasonal Releases</Link>
-                    {location.pathname === '/Seasonal%20Collection' && <hr />}
+                    <Link style={{ textDecoration: 'none' }} to='/Seasonal'>Seasonal Releases</Link>
+                    {location.pathname === '/Seasonal' && <hr />}
                 </li>
                 <li onClick={() => setIsMenuVisible(false)} onClick={() => window.scrollTo(0, 0)}>
                     <Link style={{ textDecoration: 'none' }} to='/Catalog'>Catalog</Link>

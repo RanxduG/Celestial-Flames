@@ -8,6 +8,7 @@
   align-items: center;
   width: 100%;
   box-sizing: border-box; /* Ensure padding and width are included in total width */
+  overflow-x: hidden;
 }
 
 .step-container {

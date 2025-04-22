@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import './ReadyMadeItemDisplay.css';
 import star_icon from '../Assets/Icons/star-icon.png';
 import star_dull_icon from '../Assets/Icons/star-icon-dull.png';
@@ -6,11 +6,23 @@ import { ShopContext } from '../../Context/ShopContext'; // Adjust the import pa
 
 const ReadyMadeItemDisplay = (props) => {
     const { product, reviews } = props;
-    const { addToCart } = useContext(ShopContext);
+    const { addToCart, allProducts } = useContext(ShopContext);
     const [alertVisible, setAlertVisible] = useState(false);
 
+    const getProductDescriptionByStockId = (stockId) => {
+        const correspondingProduct = allProducts.find((product) => product.id === stockId);
+        return correspondingProduct ? correspondingProduct.description : null;
+      };
+    
+    
+      const getProductNameByStockId = (stockId) => {
+        const correspondingProduct = allProducts.find((product) => product.id === stockId);
+        return correspondingProduct ? correspondingProduct.name : null;
+      }
+    
+
     const handleAddToCart = () => {
-        addToCart(product.id, product.name, product.waxtype, product.getFragranceType, product.color_id, product.scent, product.new_price, product.old_price);
+        addToCart(product.id, product.name, product.waxtype, product.getFragranceType, product.color, product.scent, product.new_price, product.old_price);
         setAlertVisible(true);
         setTimeout(() => {
             setAlertVisible(false);
@@ -21,11 +33,11 @@ const ReadyMadeItemDisplay = (props) => {
         <div className='productdisplay'>
             <div className="productdisplay-left">
                 <div className="productdisplay-img">
-                    <img src={product.image} alt="product" />
+                    <img src={product.imageUrl} alt="product" />
                 </div>
             </div>
             <div className="productdisplay-right">
-                <h1>{product.name}</h1>
+                <h1>{getProductNameByStockId(product.id)}</h1>
                 <div className="productdisplay-right-star">
                     <img src={star_icon} alt="star icon" />
                     <img src={star_icon} alt="star icon" />
@@ -38,7 +50,7 @@ const ReadyMadeItemDisplay = (props) => {
                     <p>Only {product.stock} remaining</p>
                 </div>
                 <div className="productdisplay-right-description">
-                    {product.description}
+                    {getProductDescriptionByStockId(product.id)}
                 </div>
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-new">Rs. {product.new_price}</div>

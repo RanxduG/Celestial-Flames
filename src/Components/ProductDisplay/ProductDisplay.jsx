@@ -9,21 +9,21 @@ const pastelColors = [
     { name: 'Peach', code: '#FFDFBA' },
     { name: 'Light Yellow', code: '#FFFFBA' },
     { name: 'Light Green', code: '#BAFFC9' },
-    { name: 'Light Blue', code: '#BAE1FF' },
-    { name: 'Lavender', code: '#E2C2FF' },
-    { name: 'Pink', code: '#FF99C8' },
-    { name: 'Beige', code: '#FCF6BD' },
+//     { name: 'Light Blue', code: '#BAE1FF' },
+//     { name: 'Lavender', code: '#E2C2FF' },
+//     { name: 'Pink', code: '#FF99C8' },
+//     { name: 'Beige', code: '#FCF6BD' },
     { name: 'Mint', code: '#D0F4DE' },
     { name: 'Sky Blue', code: '#A9DEF9' },
-    { name: 'Soft Coral', code: '#FFD1DC' },
-    { name: 'Pale Peach', code: '#FFE5B4' },
-    { name: 'Lemon Chiffon', code: '#FFFACD' },
-    { name: 'Pastel Lime', code: '#D4F1C5' },
-    { name: 'Powder Blue', code: '#B0E0E6' },
-    { name: 'Periwinkle', code: '#CCCCFF' },
-    { name: 'Mauve', code: '#F3D9FA' },
-    { name: 'Cream', code: '#FFFDD0' },
-    { name: 'Seafoam', code: '#BDFCC9' },
+//     { name: 'Soft Coral', code: '#FFD1DC' },
+//     { name: 'Pale Peach', code: '#FFE5B4' },
+//     { name: 'Lemon Chiffon', code: '#FFFACD' },
+//     { name: 'Pastel Lime', code: '#D4F1C5' },
+//     { name: 'Powder Blue', code: '#B0E0E6' },
+//     { name: 'Periwinkle', code: '#CCCCFF' },
+//     { name: 'Mauve', code: '#F3D9FA' },
+//     { name: 'Cream', code: '#FFFDD0' },
+//     { name: 'Seafoam', code: '#BDFCC9' },
     { name: 'Baby Blue', code: '#E0FFFF' }
 ];
 
@@ -54,10 +54,53 @@ const ProductDisplay = (props) => {
         setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color.code);
-        setSelectedColorName(color.name);
-    };
+const handleColorChange = (color) => {
+    setSelectedColor(color.code);
+    setSelectedColorName(color.name);
+
+    if (product.category === 'Glass Collection') {
+        // Change the main image source dynamically
+        const mainImage = document.querySelector('.productdisplay-img .Main');
+        if (mainImage) {
+            switch (color.name) {
+                case 'Light Pink':
+                    mainImage.src = product['image_Light PinkUrl'];
+                    break;
+                case 'Peach':
+                    mainImage.src = product['image_PeachUrl'];
+                    break;
+                case 'Baby Blue':
+                    mainImage.src = product['image_Baby BlueUrl'];
+                    break;
+                case 'Sky Blue':
+                    mainImage.src = product['image_Sky BlueUrl'];
+                    break;
+                case 'Blue':
+                    mainImage.src = product['image_BlueUrl'];
+                    break;
+                case 'Light Green':
+                    mainImage.src = product['image_Light GreenUrl'];
+                    break;
+                case 'Mint':
+                    mainImage.src = product['image_MintUrl'];
+                    break;
+                case 'Light Yellow':
+                    mainImage.src = product['image_Light YellowUrl'];
+                    break
+                default:
+                    mainImage.src = product['imageUrl']; // Fallback to default image
+            }
+        }
+    } else {
+        // Change background color of the div.color
+        const colorDiv = document.querySelector('.color');
+        if (colorDiv) {
+            colorDiv.style.backgroundColor = color.code;
+        }
+    }
+};
+
+
 
     const handleFragranceChange = (fragrance) => {
         setSelectedFragrance(fragrance);
@@ -110,14 +153,33 @@ const ProductDisplay = (props) => {
                     {successMessage}
                 </div>
             )}
+            {/* {console.log(product)} */}
 
+            {product.category === 'Glass Collection' ? (
             <div className="productdisplay-left">
                 <div className="productdisplay-img">
-                    <img className='img-1' src={product.img_1} alt="Product" />
-                    <img className='img-2' src={product.img_2} alt="Product Background" />
+                    <img className='Main' src={product['imageUrl']} alt="Main" />
+                    <img className='other' src={product.img_pink} alt="pink color" />
+                    <img className='other' src={product.img_peach} alt="peach color" />
+                    <img className='other' src={product.img_babyblue} alt="baby blue color" />
+                    <img className='other' src={product.img_skyblue} alt="sky blue color" />
+                    <img className='other' src={product.img_blue} alt="blue color" />
+                    <img className='other' src={product.img_lightgreen} alt="Light green color" />
+                    <img className='other' src={product.img_mint} alt="mint color" />
+                    <img className='other' src={product.img_lightyellow} alt="light yellow color" />
+
+                </div>
+            </div>
+            ) : (
+            <div className="productdisplay-left">
+                <div className="productdisplay-img">
+                    <img className='img-1' src={product.img2Url} alt="Product" />
+                    <img className='img-2' src={product.img1Url} alt="Product Background" />
                     <div className='color'></div>
                 </div>
             </div>
+        )}
+
             <div className="productdisplay-right">
                 <h1>{product.name}</h1>
                 <div className="productdisplay-right-star">

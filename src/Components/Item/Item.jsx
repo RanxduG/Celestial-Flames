@@ -18,7 +18,7 @@ const Item = (props) => {
   }
 
   // Add item to cart
-  addToCart(props.id, props.name, props.waxtype, props.fragrancetype, props.color_id, props.scent, props.new_price);
+  addToCart(props.id, props.name, props.waxtype, props.fragrancetype, props.color, props.scent, props.new_price);
 
   // Show success message
   setAlertMessage('Item successfully added to cart.');

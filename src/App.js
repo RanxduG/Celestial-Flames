@@ -16,8 +16,11 @@ import AboutUs from './Pages/AboutUs';
 import Checkout from './Pages/Checkout';
 import Catalog from './Pages/Catalog';
 import ReadyMadeItems from './Pages/ReadyMadeItems';
+import { useContext } from 'react';
+import { ShopContext } from './Context/ShopContext';
 
 function App() {
+  const { categoryBanners, seasonalBanners } = useContext(ShopContext);
   return (
     <div>
       <BrowserRouter>
@@ -25,10 +28,11 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
-          <Route path="/Seasonal Collection" element={<ShopCategory banner={classic_banner} category='Seasonal Collection'  />} />
-            <Route path="/Elemental Collection" element={<ShopCategory banner={elemental_banner} category='Elemental Collection' />} />
-            <Route path="/Crystal Collection" element={<ShopCategory banner={crystal_banner} category='Crystal Collection' />} />
-            <Route path="/Classic Collection" element={<ShopCategory banner={classic_banner} category='Classic Collection' />} />
+          <Route path="/Seasonal" element={<ShopCategory banner={categoryBanners[0]} category='Seasonal Collection'  />} />
+            <Route path="/Molds" element={<ShopCategory banner={categoryBanners[0]} category='Mold Collection' />} />
+            <Route path="/Glasses" element={<ShopCategory banner={categoryBanners[1]} category='Glass Collection' />} />
+            <Route path="/Others" element={<ShopCategory banner={categoryBanners[2]} category='Other Collection' />} />
+            <Route path="/Tins" element={<ShopCategory banner={categoryBanners[3]} category='Tin Collection' />} />
           <Route path="/product">
             <Route index element={<Product />} />
             <Route path=":productId" element={<Product />} />

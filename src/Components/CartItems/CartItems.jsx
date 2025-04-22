@@ -1,14 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import remove_icon from '../Assets/Icons/remove.png';
 import plus_icon from '../Assets/Icons/plus.png';
 import minus_icon from '../Assets/Icons/minus.png';
+import { getAllProducts } from '../../Context/api';
 
 const CartItems = () => {
     const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, discount, setCartTotal, all_products } = useContext(ShopContext);
     const [promocode, setPromocode] = useState('');
     const [showDiscount, setShowDiscount] = useState(false);
+    const [products, setProducts] = useState([]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const productsData = await getAllProducts();
+            setProducts(productsData.data);
+            console.log(cartItems);
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        };
+        fetchData();
+      }, []);
 
     const handleIncreaseQuantity = (itemId, item) => {
         addToCart(itemId, item.itemName, item.waxType, item.fragranceType, item.color, item.fragrance, item.total);
@@ -44,7 +59,7 @@ const CartItems = () => {
         let message = "Hello, I'd like to place an order for the following candles:\n\n";
         let itemIndex = 1;
 
-        all_products.forEach((product) => {
+        products.forEach((product) => {
             cartItems[product.id].forEach((item) => {
                 message += `${itemIndex}. ${product.name}\n`;
                 message += `   - Scent: ${item.fragranceType} ${item.fragrance}\n`;
@@ -76,11 +91,11 @@ const CartItems = () => {
                 <p>Remove</p>
             </div>
             <hr />
-            {all_products.map((product) => (
+            {products.map((product) => (
                 cartItems[product.id].map((item, index) => (
                     <div key={`${product.id}-${index}`}>
                         <div className="cartitems-format cartitems-format-main">
-                            <img src={product.image} alt="" className='carticon-product-icon' />
+                            <img src={product.imageUrl} alt="" className='carticon-product-icon' />
                             <p>{item.color}, {item.fragranceType} {item.fragrance} Scented {product.name} made with {item.waxType}</p>
                             <p>Rs.{item.total}</p>
                             <div className='quantity-control'>

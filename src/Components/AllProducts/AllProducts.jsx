@@ -5,12 +5,11 @@ import { ShopContext } from '../../Context/ShopContext';
 import { Link } from 'react-router-dom';
 
 const AllProducts = () => {
-  const { ready_made_products } = useContext(ShopContext);
+  const { allProducts = [], allStocks = [] } = useContext(ShopContext);
   const [loading, setLoading] = useState(true);
 
-  // Simulate a delay for loading (or fetch from API)
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000); // Simulating 2 seconds loading time
+    const timer = setTimeout(() => setLoading(false), 2000); // Simulating a 2-second loading time
     return () => clearTimeout(timer);
   }, []);
 
@@ -26,102 +25,61 @@ const AllProducts = () => {
       ));
   };
 
+  const getProductCategoryByStockId = (stockId) => {
+    const correspondingProduct = allProducts.find((product) => product.id === stockId);
+    return correspondingProduct ? correspondingProduct.category : null;
+  };
+
+  const getProductNameByStockId = (stockId) => {
+    const correspondingProduct = allProducts.find((product) => product.id === stockId);
+    return correspondingProduct ? correspondingProduct.name : null;
+  };
+
+  const categories = ['Mold Collection', 'Glass Collection', 'Tin Collection', 'Other'];
+
   return (
     <div className="all-products">
       <h1>ALL PRODUCTS</h1>
       <hr />
 
-      {/* Classic Collection */}
-      <div className="p-wrapper">
-        <Link to={'/Classic Collection'}>
-          <div className="linkbar">Classic Collection</div>
-        </Link>
-      </div>
-      <div className="collection">
-        {loading
-          ? renderSkeletons() // Show skeletons while loading
-          : ready_made_products
-              .filter((item) => item.category === 'Classic Collection')
-              .map((item) => (
-                <Item
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  scent={item.scent}
-                  image={item.image}
-                  secondImage={item.secondImage}
-                  stock={item.stock}
-                  waxtype={item.waxtype}
-                  fragrancetype={item.fragrancetype}
-                  color={item.product_color}
-                  old_price={item.old_price}
-                  new_price={item.new_price}
-                />
-              ))}
-      </div>
+      {categories.map((category) => {
+        // Filter products by category
+        const categoryProducts = allStocks.filter(item => getProductCategoryByStockId(item.id) === category);
 
-      {/* Crystal Collection */}
-      <div className="p-wrapper">
-        <Link to={'/Crystal Collection'}>
-          <div className="linkbar">Crystal Collection</div>
-        </Link>
-      </div>
-      <div className="collection">
-        {loading
-          ? renderSkeletons() // Show skeletons while loading
-          : ready_made_products
-              .filter((item) => item.category === 'Crystal Collection')
-              .map((item) => (
-                <Item
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  scent={item.scent}
-                  image={item.image}
-                  secondImage={item.secondImage}
-                  stock={item.stock}
-                  waxtype={item.waxtype}
-                  fragrancetype={item.fragrancetype}
-                  color={item.product_color}
-                  old_price={item.old_price}
-                  new_price={item.new_price}
-                />
-              ))}
-      </div>
+        if (categoryProducts.length === 0) return null; // Skip if no products in this category
 
-      {/* Elemental Collection */}
-      <div className="p-wrapper">
-        <Link to={'/Elemental Collection'}>
-          <div className="linkbar">Elemental Collection</div>
-        </Link>
-      </div>
-      <div className="collection">
-        {loading
-          ? renderSkeletons() // Show skeletons while loading
-          : ready_made_products
-              .filter((item) => item.category === 'Elemental Collection')
-              .map((item) => (
-                <Item
-                  key={item.id}
-                  id={item.id}
-                  name={item.name}
-                  scent={item.scent}
-                  image={item.image}
-                  secondImage={item.secondImage}
-                  stock={item.stock}
-                  waxtype={item.waxtype}
-                  fragrancetype={item.fragrancetype}
-                  color={item.product_color}
-                  old_price={item.old_price}
-                  new_price={item.new_price}
-                />
-              ))}
-      </div>
+        return (
+          <div>
+          <div className="category-title">{category}</div >
+          <div key={category} className="collection">
+            {loading
+              ? renderSkeletons()
+              : categoryProducts.map((stock) => (
+                  <Item
+                    key={stock.id}
+                    id={stock.id}
+                    item_id={stock.item_id}
+                    name={getProductNameByStockId(stock.id)}
+                    scent={stock.scent}
+                    image={stock.imageUrl}
+                    secondImage={stock.secondImageUrl}
+                    stock={stock.stock}
+                    waxtype={stock.waxtype}
+                    fragrancetype={stock.fragrancetype}
+                    color={stock.color}
+                    old_price={stock.old_price}
+                    new_price={stock.new_price}
+                  />
+                ))}
+          </div>
+        </div>
+        );
+      })}
 
       <div className="create-candle-link">
         <h3>
-          Couldn't Find Anything To Your Liking?<br />
-          We Got You!!<br />
+          Couldn't Find Anything To Your Liking? <br />
+          We Got You! <br />
           <Link to={'/Catalog'}>
             <button onClick={() => window.scroll(0, 0)}>Create The Candle You Want</button>
           </Link>

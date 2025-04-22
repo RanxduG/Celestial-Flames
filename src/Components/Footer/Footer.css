@@ -1,170 +1,130 @@
-.footer{
-    height: 80vh;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 50px;
-}
-.footer-logo{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-.footer-logo img{
-    width: 250px;
-    height: 250px;
-}
-.footer-logo p{
-    color: #383838;
-    font-size: 36px;
-    font-weight: 700;
-}
-.footer-links{
-    display: flex;
-    list-style: none;
-    gap: 50px;
-    color: #252525;
-    font-size: 20px;
-}
-.footer-links a {
-    text-decoration: none; /* Remove underline */
-    color: black; /* Set link color to black */
-  }
-  
-  /* Optionally, you can style the links on hover */
-  .footer-links a:hover {
-    text-decoration: underline; /* Add underline on hover */
-  }
-.footer-links li{
-    cursor: pointer;
-}
-.footer-social-icons{
-    display: flex;
-    gap: 20px;
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 40px 60px;
+  background-color: #fafafa;
+  color: #383838;
 }
 
-.footer-icons-container{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    padding-bottom: 6px;
-    background: #fbfbfb;
-    border: 1px solid #e0e0e0;
+/* Left Section */
+.footer-left {
+  flex: 1;
+  max-width: 300px;
+}
 
+.footer-left img {
+  margin-left: 30px;
+  width: 150px;
+  height: auto;
 }
-.footer-icons-container img{
-    width: 30px;
-    height: 30px;
 
+.footer-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
 }
-.footer-copywrite{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    width: 100%;
-    margin-bottom: 30px;
-    font-size: 20px;
-    color:#1a1a1a;
 
+.footer-slogan {
+  font-size: 16px;
+  font-style: italic;
+  color: #666;
 }
-.footer-copywrite hr{
-    width: 80%;
-    border: none;
-    border-radius: 30px;
-    height: 3px;
-    background: #c7c7c7;
+
+/* Center Section */
+.footer-center {
+  flex: 2;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
 }
-/* WhatsApp button container styles */
+
+.footer-center h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-center a {
+  display: block;
+  text-decoration: none;
+  color: #252525;
+  margin-bottom: 5px;
+}
+
+.footer-center a:hover {
+  text-decoration: underline;
+}
+
+/* Right Section */
+.footer-right {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-right h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-social-icons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Copyright */
+.footer-copywrite {
+  text-align: center;
+  width: 100%;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #777;
+}
+
+.footer-copywrite hr {
+  margin: 10px auto;
+  width: 80%;
+  border: none;
+  height: 1px;
+  background-color: #e0e0e0;
+}
+
+/* WhatsApp Button */
 .whatsapp {
-  position: fixed; /* Fixes the position relative to the viewport */
-  bottom: 20px; /* Adjust to your desired position */
-  right: 20px; /* Adjust to your desired position */
-  z-index: 1000; /* Ensures it stays on top of other content */
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.whatsapp a{
+    text-decoration: none;
 }
 
-/* Default styles for the WhatsApp button */
 .whatsapp-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-color: green; /* Changed to black */
+  background-color: green;
   border: none;
-  border-radius: 50px; /* Makes it circular when icon-only */
-  padding: 20px 20px; /* Increased height with padding */
-  cursor: pointer;
+  border-radius: 50px;
+  padding: 10px 15px;
   color: white;
-  font-size: 18px; /* Slightly larger font */
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Slightly darker shadow */
-  position: relative;
-  overflow: hidden;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Hide the text initially */
-.whatsapp-text {
-  display: none;
-  margin-left: 10px;
-  font-size: 16px; /* Increased text size */
-  font-weight: bold;
-}
-
-/* WhatsApp icon styles */
 .whatsapp-icon {
-  width: 30px; /* Increased icon size */
-  height: 30px;
-  transition: transform 0.3s ease-in-out;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
-/* On hover, show the text and adjust padding */
 .whatsapp-btn:hover {
-  background-color: Green; /* Keep black even on hover */
-  padding: 20px 25px; /* Larger button on hover */
-  border-radius: 30px; /* Makes the button more elongated */
-}
-
-/* Show the text on hover */
-.whatsapp-btn:hover .whatsapp-text {
-  display: inline;
-}
-
-/* Add rotation effect to the icon */
-.whatsapp-btn:hover .whatsapp-icon {
-  transform: rotate(360deg);
-}
-
-
-@media(max-width: 800px){
-
-    .footer-logo img{
-        width: 100px;
-        height: 100px;
-    }
-    .footer-logo p{
-        font-weight: 600;
-        font-size: 25px;
-    }
-    .footer-links{
-        gap: 30px;
-    }
-    .footer-links li{
-        font-size: 16px;
-    }
-    .footer-social-icons{
-        gap: 10px;
-    }
-    .footer-icons-container img{
-        width: 20px;
-        height: 20px;
-    }
-    .footer-copywrite{
-        gap: 20px;
-        font-size: 16px;
-    }
-    .footer-copywrite hr{
-        width: 70%;
-        height: 2px;
-    }
+  background-color: darkgreen;
 }

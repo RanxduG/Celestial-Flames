@@ -22,7 +22,7 @@ import Xmas_tree from '../Good/X-mas Tree/Xmas tree 2.jpg';
 import Hexa_light from '../Good/Hexa Light/Hexa Light Editted.jpg';
 import Hexa_light_img_1 from '../Good/Hexa Light/Hexa Light candle greyscaled.jpg';
 import Hexa_lght_img_2 from '../Good/Hexa Light/Hexa Light candle removed.jpg';
-import Hexa_light_second from '../Good/Hexa Light/Pink Hexa Light.jpg';
+// import Hexa_light_second from '../Good/Hexa Light/Pink Hexa Light.jpg';
 // import Hexa_lght_pink from '../Good/Hexa Light/Pink Hexa Light.jpg';
 // import Hexa_lght_blue from '../Good/Hexa Light/Blue Hexa Light.jpg';
 // import Hexa_lght_green from '../Good/Hexa Light/Purple Hexa Light.jpg';
@@ -38,9 +38,14 @@ import Baby_bear_grayscaled from '../Good/Baby Bear/Baby bear grayscaled.jpg';
 import Baby_bear_second from '../Good/Baby Bear/Baby bear 2.jpg';
 
 import celestialglow from '../Good/Celestial Glow/Celestial Glow 2.jpg';
-import celestialglowgrayscaled from '../Good/Celestial Glow/Celestial glow grayscaled no backround.png';
-import celestialglowbackground from '../Good/Celestial Glow/Celestial glow backround.png';
-import celestialglowsecond from '../Good/Celestial Glow/Celestial Glow second.jpg';
+import babyblueCG from '../Good/Celestial Glow/baby blue.jpg'
+import skyblueCG from '../Good/Celestial Glow/sky blue.jpg'
+import lightpinkCG from '../Good/Celestial Glow/light pink.jpg'
+import pinkCG from '../Good/Celestial Glow/pink.jpg'
+import peachCG from '../Good/Celestial Glow/peach.jpg'
+import lightgreenCG from '../Good/Celestial Glow/light green.jpg'
+import mintCG from '../Good/Celestial Glow/mint.jpg'
+
 
 import cementchic from '../Good/Cement Chic/Cement Chic 2.jpg';
 import cementchicsecond from '../Good/Cement Chic/Cement Chic second.jpg';
@@ -71,10 +76,17 @@ import Crystal_Pear_background from '../Good/Crystal Pear/Crystal Pear backgroun
 import Crystal_Pear_grayscaled from '../Good/Crystal Pear/Crystal Pear gray scaled.jpg';
 
 import Gentleglow from '../Good/Gentle Glow/Gentle Glow.jpg'
+
+import cutsie from '../Good/Cutsie/3 cutsies.jpg'
+
+import oasis from '../Good/Oasis/Coffee latte.jpg'
+
+import blackTin from '../Good/Black Tin/Black tin.jpg'
+import everythingBlackTin from '../Good/Black Tin/Everything black tin.jpg'
 let all_data = [
     {
         id: 'CLC2024004',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Tower',
         image: tower,
         img_1: tower_grayscaled,
@@ -84,12 +96,13 @@ let all_data = [
         dimensions: '12cm x 6cm',
         soy_price: 2200,
         paraffin_price: 1800,
+        season: 'None',
         popular: true,
-        tags: ['tower', 'candle', 'classic']
+        tags: ['tower', 'candle', 'mold']
     },
     {
         id: 'CLC2024003',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Cubist Candle',
         image: cubist_candle,
         img_1: cubist_candle_grayscaled,
@@ -99,12 +112,13 @@ let all_data = [
         dimensions: '8.5cm x 5cm',
         soy_price: 1500,
         paraffin_price: 1150,
+        season: 'None',
         popular: false,
         tags: ['cubist', 'candle', 'classic']
     },
     {
         id: 'CLC2024005',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Twirling Hearts',
         image: twirlling_hearts,
         img_1: twirlling_hearts_grayscaled,
@@ -114,12 +128,13 @@ let all_data = [
         dimensions: '4.5cm x 5cm',
         soy_price: 600,
         paraffin_price: 500,
+        season: 'Valentine',
         popular: false,
         tags: ['twirling', 'hearts', 'candle']
     },
     {
         id: 'CLC2024002',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Cloud Nine',
         image: Cloud_nine,
         img_1: Cloud_nine_image,
@@ -129,12 +144,13 @@ let all_data = [
         dimensions: '5.5cm x 5.6cm',
         soy_price: 1000,
         paraffin_price: 800,
+        season: 'None',
         popular: false,
         tags: ['cloud', 'nine', 'candle']
     },
     {
         id: 'CLC2024016',
-        category: 'Seasonal Collection',
+        category: 'Mold Collection',
         name: 'Xmas Tree',
         image: Xmas_tree,
         secondImage: Xmas_tree_second,
@@ -142,12 +158,13 @@ let all_data = [
         dimensions: '9.5cm x 4.5cm x 4.5cm',
         soy_price: 800,
         paraffin_price: 650,
+        season: 'Christmas',
         popular: false,
         tags: ['xmas', 'tree', 'candle']
     },
     {
         id: 'CLC2024022',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Hexa Light',
         image: Hexa_light,
         img_1: Hexa_light_img_1,
@@ -156,12 +173,13 @@ let all_data = [
         dimensions: '5cm x 6cm x 6cm',
         soy_price: 600,
         paraffin_price: 500,
+        season: 'None',
         popular: true,
         tags: ['hexa', 'light', 'candle']
     },
 {
         id: 'CLC2024006',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Pine Cone',
         image: Pine_cone,
         img_1: Pine_cone_grayscaled,
@@ -171,12 +189,13 @@ let all_data = [
         dimensions: '7cm x 5.5cm',
         soy_price: 800,
         paraffin_price: 600,
+        season: 'Christmas',
         popular: false,
         tags: ['pine', 'cone', 'candle']
     },
     {
         id: 'CLC2024023',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Baby Bear',
         image: Baby_bear,
         img_1: Baby_bear_grayscaled,
@@ -186,13 +205,14 @@ let all_data = [
         dimensions: '4.5cm x 3cm x 3cm',
         soy_price: 200,
         paraffin_price: 150,
+        season: 'Valentine',
         popular: false,
         tags: ['baby', 'bear', 'candle']
 
     },
     {
         id: 'CLC2024001',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Wobbly',
         image: Wobbly,
         secondImage: Wobbly_second,
@@ -200,12 +220,13 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 450,
         paraffin_price: 350,
+        season: 'None',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CLC2024100',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Frosty',
         image: frosty,
         secondImage: frosty,
@@ -213,12 +234,13 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 800,
         paraffin_price: 600,
+        season: 'Christmas',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CLC2024101',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Frosty forest',
         image: frosty_forest,
         secondImage: frosty_forest,
@@ -226,12 +248,13 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 900,
         paraffin_price: 700,
+        season: 'Christmas',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CLC2024102',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Popit',
         image: popit,
         img_1: popit_grayscaled,
@@ -241,12 +264,13 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 1200,
         paraffin_price: 830,
+        season: 'None',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CLC2021003',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Crystal Pear',
         image: Crystal_Pear,
         img_1: Crystal_Pear_grayscaled,
@@ -256,12 +280,13 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 1200,
         paraffin_price: 900,
+        season: 'None',
         popular: false,
         tags: ['wobbly', 'candle', 'classic']
     },
     {
         id: 'CLC2024104',
-        category: 'Classic Collection',
+        category: 'Mold Collection',
         name: 'Bootiful',
         image: bootiful,
         img_1: bootiful_grayscaled,
@@ -271,87 +296,127 @@ let all_data = [
         dimensions: '2cm x 2cm x 2cm',
         soy_price: 1000,
         paraffin_price: 800,
+        season: 'Halloween',
         popular: false,
-        tags: ['wobbly', 'candle', 'classic']
+        tags: ['Bootiful', 'Halloween', 'candle', 'classic']
     },
     {
         id: 'CC2024017',
-        category: 'Crystal Collection',
+        category: 'Glass Collection',
         name: 'Celestial Glow',
         image: celestialglow,
-        img_1: celestialglowgrayscaled,
-        img_2: celestialglowbackground,
-        secondImage: celestialglowsecond,
+        img_lightyellow: celestialglow,
+        img_lightpink: lightpinkCG,
+        img_pink: pinkCG,
+        img_peach: peachCG,
+        img_babyblue: babyblueCG,
+        img_skyblue: skyblueCG,
+        img_lightgreen: lightgreenCG,
+        img_mint: mintCG,
         description: ' A 9cm tall and 7.2cm wide candle in a sleek glass container. With 18-20 hours burn time. Choose from various colors, wax types, and scents for a personalized experience. Let your space shine with celestial charm.',
         dimensions: '9cm x 7.2cm x 7.2cm',
         soy_price: 2000,
         paraffin_price: 1500,
+        season: 'None',
         popular: true,
         tags: ['celestial', 'glow', 'candle']
     },
     {
         id: 'CC202400',
-        category: 'Crystal Collection',
+        category: 'Glass Collection',
         name: 'Oasis',
-        image: celestialglow,
-        img_1: celestialglowgrayscaled,
-        img_2: celestialglowbackground,
-        secondImage: celestialglowsecond,
+        image: oasis,
+        img_1: oasis,
+        img_2: oasis,
+        secondImage: oasis,
         description: 'A candle in a sleek glass container with a burn time of 36-48 hours. Choose from a variety of colors, wax types, and scents for a personalized experience. Bring celestial elegance to your space.',
         dimensions: '300 ML',
         soy_price: 3000,
         paraffin_price: 2500,
+        season: 'None',
         popular: true,
         tags: ['oasis', 'glass', 'candle']
     },
     {
         id: 'CC2024003',
-        category: 'Crystal Collection',
+        category: 'Glass Collection',
         name: 'Gentle Glow',
         image: Gentleglow,
-        img_1: celestialglowgrayscaled,
-        img_2: celestialglowbackground,
-        secondImage: celestialglowsecond,
         description: 'A candle with 18-24 hours of burn time, crafted for a sleek and elegant look. Personalize your experience with a variety of colors, wax types, and enchanting scents. Add celestial elegance to your space.',
         dimensions: '150 ML',
         soy_price: 1200,
         paraffin_price: 900,
+        season: 'None',
         popular: true,
         tags: ['gentle', 'glass', 'candle']
     },
     {
         id: 'CC2024004',
-        category: 'Crystal Collection',
+        category: 'Glass Collection',
         name: 'Cutsie',
-        image: Gentleglow,
-        img_1: celestialglowgrayscaled,
-        img_2: celestialglowbackground,
-        secondImage: celestialglowsecond,
+        image: cutsie,
+        img_1: cutsie,
+        img_2: cutsie,
+        secondImage: cutsie,
         description: 'A compact candle with 8-10 hours of burn time, perfect for small spaces or as a thoughtful gift. Choose from a variety of colors, wax types, and captivating scents to suit your style. Bring a touch of celestial charm to any corner.',
         dimensions: '50 ML',
         soy_price: 550,
         paraffin_price: 450,
+        season: 'None',
         popular: true,
         tags: ['cutsie', 'glass', 'candle']
     },
     {
-        id: 'EC2024004',
-        category: 'Elemental Collection',
-        name: 'Tin Candle',
-        image: frosty,
-        img_1: frosty_forest,
-        img_2: frosty_forest,
-        secondImage: frosty_forest,
+        id: 'TC2024004',
+        category: 'Tin Collection',
+        name: 'Black Tin Candle',
+        image: blackTin,
+        img_1: blackTin,
+        img_2: blackTin,
+        secondImage: everythingBlackTin,
         description: 'A beautifully crafted tin candle, combining portability with style. With a burn time of 12-15 hours, it’s ideal for cozy evenings or gifting. Enhanced with a sleek lid, this compact design ensures freshness and charm.',
         dimensions: '4cm (Height) x 6.2cm (Width)',
-        soy_price: 1000,
-        paraffin_price: 800,
+        soy_price: 1500,
+        paraffin_price: 1300,
+        season: 'None',
+        popular: true,
+        tags: ['tin', 'candle', 'portable']
+    },
+        {
+        id: 'TC2024005',
+        category: 'Tin Collection',
+        name: 'Gold Tin Candle',
+        image: blackTin,
+        img_1: blackTin,
+        img_2: blackTin,
+        secondImage: everythingBlackTin,
+        description: 'A beautifully crafted tin candle, combining portability with style. With a burn time of 12-15 hours, it’s ideal for cozy evenings or gifting. Enhanced with a sleek lid, this compact design ensures freshness and charm.',
+        dimensions: '4cm (Height) x 6.2cm (Width)',
+        soy_price: 1750,
+        paraffin_price: 1500,
+        season: 'None',
+        popular: true,
+        tags: ['tin', 'candle', 'portable']
+    },
+        {
+        id: 'TC2024006',
+        category: 'Tin Collection',
+        name: 'Fancy Tin Candle',
+        image: blackTin,
+        img_1: blackTin,
+        img_2: blackTin,
+        secondImage: everythingBlackTin,
+        description: 'A beautifully crafted tin candle, combining portability with style. With a burn time of 12-15 hours, it’s ideal for cozy evenings or gifting. Enhanced with a sleek lid, this compact design ensures freshness and charm.',
+        dimensions: '4cm (Height) x 6.2cm (Width)',
+        soy_price: 2000,
+        paraffin_price: 1800,
+        season: 'None',
         popular: true,
         tags: ['tin', 'candle', 'portable']
     },
     {
         id: 'EC2024023',
-        category: 'Elemental Collection',
+        category: 'Other',
         name: 'Cement Chic',
         image: cementchic,
         secondImage: cementchicsecond,
@@ -359,12 +424,13 @@ let all_data = [
         dimensions: '7.5cm x 7.5cm x 7.5cm',
         soy_price: 3000,
         paraffin_price: 2000,
+        season: 'None',
         popular: true,
         tags: ['cement', 'chic', 'candle']
     },
     {
         id: 'EC2024024',
-        category: 'Elemental Collection',
+        category: 'Other',
         name: 'Cement Cutie',
         image: cementchic,
         secondImage: cementchicsecond,
@@ -372,12 +438,13 @@ let all_data = [
         dimensions: '7.5cm x 7.5cm x 7.5cm',
         soy_price: 3000,
         paraffin_price: 2000,
+        season: 'None',
         popular: true,
         tags: ['cement', 'chic', 'candle']
     },
     {
         id: 'EC2024025',
-        category: 'Elemental Collection',
+        category: 'Other',
         name: 'Celestial Soul',
         image: cementchic,
         secondImage: cementchicsecond,
@@ -385,6 +452,7 @@ let all_data = [
         dimensions: '7.5cm x 7.5cm x 7.5cm',
         soy_price: 3000,
         paraffin_price: 2000,
+        season: 'None',
         popular: true,
         tags: ['cement', 'chic', 'candle']
     }

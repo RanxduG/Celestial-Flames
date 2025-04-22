@@ -10,7 +10,7 @@ import image5 from '../Assets/Banners/Candle Ingredients.jpg';
 import image6 from '../Assets/Banners/Candles burning.jpg';
 
 const WelcomeBanner = () => {
-  const { userDetails } = useContext(ShopContext);
+  const { userDetails, homeBanners } = useContext(ShopContext);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [typedText1, setTypedText1] = useState('');
   const [typedText2, setTypedText2] = useState('');
@@ -74,7 +74,7 @@ const WelcomeBanner = () => {
   return (
     <div className='welcomebanner'>
       <div className='slideshow'>
-        {slides.map((slide, index) => (
+        {homeBanners.map((slide, index) => (
           <img
             key={index}
             src={slide}
@@ -83,7 +83,7 @@ const WelcomeBanner = () => {
           />
         ))}
         <div className='dots'>
-          {slides.map((_, index) => (
+          {homeBanners.map((_, index) => (
             <span
               key={index}
               className={index === currentSlide ? 'dot active' : 'dot'}
