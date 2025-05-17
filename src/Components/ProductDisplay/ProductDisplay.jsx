@@ -9,21 +9,8 @@ const pastelColors = [
     { name: 'Peach', code: '#FFDFBA' },
     { name: 'Light Yellow', code: '#FFFFBA' },
     { name: 'Light Green', code: '#BAFFC9' },
-//     { name: 'Light Blue', code: '#BAE1FF' },
-//     { name: 'Lavender', code: '#E2C2FF' },
-//     { name: 'Pink', code: '#FF99C8' },
-//     { name: 'Beige', code: '#FCF6BD' },
     { name: 'Mint', code: '#D0F4DE' },
     { name: 'Sky Blue', code: '#A9DEF9' },
-//     { name: 'Soft Coral', code: '#FFD1DC' },
-//     { name: 'Pale Peach', code: '#FFE5B4' },
-//     { name: 'Lemon Chiffon', code: '#FFFACD' },
-//     { name: 'Pastel Lime', code: '#D4F1C5' },
-//     { name: 'Powder Blue', code: '#B0E0E6' },
-//     { name: 'Periwinkle', code: '#CCCCFF' },
-//     { name: 'Mauve', code: '#F3D9FA' },
-//     { name: 'Cream', code: '#FFFDD0' },
-//     { name: 'Seafoam', code: '#BDFCC9' },
     { name: 'Baby Blue', code: '#E0FFFF' }
 ];
 
@@ -37,6 +24,8 @@ const ProductDisplay = (props) => {
     const [selectedColorName, setSelectedColorName] = useState(null);
     const [selectedFragrance, setSelectedFragrance] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
+    const [colorOption, setColorOption] = useState('Existing'); // Default to Existing colors
+    const [customColorName, setCustomColorName] = useState('');
 
     useEffect(() => {
         const color = document.querySelector('.color');
@@ -54,53 +43,67 @@ const ProductDisplay = (props) => {
         setSelectedFragrance(null); // Reset fragrance when fragrance type changes
     };
 
-const handleColorChange = (color) => {
-    setSelectedColor(color.code);
-    setSelectedColorName(color.name);
+    // Function to handle color option selection (Existing vs Custom)
+    const handleColorOptionChange = (option) => {
+        setColorOption(option);
+        // Reset color selection when switching between options
+        setSelectedColor(null);
+        setSelectedColorName(null);
+        setCustomColorName('');
+    };
 
-    if (product.category === 'Glass Collection') {
-        // Change the main image source dynamically
-        const mainImage = document.querySelector('.productdisplay-img .Main');
-        if (mainImage) {
-            switch (color.name) {
-                case 'Light Pink':
-                    mainImage.src = product['image_Light PinkUrl'];
-                    break;
-                case 'Peach':
-                    mainImage.src = product['image_PeachUrl'];
-                    break;
-                case 'Baby Blue':
-                    mainImage.src = product['image_Baby BlueUrl'];
-                    break;
-                case 'Sky Blue':
-                    mainImage.src = product['image_Sky BlueUrl'];
-                    break;
-                case 'Blue':
-                    mainImage.src = product['image_BlueUrl'];
-                    break;
-                case 'Light Green':
-                    mainImage.src = product['image_Light GreenUrl'];
-                    break;
-                case 'Mint':
-                    mainImage.src = product['image_MintUrl'];
-                    break;
-                case 'Light Yellow':
-                    mainImage.src = product['image_Light YellowUrl'];
-                    break
-                default:
-                    mainImage.src = product['imageUrl']; // Fallback to default image
+    const handleColorChange = (color) => {
+        setSelectedColor(color.code);
+        setSelectedColorName(color.name);
+
+        if (product.category === 'Glass Collection') {
+            // Change the main image source dynamically
+            const mainImage = document.querySelector('.productdisplay-img .Main');
+            if (mainImage) {
+                switch (color.name) {
+                    case 'Light Pink':
+                        mainImage.src = product['image_Light PinkUrl'];
+                        break;
+                    case 'Peach':
+                        mainImage.src = product['image_PeachUrl'];
+                        break;
+                    case 'Baby Blue':
+                        mainImage.src = product['image_Baby BlueUrl'];
+                        break;
+                    case 'Sky Blue':
+                        mainImage.src = product['image_Sky BlueUrl'];
+                        break;
+                    case 'Blue':
+                        mainImage.src = product['image_BlueUrl'];
+                        break;
+                    case 'Light Green':
+                        mainImage.src = product['image_Light GreenUrl'];
+                        break;
+                    case 'Mint':
+                        mainImage.src = product['image_MintUrl'];
+                        break;
+                    case 'Light Yellow':
+                        mainImage.src = product['image_Light YellowUrl'];
+                        break
+                    default:
+                        mainImage.src = product['imageUrl']; // Fallback to default image
+                }
+            }
+        } else {
+            // Change background color of the div.color
+            const colorDiv = document.querySelector('.color');
+            if (colorDiv) {
+                colorDiv.style.backgroundColor = color.code;
             }
         }
-    } else {
-        // Change background color of the div.color
-        const colorDiv = document.querySelector('.color');
-        if (colorDiv) {
-            colorDiv.style.backgroundColor = color.code;
-        }
-    }
-};
+    };
 
-
+    const handleCustomColorChange = (e) => {
+        setCustomColorName(e.target.value);
+        setSelectedColorName(e.target.value);
+        // For custom colors, we don't have a color code, so we'll use a placeholder or default color
+        setSelectedColor('#FFFFFF'); // Default white or you could use a placeholder color
+    };
 
     const handleFragranceChange = (fragrance) => {
         setSelectedFragrance(fragrance);
@@ -119,9 +122,9 @@ const handleColorChange = (color) => {
 
     const getFragrancePrice = () => {
         switch (selectedFragranceType) {
-            case 'Chemical1':
+            case 'Chemical':
                 return 50;
-            case 'Essential Oil1':
+            case 'Essential Oil':
                 return 150;
             default:
                 return 0;
@@ -133,11 +136,27 @@ const handleColorChange = (color) => {
     };
 
     const areAllOptionsSelected = () => {
-        return selectedWaxType && selectedColor;
+        if (colorOption === 'Existing') {
+            return selectedWaxType && selectedColor && selectedFragranceType && selectedFragrance;
+        } else { // Custom color option
+            return selectedWaxType && customColorName && selectedFragranceType && selectedFragrance;
+        }
     };
 
     const handleAddToCart = () => {
-        addToCart(product.id, product.name, selectedWaxType, selectedFragranceType, selectedColorName, selectedFragrance, getPrice() + getFragrancePrice());
+        // Use either selected color name or custom color name
+        const finalColorName = colorOption === 'Custom' ? customColorName : selectedColorName;
+        
+        addToCart(
+            product.id, 
+            product.name, 
+            selectedWaxType, 
+            selectedFragranceType, 
+            finalColorName, 
+            selectedFragrance, 
+            getPrice() + getFragrancePrice()
+        );
+        
         // Show success message
         setSuccessMessage('Item added to cart successfully!');
 
@@ -153,32 +172,30 @@ const handleColorChange = (color) => {
                     {successMessage}
                 </div>
             )}
-            {/* {console.log(product)} */}
 
             {product.category === 'Glass Collection' ? (
-            <div className="productdisplay-left">
-                <div className="productdisplay-img">
-                    <img className='Main' src={product['imageUrl']} alt="Main" />
-                    <img className='other' src={product.img_pink} alt="pink color" />
-                    <img className='other' src={product.img_peach} alt="peach color" />
-                    <img className='other' src={product.img_babyblue} alt="baby blue color" />
-                    <img className='other' src={product.img_skyblue} alt="sky blue color" />
-                    <img className='other' src={product.img_blue} alt="blue color" />
-                    <img className='other' src={product.img_lightgreen} alt="Light green color" />
-                    <img className='other' src={product.img_mint} alt="mint color" />
-                    <img className='other' src={product.img_lightyellow} alt="light yellow color" />
-
+                <div className="productdisplay-left">
+                    <div className="productdisplay-img">
+                        <img className='Main' src={product['imageUrl']} alt="Main" />
+                        <img className='other' src={product.img_pink} alt="pink color" />
+                        <img className='other' src={product.img_peach} alt="peach color" />
+                        <img className='other' src={product.img_babyblue} alt="baby blue color" />
+                        <img className='other' src={product.img_skyblue} alt="sky blue color" />
+                        <img className='other' src={product.img_blue} alt="blue color" />
+                        <img className='other' src={product.img_lightgreen} alt="Light green color" />
+                        <img className='other' src={product.img_mint} alt="mint color" />
+                        <img className='other' src={product.img_lightyellow} alt="light yellow color" />
+                    </div>
                 </div>
-            </div>
             ) : (
-            <div className="productdisplay-left">
-                <div className="productdisplay-img">
-                    <img className='img-1' src={product.img2Url} alt="Product" />
-                    <img className='img-2' src={product.img1Url} alt="Product Background" />
-                    <div className='color'></div>
+                <div className="productdisplay-left">
+                    <div className="productdisplay-img">
+                        <img className='img-1' src={product.img2Url} alt="Product" />
+                        <img className='img-2' src={product.img1Url} alt="Product Background" />
+                        <div className='color'></div>
+                    </div>
                 </div>
-            </div>
-        )}
+            )}
 
             <div className="productdisplay-right">
                 <h1>{product.name}</h1>
@@ -237,23 +254,57 @@ const handleColorChange = (color) => {
                 )}
 
                 <div className="productdisplay-right-feature">
-                    <h1>Select Color</h1>
-                    <div className="productdisplay-right-options">
-                        {pastelColors.map(color => (
-                            <div
-                                key={color.code}
-                                className={getOptionClass(selectedColor, color.code)}
-                                style={{
-                                backgroundColor: selectedColor === color.code ? color.code : 'white',
-                                color: 'black'
-                                 }}
-                                onClick={() => handleColorChange(color)}
-                            >
-                                <span>{color.name}</span>
-                            </div>
-                        ))}
+                    <h1>Color Options</h1>
+                    <div className='color-option'>
+                        <div 
+                            className={colorOption === 'Existing' ? 'option selected' : 'option'} 
+                            onClick={() => handleColorOptionChange('Existing')}
+                        >
+                            Existing colors
+                        </div>
+                        <div 
+                            className={colorOption === 'Custom' ? 'option selected' : 'option'} 
+                            onClick={() => handleColorOptionChange('Custom')}
+                        >
+                            Custom Colors
+                        </div>
                     </div>
+                    
+                    {colorOption === 'Existing' ? (
+                        <>
+                            <h1>Select Color*</h1>
+                            <div className="productdisplay-right-options">
+                                {pastelColors.map(color => (
+                                    <div
+                                        key={color.code}
+                                        className={getOptionClass(selectedColor, color.code)}
+                                        style={{
+                                            backgroundColor: color.code,
+                                            color: 'black'
+                                        }}
+                                        onClick={() => handleColorChange(color)}
+                                    >
+                                        <span>{color.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <h1>Enter Custom Color*</h1>
+                            <div className="productdisplay-right-color-input">
+                                <input 
+                                    type="text" 
+                                    className='color-input' 
+                                    placeholder='Enter the name of the color'
+                                    value={customColorName}
+                                    onChange={handleCustomColorChange}
+                                />
+                            </div>
+                        </>
+                    )}
                 </div>
+                
                 <div className="productdisplay-right-prices">
                     <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
                 </div>
@@ -265,7 +316,9 @@ const handleColorChange = (color) => {
                         Create Candle
                     </button>
                 </div>
-                <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
+                <p className='productdisplay-right-category'>
+                    <span>Category :</span> {product.category || 'Crystal Collection, Celestial Glow'}
+                </p>
             </div>
         </div>
     );
