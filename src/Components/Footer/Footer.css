@@ -113,11 +113,11 @@
 .whatsapp-btn {
   display: flex;
   align-items: center;
-  background-color: black;
-  border: none;
+  background-color: None;
+  border: 1px solid #d3d3d3;
   border-radius: 50px;
   padding: 10px 15px;
-  color: white;
+  color: #6d6d6d;
   font-size: 14px;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -130,5 +130,7 @@
 }
 
 .whatsapp-btn:hover {
-  background-color: darkgreen;
+  border-color:  #6b4423;
+  color: #6b4423;
+  transition: ease-in-out 0.3s;
 }

@@ -71,7 +71,7 @@ const Footer = () => {
       <div className="whatsapp">
         <a href="https://wa.me/message/SCXFB5PPHQQ7K1" target="_blank" rel="noopener noreferrer">
           <button className="whatsapp-btn">
-            <img src={whatsapp_icon} alt="WhatsApp" className="whatsapp-icon" />
+            {/* <img src={whatsapp_icon} alt="WhatsApp" className="whatsapp-icon" /> */}
             <span className="whatsapp-text">Chat In WhatsApp</span>
           </button>
         </a>

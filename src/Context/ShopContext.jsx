@@ -32,8 +32,10 @@ const ShopContextProvider = (props) => {
         try {
             const stocksData = await getAllStock();
             setStocks(stocksData.data);
+            console.log(stocksData.data);
             const productsData = await getAllProducts();
             setProducts(productsData.data);
+            console.log(productsData.data);
             const homeBannerUrl = await getHomeBanner();
             // console.log(homeBannerUrl);
             setHomeBanners(homeBannerUrl.data.sildesUrl);
@@ -48,6 +50,16 @@ const ShopContextProvider = (props) => {
         };
         fetchData();
     }, []);
+
+    const getProductById = (id) => {
+        const product = allProducts.find((product) => product.id === id);
+        return product ? product : null;
+    };
+
+    const getStockById = (id) => {
+        const stock = allStocks.find((stock) => stock.id === id);
+        return stock ? stock : null;
+    };
 
     const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
@@ -137,7 +149,9 @@ const ShopContextProvider = (props) => {
         allStocks,
         homeBanners,
         categoryBanners,
-        seasonalBanners
+        seasonalBanners,
+        getProductById,
+        getStockById
     };
 
     return (

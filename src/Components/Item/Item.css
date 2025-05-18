@@ -140,6 +140,7 @@
 @media(max-width: 1280px) {
     .item {
         width: 230px;
+        height: 400px;
         font-size: 14px;
     }
 
@@ -147,11 +148,15 @@
         width: 230px;
         height: 320px;
     }
+    .item button{
+        width: 230px;
+    }
 }
 
 @media(max-width: 1024px) {
     .item {
         width: 220px;
+        height: 340px;
         font-size: 13px;
     }
 
@@ -159,16 +164,23 @@
         width: 220px;
         height: 270px;
     }
+    .item button{
+        width: 220px;
+    }
 }
 
 @media(max-width: 800px) {
     .item {
         width: 200px;
+        height: 330px;
         font-size: 12px;
     }
 
     .item img {
         width: 200px;
         height: 250px;
+    }
+    .item button{
+        width: 200px;
     }
 }

@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from 'react';
 import './AllProducts.css';
 import Item from '../Item/Item';
 import { ShopContext } from '../../Context/ShopContext';
-import { Link } from 'react-router-dom';
 
 const AllProducts = () => {
   const { allProducts = [], allStocks = [] } = useContext(ShopContext);
@@ -76,15 +75,6 @@ const AllProducts = () => {
         );
       })}
 
-      <div className="create-candle-link">
-        <h3>
-          Couldn't Find Anything To Your Liking? <br />
-          We Got You! <br />
-          <Link to={'/Catalog'}>
-            <button onClick={() => window.scroll(0, 0)}>Create The Candle You Want</button>
-          </Link>
-        </h3>
-      </div>
     </div>
   );
 };

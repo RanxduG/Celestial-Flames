@@ -2,15 +2,15 @@ import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginSignup from './Pages/LoginSignup';
-import Shop from './Pages/Shop';
+import Shop from './Pages/ShopTest';
 import ShopCategory from './Pages/ShopCategory';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import Home from './Pages/Home';
 import Footer from './Components/Footer/Footer';
-import classic_banner from './Components/Assets/Banners/Classic banner.jpg';
-import elemental_banner from './Components/Assets/Banners/Elemental banner.jpg';
-import crystal_banner from './Components/Assets/Banners/Crystal banner.jpg';
+// import classic_banner from './Components/Assets/Banners/Classic banner.jpg';
+// import elemental_banner from './Components/Assets/Banners/Elemental banner.jpg';
+// import crystal_banner from './Components/Assets/Banners/Crystal banner.jpg';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import Checkout from './Pages/Checkout';
@@ -20,7 +20,7 @@ import { useContext } from 'react';
 import { ShopContext } from './Context/ShopContext';
 
 function App() {
-  const { categoryBanners, seasonalBanners } = useContext(ShopContext);
+  const { categoryBanners } = useContext(ShopContext);
   return (
     <div>
       <BrowserRouter>
@@ -28,9 +28,9 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
-          <Route path="/Seasonal" element={<ShopCategory banner={categoryBanners[0]} category='Seasonal Collection'  />} />
-            <Route path="/Molds" element={<ShopCategory banner={categoryBanners[0]} category='Mold Collection' />} />
-            <Route path="/Glasses" element={<ShopCategory banner={categoryBanners[1]} category='Glass Collection' />} />
+          <Route path="/Collection/Seasonal" element={<ShopCategory banner={categoryBanners[0]} category='Seasonal Collection'  />} />
+            <Route path="/Collection/Classic" element={<ShopCategory banner={categoryBanners[0]} category='Mold Collection' />} />
+            <Route path="/Collection/Gel" element={<ShopCategory banner={categoryBanners[1]} category='Glass Collection' />} />
             <Route path="/Others" element={<ShopCategory banner={categoryBanners[2]} category='Other Collection' />} />
             <Route path="/Tins" element={<ShopCategory banner={categoryBanners[3]} category='Tin Collection' />} />
           <Route path="/product">

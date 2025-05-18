@@ -1,0 +1,310 @@
+/* CollectionsShowcase.css */
+.collections-showcase {
+  padding: 5rem 2rem;
+  background-color: #f8f4ee;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.collections-showcase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header styling */
+.collections-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.collections-title h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4a3b2c;
+  position: relative;
+  display: inline-block;
+}
+
+.collections-title h2::after {
+  content: '';
+  position: absolute;
+  width: 40%;
+  height: 3px;
+  background-color: #e9c46a;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.collections-title p {
+  font-size: 1.1rem;
+  color: #6d6d6d;
+  margin-top: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Collection grid layout */
+.collections-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Individual collection card */
+.collection-card {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.collections-showcase.visible .collection-card {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Staggered animation for cards */
+.collections-showcase.visible .collection-card:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.collections-showcase.visible .collection-card:nth-child(2) {
+  transition-delay: 0.3s;
+}
+
+.collections-showcase.visible .collection-card:nth-child(3) {
+  transition-delay: 0.5s;
+}
+
+.collections-showcase.visible .collection-card:nth-child(4) {
+  transition-delay: 0.7s;
+}
+
+/* Alternate layout for cards */
+.collection-card.card-left {
+  flex-direction: row;
+}
+
+.collection-card.card-right {
+  flex-direction: row-reverse;
+  transform: translateX(50px);
+}
+
+/* Collection image styling */
+.collection-image {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.collection-card:hover .collection-image img {
+  transform: scale(1.05);
+}
+
+.collection-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+}
+
+/* Collection details styling */
+.collection-details {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.collection-details h3 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #4a3b2c;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.collection-details h3::after {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 3px;
+  background-color: #a68a64;
+  bottom: -8px;
+  left: 0;
+}
+
+.collection-details p {
+  font-size: 1.1rem;
+  color: #6d6d6d;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.collection-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.collection-meta span {
+  background-color: rgba(166, 138, 100, 0.1);
+  color: #a68a64;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* View collection button */
+.view-collection-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  background-color: #a68a64;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.view-collection-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.view-collection-btn:hover {
+  background-color: #8c724f;
+}
+
+.view-collection-btn:hover svg {
+  transform: translateX(5px);
+}
+
+/* Collections footer */
+.collections-footer {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.view-all-collections {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  background-color: transparent;
+  border: 2px solid #a68a64;
+  color: #4a3b2c;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.view-all-collections:hover {
+  background-color: #a68a64;
+  color: white;
+}
+
+.view-all-collections svg {
+  transition: transform 0.3s ease;
+}
+
+.view-all-collections:hover svg {
+  transform: translateX(5px);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .collection-card.card-left,
+  .collection-card.card-right {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .collection-image {
+    width: 100%;
+    height: 300px;
+  }
+  
+  .collection-details {
+    width: 100%;
+    padding: 1.5rem 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .collections-showcase {
+    padding: 4rem 1.5rem;
+  }
+  
+  .collections-title h2 {
+    font-size: 2.2rem;
+  }
+  
+  .collections-grid {
+    gap: 3rem;
+  }
+  
+  .collection-details h3 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .collections-showcase {
+    padding: 3rem 1rem;
+  }
+  
+  .collections-title h2 {
+    font-size: 2rem;
+  }
+  
+  .collection-image {
+    height: 250px;
+  }
+  
+  .collection-details h3 {
+    font-size: 1.6rem;
+  }
+  
+  .collection-details p {
+    font-size: 1rem;
+  }
+  
+  .view-collection-btn,
+  .view-all-collections {
+    width: 100%;
+    justify-content: center;
+  }
+}
