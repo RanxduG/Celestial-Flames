@@ -17,26 +17,93 @@ const ProductGallery = () => {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   // Fragrance options
-  const fragranceOptions = [
-    { id: 'vanilla', name: 'Vanilla' },
-    { id: 'cinnamon', name: 'Cinnamon' },
-    { id: 'lavender', name: 'Lavender' },
-    { id: 'cedar', name: 'Cedar' },
-    { id: 'jasmine', name: 'Jasmine' },
-    { id: 'sandalwood', name: 'Sandalwood' },
-    { id: 'citrus', name: 'Citrus' },
-    { id: 'peppermint', name: 'Peppermint' },
-  ];
 
-  // Mood options with associated fragrances
-  const moodOptions = [
-    { id: 'relaxing', name: 'Calm & Relaxing', fragrances: ['lavender', 'vanilla', 'sandalwood'] },
-    { id: 'energizing', name: 'Energizing', fragrances: ['citrus', 'peppermint'] },
-    { id: 'cozy', name: 'Cozy & Warm', fragrances: ['cinnamon', 'vanilla'] },
-    { id: 'refreshing', name: 'Refreshing', fragrances: ['cedar', 'citrus'] },
-    { id: 'romantic', name: 'Romantic', fragrances: ['jasmine', 'sandalwood', 'vanilla'] },
-  ];
+// Individual fragrances from both lists
+const fragranceOptions = [
+  // Spicy and Strong
+  { id: 'cinnamon', name: 'Cinnamon' },
+  { id: 'citronella', name: 'Citronella' },
+  { id: 'lemongrass', name: 'Lemongrass' },
+  
+  // Sweet and Subtle
+  { id: 'frenchVanilla', name: 'French Vanilla' },
+  { id: 'honeydew', name: 'Honeydew' },
+  { id: 'cafe', name: 'Cafe' },
+  
+  // Mint and Citrus
+  { id: 'peppermint', name: 'Peppermint' },
+  { id: 'teaLime', name: 'Tea & Lime' },
+  { id: 'lime', name: 'Lime' },
+  
+  // Fruity and Fresh
+  { id: 'raspberry', name: 'Raspberry' },
+  { id: 'apple', name: 'Apple' },
+  { id: 'greenTea', name: 'Green Tea' },
+  { id: 'aqua', name: 'Aqua' },
+  { id: 'teaLeaf', name: 'Tea Leaf' },
+  
+  // Flowerly and Earthy
+  { id: 'jasmine', name: 'Jasmine' },
+  { id: 'rose', name: 'Rose' },
+  { id: 'cherryBlossoms', name: 'Cherry Blossoms' },
+  { id: 'alwaysRose', name: 'Always Rose' },
+  { id: 'sweetFlower', name: 'Sweet Flower' },
+  { id: 'forest', name: 'Forest' },
+  
+  // Coffee and Beans
+  { id: 'roastedCoffee', name: 'Roasted Coffee' },
+  
+  // Sweet and Floral
+  { id: 'sweetheart', name: 'Sweetheart' },
+  
+  // Sweet and Spicy
+  { id: 'appleSpice', name: 'Apple Spice' },
+  { id: 'darkVanilla', name: 'Dark Vanilla' }
+];
 
+// Mood options with associated fragrances
+const moodOptions = [
+  { 
+    id: 'relaxing', 
+    name: 'Calm & Relaxing', 
+    fragrances: ['jasmine', 'sweetFlower', 'forest', 'greenTea', 'teaLeaf'] 
+  },
+  { 
+    id: 'energizing', 
+    name: 'Energizing', 
+    fragrances: ['lime', 'lemongrass', 'peppermint', 'citronella', 'aqua'] 
+  },
+  { 
+    id: 'cozy', 
+    name: 'Cozy & Warm', 
+    fragrances: ['cinnamon', 'frenchVanilla', 'cafe', 'roastedCoffee', 'appleSpice', 'darkVanilla'] 
+  },
+  { 
+    id: 'refreshing', 
+    name: 'Refreshing', 
+    fragrances: ['teaLime', 'aqua', 'honeydew', 'greenTea', 'raspberry'] 
+  },
+  { 
+    id: 'romantic', 
+    name: 'Romantic', 
+    fragrances: ['rose', 'cherryBlossoms', 'alwaysRose', 'sweetheart', 'jasmine'] 
+  },
+  {
+    id: 'fruitySensation',
+    name: 'Fruity Sensation',
+    fragrances: ['raspberry', 'apple', 'honeydew', 'appleSpice']
+  },
+  {
+    id: 'coffeeLovers',
+    name: 'Coffee Lovers',
+    fragrances: ['roastedCoffee', 'cafe', 'darkVanilla']
+  },
+  {
+    id: 'sweetIndulgence',
+    name: 'Sweet Indulgence',
+    fragrances: ['frenchVanilla', 'sweetFlower', 'sweetheart', 'darkVanilla']
+  }
+];
   // Filter categories
   const filterCategories = [
     { id: 'type', name: 'Type' },
@@ -430,7 +497,7 @@ const ProductGallery = () => {
                 <div className="sale-badge">Sale</div>
               )}
               
-              <Link to={`/product/${product.id}`} className="gallery-product-link">
+              <Link to={`/readymade/?productId=${product.id}&itemId=${product.item_id}`} className="gallery-product-link">
                 <div className="gallery-product-image">
                   <img src={product.imageUrl} alt={product.name} />
                   <div className="gallery-product-overlay">

@@ -1,0 +1,127 @@
+/* RelatedProducts.css */
+.related-products {
+  margin: 4rem 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.related-products h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.related-products h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 80px;
+  height: 3px;
+  background-color: #B76E79;
+}
+
+.related-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .related-products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .related-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .related-products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.related-product-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.related-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.related-product-image {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* 1:1 Aspect Ratio */
+  overflow: hidden;
+}
+
+.related-product-image img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.related-product-card:hover .related-product-image img {
+  transform: scale(1.1);
+}
+
+.related-product-sale {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #B76E79;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.related-product-info {
+  padding: 1rem;
+}
+
+.related-product-info h3 {
+  font-size: 0.95rem;
+  margin: 0 0 0.5rem;
+  color: #333;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.related-product-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.related-product-price .current-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #B76E79;
+}
+
+.related-product-price .old-price {
+  font-size: 0.85rem;
+  color: #999;
+  text-decoration: line-through;
+}

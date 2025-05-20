@@ -13,7 +13,6 @@ import Footer from './Components/Footer/Footer';
 // import crystal_banner from './Components/Assets/Banners/Crystal banner.jpg';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
-import Checkout from './Pages/Checkout';
 import Catalog from './Pages/Catalog';
 import ReadyMadeItems from './Pages/ReadyMadeItems';
 import { useContext } from 'react';
@@ -49,7 +48,6 @@ function App() {
           </Route>
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/checkout" element={<Checkout />} />
           <Route path="/Catalog" element={<Catalog />} />
         </Routes>
         <Footer />

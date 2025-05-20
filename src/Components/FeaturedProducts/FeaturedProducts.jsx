@@ -3,13 +3,13 @@ import './FeaturedProducts.css';
 import { ShopContext } from '../..//Context/ShopContext';
 import { Link } from 'react-router-dom';
 
-const FeaturedProducts = () => {
+const FeaturedProducts = ({ productGalleryRef }) => {
   const { allStocks, allProducts } = useContext(ShopContext);
   const [visibleProducts, setVisibleProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState('All');
   
-  const categories = ['All', 'Soy Wax', 'Gel Wax', 'Seasonal'];
+  const categories = ['All', 'Soy Wax', 'Gel Wax'];
 
   useEffect(() => {
     if (!allStocks || !allProducts || allStocks.length === 0) {
@@ -23,14 +23,20 @@ const FeaturedProducts = () => {
   }, [allStocks, allProducts]);
 
   const getProductNameByStockId = (stockId) => {
-    const correspondingProduct = allProducts.find((product) => product.id === stockId);
+    const correspondingProduct = allStocks.find((product) => product.id === stockId);
     return correspondingProduct ? correspondingProduct.name : null;
   };
 
   const getProductCategoryByStockId = (stockId) => {
-    const correspondingProduct = allProducts.find((product) => product.id === stockId);
+    const correspondingProduct = allStocks.find((product) => product.id === stockId);
     return correspondingProduct ? correspondingProduct.category : null;
   };
+
+  const getWaxTypeByStockId = (stockId) => {
+    const correspondingProduct = allStocks.find((product) => product.id === stockId);
+    console.log('Corresponding Product:', correspondingProduct);
+    return correspondingProduct ? correspondingProduct.waxtype : null;
+  }
 
   const filterByCategory = (category) => {
     setActiveCategory(category);
@@ -42,11 +48,22 @@ const FeaturedProducts = () => {
     }
     
     const filteredProducts = allStocks.filter(item => {
-      const productCategory = getProductCategoryByStockId(item.id);
+      const productCategory = getWaxTypeByStockId(item.id);
+      console.log('Product Category:', productCategory);
       return item.popular && productCategory && productCategory.includes(category);
     });
     
     setVisibleProducts(filteredProducts);
+  };
+
+  const handleScrollToProductGallery = (e) => {
+    e.preventDefault();
+    if (productGalleryRef && productGalleryRef.current) {
+      productGalleryRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
   };
 
   // Skeleton loader for products when loading
@@ -92,7 +109,7 @@ const FeaturedProducts = () => {
           visibleProducts.map((product) => (
             <div key={product.id} className="featured-product">
               <div className="featured-badge">Featured</div>
-              <Link to={`/readymade/${product.id}`} className="featured-product-link">
+              <Link to={`/readymade/?productId=${product.id}&itemId=${product.item_id}`} className="featured-product-link">
                 <div className="featured-product-image">
                   <img src={product.imageUrl} alt={product.scent} />
                   <div className="featured-product-overlay">
@@ -139,13 +156,13 @@ const FeaturedProducts = () => {
       </div>
       
       <div className="featured-products-footer">
-        <Link to="/catalog" className="view-all-button">
+        <button onClick={handleScrollToProductGallery} className="view-all-button">
           View All Products
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
-        </Link>
+        </button>
       </div>
     </section>
   );

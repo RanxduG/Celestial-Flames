@@ -1,0 +1,134 @@
+/* Catalog page styles */
+.catalog-page {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Banner styles */
+.catalog-banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+              url('https://images.unsplash.com/photo-1603006905003-be475563bc59?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.catalog-banner-content {
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.catalog-banner h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.catalog-banner p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem 1.5rem;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.breadcrumb span {
+  margin: 0 0.3rem;
+}
+
+.breadcrumb span:first-child {
+  margin-left: 0;
+}
+
+.breadcrumb .active {
+  color: #333;
+  font-weight: 500;
+}
+
+/* CTA section styles */
+.catalog-cta-section {
+  background-color: #f8f6f2;
+  padding: 4rem 1rem;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.catalog-cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.catalog-cta-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #2b2b2b;
+}
+
+.catalog-cta-section p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.create-custom-btn {
+  background-color: #e98074;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.create-custom-btn:hover {
+  background-color: #d26e60;
+  transform: translateY(-2px);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .catalog-banner {
+    height: 220px;
+  }
+  
+  .catalog-banner h1 {
+    font-size: 2.2rem;
+  }
+  
+  .catalog-cta-section {
+    padding: 3rem 1rem;
+  }
+  
+  .catalog-cta-section h2 {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .catalog-banner {
+    height: 180px;
+  }
+  
+  .catalog-banner h1 {
+    font-size: 1.8rem;
+  }
+  
+  .catalog-banner p {
+    font-size: 1rem;
+  }
+}

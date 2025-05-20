@@ -1,10 +1,37 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './ProductDisplay.css';
-import star_icon from '../Assets/Icons/star-icon.png';
-import star_dull_icon from '../Assets/Icons/star-icon-dull.png';
-import { ShopContext } from '../../Context/ShopContext'; // Adjust the import path as necessary
+import { ShopContext } from '../../Context/ShopContext';
+import { FiHeart, FiStar, FiShare2, FiShoppingBag } from 'react-icons/fi';
 
-const pastelColors = [
+const ProductDisplay = ({ product }) => {
+  const { addToCart, allProducts } = useContext(ShopContext);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [mainImage, setMainImage] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [averageRating, setAverageRating] = useState(0);
+  const [selectedScent, setSelectedScent] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColorName, setSelectedColorName] = useState(null);
+  const [colorOption, setColorOption] = useState('Existing'); // Default to Existing colors
+  const [customColorName, setCustomColorName] = useState('');
+
+  // List of scents
+  const regularScents = [
+    'Cinnamon', 'Citronella', 'Lemongrass', 'French Vanilla', 'Honeydew',
+    'Cafe', 'Peppermint', 'Tea & Lime', 'Lime', 'Raspberry', 'Apple',
+    'Green Tea', 'Aqua', 'Jasmine', 'Rose', 'Cherry Blossoms', 'Always Rose',
+    'Sweet Flower', 'Roasted Coffee'
+  ];
+
+  const specialScents = [
+    'Forest', 'Sweetheart', 'Apple Spice', 'Dark Vanilla', 'Tea Leaf'
+  ];
+
+  // Combined scent list (without duplicates)
+  const allScents = [...regularScents, ...specialScents.filter(scent => !regularScents.includes(scent))];
+
+  // Pastel colors
+  const pastelColors = [
     { name: 'Light Pink', code: '#FFB3BA' },
     { name: 'Peach', code: '#FFDFBA' },
     { name: 'Light Yellow', code: '#FFFFBA' },
@@ -12,316 +39,344 @@ const pastelColors = [
     { name: 'Mint', code: '#D0F4DE' },
     { name: 'Sky Blue', code: '#A9DEF9' },
     { name: 'Baby Blue', code: '#E0FFFF' }
-];
+  ];
 
-const ProductDisplay = (props) => {
-    const { product, reviews } = props;
-    const { addToCart } = useContext(ShopContext);
-
-    const [selectedWaxType, setSelectedWaxType] = useState(null);
-    const [selectedFragranceType, setSelectedFragranceType] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(null);
-    const [selectedColorName, setSelectedColorName] = useState(null);
-    const [selectedFragrance, setSelectedFragrance] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
-    const [colorOption, setColorOption] = useState('Existing'); // Default to Existing colors
-    const [customColorName, setCustomColorName] = useState('');
-
-    useEffect(() => {
-        const color = document.querySelector('.color');
-        if (color) {
-            color.style.backgroundColor = selectedColor;
-        }
-    }, [selectedColor]);
-
-    const handleWaxTypeChange = (waxType) => {
-        setSelectedWaxType(waxType);
+  // Extract product details
+  const getProductDetails = () => {
+    const correspondingProduct = allProducts && allProducts.find((p) => p.id === product.id);
+    return {
+      name: correspondingProduct?.name || product.name,
+      description: correspondingProduct?.description || product.description,
+      category: product.collection || product.category || 'Standard Collection'
     };
+  };
 
-    const handleFragranceTypeChange = (fragranceType) => {
-        setSelectedFragranceType(fragranceType);
-        setSelectedFragrance(null); // Reset fragrance when fragrance type changes
+  const { name, description, category } = getProductDetails();
+
+  // Determine if this is a mold collection product
+  const isMoldCollection = category.toLowerCase().includes('mold');
+
+  useEffect(() => {
+    // Set main image when product changes
+    setMainImage(product.imageUrl || product.img1Url);
+  }, [product]);
+
+  useEffect(() => {
+    // Update color display when selectedColor changes
+    if (product.category === 'Glass Collection') {
+      // Dynamic image change based on selected color for Glass Collection
+      updateGlassCollectionImage();
+    } else if (isMoldCollection && selectedColor) {
+      // Update the color div for mold collection products
+      const colorDiv = document.querySelector('.product-color-preview');
+      if (colorDiv) {
+        colorDiv.style.backgroundColor = selectedColor;
+      }
+    }
+  }, [selectedColor, product.category, isMoldCollection]);
+
+  const updateGlassCollectionImage = () => {
+    if (!selectedColorName) return;
+    
+    // Map of color names to their image URLs
+    const colorToImageMap = {
+      'Light Pink': product['image_Light PinkUrl'] || product.img_pink,
+      'Peach': product['image_PeachUrl'] || product.img_peach,
+      'Baby Blue': product['image_Baby BlueUrl'] || product.img_babyblue,
+      'Sky Blue': product['image_Sky BlueUrl'] || product.img_skyblue,
+      'Light Green': product['image_Light GreenUrl'] || product.img_lightgreen,
+      'Mint': product['image_MintUrl'] || product.img_mint,
+      'Light Yellow': product['image_Light YellowUrl'] || product.img_lightyellow
     };
+    
+    const newImageUrl = colorToImageMap[selectedColorName] || product.imageUrl || product.img1Url;
+    setMainImage(newImageUrl);
+  };
 
-    // Function to handle color option selection (Existing vs Custom)
-    const handleColorOptionChange = (option) => {
-        setColorOption(option);
-        // Reset color selection when switching between options
-        setSelectedColor(null);
-        setSelectedColorName(null);
-        setCustomColorName('');
-    };
+  const handleColorOptionChange = (option) => {
+    setColorOption(option);
+    // Reset color selection when switching between options
+    setSelectedColor(null);
+    setSelectedColorName(null);
+    setCustomColorName('');
+  };
 
-    const handleColorChange = (color) => {
-        setSelectedColor(color.code);
-        setSelectedColorName(color.name);
+  const handleColorChange = (color) => {
+    setSelectedColor(color.code);
+    setSelectedColorName(color.name);
+  };
 
-        if (product.category === 'Glass Collection') {
-            // Change the main image source dynamically
-            const mainImage = document.querySelector('.productdisplay-img .Main');
-            if (mainImage) {
-                switch (color.name) {
-                    case 'Light Pink':
-                        mainImage.src = product['image_Light PinkUrl'];
-                        break;
-                    case 'Peach':
-                        mainImage.src = product['image_PeachUrl'];
-                        break;
-                    case 'Baby Blue':
-                        mainImage.src = product['image_Baby BlueUrl'];
-                        break;
-                    case 'Sky Blue':
-                        mainImage.src = product['image_Sky BlueUrl'];
-                        break;
-                    case 'Blue':
-                        mainImage.src = product['image_BlueUrl'];
-                        break;
-                    case 'Light Green':
-                        mainImage.src = product['image_Light GreenUrl'];
-                        break;
-                    case 'Mint':
-                        mainImage.src = product['image_MintUrl'];
-                        break;
-                    case 'Light Yellow':
-                        mainImage.src = product['image_Light YellowUrl'];
-                        break
-                    default:
-                        mainImage.src = product['imageUrl']; // Fallback to default image
-                }
-            }
-        } else {
-            // Change background color of the div.color
-            const colorDiv = document.querySelector('.color');
-            if (colorDiv) {
-                colorDiv.style.backgroundColor = color.code;
-            }
-        }
-    };
+  const handleCustomColorChange = (e) => {
+    setCustomColorName(e.target.value);
+    setSelectedColorName(e.target.value);
+    // For custom colors, we don't have a color code, so we'll use a placeholder
+    setSelectedColor('#FFFFFF');
+  };
 
-    const handleCustomColorChange = (e) => {
-        setCustomColorName(e.target.value);
-        setSelectedColorName(e.target.value);
-        // For custom colors, we don't have a color code, so we'll use a placeholder or default color
-        setSelectedColor('#FFFFFF'); // Default white or you could use a placeholder color
-    };
+  const handleScentChange = (scent) => {
+    setSelectedScent(scent);
+  };
 
-    const handleFragranceChange = (fragrance) => {
-        setSelectedFragrance(fragrance);
-    };
+  // Calculate the price based on requirements
+  const calculatePrice = () => {
+    // Base price is always soy wax price
+    let basePrice = product.soy_price || product.new_price || product.price;
+    
+    // Add 100 Rs for custom design
+    if (colorOption === 'Custom') {
+      basePrice += 100;
+    }
+    
+    return basePrice;
+  };
 
-    const getPrice = () => {
-        switch (selectedWaxType) {
-            case 'Paraffin Wax':
-                return product.paraffin_price;
-            case 'Soy Wax':
-                return product.soy_price;
-            default:
-                return product.paraffin_price;
-        }
-    };
-
-    const getFragrancePrice = () => {
-        switch (selectedFragranceType) {
-            case 'Chemical':
-                return 50;
-            case 'Essential Oil':
-                return 150;
-            default:
-                return 0;
-        }
-    };
-
-    const getOptionClass = (selected, current) => {
-        return selected === current ? 'option selected' : 'option';
-    };
-
-    const areAllOptionsSelected = () => {
-        if (colorOption === 'Existing') {
-            return selectedWaxType && selectedColor && selectedFragranceType && selectedFragrance;
-        } else { // Custom color option
-            return selectedWaxType && customColorName && selectedFragranceType && selectedFragrance;
-        }
-    };
-
-    const handleAddToCart = () => {
-        // Use either selected color name or custom color name
-        const finalColorName = colorOption === 'Custom' ? customColorName : selectedColorName;
-        
-        addToCart(
-            product.id, 
-            product.name, 
-            selectedWaxType, 
-            selectedFragranceType, 
-            finalColorName, 
-            selectedFragrance, 
-            getPrice() + getFragrancePrice()
-        );
-        
-        // Show success message
-        setSuccessMessage('Item added to cart successfully!');
-
-        // Clear message after 3 seconds
-        setTimeout(() => setSuccessMessage(''), 3000);
-    };
-
-    return (
-        <div className='productdisplay'>
-            {/* Alert Message */}
-            {successMessage && (
-                <div className="alert-message">
-                    {successMessage}
-                </div>
-            )}
-
-            {product.category === 'Glass Collection' ? (
-                <div className="productdisplay-left">
-                    <div className="productdisplay-img">
-                        <img className='Main' src={product['imageUrl']} alt="Main" />
-                        <img className='other' src={product.img_pink} alt="pink color" />
-                        <img className='other' src={product.img_peach} alt="peach color" />
-                        <img className='other' src={product.img_babyblue} alt="baby blue color" />
-                        <img className='other' src={product.img_skyblue} alt="sky blue color" />
-                        <img className='other' src={product.img_blue} alt="blue color" />
-                        <img className='other' src={product.img_lightgreen} alt="Light green color" />
-                        <img className='other' src={product.img_mint} alt="mint color" />
-                        <img className='other' src={product.img_lightyellow} alt="light yellow color" />
-                    </div>
-                </div>
-            ) : (
-                <div className="productdisplay-left">
-                    <div className="productdisplay-img">
-                        <img className='img-1' src={product.img2Url} alt="Product" />
-                        <img className='img-2' src={product.img1Url} alt="Product Background" />
-                        <div className='color'></div>
-                    </div>
-                </div>
-            )}
-
-            <div className="productdisplay-right">
-                <h1>{product.name}</h1>
-                <div className="productdisplay-right-star">
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_dull_icon} alt="dull star icon" />
-                    <p>({reviews.length})</p>
-                </div>
-                <div className="productdisplay-right-description">
-                    {product.description}
-                </div>
-                <div className="productdisplay-right-feature">
-                    <h1>Select Wax Type*</h1>
-                    <div className="productdisplay-right-options">
-                        <div className={getOptionClass(selectedWaxType, 'Paraffin Wax')} onClick={() => handleWaxTypeChange('Paraffin Wax')}>Paraffin Wax</div>
-                        <div className={getOptionClass(selectedWaxType, 'Soy Wax')} onClick={() => handleWaxTypeChange('Soy Wax')}>Soy Wax</div>
-                    </div>
-                </div>
-                <div className="productdisplay-right-feature">
-                    <h1>Select Fragrance Type*</h1>
-                    <div className="productdisplay-right-options">
-                        <div className={getOptionClass(selectedFragranceType, 'Chemical')} onClick={() => handleFragranceTypeChange('Chemical')}>Chemical Fragrance</div>
-                        <div className={getOptionClass(selectedFragranceType, 'Essential Oil')} onClick={() => handleFragranceTypeChange('Essential Oil')}>Essential Oil</div>
-                    </div>
-                </div>
-                {selectedFragranceType && (
-                    <div className="productdisplay-right-feature">
-                        <h1>Select Fragrance*</h1>
-                        <div className="productdisplay-right-options">
-                            {selectedFragranceType === 'Chemical' && (
-                                <>
-                                    <div className={getOptionClass(selectedFragrance, 'Jasmine')} onClick={() => handleFragranceChange('Jasmine')}>Jasmine</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Visible')} onClick={() => handleFragranceChange('Visible')}>Visible</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Lavender')} onClick={() => handleFragranceChange('Lavender')}>Lavender</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Lemon lime')} onClick={() => handleFragranceChange('Lemon lime')}>Lemon lime</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Orchid and lotus')} onClick={() => handleFragranceChange('Orchid and lotus')}>Orchid and lotus</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Tutti Frutti')} onClick={() => handleFragranceChange('Tutti Frutti')}>Tutti Frutti</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Aquatic Lady')} onClick={() => handleFragranceChange('Aquatic Lady')}>Aquatic Lady</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Coffee')} onClick={() => handleFragranceChange('Coffee')}>Coffee</div>
-                                </>
-                            )}
-                            {selectedFragranceType === 'Essential Oil' && (
-                                <>
-                                    <div className={getOptionClass(selectedFragrance, 'Cinnamon')} onClick={() => handleFragranceChange('Cinnamon')}>Cinnamon</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Vanilla')} onClick={() => handleFragranceChange('Vanilla')}>Vanilla</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Nina Ricci')} onClick={() => handleFragranceChange('Nina Ricci')}>Nina Ricci</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Apple')} onClick={() => handleFragranceChange('Apple')}>Apple</div>
-                                    <div className={getOptionClass(selectedFragrance, 'Poise')} onClick={() => handleFragranceChange('Poise')}>Poise</div>
-                                </>
-                            )}
-                        </div>
-                    </div>
-                )}
-
-                <div className="productdisplay-right-feature">
-                    <h1>Color Options</h1>
-                    <div className='color-option'>
-                        <div 
-                            className={colorOption === 'Existing' ? 'option selected' : 'option'} 
-                            onClick={() => handleColorOptionChange('Existing')}
-                        >
-                            Existing colors
-                        </div>
-                        <div 
-                            className={colorOption === 'Custom' ? 'option selected' : 'option'} 
-                            onClick={() => handleColorOptionChange('Custom')}
-                        >
-                            Custom Colors
-                        </div>
-                    </div>
-                    
-                    {colorOption === 'Existing' ? (
-                        <>
-                            <h1>Select Color*</h1>
-                            <div className="productdisplay-right-options">
-                                {pastelColors.map(color => (
-                                    <div
-                                        key={color.code}
-                                        className={getOptionClass(selectedColor, color.code)}
-                                        style={{
-                                            backgroundColor: color.code,
-                                            color: 'black'
-                                        }}
-                                        onClick={() => handleColorChange(color)}
-                                    >
-                                        <span>{color.name}</span>
-                                    </div>
-                                ))}
-                            </div>
-                        </>
-                    ) : (
-                        <>
-                            <h1>Enter Custom Color*</h1>
-                            <div className="productdisplay-right-color-input">
-                                <input 
-                                    type="text" 
-                                    className='color-input' 
-                                    placeholder='Enter the name of the color'
-                                    value={customColorName}
-                                    onChange={handleCustomColorChange}
-                                />
-                            </div>
-                        </>
-                    )}
-                </div>
-                
-                <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-price-new">Rs. {getPrice() + getFragrancePrice()}</div>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <button
-                        onClick={handleAddToCart}
-                        disabled={!areAllOptionsSelected()}
-                    >
-                        Create Candle
-                    </button>
-                </div>
-                <p className='productdisplay-right-category'>
-                    <span>Category :</span> {product.category || 'Crystal Collection, Celestial Glow'}
-                </p>
-            </div>
-        </div>
+  const handleAddToCart = () => {
+    // Default wax type is 'Soy Wax' as per requirements
+    const waxType = 'Soy Wax';
+    
+    // Use either selected color name or custom color name
+    const finalColorName = colorOption === 'Custom' ? customColorName : selectedColorName;
+    
+    addToCart(
+      product.id,
+      name,
+      waxType,
+      'Essential Oils', // Default fragrance type
+      finalColorName,
+      selectedScent,
+      calculatePrice(),
+      product.old_price,
+      quantity
     );
+    
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000);
+  };
+
+  const incrementQuantity = () => {
+    if (quantity < (product.stock || 10)) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  // Calculate discount percentage
+  const discountPercentage = product.old_price && (product.soy_price || product.new_price || product.price)
+    ? Math.round(((product.old_price - (product.soy_price || product.new_price || product.price)) / product.old_price) * 100)
+    : 0;
+
+  // Additional images (in a real implementation, these would come from your database)
+  const additionalImages = [
+    mainImage,
+    product.secondImageUrl || product.img2Url,
+    product.thirdImageUrl || product.img1Url || mainImage
+  ].filter(Boolean); // Remove any undefined/null values
+
+  const areAllOptionsSelected = () => {
+    if (colorOption === 'Existing') {
+      return selectedColor && selectedScent;
+    } else { // Custom color option
+      return customColorName && selectedScent;
+    }
+  };
+
+  return (
+    <div className="product-display">
+      <div className="product-display-left">
+        <div className="product-display-main-image">
+          <img src={mainImage} alt={name} />
+          {discountPercentage > 0 && (
+            <div className="product-discount-badge">-{discountPercentage}%</div>
+          )}
+          
+          {/* Color preview overlay for mold collection products */}
+          {isMoldCollection && (
+            <>
+              <img className="product-mold-overlay" src={product.img2Url || product.secondImageUrl} alt="Mold Overlay" />
+              <div className="product-color-preview"></div>
+            </>
+          )}
+        </div>
+        <div className="product-display-thumbnail-grid">
+          {additionalImages.map((img, index) => (
+            <div 
+              key={index} 
+              className={`product-thumbnail ${mainImage === img ? 'active' : ''}`}
+              onClick={() => setMainImage(img)}
+            >
+              <img src={img} alt={`${name} view ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="product-display-right">
+        <h1 className="product-title">{name}</h1>
+        
+        <div className="product-meta">
+          <div className="product-rating">
+            <div className="stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <FiStar 
+                  key={star} 
+                  className={star <= Math.round(averageRating) ? 'filled' : ''}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="product-availability">
+            {product.stock > 10 ? (
+              <span className="in-stock">In Stock</span>
+            ) : product.stock > 0 ? (
+              <span className="limited">Only {product.stock} left</span>
+            ) : (
+              <span className="out-of-stock">Out of Stock</span>
+            )}
+          </div>
+        </div>
+
+        <div className="product-short-description">
+          <p>{description}</p>
+        </div>
+
+        <div className="product-price">
+          <div className="current-price">Rs. {calculatePrice()}</div>
+          {product.old_price > (product.soy_price || product.new_price || product.price) && (
+            <div className="original-price">Rs. {product.old_price}</div>
+          )}
+        </div>
+
+        <div className="product-attributes">
+          <div className="product-attribute">
+            <span className="attribute-label">Wax Type:</span>
+            <span className="attribute-value">Soy Wax</span>
+          </div>
+        </div>
+
+        {/* Scent Selection */}
+        <div className="product-scent-selection">
+          <h3>Select Scent*</h3>
+          <div className="scent-options">
+            {allScents.map(scent => (
+              <div 
+                key={scent}
+                className={`scent-option ${selectedScent === scent ? 'selected' : ''}`}
+                onClick={() => handleScentChange(scent)}
+              >
+                {scent}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Color Selection */}
+        <div className="product-color-selection">
+          <h3>Color Options</h3>
+          <div className="color-option-selector">
+            <div 
+              className={`option ${colorOption === 'Existing' ? 'selected' : ''}`} 
+              onClick={() => handleColorOptionChange('Existing')}
+            >
+              Existing Colors
+            </div>
+            <div 
+              className={`option ${colorOption === 'Custom' ? 'selected' : ''}`} 
+              onClick={() => handleColorOptionChange('Custom')}
+            >
+              Custom Design (+Rs. 100)
+            </div>
+          </div>
+          
+          {colorOption === 'Existing' ? (
+            <div className="color-palette">
+              {pastelColors.map(color => (
+                <div
+                  key={color.name}
+                  className={`color-swatch ${selectedColor === color.code ? 'selected' : ''}`}
+                  style={{ backgroundColor: color.code }}
+                  onClick={() => handleColorChange(color)}
+                >
+                  <span className="color-name">{color.name}</span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="custom-design-section">
+              <div className="custom-design-input">
+                <input 
+                  type="text" 
+                  placeholder="Describe your custom design"
+                  value={customColorName}
+                  onChange={handleCustomColorChange}
+                />
+              </div>
+              <p className="custom-design-note">
+                Since all of these are handmade and poured, it may not be exactly how you have it in your mind,
+                but we will try to surpass your expectations.
+              </p>
+            </div>
+          )}
+        </div>
+
+        <div className="product-actions">
+          <div className="quantity-selector">
+            <button onClick={decrementQuantity} disabled={quantity <= 1}>-</button>
+            <input 
+              type="number" 
+              value={quantity} 
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                if (!isNaN(val) && val > 0 && val <= (product.stock || 10)) {
+                  setQuantity(val);
+                }
+              }}
+              min="1"
+              max={product.stock || 10}
+            />
+            <button onClick={incrementQuantity} disabled={quantity >= (product.stock || 10)}>+</button>
+          </div>
+          
+          <button 
+            className="add-to-cart-btn"
+            onClick={handleAddToCart}
+            disabled={!areAllOptionsSelected()}
+          >
+            <FiShoppingBag />
+            Create Candle
+          </button>
+
+          <button className="wishlist-btn">
+            <FiHeart />
+          </button>
+
+          <button className="share-btn">
+            <FiShare2 />
+          </button>
+        </div>
+
+        <div className="product-categories">
+          <span className="category-label">Collection:</span>
+          <span className="category-value">{category}</span>
+        </div>
+      </div>
+
+      {alertVisible && (
+        <div className="product-alert">
+          <div className="alert-content">
+            <span className="alert-icon">✓</span>
+            <span className="alert-message">Added to cart successfully!</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default ProductDisplay;

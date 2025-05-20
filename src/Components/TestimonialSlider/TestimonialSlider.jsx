@@ -113,7 +113,7 @@ const TestimonialSlider = () => {
         <h2>What Our Customers Say</h2>
         <div className="candle-divider">
           <div className="candle">
-            <div className="flame"></div>
+            <div className="testo-flame"></div>
           </div>
         </div>
         <p>Real reviews from our candle community</p>

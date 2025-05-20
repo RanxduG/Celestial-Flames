@@ -1,74 +1,208 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import './ReadyMadeItemDisplay.css';
-import star_icon from '../Assets/Icons/star-icon.png';
-import star_dull_icon from '../Assets/Icons/star-icon-dull.png';
-import { ShopContext } from '../../Context/ShopContext'; // Adjust the import path as necessary
+import { ShopContext } from '../../Context/ShopContext';
+import { FiHeart, FiStar, FiShare2, FiShoppingBag } from 'react-icons/fi';
 
-const ReadyMadeItemDisplay = (props) => {
-    const { product, reviews } = props;
-    const { addToCart, allProducts } = useContext(ShopContext);
-    const [alertVisible, setAlertVisible] = useState(false);
+const ProductDisplay = ({ product }) => {
+  const { addToCart, allProducts } = useContext(ShopContext);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [mainImage, setMainImage] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [averageRating, setAverageRating] = useState(0);
 
-    const getProductDescriptionByStockId = (stockId) => {
-        const correspondingProduct = allProducts.find((product) => product.id === stockId);
-        return correspondingProduct ? correspondingProduct.description : null;
-      };
-    
-    
-      const getProductNameByStockId = (stockId) => {
-        const correspondingProduct = allProducts.find((product) => product.id === stockId);
-        return correspondingProduct ? correspondingProduct.name : null;
-      }
-    
-
-    const handleAddToCart = () => {
-        addToCart(product.id, product.name, product.waxtype, product.getFragranceType, product.color, product.scent, product.new_price, product.old_price);
-        setAlertVisible(true);
-        setTimeout(() => {
-            setAlertVisible(false);
-        }, 3000); // Hide the alert after 3 seconds
+  // Extract product details
+  const getProductDetails = () => {
+    const correspondingProduct = allProducts.find((p) => p.id === product.id);
+    return {
+      name: correspondingProduct?.name || product.name,
+      description: correspondingProduct?.description || product.description,
+      category: product.collection || 'Standard Collection'
     };
+  };
 
-    return (
-        <div className='productdisplay'>
-            <div className="productdisplay-left">
-                <div className="productdisplay-img">
-                    <img src={product.imageUrl} alt="product" />
-                </div>
-            </div>
-            <div className="productdisplay-right">
-                <h1>{getProductNameByStockId(product.id)}</h1>
-                <div className="productdisplay-right-star">
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_icon} alt="star icon" />
-                    <img src={star_dull_icon} alt="dull star icon" />
-                    <p>({reviews.length})</p>
-                </div>
-                <div className="productdisplay-right-stock">
-                    <p>Only {product.stock} remaining</p>
-                </div>
-                <div className="productdisplay-right-description">
-                    {getProductDescriptionByStockId(product.id)}
-                </div>
-                <div className="productdisplay-right-prices">
-                    <div className="productdisplay-right-price-new">Rs. {product.new_price}</div>
-                    <div className="productdisplay-right-price-old">Rs. {product.old_price}</div>
-                </div>
-                <button onClick={handleAddToCart}>
-                    ADD TO CART
-                </button>
+  const { name, description, category } = getProductDetails();
 
-                <p className='productdisplay-right-category'><span>Category :</span> Crystal Collection, Celestial Glow</p>
-            </div>
-            {alertVisible && (
-                <div className="alert">
-                    <p>Added to cart successfully!</p>
-                </div>
-            )}
-        </div>
+  useEffect(() => {
+    // Set main image when product changes
+    setMainImage(product.imageUrl);
+  }, [product]);
+
+  const handleAddToCart = () => {
+    addToCart(
+      product.id, 
+      name, 
+      product.waxtype, 
+      product.getFragranceType, 
+      product.color, 
+      product.scent, 
+      product.new_price, 
+      product.old_price,
+      quantity
     );
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000);
+  };
+
+  const incrementQuantity = () => {
+    if (quantity < product.stock) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  // Mock additional images (in a real implementation, these would come from your database)
+  const additionalImages = [
+    product.imageUrl,
+    // Add placeholder images for testing
+    product.secondImageUrl,
+    product.thirdImageUrl || product.imageUrl
+  ];
+
+  // Calculate discount percentage
+  const discountPercentage = Math.round(
+    ((product.old_price - product.new_price) / product.old_price) * 100
+  );
+
+  return (
+    <div className="product-display">
+      <div className="product-display-left">
+        <div className="product-display-main-image">
+          <img src={mainImage} alt={name} />
+          {discountPercentage > 0 && (
+            <div className="product-discount-badge">-{discountPercentage}%</div>
+          )}
+        </div>
+        <div className="product-display-thumbnail-grid">
+          {additionalImages.map((img, index) => (
+            <div 
+              key={index} 
+              className={`product-thumbnail ${mainImage === img ? 'active' : ''}`}
+              onClick={() => setMainImage(img)}
+            >
+              <img src={img} alt={`${name} view ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="product-display-right">
+        <h1 className="product-title">{name}</h1>
+        
+        <div className="product-meta">
+          <div className="product-rating">
+            <div className="stars">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <FiStar 
+                  key={star} 
+                  className={star <= Math.round(averageRating) ? 'filled' : ''}
+                />
+              ))}
+            </div>
+            {/* <span>{averageRating} ({reviews.length} reviews)</span> */}
+          </div>
+          <div className="product-availability">
+            {product.stock > 10 ? (
+              <span className="in-stock">In Stock</span>
+            ) : product.stock > 0 ? (
+              <span className="limited">Only {product.stock} left</span>
+            ) : (
+              <span className="out-of-stock">Out of Stock</span>
+            )}
+          </div>
+        </div>
+
+        <div className="product-short-description">
+          <p>{description}</p>
+        </div>
+
+        <div className="product-price">
+          <div className="current-price">Rs. {product.new_price}</div>
+          {product.old_price > product.new_price && (
+            <div className="original-price">Rs. {product.old_price}</div>
+          )}
+        </div>
+
+        <div className="product-attributes">
+          {product.waxtype && (
+            <div className="product-attribute">
+              <span className="attribute-label">Wax Type:</span>
+              <span className="attribute-value">{product.waxtype}</span>
+            </div>
+          )}
+          {product.scent && (
+            <div className="product-attribute">
+              <span className="attribute-label">Scent:</span>
+              <span className="attribute-value">{product.scent}</span>
+            </div>
+          )}
+          {product.color && (
+            <div className="product-attribute">
+              <span className="attribute-label">Color:</span>
+              <div className="color-indicator" style={{ backgroundColor: product.color }}></div>
+              <span className="attribute-value">{product.color}</span>
+            </div>
+          )}
+        </div>
+
+        <div className="product-actions">
+          <div className="quantity-selector">
+            <button onClick={decrementQuantity} disabled={quantity <= 1}>-</button>
+            <input 
+              type="number" 
+              value={quantity} 
+              onChange={(e) => {
+                const val = parseInt(e.target.value);
+                if (!isNaN(val) && val > 0 && val <= product.stock) {
+                  setQuantity(val);
+                }
+              }}
+              min="1"
+              max={product.stock}
+            />
+            <button onClick={incrementQuantity} disabled={quantity >= product.stock}>+</button>
+          </div>
+          
+          <button 
+            className="add-to-cart-btn"
+            onClick={handleAddToCart}
+            disabled={product.stock <= 0}
+          >
+            <FiShoppingBag />
+            Add to Cart
+          </button>
+
+          <button className="wishlist-btn">
+            <FiHeart />
+          </button>
+
+          <button className="share-btn">
+            <FiShare2 />
+          </button>
+        </div>
+
+        <div className="product-categories">
+          <span className="category-label">Collection:</span>
+          <span className="category-value">{category}</span>
+        </div>
+      </div>
+
+      {alertVisible && (
+        <div className="product-alert">
+          <div className="alert-content">
+            <span className="alert-icon">✓</span>
+            <span className="alert-message">Added to cart successfully!</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
-export default ReadyMadeItemDisplay;
+export default ProductDisplay;

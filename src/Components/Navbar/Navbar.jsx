@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import "./Navbar.css";
-import logo from "../Assets/Logo/logo background removed.png";
+// import logo from "../Assets/Logo/Candle New Logo 2.0 2025 Plain cropped.png";
 import shoppingcart from "../Assets/Icons/shopping-cart.jpg";
 import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
@@ -17,6 +17,19 @@ const Navbar = () => {
     const navbarRef = useRef();
     const profileDropdownRef = useRef();
     const location = useLocation();
+      const [logo, setLogo] = useState('')
+      useEffect(() => {
+          const fetchLogo = async () => {
+              try {
+                  const { data } = await getLogo()
+                  console.log(data)
+                  setLogo(data.logoUrl)
+              } catch (error) {
+                  console.log(error)
+              }
+          }
+          fetchLogo()
+      }, [])
 
     const dropdown_toggle = () => {
         setIsMenuVisible(!isMenuVisible);
@@ -39,25 +52,15 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
-    // const [logo, setLogo] = useState('')
-    //   useEffect(() => {
-    //       const fetchLogo = async () => {
-    //           try {
-    //               const { data } = await getLogo()
-    //               console.log(data)
-    //               setLogo(data.logoUrl)
-    //           } catch (error) {
-    //               console.log(error)
-    //           }
-    //       }
-    //       fetchLogo()
-    //   }, [])
 
     return (
         <div className='navbar' ref={navbarRef}>
             <div className="nav-logo">
                 <Link to='/'><img src={logo} alt="logo" id='mainLogo' /></Link>
-                <p>Celestial Flames</p>
+                <div className="nav-logo-text">
+                    <h1>Celestial Flames</h1>
+                    <p>Share the light</p>
+                </div>
             </div>
             <img className='nav-dropdown' onClick={dropdown_toggle} src={nav_dropdown} alt="Menu" />
             <ul ref={menuRef} className={`nav-menu ${isMenuVisible ? 'visible' : ''}`}>

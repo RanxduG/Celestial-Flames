@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './CSS/ShopTest.css';
 import ShopHero from '../Components/ShopHero/ShopHero';
 import FeaturedProducts from '../Components/FeaturedProducts/FeaturedProducts';
@@ -9,16 +9,24 @@ import ProductGallery from '../Components/ProductGallery/ProductGallery';
 
 const ShopTest = () => {
   const [isLoading, setIsLoading] = useState(true);
-
+  const productGalleryRef = useRef(null);
+  
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-    
+   
     return () => clearTimeout(timer);
   }, []);
-
+  
+  // Check if the URL has a hash and scroll to that section after loading
+  useEffect(() => {
+    if (!isLoading && window.location.hash === '#product-gallery') {
+      productGalleryRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [isLoading]);
+  
   if (isLoading) {
     return (
       <div className="shop-loading">
@@ -30,16 +38,16 @@ const ShopTest = () => {
       </div>
     );
   }
-
+  
   return (
     <div className="shop-container">
       <ShopHero />
-      <FeaturedProducts />
+      <FeaturedProducts productGalleryRef={productGalleryRef} />
       <CollectionsShowcase />
-      <ProductGallery />
-
+      <div ref={productGalleryRef} id="product-gallery">
+        <ProductGallery />
+      </div>
        {/*
-      <TestimonialSlider />
       <CreateCustomCandle /> */}
     </div>
   );

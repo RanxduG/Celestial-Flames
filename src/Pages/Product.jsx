@@ -1,26 +1,81 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import Breadcrums from '../Components/Breadcrums/Breadcrums';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
-import DescriptionBox from '../Components/DescriptionBox/DescriptionBox';
-import FeedbackForm from '../Components/FeedbackForm/Feedback';
+import ProductTabs from '../Components/ProductTabs/ProductTabs';
+import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
 
 const Product = () => {
-  const { all_products, reviews, userDetails, allProducts } = useContext(ShopContext);
+  const [searchParams] = useSearchParams();
+  const { allProducts } = useContext(ShopContext);
   const { productId } = useParams();
+  const [productIdFromSearch] = [searchParams.get('productId')];
+  const [isLoading, setIsLoading] = useState(true);
+  
 
-  const testProduct = allProducts.find((product) => product.id === productId);
+  const product = allProducts.find((product) => product.id === productId);
+  console.log('Product:', product);
 
-  const product = all_products.find((e) => e.id === productId);
-  const productReviews = reviews.filter((review) => review.product_id === productId);
+    // Get related products (same collection or type)
+    const getRelatedProducts = () => {
+      if (!product) return [];
+      
+      return allProducts
+        .filter(item => 
+          (item.collection === product.collection || item.waxtype === product.waxtype) && 
+          item.id !== product.id
+        )
+        .slice(0, 4);
+    };
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      
+      // Simulate loading time
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+      
+      return () => clearTimeout(timer);
+    }, [productId]);
+  
+    if (isLoading) {
+      return (
+        <div className="product-loading">
+          <div className="candle-loader">
+            <div className="flame"></div>
+            <div className="wax"></div>
+          </div>
+          <p>Preparing your candle...</p>
+        </div>
+      );
+    }
+  
+    if (!product) {
+      return <div className="product-not-found">Product not found</div>;
+    }
+  
 
   return (
-    <div>
-        <Breadcrums product={testProduct} />
-        <ProductDisplay product={testProduct} reviews={productReviews}/>
-        <DescriptionBox product={testProduct} reviews={productReviews} />
-        <FeedbackForm product={testProduct} userDetails={userDetails} productId={productId} />
+    <div className="product-page-container">
+      <div className="product-breadcrumb">
+        <span>Home</span> / <span>Shop</span> / <span className="current">{product.name}</span>
+      </div>
+      <Breadcrums product={product} />
+
+      <ProductDisplay
+        product={product}
+      />
+
+      
+      <ProductTabs 
+        product={product} 
+      />
+      
+      <RelatedProducts 
+        products={getRelatedProducts()}
+      />
     </div>
   );
 }

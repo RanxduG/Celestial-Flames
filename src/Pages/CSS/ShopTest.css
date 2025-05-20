@@ -17,9 +17,11 @@
 
 .candle-loader {
   position: relative;
-  width: 60px;
-  height: 120px;
+  width: 100px;
+  height: 180px;
   margin-bottom: 20px;
+  justify-content: center
+  ;
 }
 
 .wax {
@@ -31,14 +33,13 @@
   border-radius: 10px 10px 5px 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
-
 .flame {
   position: absolute;
-  top: -20px;
-  left: 25px;
+  top: 40px;
+  left: 21px;
   transform: translateX(-50%);
-  width: 30px;
-  height: 50px;
+  width: 15px;
+  height: 30px;
   background: linear-gradient(to bottom, #ff7b00, #ffb700);
   border-radius: 50% 50% 20% 20%;
   animation: flicker 1s infinite alternate;
