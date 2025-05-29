@@ -1,29 +1,42 @@
 import React, { useContext, useState, useEffect } from 'react';
 import './CartItems.css';
 import { ShopContext } from '../../Context/ShopContext';
-import remove_icon from '../Assets/Icons/remove.png';
-import plus_icon from '../Assets/Icons/plus.png';
-import minus_icon from '../Assets/Icons/minus.png';
+import { Link } from 'react-router-dom';
+import { Plus, Minus, X, ShoppingBag, Truck } from 'lucide-react';
 import { getAllProducts } from '../../Context/api';
 
 const CartItems = () => {
-    const { ready_made_products, cartItems, removeFromCart, getTotalCartAmount, verifyPromoCode, addToCart, setCartItems, discount, setCartTotal, all_products } = useContext(ShopContext);
+    const { 
+        cartItems, 
+        removeFromCart, 
+        getTotalCartAmount, 
+        verifyPromoCode, 
+        addToCart, 
+        setCartItems, 
+        discount, 
+        setCartTotal 
+    } = useContext(ShopContext);
+    
     const [promocode, setPromocode] = useState('');
     const [showDiscount, setShowDiscount] = useState(false);
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [animateItems, setAnimateItems] = useState(false);
 
-      useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
-          try {
-            const productsData = await getAllProducts();
-            setProducts(productsData.data);
-            console.log(cartItems);
-          } catch (error) {
-            console.error("Error fetching data:", error);
-          }
+            try {
+                const productsData = await getAllProducts();
+                setProducts(productsData.data);
+                setIsLoading(false);
+                setAnimateItems(true);
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                setIsLoading(false);
+            }
         };
         fetchData();
-      }, []);
+    }, []);
 
     const handleIncreaseQuantity = (itemId, item) => {
         addToCart(itemId, item.itemName, item.waxType, item.fragranceType, item.color, item.fragrance, item.total);
@@ -46,106 +59,243 @@ const CartItems = () => {
     };
 
     const handlePromoCodeSubmit = () => {
-        verifyPromoCode(promocode);
-        setShowDiscount(true);
+        if (promocode.trim()) {
+            verifyPromoCode(promocode);
+            setShowDiscount(true);
+        }
     };
 
     const totalAmount = getTotalCartAmount();
     const discountedAmount = totalAmount * discount;
-    setCartTotal(discountedAmount);
+    
+    useEffect(() => {
+        setCartTotal(discountedAmount);
+    }, [discountedAmount, setCartTotal]);
 
-    // Function to generate the WhatsApp message with cart items
+    // Check if cart is empty
+    const isCartEmpty = () => {
+        return products.every(product => 
+            !cartItems[product.id] || cartItems[product.id].length === 0
+        );
+    };
+
+    // Get cart items count
+    const getCartItemsCount = () => {
+        let count = 0;
+        products.forEach(product => {
+            if (cartItems[product.id]) {
+                cartItems[product.id].forEach(item => {
+                    count += item.quantity;
+                });
+            }
+        });
+        return count;
+    };
+
+    // Generate WhatsApp message
     const generateWhatsAppMessage = () => {
-        let message = "Hello, I'd like to place an order for the following candles:\n\n";
+        let message = "🕯️ Hello! I'd like to place an order for these beautiful candles:\n\n";
         let itemIndex = 1;
 
         products.forEach((product) => {
-            cartItems[product.id].forEach((item) => {
-                message += `${itemIndex}. ${product.name}\n`;
-                message += `   - Scent: ${item.fragranceType} ${item.fragrance}\n`;
-                message += `   - Color: ${item.color}\n`;
-                message += `   - Wax Type: ${item.waxType}\n`;
-                message += `   - Quantity: ${item.quantity}\n`;
-                message += `   - Price per unit: Rs.${item.total}\n`;
-                message += `   - Total: Rs.${item.total * item.quantity}\n\n`;
-                itemIndex++;
-            });
+            if (cartItems[product.id] && cartItems[product.id].length > 0) {
+                cartItems[product.id].forEach((item) => {
+                    message += `${itemIndex}. ✨ ${product.name}\n`;
+                    message += `   🌸 Scent: ${item.fragranceType} ${item.fragrance}\n`;
+                    message += `   🎨 Color: ${item.color}\n`;
+                    message += `   🕯️ Wax Type: ${item.waxType}\n`;
+                    message += `   📦 Quantity: ${item.quantity}\n`;
+                    message += `   💰 Price per unit: Rs. ${item.total}\n`;
+                    message += `   💵 Total: Rs. ${item.total * item.quantity}\n\n`;
+                    itemIndex++;
+                });
+            }
         });
-        message += `Promo Discount: ${100-(discount*100)}%\n\n`
-        message += `Grand Total: Rs.${discountedAmount.toFixed(2)}`;
+        
+        if (discount < 1) {
+            message += `🎁 Promo Discount: ${100-(discount*100)}%\n\n`;
+        }
+        message += `🛍️ Grand Total: Rs. ${discountedAmount.toFixed(2)}\n\n`;
+        message += `📍 Delivery via Prompt Express (PVT) Ltd, Nugegoda\n`;
+        message += `Thank you for choosing our handcrafted candles! 🙏`;
+        
         return encodeURIComponent(message);
     };
 
-
     const whatsappMessage = generateWhatsAppMessage();
 
-    return (
-        <div className='cartitems'>
-            <h1>Shopping Cart</h1>
-            <div className="cartitems-format-main">
-                <p>Products</p>
-                <p>Title</p>
-                <p>Price</p>
-                <p>Quantity</p>
-                <p>Total</p>
-                <p>Remove</p>
-            </div>
-            <hr />
-            {products.map((product) => (
-                cartItems[product.id].map((item, index) => (
-                    <div key={`${product.id}-${index}`}>
-                        <div className="cartitems-format cartitems-format-main">
-                            <img src={product.imageUrl} alt="" className='carticon-product-icon' />
-                            <p>{item.color}, {item.fragranceType} {item.fragrance} Scented {product.name} made with {item.waxType}</p>
-                            <p>Rs.{item.total}</p>
-                            <div className='quantity-control'>
-                                <img src={minus_icon} alt="-" className='carticon-quantity-control' onClick={() => handleDecreaseQuantity(product.id, item, index)} />
-                                <button className='carticons-quantity'>{item.quantity}</button>
-                                <img src={plus_icon} alt="+" className='carticon-quantity-control' onClick={() => handleIncreaseQuantity(product.id, item)} />
-                            </div>
-                            <p>Rs.{item.total * item.quantity}</p>
-                            <img src={remove_icon} alt="" onClick={() => { removeFromCart(product.id, index) }} className='carticon-remove-icon' />
-                        </div>
-                        <hr />
-                    </div>
-                ))
-            ))}
-
-            <div className="carticons-down">
-                <div className="carticons-total">
-                    <h1>Cart Total</h1>
-                    <div>
-                        <div className="carticons-total-item">
-                            <p>Subtotal</p>
-                            <p>Rs.{totalAmount}</p>
-                        </div>
-                        <hr />
-                        <div className="carticons-total-item">
-                            <p>Promo code Discount</p>
-                            <p>{100 - (discount * 100)}%</p>
-                        </div>
-                        <hr />
-
-                        <div className="carticons-total-item">
-                            <p>Shipping Fee</p>
-                            <p>Rs.0</p>
-                        </div>
-                        <hr />
-                        <div className="carticons-total-item">
-                            <h3>Total</h3>
-                            <h3>Rs.{discountedAmount.toFixed(2)}</h3>
-                        </div>
-                        <p>*Our trusted courier partner is Prompt Express (PVT) ltd Nugegoda</p>
-                        <a href={`https://wa.me/+94770081559?text=${whatsappMessage}`} target="_blank" rel="noopener noreferrer">
-                            <button>PLACE ORDER ON WHATSAPP</button>
-                        </a>
-                    </div>
+    if (isLoading) {
+        return (
+            <div className="cart-container">
+                <div className="cart-header">
+                    <h1>Loading your cart...</h1>
                 </div>
-                <div className="carticons-promocode">
-                    <p>If you have promo code, Enter it here</p>
-                    <div className="carticons-promo-box">
-                        <input type="text" placeholder='Enter Promo code' value={promocode} onChange={handlePromoCodeChange} />
-                        <button onClick={handlePromoCodeSubmit}>Submit</button>
+            </div>
+        );
+    }
+
+    if (isCartEmpty()) {
+        return (
+            <div className="cart-container">
+                <div className="empty-cart">
+                    <div className="empty-cart-icon">🛒</div>
+                    <h2>Your cart is empty</h2>
+                    <p>Looks like you haven't added any candles to your cart yet.</p>
+                    <Link to="/catalog" className="continue-shopping-btn">
+                        <ShoppingBag size={20} style={{ marginRight: '0.5rem' }} />
+                        Continue Shopping
+                    </Link>
+                </div>
+            </div>
+        );
+    }
+
+    return (
+        <div className="cart-container">
+            <div className="cart-header">
+                <h1>Shopping Cart</h1>
+                <p className="cart-subtitle">
+                    {getCartItemsCount()} {getCartItemsCount() === 1 ? 'item' : 'items'} ready to bring warmth to your space
+                </p>
+            </div>
+
+            <div className="cart-content">
+                <div className="cart-items-section">
+                    <div className="cart-items-header">
+                        <div className="cart-items-grid-header">
+                            <span></span>
+                            <span>Product Details</span>
+                            <span>Price</span>
+                            <span>Quantity</span>
+                            <span className="hide-mobile">Total</span>
+                            <span></span>
+                        </div>
+                    </div>
+
+                    {products.map((product) => (
+                        cartItems[product.id] && cartItems[product.id].map((item, index) => (
+                            <div key={`${product.id}-${index}`} className="cart-item">
+                                <div className="cart-item-grid">
+                                    <img 
+                                        src={product.imageUrl} 
+                                        alt={product.name}
+                                        className="cart-product-image"
+                                    />
+                                    
+                                    <div className="cart-product-details">
+                                        <h3 className="cart-product-name">{product.name}</h3>
+                                        <div className="cart-product-specs">
+                                            <span className="spec-tag color">{item.color}</span>
+                                            <span className="spec-tag fragrance">
+                                                {item.fragranceType} {item.fragrance}
+                                            </span>
+                                            <span className="spec-tag wax">{item.waxType}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="cart-price">
+                                        Rs. {item.total}
+                                    </div>
+                                    
+                                    <div className="quantity-controls">
+                                        <button 
+                                            className="quantity-btn"
+                                            onClick={() => handleDecreaseQuantity(product.id, item, index)}
+                                            aria-label="Decrease quantity"
+                                        >
+                                            <Minus size={14} />
+                                        </button>
+                                        <span className="quantity-display">{item.quantity}</span>
+                                        <button 
+                                            className="quantity-btn"
+                                            onClick={() => handleIncreaseQuantity(product.id, item)}
+                                            aria-label="Increase quantity"
+                                        >
+                                            <Plus size={14} />
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="cart-item-total hide-mobile">
+                                        Rs. {(item.total * item.quantity).toFixed(2)}
+                                    </div>
+                                    
+                                    <button 
+                                        className="remove-btn"
+                                        onClick={() => removeFromCart(product.id, index)}
+                                        aria-label="Remove item"
+                                    >
+                                        <X size={16} />
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    ))}
+                </div>
+
+                <div className="cart-summary">
+                    <div className="cart-summary-header">
+                        <h2>Order Summary</h2>
+                    </div>
+                    
+                    <div className="cart-summary-content">
+                        <div className="promo-section">
+                            <h3>Have a promo code?</h3>
+                            <div className="promo-input-container">
+                                <input 
+                                    type="text" 
+                                    placeholder="Enter promo code" 
+                                    value={promocode}
+                                    onChange={handlePromoCodeChange}
+                                    className="promo-input"
+                                />
+                                <button 
+                                    onClick={handlePromoCodeSubmit}
+                                    className="promo-btn"
+                                >
+                                    Apply
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="summary-line">
+                            <span>Subtotal ({getCartItemsCount()} items)</span>
+                            <span>Rs. {totalAmount.toFixed(2)}</span>
+                        </div>
+
+                        {discount < 1 && (
+                            <div className="summary-line discount">
+                                <span>Promo Discount ({100 - (discount * 100)}%)</span>
+                                <span>-Rs. {(totalAmount - discountedAmount).toFixed(2)}</span>
+                            </div>
+                        )}
+
+                        <div className="summary-line">
+                            <span>Shipping</span>
+                            <span>FREE</span>
+                        </div>
+
+                        <div className="summary-line total">
+                            <span>Total</span>
+                            <span>Rs. {discountedAmount.toFixed(2)}</span>
+                        </div>
+
+                        <div className="shipping-info">
+                            <p>
+                                <Truck size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
+                                Free delivery via our trusted partner Prompt Express (PVT) Ltd, Nugegoda
+                            </p>
+                        </div>
+
+                        <a 
+                            href={`https://wa.me/+94770081559?text=${whatsappMessage}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'none' }}
+                        >
+                            <button className="checkout-btn">
+                                🕯️ Place Order on WhatsApp
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
