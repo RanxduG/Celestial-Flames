@@ -91,11 +91,11 @@ const Navbar = () => {
                 <li style={{'--item-index': 0}} onClick={() => { closeMenu(); window.scrollTo(0, 0); }}>
                     <Link style={{ textDecoration: 'none' }} to='/Shop'>Shop</Link>
                 </li>
-                <li style={{'--item-index': 1}} onClick={() => { closeMenu(); window.scrollTo(0, 0); }}>
-                    <Link style={{ textDecoration: 'none' }} to='/Seasonal'>Seasonal Releases</Link>
-                </li>
                 <li style={{'--item-index': 2}} onClick={() => { closeMenu(); window.scrollTo(0, 0); }}>
                     <Link style={{ textDecoration: 'none' }} to='/Catalog'>Catalog</Link>
+                </li>
+                <li style={{'--item-index': 1}} onClick={() => { closeMenu(); window.scrollTo(0, 0); }}>
+                    <Link style={{ textDecoration: 'none' }} to='/bulk'>Bulk Order</Link>
                 </li>
             </ul>
             {isMenuVisible && <div className="menu-overlay" onClick={closeMenu}></div>}

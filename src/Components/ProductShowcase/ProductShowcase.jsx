@@ -1,15 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
+import { Link } from 'react-router-dom'
 import './ProductShowcase.css';
+import { all } from 'axios';
 
-const ProductShowcase = () => {
-  const { allStocks, allProducts } = useContext(ShopContext);
+const ProductShowcase = ({ productGalleryRef }) => {
+  const { allStocks, allProducts, addToCart } = useContext(ShopContext);
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
   const [visibleProducts, setVisibleProducts] = useState(6);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [alertVisible, setAlertVisible] = useState(false);
+  
 
   useEffect(() => {
     if (!allStocks || !allProducts || allStocks.length === 0) {
@@ -22,11 +26,14 @@ const ProductShowcase = () => {
     setLoading(false);
   }, [allStocks, allProducts]);
 
-  // Helper functions to get product details
+    // Helper functions to get product details
   const getProductNameByStockId = (stockId) => {
-    const correspondingProduct = allStocks.find((product) => product.id === stockId);
-    return correspondingProduct ? correspondingProduct.name : null;
+    const stock = allStocks.find((s) => s.item_id === parseInt(stockId));
+    if (!stock) return null;
+    const product = allProducts.find((p) => p.id === stock.id); // or stock.product_id, if that's the field
+    return product ? product.name : null;
   };
+
 
   const getProductCategoryByStockId = (stockId) => {
     const correspondingProduct = allStocks.find((product) => product.id === stockId);
@@ -116,6 +123,23 @@ const ProductShowcase = () => {
       </div>
     );
   };
+  const handleAddToCart = (product) => {
+    addToCart(
+      product.id, 
+      getProductNameByStockId(product.item_id), 
+      product.waxtype, 
+      product.getFragranceType, 
+      product.color, 
+      product.scent, 
+      product.new_price, 
+      product.old_price,
+      1
+    );
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000);
+  };
 
   // Skeleton loader for products when loading
   const renderSkeletons = () => {
@@ -137,6 +161,16 @@ const ProductShowcase = () => {
     if (product.stock < 5 && product.stock > 0) return 'Limited Stock';
     if (product.old_price > product.new_price) return 'Sale';
     return 'Featured';
+  };
+  const handleScrollToProductGallery = (e) => {
+    e.preventDefault();
+    console.log('Scrolling to product gallery');
+    if (productGalleryRef && productGalleryRef.current) {
+      productGalleryRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
   };
 
   return (
@@ -189,13 +223,15 @@ const ProductShowcase = () => {
                     className="product-image"
                     loading="lazy"
                   />
+                  <Link to={`/readymade/?productId=${product.id}&itemId=${product.item_id}`} className="gallery-product-link">
                   <div className="image-overlay">
                     <div className="overlay-actions">
                       <button className="action-btn quick-view" title="Quick View">
-                        👁️
+                        <p>View</p>
                       </button>
                     </div>
                   </div>
+                  </Link>
                 </div>
 
                 <div className="product-info">
@@ -204,7 +240,7 @@ const ProductShowcase = () => {
                   </div>
                   
                   <h3 className="product-name">
-                    {product.scent} {getProductNameByStockId(product.id)}
+                    {product.scent} {getProductNameByStockId(product.item_id)}
                   </h3>
                   
                   <p className="product-description">
@@ -241,6 +277,7 @@ const ProductShowcase = () => {
                     <button 
                       className={`add-to-cart-btn ${product.stock === 0 ? 'disabled' : ''}`}
                       disabled={product.stock === 0}
+                      onClick={() => handleAddToCart(product)}
                     >
                       <span>{product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}</span>
                       <div className="btn-shine"></div>
@@ -273,13 +310,21 @@ const ProductShowcase = () => {
               <h3>Can't Find What You're Looking For?</h3>
               <p>Explore our complete collection or create a custom candle just for you</p>
               <div className="cta-buttons">
-                <button className="btn-browse-ps">Browse All Products</button>
+                <button className="btn-browse-ps" onClick={handleScrollToProductGallery}>Browse All Products</button>
                 <button className="btn-custom-ps">Create Custom Candle</button>
               </div>
             </div>
           </div>
         )}
       </div>
+      {alertVisible && (
+        <div className="product-alert">
+          <div className="alert-content">
+            <span className="alert-icon">✓</span>
+            <span className="alert-message">Added to cart successfully!</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

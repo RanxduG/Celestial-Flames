@@ -5,8 +5,6 @@ import FeaturedProducts from '../Components/FeaturedProducts/FeaturedProducts';
 import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
 import ProductGallery from '../Components/ProductGallery/ProductGallery';
 import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
-// import TestimonialSlider from '../Components/ShopTest/TestimonialSlider/TestimonialSlider';
-// import CreateCustomCandle from '../Components/ShopTest/CreateCustomCandle/CreateCustomCandle';
 
 const ShopTest = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,14 +41,11 @@ const ShopTest = () => {
   return (
     <div className="shop-container">
       <ShopHero />
-      <ProductShowcase />
-      {/* <FeaturedProducts productGalleryRef={productGalleryRef} /> */}
+      <ProductShowcase productGalleryRef={productGalleryRef}/>
       <CollectionsShowcase />
       <div ref={productGalleryRef} id="product-gallery">
         <ProductGallery />
       </div>
-       {/*
-      <CreateCustomCandle /> */}
     </div>
   );
 };

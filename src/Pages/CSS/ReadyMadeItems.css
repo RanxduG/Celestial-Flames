@@ -31,36 +31,6 @@
   color: #B76E79;
 }
 
-.candle-loader {
-  position: relative;
-  width: 60px;
-  height: 100px;
-  margin-bottom: 1rem;
-}
-
-.flame {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 40px;
-  background: linear-gradient(to bottom, #ffcc00, #ff9900);
-  border-radius: 50% 50% 20% 20%;
-  animation: flicker 1s infinite alternate;
-}
-
-.wax {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 60px;
-  height: 90px;
-  background-color: #f8f0e5;
-  border-radius: 5px 5px 0 0;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 @keyframes flicker {
   0%, 100% {
     height: 40px;

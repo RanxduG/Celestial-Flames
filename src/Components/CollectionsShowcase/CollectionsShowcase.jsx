@@ -12,7 +12,7 @@ const CollectionsShowcase = () => {
   // Collection data with initial placeholder images
   const [collections, setCollections] = useState([
     {
-      id: 'Classic',
+      id: 'Soy',
       name: "Luxury Soy Collection",
       description: "Indulge in premium soy wax candles with exotic scents",
       imageUrl: celestialGlowImage, // Placeholder
@@ -20,16 +20,40 @@ const CollectionsShowcase = () => {
       featured: true
     },
     {
-      id: 'Seasonal',
-      name: "Seasonal Treasures",
+      id: 'Gel',
+      name: "Gel Luxe Collection",
       description: "Limited edition candles for every season",
-      imageUrl: twirllingHeartsImage,
+      imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
       totalProducts: 6,
       featured: true
     },
     {
-      id: 4,
-      name: "Gel Wax Wonders",
+      id: "Fusion",
+      name: "Fusion Wax Collection",
+      description: "Transparent gel wax candles with mesmerizing designs",
+      imageUrl: celestialGlowImage,
+      totalProducts: 10,
+      featured: true
+    },
+    {
+      id: "Budget",
+      name: "Budget-Friendly Deals",
+      description: "Transparent gel wax candles with mesmerizing designs",
+      imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
+      totalProducts: 10,
+      featured: true
+    },
+    {
+      id: "Seasonal",
+      name: "Seasonal Candle Delights",
+      description: "Transparent gel wax candles with mesmerizing designs",
+      imageUrl: twirllingHeartsImage,
+      totalProducts: 10,
+      featured: true
+    },
+    {
+      id: "Giftset",
+      name: "Gift - Ready Collections",
       description: "Transparent gel wax candles with mesmerizing designs",
       imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
       totalProducts: 10,
@@ -42,8 +66,8 @@ const CollectionsShowcase = () => {
     const fetchCelestialGlowImage = async () => {
       try {
         // Get the specific item from your backend
-        const CG = getStockById("CLC2024004");
-        const TH = getStockById("CLC2024005");
+        const CG = getStockById("5");
+        const TH = getStockById("4");
 
         
         if (CG && CG.imageUrl) {

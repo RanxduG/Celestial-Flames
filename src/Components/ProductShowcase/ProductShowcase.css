@@ -74,7 +74,7 @@
   content: '';
   height: 1px;
   width: 80px;
-  background: #4a3b2c;
+  background: rgba(68, 53, 3, 0.4);
   margin: 0 1rem;
 }
 
@@ -288,9 +288,15 @@
   align-items: center;
   justify-content: center;
 }
+.action-btn p{
+  font-size: 11px;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 500;
+
+}
 
 .action-btn:hover {
-  background: #d4af37;
+  background: #a68a64;
   color: #ffffff;
   transform: scale(1.1);
 }
@@ -619,6 +625,31 @@
   color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+}
+
+/* Alert styling */
+.product-alert {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  animation: slideIn 0.3s ease forwards;
+}
+
+.alert-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.alert-icon {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 /* Responsive Design */

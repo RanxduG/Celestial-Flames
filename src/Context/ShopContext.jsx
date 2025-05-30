@@ -57,7 +57,7 @@ const ShopContextProvider = (props) => {
     };
 
     const getStockById = (id) => {
-        const stock = allStocks.find((stock) => stock.id === id);
+        const stock = allStocks.find((stock) => stock.item_id === parseInt(id));
         return stock ? stock : null;
     };
 
