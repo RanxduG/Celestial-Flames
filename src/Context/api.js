@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // const BASE_URL = "http://localhost:3000"; // Replace with your backend URL
-const BASE_URL = "http://13.203.231.201:3000"; // Replace with your backend URL
+const BASE_URL = "http://localhost:5000"; // Replace with your backend URL
 
 export const getLogo = () => axios.get(`${BASE_URL}/logo`);
 export const getAllStock = () => axios.get(`${BASE_URL}/stocks`);

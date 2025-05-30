@@ -189,7 +189,7 @@ const CartItems = () => {
                                             <span className="spec-tag fragrance">
                                                 {item.fragranceType} {item.fragrance}
                                             </span>
-                                            <span className="spec-tag wax">{item.waxType}</span>
+                                            <span className="spec-tag wax_detail">{item.waxType}</span>
                                         </div>
                                     </div>
                                     

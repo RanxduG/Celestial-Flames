@@ -11,9 +11,10 @@
   font-size: 0.9rem;
   color: #666;
 }
-
-.product-breadcrumb span {
+.product-breadcrumb a {
   margin: 0 0.3rem;
+  color: #666;
+  text-decoration: none;
 }
 
 .product-breadcrumb .current {

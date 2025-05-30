@@ -2,101 +2,104 @@ import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../../Context/ShopContext';
 import './WelcomeBanner.css';
 
-import image1 from '../Assets/Banners/All gel wax candles.jpg';
-import image2 from '../Assets/Banners/Her fav.jpg';
-import image3 from '../Assets/Banners/Candle pouring.jpg';
-import image4 from '../Assets/Banners/Bubble candles.jpg';
-import image5 from '../Assets/Banners/Candle Ingredients.jpg';
-import image6 from '../Assets/Banners/Candles burning.jpg';
-
 const WelcomeBanner = () => {
   const { userDetails, homeBanners } = useContext(ShopContext);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [typedText1, setTypedText1] = useState('');
-  const [typedText2, setTypedText2] = useState('');
-  const [isTypingLine1, setIsTypingLine1] = useState(true);
-  const [isTypingLine2, setIsTypingLine2] = useState(false);
-
-  const slides = [image1, image2, image3, image4, image5, image6];
-  const line1 = `Weelcome to`;
-  const line2 = `Ceelestial Flames`;
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Slideshow effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 3000);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % homeBanners.length);
+    }, 5000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [homeBanners.length]);
 
-  // Typing effect for line 1
+  // Animation trigger
   useEffect(() => {
-    let index = 0;
-    setTypedText1(''); // Clear previous text
-    const typingInterval = setInterval(() => {
-      if (index < line1.length) {
-        setTypedText1((prev) => prev + line1.charAt(index));
-        index++;
-      } else {
-        clearInterval(typingInterval);
-        setIsTypingLine1(false);
-        setIsTypingLine2(true); // Start typing line 2 after line 1 finishes
-      }
-    }, 100);
+    const timer = setTimeout(() => setIsLoaded(true), 500);
+    return () => clearTimeout(timer);
+  }, []);
 
-    return () => clearInterval(typingInterval);
-  }, [line1]);
-
-  // Typing effect for line 2
-  useEffect(() => {
-    if (!isTypingLine2) return;
-
-    let index = 0;
-    setTypedText2(''); // Clear previous text
-    const typingInterval = setInterval(() => {
-      if (index < line2.length) {
-        setTypedText2((prev) => prev + line2.charAt(index));
-        index++;
-      } else {
-        clearInterval(typingInterval);
-        setIsTypingLine2(false); // Typing complete
-      }
-    }, 100);
-
-    return () => clearInterval(typingInterval);
-  }, [isTypingLine2, line2]);
-
-  // Handle dot click for slideshow
   const handleDotClick = (index) => {
     setCurrentSlide(index);
   };
 
+  const scrollToNext = () => {
+    window.scrollTo({
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <div className='welcomebanner'>
-      <div className='slideshow'>
+    <section className="hero-banner">
+      {/* Background Slideshow */}
+      <div className="hero-slideshow">
         {homeBanners.map((slide, index) => (
-          <img
+          <div
             key={index}
-            src={slide}
-            alt={`Slide ${index + 1}`}
-            className={index === currentSlide ? 'active' : ''}
+            className={`slide ${index === currentSlide ? 'active' : ''}`}
+            style={{ backgroundImage: `url(${slide})` }}
           />
         ))}
-        <div className='dots'>
-          {homeBanners.map((_, index) => (
-            <span
-              key={index}
-              className={index === currentSlide ? 'dot active' : 'dot'}
-              onClick={() => handleDotClick(index)}
-            />
-          ))}
+        <div className="hero-overlay" />
+      </div>
+
+      {/* Main Content */}
+      <div className="hero-content">
+        <div className={`hero-text ${isLoaded ? 'animate-in' : ''}`}>
+          <div className="hero-badge">
+            <span>✨ Premium Sri Lankan Candles</span>
+          </div>
+          <h1 className="hero-title">
+            <span className="title-line">Celestial</span>
+            <span className="title-line">Flames</span>
+          </h1>
+          <p className="hero-subtitle">
+            Crafted with pure soy and gel wax, infused with natural essential oils. 
+            Experience the art of sustainable luxury in every flame.
+          </p>
+          <div className="hero-buttons">
+            <button className="btn-primary" onClick={() => window.location.href = '/catalog'}>
+              Explore Collection
+            </button>
+            <button className="btn-secondary">
+              Custom Design
+            </button>
+          </div>
+        </div>
+
+        {/* Floating Elements */}
+        <div className="floating-elements">
+          <div className="float-item float-1">🕯️</div>
+          <div className="float-item float-2">✨</div>
+          <div className="float-item float-3">🌿</div>
         </div>
       </div>
-      <div className='welcome-message'>
-        <h1>{typedText1}</h1>
-        <h1>{typedText2}</h1>
+
+      {/* Navigation Dots */}
+      <div className="hero-dots">
+        {homeBanners.map((_, index) => (
+          <button
+            key={index}
+            className={`dot ${index === currentSlide ? 'active' : ''}`}
+            onClick={() => handleDotClick(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
-    </div>
+
+      {/* Scroll Indicator */}
+      <div className="scroll-indicator" onClick={scrollToNext}>
+        <div className="scroll-arrow">
+          <span>Discover More</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M7 13L12 18L17 13M7 6L12 11L17 6" stroke="currentColor" strokeWidth="2"/>
+          </svg>
+        </div>
+      </div>
+    </section>
   );
 };
 

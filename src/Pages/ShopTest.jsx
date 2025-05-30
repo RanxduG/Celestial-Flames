@@ -4,6 +4,7 @@ import ShopHero from '../Components/ShopHero/ShopHero';
 import FeaturedProducts from '../Components/FeaturedProducts/FeaturedProducts';
 import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
 import ProductGallery from '../Components/ProductGallery/ProductGallery';
+import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
 // import TestimonialSlider from '../Components/ShopTest/TestimonialSlider/TestimonialSlider';
 // import CreateCustomCandle from '../Components/ShopTest/CreateCustomCandle/CreateCustomCandle';
 
@@ -42,7 +43,8 @@ const ShopTest = () => {
   return (
     <div className="shop-container">
       <ShopHero />
-      <FeaturedProducts productGalleryRef={productGalleryRef} />
+      <ProductShowcase />
+      {/* <FeaturedProducts productGalleryRef={productGalleryRef} /> */}
       <CollectionsShowcase />
       <div ref={productGalleryRef} id="product-gallery">
         <ProductGallery />

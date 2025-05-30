@@ -95,8 +95,8 @@ const Footer = () => {
                 <Link to="/blog" className="footer-link" onClick={() => window.scrollTo(0, 0)}>
                   Blog
                 </Link>
-                <Link to="/careers" className="footer-link" onClick={() => window.scrollTo(0, 0)}>
-                  Careers
+                <Link to="/candlehelp" className="footer-link" onClick={() => window.scrollTo(0, 0)}>
+                  How to use a candle for gay people
                 </Link>
               </div>
             </div>

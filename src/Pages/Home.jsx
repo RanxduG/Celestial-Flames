@@ -1,21 +1,22 @@
-// import React, {useContext} from 'react';
-// import { ShopContext} from '../Context/ShopContext';
-// import { Link } from 'react-router-dom';
+import React from 'react';
 import WelcomeBanner from '../Components/WelcomeBanner/WelcomeBanner';
-import CustomizationProcess from '../Components/CustomizationProcess/CustomizationProcess';
-import TestimonialSlider from '../Components/TestimonialSlider/TestimonialSlider';
-
+import FeaturesSection from '../Components/FeaturesSection/FeaturesSection';
+import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
+// import CustomizationProcess from '../Components/CustomizationProcess/CustomizationProcess';
+// import TestimonialSlider from '../Components/TestimonialSlider/TestimonialSlider';
+// import NewsletterSection from '../Components/NewsletterSection/NewsletterSection';
 
 const Home = () => {
   return (
-    <div>
+    <div className="home-page">
       <WelcomeBanner />
-      <CustomizationProcess/>
-      <TestimonialSlider/>
+      <FeaturesSection />
+      <ProductShowcase />
+    {/* <CustomizationProcess />
+      <TestimonialSlider />
+      <NewsletterSection /> */}
     </div>
-      
-
   );
-}
+};
 
 export default Home;

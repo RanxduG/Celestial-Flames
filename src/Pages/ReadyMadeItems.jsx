@@ -6,6 +6,7 @@ import './CSS/ReadyMadeItems.css';
 import ReadyMadeItemDisplay from '../Components/ReadyMadeItemDisplay/ReadyMadeItemDisplay';
 import ProductTabs from '../Components/ProductTabs/ProductTabs';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
+import { Link } from 'react-router-dom';
 
 const ReadyMadeItems = () => {
   const [searchParams] = useSearchParams();
@@ -59,7 +60,7 @@ const ReadyMadeItems = () => {
   return (
     <div className="product-page-container">
       <div className="product-breadcrumb">
-        <span>Home</span> / <span>Shop</span> / <span className="current">{product.name}</span>
+        <Link to='/'><a>Home</a></Link> / <Link to='/shop'><a>Shop</a></Link> / <a className="current">{product.name}</a>
       </div>
       
       <ReadyMadeItemDisplay 

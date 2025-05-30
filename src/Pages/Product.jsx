@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ShopContext } from '../Context/ShopContext';
 import { useParams, useSearchParams } from 'react-router-dom';
-import Breadcrums from '../Components/Breadcrums/Breadcrums';
 import ProductDisplay from '../Components/ProductDisplay/ProductDisplay';
 import ProductTabs from '../Components/ProductTabs/ProductTabs';
 import RelatedProducts from '../Components/RelatedProducts/RelatedProducts';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
   const [searchParams] = useSearchParams();
@@ -60,10 +60,8 @@ const Product = () => {
   return (
     <div className="product-page-container">
       <div className="product-breadcrumb">
-        <span>Home</span> / <span>Shop</span> / <span className="current">{product.name}</span>
+        <Link to='/'><span>Home</span></Link> / <Link to='/catalog'><span>catalog</span></Link> / <span className="current">{product.name}</span>
       </div>
-      <Breadcrums product={product} />
-
       <ProductDisplay
         product={product}
       />
