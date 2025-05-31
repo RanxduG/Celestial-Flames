@@ -1,6 +1,7 @@
 import React from 'react';
 import CatalogItems from '../Components/CatalogItems/CatalogItems';
 import './CSS/Catalog.css';
+import { Link } from 'react-router-dom';
 
 const Catalog = () => {
   return (
@@ -12,8 +13,8 @@ const Catalog = () => {
         </div>
       </div>
       
-      <div className="breadcrumb">
-        <span>Home</span> / <span className="active">Catalog</span>
+      <div className="product-breadcrumb">
+        <Link to='/'><a>Home</a></Link> / <a className="active">Catalog</a>
       </div>
       
       <CatalogItems />

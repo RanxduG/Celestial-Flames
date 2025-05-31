@@ -281,7 +281,7 @@
 }
 
 .btn-explore {
-  background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+  background: #a68a64;
   color: #ffffff;
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
 }
@@ -309,7 +309,7 @@
 .btn-custom {
   background: transparent;
   color: #2c1810;
-  border: 2px solid #d4af37;
+  border: 2px solid #a68a64;
   position: relative;
 }
 
@@ -320,7 +320,7 @@
   left: 0;
   width: 0;
   height: 100%;
-  background: #d4af37;
+  background: #a68a64;
   transition: width 0.3s ease;
   z-index: -1;
 }

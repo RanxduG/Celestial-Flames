@@ -1,0 +1,723 @@
+/* AboutCandles.css - All classes prefixed with ac- */
+
+/* Base Styles */
+.ac-container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fef9f7 0%, #fff5f2 50%, #f8f6f2 100%);
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+/* Hero Section Animations */
+@keyframes ac-fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ac-flicker {
+    0%, 100% { 
+        transform: translateX(-50%) rotate(-2deg) scale(1);
+        filter: blur(1px) brightness(1);
+    }
+    25% { 
+        transform: translateX(-50%) rotate(1deg) scale(1.02);
+        filter: blur(0.8px) brightness(1.1);
+    }
+    50% { 
+        transform: translateX(-50%) rotate(2deg) scale(1.05);
+        filter: blur(1.2px) brightness(0.9);
+    }
+    75% { 
+        transform: translateX(-50%) rotate(-1deg) scale(1.03);
+        filter: blur(0.9px) brightness(1.05);
+    }
+}
+
+@keyframes ac-float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-8px) rotate(1deg);
+    }
+    66% {
+        transform: translateY(-5px) rotate(-1deg);
+    }
+}
+
+@keyframes ac-slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ac-glow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
+    }
+}
+
+@keyframes ac-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes ac-shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: 200px 0;
+    }
+}
+
+/* Hero Section */
+.ac-hero {
+    height: 80vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 50%, #6b4423 100%);
+    color: white;
+    overflow: hidden;
+}
+
+.ac-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.ac-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+    z-index: 2;
+    position: relative;
+}
+
+.ac-hero-text {
+    flex: 1;
+    max-width: 600px;
+}
+
+.ac-hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: ac-fadeInUp 1s ease-out;
+}
+
+.ac-flame-icon {
+    color: #ff6b35;
+    filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6));
+    animation: ac-flicker 2s infinite alternate;
+}
+
+.ac-hero-subtitle {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    animation: ac-fadeInUp 1s ease-out 0.3s both;
+}
+
+.ac-hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ac-candle-group {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    animation: ac-float 3s ease-in-out infinite;
+}
+
+.ac-mini-candle {
+    width: 40px;
+    height: 120px;
+    border-radius: 8px 8px 3px 3px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.ac-candle1 {
+    background: linear-gradient(to bottom, #d4af37 0%, #b8941f 100%);
+    transform: rotate(-5deg);
+}
+
+.ac-candle2 {
+    background: linear-gradient(to bottom, #e98074 0%, #d26e60 100%);
+    height: 140px;
+}
+
+.ac-candle3 {
+    background: linear-gradient(to bottom, #8fbc8f 0%, #556b2f 100%);
+    transform: rotate(5deg);
+}
+
+.ac-center-flame {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25px;
+    height: 35px;
+    background: radial-gradient(circle, #ff6b35 0%, #ff4500 50%, #dc143c 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: ac-flicker 1.5s infinite alternate;
+    filter: blur(1px);
+}
+
+/* Section Styles */
+.ac-section {
+    padding: 6rem 2rem;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+.ac-section.ac-visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.ac-section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ac-icon-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+}
+
+.ac-section-icon {
+    color: #e98074;
+    width: 3rem;
+    height: 3rem;
+    animation: ac-pulse 2s infinite;
+}
+
+.ac-section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2b2b2b;
+    text-align: center;
+}
+
+/* Wax Types Section */
+.ac-wax-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+}
+
+.ac-wax-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 40px rgba(233, 128, 116, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ac-wax-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200px;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: ac-shimmer 2s infinite;
+}
+
+.ac-wax-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(233, 128, 116, 0.2);
+}
+
+.ac-wax-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ac-wax-icon {
+    font-size: 2.5rem;
+    animation: ac-pulse 3s infinite;
+}
+
+.ac-wax-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2b2b2b;
+}
+
+.ac-wax-description {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.ac-benefits-list {
+    margin-bottom: 2rem;
+}
+
+.ac-benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: #444;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.ac-benefit:hover {
+    background-color: rgba(233, 128, 116, 0.05);
+}
+
+.ac-benefit-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    color: #e98074;
+}
+
+.ac-wax-properties {
+    background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid rgba(233, 128, 116, 0.1);
+}
+
+.ac-property {
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.ac-caution-box {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border: 1px solid #ffd93d;
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.ac-caution-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #856404;
+    margin-bottom: 1rem;
+}
+
+/* Scents Section */
+.ac-scents-section {
+    background: linear-gradient(135deg, #f8f6f2 0%, #fff 100%);
+}
+
+.ac-scents-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.ac-scent-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 25px rgba(233, 128, 116, 0.1);
+    transition: all 0.3s ease;
+    animation: ac-slideInUp 0.6s ease-out both;
+    position: relative;
+    overflow: hidden;
+}
+
+.ac-scent-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(233, 128, 116, 0.2);
+}
+
+.ac-scent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ac-scent-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2b2b2b;
+}
+
+.ac-priority-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+    animation: ac-glow 2s infinite;
+}
+
+.ac-priority-best-seller {
+    background-color: #ff4500;
+}
+
+.ac-priority-high {
+    background-color: #e98074;
+}
+
+.ac-priority-medium {
+    background-color: #d4af37;
+}
+
+/* Wick Section */
+.ac-wick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+}
+
+.ac-wick-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 40px rgba(233, 128, 116, 0.1);
+    transition: all 0.3s ease;
+}
+
+.ac-wick-card:hover {
+    transform: translateY(-10px);
+}
+
+.ac-wick-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.ac-wick-icon {
+    font-size: 2.5rem;
+}
+
+.ac-wick-content {
+    position: relative;
+    z-index: 1;
+}
+
+.ac-wick-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ac-wick-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    background: #f8f6f2;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.ac-wick-feature:hover {
+    background: rgba(233, 128, 116, 0.1);
+    transform: translateX(5px);
+}
+
+.ac-feature-label {
+    font-weight: 600;
+    color: #2b2b2b;
+    min-width: 120px;
+}
+
+.ac-checkmark {
+    color: #4caf50;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.ac-question {
+    color: #ff9800;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.ac-feature-note {
+    font-size: 0.9rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Care Tips Section */
+.ac-care-section {
+    background: linear-gradient(135deg, #2b2b2b 0%, #404040 100%);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.ac-care-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(233, 128, 116, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.ac-tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.ac-tip-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.ac-tip-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.ac-tip-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+    animation: ac-float 4s ease-in-out infinite;
+}
+
+.ac-tip-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.ac-tip-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .ac-hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .ac-hero-title {
+        font-size: 3rem;
+    }
+    
+    .ac-section-title {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .ac-hero {
+        height: 60vh;
+        padding: 2rem 1rem;
+    }
+    
+    .ac-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .ac-hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .ac-section {
+        padding: 4rem 1rem;
+    }
+    
+    .ac-section-title {
+        font-size: 2rem;
+    }
+    
+    .ac-wax-grid,
+    .ac-wick-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .ac-scents-grid,
+    .ac-tips-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .ac-candle-group {
+        scale: 0.8;
+    }
+    
+    .ac-mini-candle {
+        width: 30px;
+        height: 100px;
+    }
+    
+    .ac-candle2 {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ac-hero-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .ac-section-title {
+        font-size: 1.8rem;
+    }
+    
+    .ac-wax-card,
+    .ac-wick-card,
+    .ac-tip-card {
+        padding: 1.5rem;
+    }
+    
+    .ac-candle-group {
+        scale: 0.6;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .ac-hero {
+        height: auto;
+        background: #2b2b2b;
+        color: black;
+    }
+    
+    .ac-section {
+        padding: 2rem 0;
+    }
+    
+    .ac-wax-card,
+    .ac-wick-card,
+    .ac-scent-card,
+    .ac-tip-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .ac-care-section {
+        background: white;
+        color: black;
+    }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+.ac-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Focus Styles */
+.ac-wax-card:focus,
+.ac-wick-card:focus,
+.ac-scent-card:focus,
+.ac-tip-card:focus {
+    outline: 2px solid #e98074;
+    outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .ac-hero {
+        background: #000;
+        color: #fff;
+    }
+    
+    .ac-section-title {
+        color: #000;
+    }
+    
+    .ac-wax-card,
+    .ac-wick-card,
+    .ac-scent-card {
+        border: 2px solid #000;
+    }
+}

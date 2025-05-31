@@ -1,179 +1,289 @@
 import React, { useState, useEffect } from 'react';
 import './TestimonialSlider.css';
-import instaLogo from '../Assets/SocialIcons/instagram.png'; // Replace with actual path
-import facbookLogo from '../Assets/SocialIcons/facebook.png'; // Replace with actual path
 
 const TestimonialSlider = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Sarah Miller",
-      location: "Colombo",
-      text: "These candles transformed my home atmosphere! The natural soy wax burns so cleanly, and the scents are divine without being overwhelming. Absolutely love the custom design I ordered for my daughter's wedding.",
+      name: "Shavintha",
+      location: "WhatsApp",
+      text: "It's so cute I love it 🥹 Smells really nice too, can't wait to light it soon. Looks a great colour too ty for making what I wanted",
       rating: 5,
-      image:instaLogo
+      initials: "S"
     },
     {
       id: 2,
-      name: "Rajiv Perera",
-      location: "Kandy",
-      text: "I was skeptical about gel candles until I tried these. The clarity is amazing and the way they incorporate natural elements is artistic beyond words. My guests always ask where I found such unique pieces!",
+      name: "Sashenka",
+      location: "WhatsApp",
+      text: "It smells so goood. So pretty as well. Hey I recently came to US and my roommates said the candle smells so good. They are obsessed with that.",
       rating: 5,
-      image: facbookLogo 
+      initials: "S"
     },
     {
       id: 3,
-      name: "Emma Thompson",
-      location: "Colombo",
-      text: "As someone sensitive to artificial fragrances, I appreciate how these candles use essential oils. The vanilla cinnamon blend has become my evening ritual. Excellent customer service when I needed a rush delivery too.",
-      rating: 4,
-      image: instaLogo
+      name: "Gayan",
+      location: "WhatsApp",
+      text: "Hello, all good with the candles we got :D Still using them from time to time. The 1st candle we got it still there albeit in the last stages. Hoping to get more cinnamon stuff during the next popup.",
+      rating: 5,
+      initials: "G"
     },
     {
       id: 4,
-      name: "Anura Jayawardena",
-      location: "Negombo",
-      text: "The custom candles created for our hotel lobby have received countless compliments. The craftsmanship is exceptional, and they burn evenly for hours. Worth every rupee!",
+      name: "Geethan",
+      location: "Havelock City Mall",
+      text: "I brought a candle from you at the Avurudu market in Havelock City Mall. I had got it as a gift for my sis and she loves it! Keep it up 🙌🏾",
       rating: 5,
-      image: instaLogo
+      initials: "G"
     },
     {
       id: 5,
-      name: "Priya Mendis",
-      location: "Colombo",
-      text: "I ordered a set as gifts for my wedding bridesmaids, and the presentation was stunning! Each candle was packaged beautifully with personalized notes. The scents are uniquely Sri Lankan and bring back childhood memories.",
+      name: "Navasha",
+      location: "Instagram",
+      text: "Smells so good... i love it❤",
       rating: 5,
-      image: facbookLogo
+      initials: "N"
+    },
+    {
+      id: 6,
+      name: "Lakmali",
+      location: "Instagram",
+      text: "It's actually very good. Good smell & last long.",
+      rating: 5,
+      initials: "L"
+    },
+    {
+      id: 7,
+      name: "Sandali",
+      location: "Instagram",
+      text: "I got the candleee. Thank you so much for the replacement and for being so cooperative! Its working great and smells divine🥹 Thank you once again, and will recommend to others as well!",
+      rating: 5,
+      initials: "S"
+    },
+    {
+      id: 8,
+      name: "Panchali",
+      location: "Instagram",
+      text: "I received the package thank you so much, it smells so good!! ❤",
+      rating: 5,
+      initials: "P"
+    },
+    {
+      id: 9,
+      name: "Thisara",
+      location: "Instagram",
+      text: "Onggg it's soooo cute. I love itttt. You have an eye for creativity 😍😍😍 I don't wanna light them even. So pretty",
+      rating: 5,
+      initials: "T"
+    },
+    {
+      id: 10,
+      name: "Dewmini",
+      location: "Instagram",
+      text: "I love them❤❤. Hi,I received the candles, thank u so much. It looks beautiful!!❤❤",
+      rating: 5,
+      initials: "D"
+    },
+    {
+      id: 11,
+      name: "Ranshan",
+      location: "Instagram",
+      text: "We love the candle and danii lights it when she wants the room smelling delightful ❤ thank you and we definitely are thankful",
+      rating: 5,
+      initials: "R"
+    },
+    {
+      id: 12,
+      name: "Savanya",
+      location: "Instagram",
+      text: "Aww! I'm glad to have come across your store! Happy customer here. Keep up the good work ❤😇",
+      rating: 5,
+      initials: "S"
+    },
+    {
+      id: 13,
+      name: "Zafra",
+      location: "Instagram",
+      text: "Of course ! The candle smells amazing and it burns nicely too ❤🫶🏾",
+      rating: 5,
+      initials: "Z"
+    },
+    {
+      id: 14,
+      name: "Nuwan",
+      location: "Instagram",
+      text: "It's really gud love it 😍",
+      rating: 5,
+      initials: "N"
+    },
+    {
+      id: 15,
+      name: "Chandeepa",
+      location: "Instagram",
+      text: "I absolutely love the design too. Thanks a lot again. Omgggggg I love it guys. Definitely buying againnn.",
+      rating: 5,
+      initials: "C"
+    },
+    {
+      id: 16,
+      name: "Tharika",
+      location: "Instagram",
+      text: "Love it. Green tea was a good idea..",
+      rating: 5,
+      initials: "T"
+    },
+    {
+      id: 17,
+      name: "Shenara",
+      location: "Instagram",
+      text: "I bought the vanilla one and have been using your candle since then. It smells amazing and really fills up the whole room. The smell stays in the room even until the next day which is so good for a candle that small. Thank you so much",
+      rating: 5,
+      initials: "S"
     }
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [touchStart, setTouchStart] = useState(0);
-  const [touchEnd, setTouchEnd] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setVisibleCards(1);
+      } else if (window.innerWidth < 1024) {
+        setVisibleCards(2);
+      } else {
+        setVisibleCards(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     let interval;
     if (isAutoPlaying) {
       interval = setInterval(() => {
         nextSlide();
-      }, 5000); // Auto advance every 5 seconds
+      }, 4000);
     }
     return () => clearInterval(interval);
-  }, [currentIndex, isAutoPlaying]);
+  }, [currentIndex, isAutoPlaying, visibleCards]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1));
+    setCurrentIndex((prevIndex) => 
+      prevIndex >= testimonials.length - visibleCards 
+        ? 0 
+        : prevIndex + 1
+    );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 
+        ? testimonials.length - visibleCards 
+        : prevIndex - 1
+    );
   };
 
   const goToSlide = (index) => {
     setCurrentIndex(index);
-    setIsAutoPlaying(false); // Pause autoplay when manually navigating
-    // Resume autoplay after 10 seconds of inactivity
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  const handleTouchStart = (e) => {
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    if (touchStart - touchEnd > 50) {
-      // Swipe left
-      nextSlide();
-    } else if (touchStart - touchEnd < -50) {
-      // Swipe right
-      prevSlide();
-    }
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 8000);
   };
 
   const renderStars = (rating) => {
-    const stars = [];
-    for (let i = 0; i < 5; i++) {
-      stars.push(
-        <span key={i} className={i < rating ? "star filled" : "star"}>
-          ★
-        </span>
-      );
+    return Array.from({ length: 5 }, (_, i) => (
+      <span key={i} className={`ts-star ${i < rating ? 'ts-filled' : ''}`}>
+        ★
+      </span>
+    ));
+  };
+
+  const getVisibleTestimonials = () => {
+    const result = [];
+    for (let i = 0; i < visibleCards; i++) {
+      const index = (currentIndex + i) % testimonials.length;
+      result.push(testimonials[index]);
     }
-    return stars;
+    return result;
   };
 
   return (
-    <section className="testimonial-section">
-      <div className="section-header">
-        <h2>What Our Customers Say</h2>
-        <div className="candle-divider">
-          <div className="candle">
-            <div className="testo-flame"></div>
-          </div>
-        </div>
-        <p>reviews from our candle community</p>
+    <div className="ts-testimonial-section">
+      <div className="ts-header">
+        <div className="ts-subtitle">Customer Reviews</div>
+        <h2 className="ts-title">What Our Candle Lovers Say</h2>
+        <p className="ts-description">
+          Discover why thousands of customers choose our handcrafted candles for their homes
+        </p>
       </div>
 
-      <div 
-        className="testimonial-slider"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <button className="slider-arrow prev" onClick={prevSlide}>&lsaquo;</button>
-        
-        <div className="slider-container">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={testimonial.id} 
-              className={`testimonial-card ${index === currentIndex ? 'active' : ''}`}
-              style={{
-                transform: `translateX(${(index - currentIndex) * 100}%)`,
-                opacity: index === currentIndex ? 1 : 0
-              }}
-            >
-              <div className="testimonial-content">
-                <div className="quote-icon">&ldquo;</div>
-                <p className="testimonial-text">{testimonial.text}</p>
-                <div className="rating">
-                  {renderStars(testimonial.rating)}
-                </div>
+      <div className="ts-slider-container">
+        <button 
+          className="ts-nav-button ts-nav-prev"
+          onClick={prevSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          aria-label="Previous testimonials"
+        >
+          ‹
+        </button>
+
+        <div className="ts-slider-track">
+          {getVisibleTestimonials().map((testimonial, index) => (
+            <div key={`${testimonial.id}-${currentIndex}`} className="ts-testimonial-card">
+              <div className="ts-quote-mark">"</div>
+              
+              <div className="ts-rating">
+                {renderStars(testimonial.rating)}
               </div>
-              <div className="testimonial-author">
-                <div className="author-image">
-                  <img src={testimonial.image} alt={`${testimonial.name}`} onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "/images/testimonials/default-avatar.jpg";
-                  }} />
+
+              <p className="ts-testimonial-text">
+                {testimonial.text}
+              </p>
+
+              <div className="ts-author">
+                <div className="ts-avatar">
+                  {testimonial.initials}
                 </div>
-                <div className="author-info">
-                  <h4>{testimonial.name}</h4>
-                  <p>{testimonial.location}</p>
+                <div className="ts-author-info">
+                  <h4 className="ts-author-name">{testimonial.name}</h4>
+                  <p className="ts-author-location">
+                    <svg className="ts-location-icon" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                    </svg>
+                    {testimonial.location}
+                  </p>
                 </div>
               </div>
             </div>
           ))}
         </div>
-        
-        <button className="slider-arrow next" onClick={nextSlide}>&rsaquo;</button>
+
+        <button 
+          className="ts-nav-button ts-nav-next"
+          onClick={nextSlide}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+          aria-label="Next testimonials"
+        >
+          ›
+        </button>
       </div>
 
-      <div className="slider-indicators">
-        {testimonials.map((_, index) => (
+      <div className="ts-indicators">
+        {Array.from({ length: Math.ceil(testimonials.length / visibleCards) }, (_, index) => (
           <button
             key={index}
-            className={`indicator ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            aria-label={`Go to testimonial ${index + 1}`}
+            className={`ts-indicator ${Math.floor(currentIndex / visibleCards) === index ? 'ts-active' : ''}`}
+            onClick={() => goToSlide(index * visibleCards)}
+            aria-label={`Go to testimonial group ${index + 1}`}
           />
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 

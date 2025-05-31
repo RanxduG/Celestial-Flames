@@ -14,12 +14,14 @@ import Footer from './Components/Footer/Footer';
 import ContactUs from './Pages/ContactUs';
 import AboutUs from './Pages/AboutUs';
 import Catalog from './Pages/Catalog';
+import CandleCare from './Pages/CandleCare';
+import AboutCandles from './Pages/AboutCandles';
 import ReadyMadeItems from './Pages/ReadyMadeItems';
 import { useContext } from 'react';
 import { ShopContext } from './Context/ShopContext';
 
 function App() {
-  const { categoryBanners } = useContext(ShopContext);
+  // const { categoryBanners } = useContext(ShopContext);
   return (
     <div>
       <BrowserRouter>
@@ -27,11 +29,12 @@ function App() {
         <Routes>
           <Route index path="/" element={<Home />} />
           <Route path="/Shop" element={<Shop />} />
-          <Route path="/Collection/Seasonal" element={<ShopCategory banner={categoryBanners[0]} category='Seasonal Collection'  />} />
-            <Route path="/Collection/Classic" element={<ShopCategory banner={categoryBanners[0]} category='Mold Collection' />} />
-            <Route path="/Collection/Gel" element={<ShopCategory banner={categoryBanners[1]} category='Glass Collection' />} />
-            <Route path="/Others" element={<ShopCategory banner={categoryBanners[2]} category='Other Collection' />} />
-            <Route path="/Tins" element={<ShopCategory banner={categoryBanners[3]} category='Tin Collection' />} />
+          <Route path="/collection/Gel" element={<ShopCategory collection='Gel Wax'  />} />
+          <Route path="/collection/Soy" element={<ShopCategory collection='Soy Wax' />} />
+          <Route path="/collection/Fusion" element={<ShopCategory collection='Fusion' />} />
+          <Route path="/collection/Budget" element={<ShopCategory collection='budget' />} />
+          <Route path="/collection/Seasonal" element={<ShopCategory collection='seasonal' />} />
+          <Route path="/collection/Giftset" element={<ShopCategory collection='giftset' />} />
           <Route path="/product">
             <Route index element={<Product />} />
             <Route path=":productId" element={<Product />} />
@@ -49,6 +52,8 @@ function App() {
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/Catalog" element={<Catalog />} />
+          <Route path="/CandleCare" element={<CandleCare />} />
+          <Route path="/AboutCandles" element={<AboutCandles />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductGallery.css';
 import { ShopContext } from '../../Context/ShopContext';
+import Item from '../Item/Item'; // Import the Item component
 
 const ProductGallery = () => {
-  const { allStocks, allProducts } = useContext(ShopContext);
+  const { allStocks, allProducts, addToCart } = useContext(ShopContext);
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [activeFilter, setActiveFilter] = useState('all');
@@ -17,93 +18,92 @@ const ProductGallery = () => {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   // Fragrance options
+  const fragranceOptions = [
+    // Spicy and Strong
+    { id: 'cinnamon', name: 'Cinnamon' },
+    { id: 'citronella', name: 'Citronella' },
+    { id: 'lemongrass', name: 'Lemongrass' },
+    
+    // Sweet and Subtle
+    { id: 'frenchVanilla', name: 'French Vanilla' },
+    { id: 'honeydew', name: 'Honeydew' },
+    { id: 'cafe', name: 'Cafe' },
+    
+    // Mint and Citrus
+    { id: 'peppermint', name: 'Peppermint' },
+    { id: 'teaLime', name: 'Tea & Lime' },
+    { id: 'lime', name: 'Lime' },
+    
+    // Fruity and Fresh
+    { id: 'raspberry', name: 'Raspberry' },
+    { id: 'apple', name: 'Apple' },
+    { id: 'greenTea', name: 'Green Tea' },
+    { id: 'aqua', name: 'Aqua' },
+    { id: 'teaLeaf', name: 'Tea Leaf' },
+    
+    // Flowerly and Earthy
+    { id: 'jasmine', name: 'Jasmine' },
+    { id: 'rose', name: 'Rose' },
+    { id: 'cherryBlossoms', name: 'Cherry Blossoms' },
+    { id: 'alwaysRose', name: 'Always Rose' },
+    { id: 'sweetFlower', name: 'Sweet Flower' },
+    { id: 'forest', name: 'Forest' },
+    
+    // Coffee and Beans
+    { id: 'roastedCoffee', name: 'Roasted Coffee' },
+    
+    // Sweet and Floral
+    { id: 'sweetheart', name: 'Sweetheart' },
+    
+    // Sweet and Spicy
+    { id: 'appleSpice', name: 'Apple Spice' },
+    { id: 'darkVanilla', name: 'Dark Vanilla' }
+  ];
 
-// Individual fragrances from both lists
-const fragranceOptions = [
-  // Spicy and Strong
-  { id: 'cinnamon', name: 'Cinnamon' },
-  { id: 'citronella', name: 'Citronella' },
-  { id: 'lemongrass', name: 'Lemongrass' },
-  
-  // Sweet and Subtle
-  { id: 'frenchVanilla', name: 'French Vanilla' },
-  { id: 'honeydew', name: 'Honeydew' },
-  { id: 'cafe', name: 'Cafe' },
-  
-  // Mint and Citrus
-  { id: 'peppermint', name: 'Peppermint' },
-  { id: 'teaLime', name: 'Tea & Lime' },
-  { id: 'lime', name: 'Lime' },
-  
-  // Fruity and Fresh
-  { id: 'raspberry', name: 'Raspberry' },
-  { id: 'apple', name: 'Apple' },
-  { id: 'greenTea', name: 'Green Tea' },
-  { id: 'aqua', name: 'Aqua' },
-  { id: 'teaLeaf', name: 'Tea Leaf' },
-  
-  // Flowerly and Earthy
-  { id: 'jasmine', name: 'Jasmine' },
-  { id: 'rose', name: 'Rose' },
-  { id: 'cherryBlossoms', name: 'Cherry Blossoms' },
-  { id: 'alwaysRose', name: 'Always Rose' },
-  { id: 'sweetFlower', name: 'Sweet Flower' },
-  { id: 'forest', name: 'Forest' },
-  
-  // Coffee and Beans
-  { id: 'roastedCoffee', name: 'Roasted Coffee' },
-  
-  // Sweet and Floral
-  { id: 'sweetheart', name: 'Sweetheart' },
-  
-  // Sweet and Spicy
-  { id: 'appleSpice', name: 'Apple Spice' },
-  { id: 'darkVanilla', name: 'Dark Vanilla' }
-];
+  // Mood options with associated fragrances
+  const moodOptions = [
+    { 
+      id: 'relaxing', 
+      name: 'Calm & Relaxing', 
+      fragrances: ['jasmine', 'sweetFlower', 'forest', 'greenTea', 'teaLeaf'] 
+    },
+    { 
+      id: 'energizing', 
+      name: 'Energizing', 
+      fragrances: ['lime', 'lemongrass', 'peppermint', 'citronella', 'aqua'] 
+    },
+    { 
+      id: 'cozy', 
+      name: 'Cozy & Warm', 
+      fragrances: ['cinnamon', 'frenchVanilla', 'cafe', 'roastedCoffee', 'appleSpice', 'darkVanilla'] 
+    },
+    { 
+      id: 'refreshing', 
+      name: 'Refreshing', 
+      fragrances: ['teaLime', 'aqua', 'honeydew', 'greenTea', 'raspberry'] 
+    },
+    { 
+      id: 'romantic', 
+      name: 'Romantic', 
+      fragrances: ['rose', 'cherryBlossoms', 'alwaysRose', 'sweetheart', 'jasmine'] 
+    },
+    {
+      id: 'fruitySensation',
+      name: 'Fruity Sensation',
+      fragrances: ['raspberry', 'apple', 'honeydew', 'appleSpice']
+    },
+    {
+      id: 'coffeeLovers',
+      name: 'Coffee Lovers',
+      fragrances: ['roastedCoffee', 'cafe', 'darkVanilla']
+    },
+    {
+      id: 'sweetIndulgence',
+      name: 'Sweet Indulgence',
+      fragrances: ['frenchVanilla', 'sweetFlower', 'sweetheart', 'darkVanilla']
+    }
+  ];
 
-// Mood options with associated fragrances
-const moodOptions = [
-  { 
-    id: 'relaxing', 
-    name: 'Calm & Relaxing', 
-    fragrances: ['jasmine', 'sweetFlower', 'forest', 'greenTea', 'teaLeaf'] 
-  },
-  { 
-    id: 'energizing', 
-    name: 'Energizing', 
-    fragrances: ['lime', 'lemongrass', 'peppermint', 'citronella', 'aqua'] 
-  },
-  { 
-    id: 'cozy', 
-    name: 'Cozy & Warm', 
-    fragrances: ['cinnamon', 'frenchVanilla', 'cafe', 'roastedCoffee', 'appleSpice', 'darkVanilla'] 
-  },
-  { 
-    id: 'refreshing', 
-    name: 'Refreshing', 
-    fragrances: ['teaLime', 'aqua', 'honeydew', 'greenTea', 'raspberry'] 
-  },
-  { 
-    id: 'romantic', 
-    name: 'Romantic', 
-    fragrances: ['rose', 'cherryBlossoms', 'alwaysRose', 'sweetheart', 'jasmine'] 
-  },
-  {
-    id: 'fruitySensation',
-    name: 'Fruity Sensation',
-    fragrances: ['raspberry', 'apple', 'honeydew', 'appleSpice']
-  },
-  {
-    id: 'coffeeLovers',
-    name: 'Coffee Lovers',
-    fragrances: ['roastedCoffee', 'cafe', 'darkVanilla']
-  },
-  {
-    id: 'sweetIndulgence',
-    name: 'Sweet Indulgence',
-    fragrances: ['frenchVanilla', 'sweetFlower', 'sweetheart', 'darkVanilla']
-  }
-];
   // Filter categories
   const filterCategories = [
     { id: 'type', name: 'Type' },
@@ -136,6 +136,66 @@ const moodOptions = [
     { value: 'popular', label: 'Most Popular' },
   ];
 
+  // Helper functions for Item component
+  const getProductNameByStockId = (itemId) => {
+    const product = allProducts?.find(p => p.id === itemId);
+    return product ? product.name : 'Candle';
+  };
+
+  const getWaxTypeByStockId = (stockId) => {
+    const stock = allStocks?.find(s => s.id === stockId);
+    const product = allProducts?.find(p => p.id === stock?.item_id);
+    if (product && product.category && Array.isArray(product.category)) {
+      return product.category.find(cat => cat.includes('Wax')) || product.category[0];
+    }
+    return 'Soy Wax';
+  };
+
+  const getProductCategoryByStockId = (stockId) => {
+    const stock = allStocks?.find(s => s.id === stockId);
+    const product = allProducts?.find(p => p.id === stock?.item_id);
+    if (product && product.category) {
+      return Array.isArray(product.category) ? product.category.join(', ') : product.category;
+    }
+    return 'Candle';
+  };
+
+  const handleAddToCart = (product) => {
+    if (addToCart && product.stock > 0) {
+      addToCart(product.id);
+    }
+  };
+
+  const formatPrice = (price) => {
+    return `Rs. ${price}`;
+  };
+
+  const renderStars = (rating) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+    return (
+      <div className="product-rating">
+        {[...Array(fullStars)].map((_, i) => (
+          <span key={i} className="star filled">★</span>
+        ))}
+        {hasHalfStar && <span className="star half">★</span>}
+        {[...Array(emptyStars)].map((_, i) => (
+          <span key={i + fullStars} className="star empty">★</span>
+        ))}
+        <span className="rating-text">({rating.toFixed(1)})</span>
+      </div>
+    );
+  };
+
+  const getBadgeType = (product) => {
+    if (product.popular) return 'Best Seller';
+    if (product.new_price < product.old_price) return 'Sale';
+    // You can add logic for "New" badge based on creation date
+    return '';
+  };
+
   useEffect(() => {
     if (!allStocks || !allProducts || allStocks.length === 0) {
       return;
@@ -143,7 +203,7 @@ const moodOptions = [
 
     // Get the first 8 products for the gallery
     const galleryProducts = allStocks.slice(0, 8).map(stock => {
-      const product = allProducts.find(p => p.id === stock.id);
+      const product = allProducts.find(p => p.id === stock.item_id);
       return {
         ...stock,
         name: product ? product.name : 'Unknown Product',
@@ -490,47 +550,20 @@ const moodOptions = [
         {isLoading ? (
           renderSkeletons()
         ) : filteredProducts.length > 0 ? (
-          filteredProducts.map(product => (
-            <div key={product.id} className="gallery-product">
-              {product.popular && <div className="bestseller-badge">Best Seller</div>}
-              {product.new_price < product.old_price && (
-                <div className="sale-badge">Sale</div>
-              )}
-              
-              <Link to={`/readymade/?productId=${product.id}&itemId=${product.item_id}`} className="gallery-product-link">
-                <div className="gallery-product-image">
-                  <img src={product.imageUrl} alt={product.name} />
-                  <div className="gallery-product-overlay">
-                    <button className="quick-view-btn">Quick View</button>
-                  </div>
-                </div>
-              </Link>
-              
-              <div className="gallery-product-details">
-                <div className="gallery-product-category">
-                  {product.category && Array.isArray(product.category) 
-                    ? product.category.join(', ') 
-                    : product.category}
-                </div>
-                <h3 className="gallery-product-name">
-                  {product.scent} {product.name}
-                </h3>
-                <div className="gallery-product-price">
-                  {product.old_price > product.new_price && (
-                    <span className="old-price">Rs. {product.old_price}</span>
-                  )}
-                  <span className="new-price">Rs. {product.new_price}</span>
-                </div>
-                <div className="gallery-product-actions">
-                  <button 
-                    className={`add-to-cart-btn ${product.stock === 0 ? 'disabled' : ''}`}
-                    disabled={product.stock === 0}
-                  >
-                    {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
-                  </button>
-                </div>
-              </div>
-            </div>
+          filteredProducts.map((product, index) => (
+            <Item
+              key={product.id}
+              product={product}
+              index={index}
+              isVisible={isVisible}
+              getProductNameByStockId={getProductNameByStockId}
+              getWaxTypeByStockId={getWaxTypeByStockId}
+              getProductCategoryByStockId={getProductCategoryByStockId}
+              handleAddToCart={handleAddToCart}
+              formatPrice={formatPrice}
+              renderStars={renderStars}
+              getBadgeType={getBadgeType}
+            />
           ))
         ) : (
           <div className="no-products">

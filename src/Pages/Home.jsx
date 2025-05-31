@@ -2,8 +2,9 @@ import React from 'react';
 import WelcomeBanner from '../Components/WelcomeBanner/WelcomeBanner';
 import FeaturesSection from '../Components/FeaturesSection/FeaturesSection';
 import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
-// import CustomizationProcess from '../Components/CustomizationProcess/CustomizationProcess';
-// import TestimonialSlider from '../Components/TestimonialSlider/TestimonialSlider';
+import CustomizationProcess from '../Components/CustomizationProcess/CustomizationProcess';
+import TestimonialSlider from '../Components/TestimonialSlider/TestimonialSlider';
+import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
 // import NewsletterSection from '../Components/NewsletterSection/NewsletterSection';
 
 const Home = () => {
@@ -11,10 +12,10 @@ const Home = () => {
     <div className="home-page">
       <WelcomeBanner />
       <FeaturesSection />
-      <ProductShowcase />
-    {/* <CustomizationProcess />
+      <CollectionsShowcase />
+      <CustomizationProcess />
       <TestimonialSlider />
-      <NewsletterSection /> */}
+      {/* <NewsletterSection /> */}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import './CatalogItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Filter, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowRight, Filter, ChevronDown, ChevronUp, FileText, Download, Eye } from 'lucide-react';
 
 const CatalogItems = () => {
     const { allProducts } = useContext(ShopContext);
@@ -23,6 +23,9 @@ const CatalogItems = () => {
     // Seasons and wax types for filters
     const seasons = ['Christmas', 'Valentine', 'Halloween', 'Summer', 'Spring'];
     const waxTypes = ['Soy Wax', 'Gel Wax'];
+
+    // PDF catalog path
+    const catalogPdfPath = '../Assets/Catalog/Celestial Flames Product Catalog Presentation.pdf';
 
     // Initialize products when data is loaded
     useEffect(() => {
@@ -114,6 +117,21 @@ const CatalogItems = () => {
         setActiveFilters(clearedFilters);
         setActiveCategory('All');
         applyFilters('All', clearedFilters);
+    };
+
+    // Handle PDF preview
+    const handlePdfPreview = () => {
+        window.open(catalogPdfPath, '_blank');
+    };
+
+    // Handle PDF download
+    const handlePdfDownload = () => {
+        const link = document.createElement('a');
+        link.href = catalogPdfPath;
+        link.download = 'Celestial Flames Product Catalog.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
     };
 
     // Get seasonal indicator color
@@ -208,6 +226,35 @@ const CatalogItems = () => {
                                 ))}
                             </div>
                         )}
+                    </div>
+
+                    {/* PDF Catalog Download Section */}
+                    <div className="pdf-catalog-section">
+                        <div className="pdf-catalog-header">
+                            <FileText size={20} />
+                            <h4>Product Catalog</h4>
+                        </div>
+                        <p className="pdf-catalog-description">
+                            Download our complete product catalog for offline viewing
+                        </p>
+                        <div className="pdf-catalog-actions">
+                            <button 
+                                className="pdf-preview-btn"
+                                onClick={handlePdfPreview}
+                                title="Preview PDF"
+                            >
+                                <Eye size={16} />
+                                Preview
+                            </button>
+                            <button 
+                                className="pdf-download-btn"
+                                onClick={handlePdfDownload}
+                                title="Download PDF"
+                            >
+                                <Download size={16} />
+                                Download
+                            </button>
+                        </div>
                     </div>
                 </div>
                 

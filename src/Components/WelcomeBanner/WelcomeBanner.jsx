@@ -43,7 +43,6 @@ const WelcomeBanner = () => {
             style={{ backgroundImage: `url(${slide})` }}
           />
         ))}
-        <div className="hero-overlay" />
       </div>
 
       {/* Main Content */}

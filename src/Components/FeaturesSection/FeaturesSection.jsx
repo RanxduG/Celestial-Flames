@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './FeaturesSection.css';
-
+import { Link } from 'react-router-dom';
 const FeaturesSection = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -84,8 +84,8 @@ const FeaturesSection = () => {
             <h3>Ready to Experience the Difference?</h3>
             <p>Explore our collections or create your custom candle today</p>
             <div className="cta-buttons">
-              <button className="btn-explore">Explore Collections</button>
-              <button className="btn-custom">Start Customizing</button>
+              <Link to='/shop'><button className="btn-explore">Explore Collections</button></Link>
+              <Link to='/catalog'><button className="btn-custom">Start Customizing</button></Link>
             </div>
           </div>
         </div>
