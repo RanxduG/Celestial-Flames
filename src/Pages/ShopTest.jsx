@@ -41,11 +41,10 @@ const ShopTest = () => {
   return (
     <div className="shop-container">
       <ShopHero />
-      <ProductShowcase productGalleryRef={productGalleryRef}/>
-      <CollectionsShowcase />
       <div ref={productGalleryRef} id="product-gallery">
         <ProductGallery />
       </div>
+      <ProductShowcase productGalleryRef={productGalleryRef}/>
     </div>
   );
 };

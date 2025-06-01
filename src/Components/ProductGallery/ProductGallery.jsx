@@ -25,7 +25,7 @@ const ProductGallery = () => {
     { id: 'lemongrass', name: 'Lemongrass' },
     
     // Sweet and Subtle
-    { id: 'frenchVanilla', name: 'French Vanilla' },
+    { id: 'Vanilla', name: 'Vanilla' },
     { id: 'honeydew', name: 'Honeydew' },
     { id: 'cafe', name: 'Cafe' },
     
@@ -35,7 +35,7 @@ const ProductGallery = () => {
     { id: 'lime', name: 'Lime' },
     
     // Fruity and Fresh
-    { id: 'raspberry', name: 'Raspberry' },
+    { id: 'raspberry', name: 'Raspberry', stock: 0 },
     { id: 'apple', name: 'Apple' },
     { id: 'greenTea', name: 'Green Tea' },
     { id: 'aqua', name: 'Aqua' },
@@ -47,7 +47,6 @@ const ProductGallery = () => {
     { id: 'cherryBlossoms', name: 'Cherry Blossoms' },
     { id: 'alwaysRose', name: 'Always Rose' },
     { id: 'sweetFlower', name: 'Sweet Flower' },
-    { id: 'forest', name: 'Forest' },
     
     // Coffee and Beans
     { id: 'roastedCoffee', name: 'Roasted Coffee' },
@@ -57,7 +56,9 @@ const ProductGallery = () => {
     
     // Sweet and Spicy
     { id: 'appleSpice', name: 'Apple Spice' },
-    { id: 'darkVanilla', name: 'Dark Vanilla' }
+    { id: 'darkVanilla', name: 'Dark Vanilla' },
+    // Earthy and Natural
+    { id: 'strawberry', name: 'Strawberry' },
   ];
 
   // Mood options with associated fragrances
@@ -75,7 +76,7 @@ const ProductGallery = () => {
     { 
       id: 'cozy', 
       name: 'Cozy & Warm', 
-      fragrances: ['cinnamon', 'frenchVanilla', 'cafe', 'roastedCoffee', 'appleSpice', 'darkVanilla'] 
+      fragrances: ['cinnamon', 'Vanilla', 'cafe', 'roastedCoffee', 'appleSpice', 'darkVanilla'] 
     },
     { 
       id: 'refreshing', 
@@ -100,7 +101,12 @@ const ProductGallery = () => {
     {
       id: 'sweetIndulgence',
       name: 'Sweet Indulgence',
-      fragrances: ['frenchVanilla', 'sweetFlower', 'sweetheart', 'darkVanilla']
+      fragrances: ['Vanilla', 'sweetFlower', 'sweetheart', 'darkVanilla']
+    },
+    {
+      id: 'spicyDelight',
+      name: 'Spicy Delight',
+      fragrances: ['cinnamon', 'appleSpice', 'teaLime']
     }
   ];
 
@@ -115,8 +121,8 @@ const ProductGallery = () => {
   // Type filters
   const typeFilters = [
     { id: 'all', name: 'All Products' },
-    { id: 'soy-wax', name: 'Soy Wax' },
-    { id: 'gel-wax', name: 'Gel Wax' },
+    { id: 'Soy Wax', name: 'Soy Wax' },
+    { id: 'Gel Wax', name: 'Gel Wax' },
     { id: 'seasonal', name: 'Seasonal' },
   ];
 
@@ -203,7 +209,7 @@ const ProductGallery = () => {
 
     // Get the first 8 products for the gallery
     const galleryProducts = allStocks.slice(0, 8).map(stock => {
-      const product = allProducts.find(p => p.id === stock.item_id);
+      const product = allProducts.find(p => p.id === stock.id);
       return {
         ...stock,
         name: product ? product.name : 'Unknown Product',
@@ -263,10 +269,10 @@ const ProductGallery = () => {
     }
     
     const filtered = products.filter(product => {
-      if (filterType === 'soy-wax' && product.category && product.category.includes('Soy Wax')) {
+      if (filterType === 'Soy Wax' && product.waxtype && product.waxtype.includes('Soy Wax')) {
         return true;
       }
-      if (filterType === 'gel-wax' && product.category && product.category.includes('Gel Wax')) {
+      if (filterType === 'Gel Wax' && product.waxtype && product.waxtype.includes('Gel Wax')) {
         return true;
       }
       if (filterType === 'seasonal' && product.category && product.category.includes('Seasonal')) {

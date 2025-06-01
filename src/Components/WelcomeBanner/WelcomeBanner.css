@@ -128,7 +128,7 @@
 }
 
 .title-line:first-child {
-  color: #a68a64;
+  color: White;
   font-weight: 400;
 }
 
@@ -227,7 +227,7 @@
 }
 
 .float-2 {
-  top: 60%;
+  top: 50%;
   right: 15%;
   animation-delay: -4s;
 }

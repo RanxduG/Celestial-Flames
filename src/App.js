@@ -8,23 +8,33 @@ import Product from './Pages/Product';
 import Cart from './Pages/Cart';
 import Home from './Pages/Home';
 import Footer from './Components/Footer/Footer';
-// import classic_banner from './Components/Assets/Banners/Classic banner.jpg';
-// import elemental_banner from './Components/Assets/Banners/Elemental banner.jpg';
-// import crystal_banner from './Components/Assets/Banners/Crystal banner.jpg';
-import ContactUs from './Pages/ContactUs';
+import Contact from './Pages/Contact';
 import AboutUs from './Pages/AboutUs';
 import Catalog from './Pages/Catalog';
 import CandleCare from './Pages/CandleCare';
 import AboutCandles from './Pages/AboutCandles';
 import ReadyMadeItems from './Pages/ReadyMadeItems';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ShopContext } from './Context/ShopContext';
+import { useLocation } from 'react-router-dom';
+
+// ScrollToTop component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   // const { categoryBanners } = useContext(ShopContext);
   return (
     <div>
       <BrowserRouter>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route index path="/" element={<Home />} />
@@ -49,7 +59,7 @@ function App() {
             <Route index element={<LoginSignup />} />
             <Route path=":state" element={<LoginSignup />} />
           </Route>
-          <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/contactus" element={<Contact />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/Catalog" element={<Catalog />} />
           <Route path="/CandleCare" element={<CandleCare />} />

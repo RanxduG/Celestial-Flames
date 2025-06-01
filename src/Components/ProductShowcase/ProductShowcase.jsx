@@ -249,7 +249,7 @@ const ProductShowcase = ({ productGalleryRef }) => {
               <p>Explore our complete collection or create a custom candle just for you</p>
               <div className="cta-buttons">
                 <button className="btn-browse-ps" onClick={handleScrollToProductGallery}>Browse All Products</button>
-                <button className="btn-custom-ps">Create Custom Candle</button>
+                <Link to='/catalog'><button className="btn-custom-ps">Create Custom Candle</button></Link>
               </div>
             </div>
           </div>

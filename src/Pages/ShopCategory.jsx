@@ -4,6 +4,7 @@ import { ShopContext } from '../Context/ShopContext';
 import Item from '../Components/Item/Item';
 import soy_wax_banner from '../Components/Assets/Banners/soy_wax_banner.png';
 import gel_wax_banner from '../Components/Assets/Banners/gel_wax_banner.png';
+import { Link } from 'react-router-dom';
 
 const ShopCategory = (props) => {
   const { allStocks, allProducts, getBadgeType } = useContext(ShopContext);
@@ -106,13 +107,6 @@ const ShopCategory = (props) => {
           <div className="sc-hero-overlay"></div>
         </div>
         <div className="sc-hero-content">
-          <div className="sc-breadcrumb">
-            <span>Home</span>
-            <span className="sc-separator">›</span>
-            <span>Collections</span>
-            <span className="sc-separator">›</span>
-            <span className="sc-current">{getCollectionName()}</span>
-          </div>
           <h1>{getCollectionName()}</h1>
           <p>Discover our carefully curated selection of premium handcrafted candles</p>
           <div className="sc-hero-stats">
@@ -129,6 +123,13 @@ const ShopCategory = (props) => {
       </div>
 
       {/* Controls Section */}
+      <div className="product-breadcrumb">
+        <Link to='/'><a>Home</a></Link>
+        <span className="sc-separator">/</span>
+        <span>Collections</span>
+        <span className="sc-separator">/</span>
+        <span className="sc-current">{getCollectionName()}</span>
+      </div>
       {filteredProducts.length > 0 && (
         <div className="sc-category-controls">
           <div className="sc-controls-left">

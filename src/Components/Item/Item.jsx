@@ -14,6 +14,7 @@ const Item = ({
   renderStars,
   getBadgeType 
 }) => {
+  console.log(product);
   return (
     <div
       className={`product-card ${isVisible ? 'animate-in' : ''}`}
@@ -47,7 +48,7 @@ const Item = ({
         </div>
         
         <h3 className="product-name">
-          {product.scent} {getProductNameByStockId(product.item_id)}
+          {product.scent} {product.name ? product.name : getProductNameByStockId(product.item_id)}
         </h3>
         
         <p className="product-description">

@@ -71,6 +71,8 @@ const Navbar = () => {
                     <li><Link to="/Shop" onClick={closeMenu}>Shop</Link></li>
                     <li><Link to="/Catalog" onClick={closeMenu}>Catalog</Link></li>
                     <li><Link to="/bulk" onClick={closeMenu}>Bulk Order</Link></li>
+                    <li><Link to="/aboutus" onClick={closeMenu}>About Us</Link></li>
+                    <li><Link to="/contactus" onClick={closeMenu}>Contact Us</Link></li>
                 </ul>
 
                 {/* Cart and Mobile Menu */}

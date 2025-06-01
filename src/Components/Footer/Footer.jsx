@@ -161,13 +161,13 @@ const Footer = () => {
                 <div className="contact-item">
                   <span className="contact-icon">📧</span>
                   <a href="mailto:info@celestialflames.lk" className="contact-link">
-                    info@celestialflames.lk
+                    celestialflames.candles@gmail.com
                   </a>
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">📱</span>
                   <a href="tel:+94712345678" className="contact-link">
-                    +94 71 234 5678
+                    +94 77 008 1559
                   </a>
                 </div>
                 <div className="contact-item">

@@ -16,9 +16,9 @@ const CustomizationProcess = () => {
       title: 'Choose Your Candle',
       description: 'Select from our carefully curated collections, each designed to create a unique ambiance for your space.',
       features: [
-        'Classic Collection - Timeless elegance',
-        'Elemental Collection - Nature-inspired designs',
-        'Crystal Collection - Luxury meets spirituality'
+        'Glass Collection - Timeless elegance',
+        'Mold Collection - Nature-inspired designs',
+        'Special Collection - Luxury meets spirituality'
       ]
     },
     {
@@ -28,8 +28,8 @@ const CustomizationProcess = () => {
       description: 'Pick the perfect wax blend that matches your preferences for burn time, scent throw, and sustainability.',
       features: [
         'Soy Wax - Eco-friendly and clean burning',
-        'Beeswax - Natural and long-lasting',
-        'Paraffin Wax - Strong scent throw'
+        'Gel Wax - Natural and long-lasting',
+        'Coconut Wax - Strong scent throw (Coming Soon)'
       ]
     },
     {
