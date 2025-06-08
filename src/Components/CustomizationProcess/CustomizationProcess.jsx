@@ -28,7 +28,7 @@ const CustomizationProcess = () => {
       description: 'Pick the perfect wax blend that matches your preferences for burn time, scent throw, and sustainability.',
       features: [
         'Soy Wax - Eco-friendly and clean burning',
-        'Gel Wax - Natural and long-lasting',
+        'Gel Wax - Unique visual appeal',
         'Coconut Wax - Strong scent throw (Coming Soon)'
       ]
     },

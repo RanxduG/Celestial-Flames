@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Item.css';
 
@@ -14,7 +14,30 @@ const Item = ({
   renderStars,
   getBadgeType 
 }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
   console.log(product);
+  
+  // Get all available product images
+  const productImages = [
+    product.img1Url,
+    product.img2Url,
+    product.img3Url
+  ].filter(Boolean); // Remove any undefined/null values
+  
+  // If no images available, fallback to imageUrl
+  const displayImages = productImages.length > 0 ? productImages : [product.imageUrl].filter(Boolean);
+  
+  const handleImageHover = () => {
+    if (displayImages.length > 1) {   
+      setCurrentImageIndex((prev) => (prev + 1) % displayImages.length);
+    }
+  };
+  
+  const handleImageLeave = () => {
+    setCurrentImageIndex(0);
+  };
+
   return (
     <div
       className={`product-card ${isVisible ? 'animate-in' : ''}`}
@@ -26,11 +49,26 @@ const Item = ({
       
       <div className="product-image-container">
         <img
-          src={product.imageUrl}
+          src={displayImages[currentImageIndex] || product.imageUrl}
           alt={product.scent}
           className="product-image"
           loading="lazy"
+          onMouseEnter={handleImageHover}
+          onMouseLeave={handleImageLeave}
         />
+        
+        {/* Image indicators if multiple images exist */}
+        {displayImages.length > 1 && (
+          <div className="image-indicators">
+            {displayImages.map((_, idx) => (
+              <div 
+                key={idx}
+                className={`indicator ${idx === currentImageIndex ? 'active' : ''}`}
+              />
+            ))}
+          </div>
+        )}
+        
         <Link to={`/readymade/?productId=${product.id}&itemId=${product.item_id}`} className="gallery-product-link">
           <div className="image-overlay">
             <div className="overlay-actions">
@@ -60,7 +98,7 @@ const Item = ({
         <div className="product-details">
           <div className="burn-time">
             <span className="detail-icon">⏰</span>
-            <span>{getWaxTypeByStockId(product.id)?.includes('Gel') ? '55-60 hours' : '40-45 hours'}</span>
+            <span>{product.burntime}</span>
           </div>
         </div>
 

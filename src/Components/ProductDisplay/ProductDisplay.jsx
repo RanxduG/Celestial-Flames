@@ -8,7 +8,7 @@ const ProductDisplay = ({ product }) => {
   const [alertVisible, setAlertVisible] = useState(false);
   const [mainImage, setMainImage] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [averageRating, setAverageRating] = useState(0);
+  const [averageRating, setAverageRating] = useState(0); // Hardcoded to 3.9
   const [selectedScent, setSelectedScent] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedColorName, setSelectedColorName] = useState(null);
@@ -24,11 +24,16 @@ const ProductDisplay = ({ product }) => {
   ];
 
   const specialScents = [
-    'Forest', 'Sweetheart', 'Apple Spice', 'Dark Vanilla', 'Tea Leaf'
-  ];
+    'Sweetheart', 'Apple Spice', 'Dark Vanilla', 'Tea Leaf'
+  ];  
 
   // Combined scent list (without duplicates)
   const allScents = [...regularScents, ...specialScents.filter(scent => !regularScents.includes(scent))];
+
+  // Calculate filled stars for rating display
+  const getFilledStars = () => {
+    return Math.round(averageRating); // This will give us 4 stars for 3.9 rating
+  };
 
   // Pastel colors
   const pastelColors = [
@@ -53,45 +58,26 @@ const ProductDisplay = ({ product }) => {
 
   const { name, description, category } = getProductDetails();
 
-  // Determine if this is a mold collection product
-  const isMoldCollection = category.toLowerCase().includes('mold');
+  // Product images - always use the 3 standard images
+  const productImages = [
+    product.img1Url,
+    product.img2Url,
+    product.img3Url
+  ].filter(Boolean); // Remove any undefined/null values
 
   useEffect(() => {
-    // Set main image when product changes
-    setMainImage(product.imageUrl || product.img1Url);
+    // Set main image to first available image when product changes
+    setMainImage(productImages[0] || product.img1Url);
   }, [product]);
-
   useEffect(() => {
-    // Update color display when selectedColor changes
-    if (product.category === 'Glass Collection') {
-      // Dynamic image change based on selected color for Glass Collection
-      updateGlassCollectionImage();
-    } else if (isMoldCollection && selectedColor) {
-      // Update the color div for mold collection products
-      const colorDiv = document.querySelector('.product-color-preview');
-      if (colorDiv) {
-        colorDiv.style.backgroundColor = selectedColor;
-      }
-    }
-  }, [selectedColor, product.category, isMoldCollection]);
-
-  const updateGlassCollectionImage = () => {
-    if (!selectedColorName) return;
-    
-    // Map of color names to their image URLs
-    const colorToImageMap = {
-      'Light Pink': product['image_Light PinkUrl'] || product.img_pink,
-      'Peach': product['image_PeachUrl'] || product.img_peach,
-      'Baby Blue': product['image_Baby BlueUrl'] || product.img_babyblue,
-      'Sky Blue': product['image_Sky BlueUrl'] || product.img_skyblue,
-      'Light Green': product['image_Light GreenUrl'] || product.img_lightgreen,
-      'Mint': product['image_MintUrl'] || product.img_mint,
-      'Light Yellow': product['image_Light YellowUrl'] || product.img_lightyellow
-    };
-    
-    const newImageUrl = colorToImageMap[selectedColorName] || product.imageUrl || product.img1Url;
-    setMainImage(newImageUrl);
-  };
+  if (product.rating && product.rating.length > 0) {
+    const totalRating = product.rating.reduce((acc, r) => acc + r, 0);
+    const calculatedAverage = totalRating / product.rating.length;
+    setAverageRating(calculatedAverage);
+  } else {
+    setAverageRating(0);
+  }
+}, [product.rating]);
 
   const handleColorOptionChange = (option) => {
     setColorOption(option);
@@ -172,13 +158,6 @@ const ProductDisplay = ({ product }) => {
     ? Math.round(((product.old_price - (product.soy_price || product.new_price || product.price)) / product.old_price) * 100)
     : 0;
 
-  // Additional images (in a real implementation, these would come from your database)
-  const additionalImages = [
-    mainImage,
-    product.secondImageUrl || product.img2Url,
-    product.thirdImageUrl || product.img1Url || mainImage
-  ].filter(Boolean); // Remove any undefined/null values
-
   const areAllOptionsSelected = () => {
     if (colorOption === 'Existing') {
       return selectedColor && selectedScent;
@@ -195,17 +174,9 @@ const ProductDisplay = ({ product }) => {
           {discountPercentage > 0 && (
             <div className="product-discount-badge">-{discountPercentage}%</div>
           )}
-          
-          {/* Color preview overlay for mold collection products */}
-          {isMoldCollection && (
-            <>
-              <img className="product-mold-overlay" src={product.img2Url || product.secondImageUrl} alt="Mold Overlay" />
-              <div className="product-color-preview"></div>
-            </>
-          )}
         </div>
         <div className="product-display-thumbnail-grid">
-          {additionalImages.map((img, index) => (
+          {productImages.map((img, index) => (
             <div 
               key={index} 
               className={`product-thumbnail ${mainImage === img ? 'active' : ''}`}
@@ -226,19 +197,11 @@ const ProductDisplay = ({ product }) => {
               {[1, 2, 3, 4, 5].map((star) => (
                 <FiStar 
                   key={star} 
-                  className={star <= Math.round(averageRating) ? 'filled' : ''}
+                  className={star <= getFilledStars() ? 'filled' : ''}
                 />
               ))}
             </div>
-          </div>
-          <div className="product-availability">
-            {product.stock > 10 ? (
-              <span className="in-stock">In Stock</span>
-            ) : product.stock > 0 ? (
-              <span className="limited">Only {product.stock} left</span>
-            ) : (
-              <span className="out-of-stock">Out of Stock</span>
-            )}
+            <span className="rating-value">({averageRating})</span>
           </div>
         </div>
 

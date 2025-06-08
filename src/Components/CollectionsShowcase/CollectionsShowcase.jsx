@@ -5,8 +5,6 @@ import { ShopContext } from '../../Context/ShopContext';
 
 const CollectionsShowcase = () => {
   const { getStockById } = useContext(ShopContext);
-  const [celestialGlowImage, setCelestialGlowImage] = useState('');
-  const [twirllingHeartsImage, settwirllingHeartsImage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   
   // Collection data with initial placeholder images
@@ -15,30 +13,22 @@ const CollectionsShowcase = () => {
       id: 'Soy',
       name: "Luxury Soy Collection",
       description: "Indulge in premium soy wax candles with exotic scents",
-      imageUrl: celestialGlowImage, // Placeholder
+      imageUrl: "", // Placeholder
       totalProducts: 8,
-      featured: true
-    },
-    {
-      id: 'Gel',
-      name: "Gel Luxe Collection",
-      description: "Limited edition candles for every season",
-      imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
-      totalProducts: 6,
       featured: true
     },
     {
       id: "Fusion",
       name: "Fusion Wax Collection",
       description: "Transparent gel wax candles with mesmerizing designs",
-      imageUrl: celestialGlowImage,
+      imageUrl: "",
       totalProducts: 10,
       featured: true
     },
     {
       id: "Budget",
       name: "Budget-Friendly Deals",
-      description: "Transparent gel wax candles with mesmerizing designs",
+      description: "Affordable candles without compromising quality",
       imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
       totalProducts: 10,
       featured: true
@@ -46,15 +36,15 @@ const CollectionsShowcase = () => {
     {
       id: "Seasonal",
       name: "Seasonal Candle Delights",
-      description: "Transparent gel wax candles with mesmerizing designs",
-      imageUrl: twirllingHeartsImage,
+      description: "Celebrate every season with our exclusive candle collection",
+      imageUrl: "",
       totalProducts: 10,
       featured: true
     },
     {
       id: "Giftset",
       name: "Gift - Ready Collections",
-      description: "Transparent gel wax candles with mesmerizing designs",
+      description: "Perfectly curated gift sets for every occasion",
       imageUrl: "https://images.pexels.com/photos/7319294/pexels-photo-7319294.jpeg",
       totalProducts: 10,
       featured: true
@@ -66,36 +56,42 @@ const CollectionsShowcase = () => {
     const fetchCelestialGlowImage = async () => {
       try {
         // Get the specific item from your backend
-        const CG = getStockById("5");
+        const CG = getStockById("7");
         const TH = getStockById("4");
+        const CoffeeOasis = getStockById("6");
 
         
-        if (CG && CG.imageUrl) {
-          console.log("Found CelestialGlow item:", CG);
-          setCelestialGlowImage(CG.imageUrl);
-          
+        if (CG && CG.img1Url) {          
           // Update the first collection with the fetched image
           setCollections(prevCollections => {
             const updatedCollections = [...prevCollections];
             updatedCollections[0] = {
               ...updatedCollections[0],
-              imageUrl: CG.imageUrl
+              imageUrl: CG.img1Url
             };
             return updatedCollections;
           });
         } else {
           console.error("CelestialGlow item not found or has no image URL");
         }
-        if (TH && TH.imageUrl) {
-          console.log("Found TwirllingHearts item:", TH);
-          settwirllingHeartsImage(TH.imageUrl);
-          
+        if (TH && TH.img1Url) {          
           // Update the second collection with the fetched image
+          setCollections(prevCollections => {
+            const updatedCollections = [...prevCollections];
+            updatedCollections[3] = {
+              ...updatedCollections[3],
+              imageUrl: TH.img1Url
+            };
+            return updatedCollections;
+          });
+        }
+        if (CoffeeOasis && CoffeeOasis.img1Url) {          
+          // Update the third collection with the fetched image
           setCollections(prevCollections => {
             const updatedCollections = [...prevCollections];
             updatedCollections[1] = {
               ...updatedCollections[1],
-              imageUrl: TH.imageUrl
+              imageUrl: CoffeeOasis.img1Url
             };
             return updatedCollections;
           });
@@ -181,7 +177,7 @@ const CollectionsShowcase = () => {
       </div>
       
       <div className="collections-footer">
-        <Link to="/collections" className="view-all-collections">
+        <Link to="/shop" className="view-all-collections">
           View All Collections
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>

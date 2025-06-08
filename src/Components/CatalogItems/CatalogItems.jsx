@@ -304,10 +304,10 @@ const CatalogItems = () => {
                                         </div>
                                     )}
                                     <div className="catalog-item-image">
-                                        <img src={product.imageUrl} alt={product.name} />
+                                        <img src={product.img1Url} alt={product.name} />
                                         <div className="hover-overlay">
                                             <Link 
-                                                to={`/product/${product.id}`} 
+                                                to={`/product?productId=${product.id}`} 
                                                 onClick={() => window.scrollTo(0, 0)}
                                                 className="view-details-btn"
                                             >

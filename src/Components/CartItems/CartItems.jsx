@@ -177,7 +177,7 @@ const CartItems = () => {
                             <div key={`${product.id}-${index}`} className="cart-item">
                                 <div className="cart-item-grid">
                                     <img 
-                                        src={product.imageUrl} 
+                                        src={product.img1Url} 
                                         alt={product.name}
                                         className="cart-product-image"
                                     />

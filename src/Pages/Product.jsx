@@ -9,12 +9,11 @@ import { Link } from 'react-router-dom';
 const Product = () => {
   const [searchParams] = useSearchParams();
   const { allProducts } = useContext(ShopContext);
-  const { productId } = useParams();
   const [productIdFromSearch] = [searchParams.get('productId')];
   const [isLoading, setIsLoading] = useState(true);
   
 
-  const product = allProducts.find((product) => product.id === productId);
+  const product = allProducts.find((product) => product.id === productIdFromSearch);
   console.log('Product:', product);
 
     // Get related products (same collection or type)
@@ -38,7 +37,7 @@ const Product = () => {
       }, 1000);
       
       return () => clearTimeout(timer);
-    }, [productId]);
+    }, [productIdFromSearch]);
   
     if (isLoading) {
       return (

@@ -59,10 +59,10 @@ const ProductShowcase = ({ productGalleryRef }) => {
     },
     { 
       id: 'Gel Wax', 
-      name: 'Gel Wax', 
+      name: 'Contains Gel Wax', 
       count: products.filter(p => {
         const waxType = getWaxTypeByStockId(p.id);
-        return waxType && waxType.includes('Gel Wax');
+        return waxType && waxType.includes('Gel');
       }).length 
     }
   ];
@@ -106,7 +106,7 @@ const ProductShowcase = ({ productGalleryRef }) => {
     return `Rs. ${price.toLocaleString()}`;
   };
 
-  const renderStars = (rating = 4.5) => {
+const renderStars = (rating) => {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -118,9 +118,9 @@ const ProductShowcase = ({ productGalleryRef }) => {
         ))}
         {hasHalfStar && <span className="star half">★</span>}
         {[...Array(emptyStars)].map((_, i) => (
-          <span key={i} className="star empty">★</span>
+          <span key={i + fullStars} className="star empty">★</span>
         ))}
-        <span className="rating-text">({rating})</span>
+        <span className="rating-text">({rating.toFixed(1)})</span>
       </div>
     );
   };

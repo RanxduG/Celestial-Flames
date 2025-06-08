@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './ProductTabs.css';
 import { FiStar, FiUser, FiCalendar, FiMessageSquare } from 'react-icons/fi';
+import { ShopContext } from '../../Context/ShopContext';
 
 const ProductTabs = ({ product }) => {
   const [activeTab, setActiveTab] = useState('description');
+  const { allProducts } = useContext(ShopContext);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -74,7 +76,7 @@ const ProductTabs = ({ product }) => {
                 </tr>
                 <tr>
                   <td>Scent</td>
-                  <td>{product.scent || 'Unscented'}</td>
+                  <td>{product.scent || 'Select from above'}</td>
                 </tr>
                 <tr>
                   <td>Color</td>
@@ -86,7 +88,7 @@ const ProductTabs = ({ product }) => {
                 </tr>
                 <tr>
                   <td>Burn Time</td>
-                  <td>Approximately 40-50 hours</td>
+                  <td>{product.burntime}</td>
                 </tr>
                 <tr>
                   <td>Material</td>

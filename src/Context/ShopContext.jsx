@@ -5,10 +5,10 @@ import { getAllStock, getAllProducts, getHomeBanner, getCategoryBanner, getSeaso
 
 export const ShopContext = createContext(null);
 
-const getDefaultCart = () => {
+const getDefaultCart = (products) => {
     let cart = {};
-    for (let i = 0; i < all_products.length; i++) {
-        cart[all_products[i].id] = [];
+    for (let i = 0; i < products.length; i++) {
+        cart[products[i].id] = [];
     }
     return cart;
 };
@@ -19,7 +19,7 @@ const ShopContextProvider = (props) => {
     const [allStocks, setStocks] = useState([]);
 
     const promocode = 'CF202406';
-    const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [cartItems, setCartItems] = useState({});
     const [reviews, setReviews] = useState([]);
     const [discount, setDiscount] = useState(1);
     const [cartTotal, setCartTotal] = useState(0);
@@ -32,18 +32,16 @@ const ShopContextProvider = (props) => {
         try {
             const stocksData = await getAllStock();
             setStocks(stocksData.data);
-            console.log(stocksData.data);
             const productsData = await getAllProducts();
             setProducts(productsData.data);
-            console.log(productsData.data);
+            setCartItems(getDefaultCart(productsData.data));
             const homeBannerUrl = await getHomeBanner();
-            // console.log(homeBannerUrl);
             setHomeBanners(homeBannerUrl.data.sildesUrl);
             const categoryBannerUrl = await getCategoryBanner();
-            console.log(categoryBannerUrl);
             setCategoryBanners(categoryBannerUrl.data.sildesUrl);
             const seasonalBannerUrl = await getSeasonalBanner();
             setSeasonalBanners(seasonalBannerUrl.data.sildesUrl);
+            console.log("Products:", productsData.data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -57,12 +55,16 @@ const ShopContextProvider = (props) => {
     };
 
     const getStockById = (id) => {
+        console.log("getStockById called with id:", id);
+        console.log("All Stocks:", allStocks);
         const stock = allStocks.find((stock) => stock.item_id === parseInt(id));
+        console.log("Found Stock:", stock);
         return stock ? stock : null;
     };
 
     const addToCart = (itemId, itemName, waxType, fragranceType, color, fragrance, total) => {
         setCartItems((prev) => {
+            console.log("Adding to cart:",prev)
             const updatedItems = [...prev[itemId]];
             const existingItemIndex = updatedItems.findIndex(item =>
 

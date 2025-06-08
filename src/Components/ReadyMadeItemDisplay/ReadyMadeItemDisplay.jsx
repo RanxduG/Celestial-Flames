@@ -16,15 +16,25 @@ const ProductDisplay = ({ product }) => {
     return {
       name: correspondingProduct?.name || product.name,
       description: correspondingProduct?.description || product.description,
-      category: product.collection || 'Standard Collection'
+      category: product.collection || 'Standard Collection',
+      burntime: correspondingProduct?.burntime || 'N/A'
     };
   };
 
-  const { name, description, category } = getProductDetails();
+  const { name, description, category, burntime } = getProductDetails();
+
+  // Get all 3 product images consistently
+  const productImages = [
+    product.img1Url,
+    product.img2Url,
+    product.img3Url
+  ].filter(Boolean); // Remove any null/undefined images
 
   useEffect(() => {
-    // Set main image when product changes
-    setMainImage(product.imageUrl);
+    // Set main image to first available image when product changes
+    if (productImages.length > 0) {
+      setMainImage(productImages[0]);
+    }
   }, [product]);
 
   const handleAddToCart = () => {
@@ -57,14 +67,6 @@ const ProductDisplay = ({ product }) => {
     }
   };
 
-  // Mock additional images (in a real implementation, these would come from your database)
-  const additionalImages = [
-    product.imageUrl,
-    // Add placeholder images for testing
-    product.secondImageUrl,
-    product.thirdImageUrl || product.imageUrl
-  ];
-
   // Calculate discount percentage
   const discountPercentage = Math.round(
     ((product.old_price - product.new_price) / product.old_price) * 100
@@ -80,7 +82,7 @@ const ProductDisplay = ({ product }) => {
           )}
         </div>
         <div className="product-display-thumbnail-grid">
-          {additionalImages.map((img, index) => (
+          {productImages.map((img, index) => (
             <div 
               key={index} 
               className={`product-thumbnail ${mainImage === img ? 'active' : ''}`}
