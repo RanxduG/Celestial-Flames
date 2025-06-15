@@ -14,6 +14,7 @@ import Catalog from './Pages/Catalog';
 import CandleCare from './Pages/CandleCare';
 import AboutCandles from './Pages/AboutCandles';
 import ReadyMadeItems from './Pages/ReadyMadeItems';
+import BulkOrder from './Pages/BulkOrder';
 import { useContext, useEffect } from 'react';
 import { ShopContext } from './Context/ShopContext';
 import { useLocation } from 'react-router-dom';
@@ -64,6 +65,7 @@ function App() {
           <Route path="/Catalog" element={<Catalog />} />
           <Route path="/CandleCare" element={<CandleCare />} />
           <Route path="/AboutCandles" element={<AboutCandles />} />
+          <Route path="/Bulk" element={<BulkOrder />} />
         </Routes>
         <Footer />
       </BrowserRouter>

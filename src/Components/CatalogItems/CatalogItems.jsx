@@ -324,14 +324,14 @@ const CatalogItems = () => {
                                                 : product.description
                                         }</p>
                                         <Link 
-                                            to={`/product/${product.id}`} 
+                                            to={`/product?productId=${product.id}`} 
                                             onClick={() => window.scrollTo(0, 0)}
                                             className="customize-link"
                                         >
                                             Customize This Design <ArrowRight size={16} />
                                         </Link>
                                     </div>
-                                </div>
+                                </div> 
                             ))
                         ) : (
                             <div className="no-products-found">

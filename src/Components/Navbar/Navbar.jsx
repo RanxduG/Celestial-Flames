@@ -108,6 +108,8 @@ const Navbar = () => {
                     <Link to="/Shop" onClick={closeMenu}>Shop</Link>
                     <Link to="/Catalog" onClick={closeMenu}>Catalog</Link>
                     <Link to="/bulk" onClick={closeMenu}>Bulk Order</Link>
+                    <Link to="/aboutus" onClick={closeMenu}>About Us</Link>
+                    <Link to="/contactus" onClick={closeMenu}>Contact Us</Link>
                 </div>
             </div>
 

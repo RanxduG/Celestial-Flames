@@ -29,9 +29,9 @@ const ShopTest = () => {
   if (isLoading) {
     return (
       <div className="shop-loading">
-        <div className="candle-loader">
-          <div className="flame"></div>
-          <div className="wax"></div>
+        <div className="shop-candle-loader">
+          <div className="shop-flame"></div>
+          <div className="shop-wax"></div>
         </div>
         <p>Lighting your way...</p>
       </div>
