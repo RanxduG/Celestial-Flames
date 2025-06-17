@@ -166,7 +166,7 @@ const Footer = () => {
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">📱</span>
-                  <a href="tel:+94712345678" className="contact-link">
+                  <a href="tel:+94770081559" className="contact-link">
                     +94 77 008 1559
                   </a>
                 </div>
@@ -194,10 +194,11 @@ const Footer = () => {
                     <img src={facebook_icon} alt="Facebook" />
                     <span className="social-tooltip">Facebook</span>
                   </a>
-                  <a href="https://wa.me/message/SCXFB5PPHQQ7K1" 
-                     target="_blank" 
-                     rel="noopener noreferrer" 
-                     className="social-link whatsapp">
+                  <a 
+                    href="https://wa.me/94770081559" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="social-link whatsapp">
                     <img src={whatsapp_icon} alt="WhatsApp" />
                     <span className="social-tooltip">WhatsApp</span>
                   </a>
@@ -229,10 +230,12 @@ const Footer = () => {
 
       {/* Enhanced WhatsApp Floating Button */}
       <div className="whatsapp-float">
-        <a href="https://wa.me/message/SCXFB5PPHQQ7K1" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           className="whatsapp-btn">
+        <a 
+            href="https://wa.me/94770081559" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="whatsapp-btn"
+          >
           {/* <div className="whatsapp-pulse"></div> */}
           <img src={whatsapp_icon} alt="WhatsApp" className="whatsapp-icon" />
           <span className="whatsapp-text">Chat with us</span>
