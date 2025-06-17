@@ -240,7 +240,7 @@ const BulkOrder = () => {
             </div>
             <div className="bulk-order-hero-cta">
               <a 
-                href="https://wa.me/94777008359" 
+                href="https://wa.me/94770081559" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="bulk-order-cta-primary"
@@ -478,7 +478,7 @@ const BulkOrder = () => {
               </p>
               <div className="bulk-order-cta-buttons">
                 <a 
-                  href="https://wa.me/94777008359" 
+                  href="https://wa.me/94770081559" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bulk-order-btn-primary"
@@ -486,7 +486,7 @@ const BulkOrder = () => {
                   <MessageCircle size={20} />
                   WhatsApp Us Now
                 </a>
-                <Link to="/contact" className="bulk-order-btn-secondary">
+                <Link to="/contactus" className="bulk-order-btn-secondary">
                   Get Detailed Quote
                   <ArrowRight size={18} />
                 </Link>

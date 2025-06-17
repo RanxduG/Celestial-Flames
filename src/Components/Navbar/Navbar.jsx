@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "./Navbar.css";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ShopContext } from '../../Context/ShopContext';
 import { getLogo } from '../../Context/api';
 
@@ -8,6 +8,7 @@ const Navbar = () => {
     const { getTotalCartItems } = useContext(ShopContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [logo, setLogo] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
         const fetchLogo = async () => {
@@ -54,6 +55,14 @@ const Navbar = () => {
         };
     }, [isMenuOpen]);
 
+    // Helper function to check if a path is active
+    const isActive = (path) => {
+        if (path === '/') {
+            return location.pathname === '/';
+        }
+        return location.pathname.toLowerCase() === path.toLowerCase();
+    };
+
     return (
         <nav className="cf-navbar">
             <div className="cf-navbar-container">
@@ -68,17 +77,57 @@ const Navbar = () => {
 
                 {/* Desktop Navigation */}
                 <ul className="cf-nav-links">
-                    <li><Link to="/Shop" onClick={closeMenu}>Shop</Link></li>
-                    <li><Link to="/Catalog" onClick={closeMenu}>Catalog</Link></li>
-                    <li><Link to="/bulk" onClick={closeMenu}>Bulk Order</Link></li>
-                    <li><Link to="/aboutus" onClick={closeMenu}>About Us</Link></li>
-                    <li><Link to="/contactus" onClick={closeMenu}>Contact Us</Link></li>
+                    <li>
+                        <Link 
+                            to="/Shop/" 
+                            onClick={closeMenu}
+                            className={isActive('/shop') ? 'cf-nav-active' : ''}
+                        >
+                            Shop
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/Catalog/" 
+                            onClick={closeMenu}
+                            className={isActive('/catalog') ? 'cf-nav-active' : ''}
+                        >
+                            Catalog
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/bulk/" 
+                            onClick={closeMenu}
+                            className={isActive('/bulk') ? 'cf-nav-active' : ''}
+                        >
+                            Bulk Order
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/aboutus/" 
+                            onClick={closeMenu}
+                            className={isActive('/aboutus') ? 'cf-nav-active' : ''}
+                        >
+                            About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/contactus/" 
+                            onClick={closeMenu}
+                            className={isActive('/contactus') ? 'cf-nav-active' : ''}
+                        >
+                            Contact Us
+                        </Link>
+                    </li>
                 </ul>
 
                 {/* Cart and Mobile Menu */}
                 <div className="cf-navbar-right">
                     {/* Cart */}
-                    <Link to="/cart" className="cf-cart" onClick={closeMenu}>
+                    <Link to="/cart/" className="cf-cart" onClick={closeMenu}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
@@ -105,11 +154,41 @@ const Navbar = () => {
             {/* Mobile Menu */}
             <div className={`cf-mobile-menu ${isMenuOpen ? 'cf-mobile-menu-open' : ''}`}>
                 <div className="cf-mobile-menu-content">
-                    <Link to="/Shop" onClick={closeMenu}>Shop</Link>
-                    <Link to="/Catalog" onClick={closeMenu}>Catalog</Link>
-                    <Link to="/bulk" onClick={closeMenu}>Bulk Order</Link>
-                    <Link to="/aboutus" onClick={closeMenu}>About Us</Link>
-                    <Link to="/contactus" onClick={closeMenu}>Contact Us</Link>
+                    <Link 
+                        to="/Shop" 
+                        onClick={closeMenu}
+                        className={isActive('/shop') ? 'cf-nav-active' : ''}
+                    >
+                        Shop
+                    </Link>
+                    <Link 
+                        to="/Catalog" 
+                        onClick={closeMenu}
+                        className={isActive('/catalog') ? 'cf-nav-active' : ''}
+                    >
+                        Catalog
+                    </Link>
+                    <Link 
+                        to="/bulk" 
+                        onClick={closeMenu}
+                        className={isActive('/bulk') ? 'cf-nav-active' : ''}
+                    >
+                        Bulk Order
+                    </Link>
+                    <Link 
+                        to="/aboutus" 
+                        onClick={closeMenu}
+                        className={isActive('/aboutus') ? 'cf-nav-active' : ''}
+                    >
+                        About Us
+                    </Link>
+                    <Link 
+                        to="/contactus" 
+                        onClick={closeMenu}
+                        className={isActive('/contactus') ? 'cf-nav-active' : ''}
+                    >
+                        Contact Us
+                    </Link>
                 </div>
             </div>
 
