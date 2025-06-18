@@ -57,10 +57,20 @@ const Navbar = () => {
 
     // Helper function to check if a path is active
     const isActive = (path) => {
-        if (path === '/') {
-            return location.pathname === '/';
+        const currentPath = location.pathname.toLowerCase();
+        const checkPath = path.toLowerCase();
+        
+        // For home page
+        if (checkPath === '/') {
+            return currentPath === '/';
         }
-        return location.pathname.toLowerCase() === path.toLowerCase();
+        
+        // For other pages, check if the current path starts with the check path
+        // This handles cases like /shop/ and /shop
+        return currentPath === checkPath || 
+               currentPath === checkPath + '/' || 
+               currentPath === checkPath.slice(0, -1) ||
+               (checkPath.endsWith('/') && currentPath === checkPath.slice(0, -1));
     };
 
     return (
@@ -79,7 +89,7 @@ const Navbar = () => {
                 <ul className="cf-nav-links">
                     <li>
                         <Link 
-                            to="/Shop/" 
+                            to="/Shop" 
                             onClick={closeMenu}
                             className={isActive('/shop') ? 'cf-nav-active' : ''}
                         >
@@ -88,7 +98,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link 
-                            to="/Catalog/" 
+                            to="/Catalog" 
                             onClick={closeMenu}
                             className={isActive('/catalog') ? 'cf-nav-active' : ''}
                         >
@@ -97,7 +107,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link 
-                            to="/bulk/" 
+                            to="/bulk" 
                             onClick={closeMenu}
                             className={isActive('/bulk') ? 'cf-nav-active' : ''}
                         >
@@ -106,7 +116,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link 
-                            to="/aboutus/" 
+                            to="/aboutus" 
                             onClick={closeMenu}
                             className={isActive('/aboutus') ? 'cf-nav-active' : ''}
                         >
@@ -115,7 +125,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <Link 
-                            to="/contactus/" 
+                            to="/contactus" 
                             onClick={closeMenu}
                             className={isActive('/contactus') ? 'cf-nav-active' : ''}
                         >
@@ -127,7 +137,7 @@ const Navbar = () => {
                 {/* Cart and Mobile Menu */}
                 <div className="cf-navbar-right">
                     {/* Cart */}
-                    <Link to="/cart/" className="cf-cart" onClick={closeMenu}>
+                    <Link to="/cart" className="cf-cart" onClick={closeMenu}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <circle cx="9" cy="21" r="1"></circle>
                             <circle cx="20" cy="21" r="1"></circle>
