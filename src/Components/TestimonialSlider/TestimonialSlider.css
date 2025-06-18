@@ -284,11 +284,11 @@
   }
 
   .ts-slider-container {
-    padding: 0 50px;
+    margin: 0px;
   }
 
   .ts-testimonial-card {
-    flex: 0 0 100%;
+    flex: 0 0 83%;
     padding: 24px;
   }
 
@@ -305,7 +305,7 @@
 
 @media (max-width: 480px) {
   .ts-slider-container {
-    padding: 0 40px;
+    margin: 0px;
   }
 
   .ts-testimonial-text {

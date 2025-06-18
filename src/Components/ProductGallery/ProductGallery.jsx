@@ -32,7 +32,6 @@ const ProductGallery = () => {
     // Mint and Citrus
     { id: 'peppermint', name: 'Peppermint' },
     { id: 'teaLime', name: 'Tea & Lime' },
-    { id: 'lime', name: 'Lime' },
     
     // Fruity and Fresh
     { id: 'raspberry', name: 'Raspberry', stock: 0 },
@@ -44,7 +43,6 @@ const ProductGallery = () => {
     // Flowerly and Earthy
     { id: 'jasmine', name: 'Jasmine' },
     { id: 'rose', name: 'Rose' },
-    { id: 'cherryBlossoms', name: 'Cherry Blossoms' },
     { id: 'alwaysRose', name: 'Always Rose' },
     { id: 'sweetFlower', name: 'Sweet Flower' },
     
@@ -122,7 +120,7 @@ const ProductGallery = () => {
   const typeFilters = [
     { id: 'all', name: 'All Products' },
     { id: 'Soy Wax', name: 'Soy Wax' },
-    { id: 'Gel Wax', name: 'Gel Wax' },
+    { id: 'Gel Wax', name: 'Soy & Gel Wax' },
     { id: 'seasonal', name: 'Seasonal' },
   ];
 

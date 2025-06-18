@@ -117,7 +117,7 @@ const Footer = () => {
                   <Link to="/shop" className="nav-link" onClick={() => window.scrollTo(0, 4200)}>
                     Glass Elegance
                   </Link>
-                  <Link to="/collections/seasonal" className="nav-link" onClick={() => window.scrollTo(0, 0)}>
+                  <Link to="/shop" className="nav-link" onClick={() => window.scrollTo(0, 0)}>
                     Seasonal Specials
                   </Link>
                 </div>

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './CSS/ShopTest.css';
 import ShopHero from '../Components/ShopHero/ShopHero';
-import FeaturedProducts from '../Components/FeaturedProducts/FeaturedProducts';
-import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
 import ProductGallery from '../Components/ProductGallery/ProductGallery';
 import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
 

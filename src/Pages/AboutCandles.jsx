@@ -32,24 +32,39 @@ const AboutCandles = () => {
     sectionRefs.current[key] = el;
   };
 
-  const scentPriorities = [
-    { name: 'Cinnamon', priority: 'high', color: '#d2691e' },
-    { name: 'Vanilla', priority: 'high', color: '#daa520' },
-    { name: 'Honeydew', priority: 'medium', color: '#98fb98' },
-    { name: 'Café', priority: 'medium', color: '#8b4513' },
-    { name: 'Coffee', priority: 'medium', color: '#6f4e37' },
-    { name: 'Sweet Flower', priority: 'medium', color: '#ff69b4' },
-    { name: 'Always Rose', priority: 'medium', color: '#ff1493' },
-    { name: 'Jasmine', priority: 'high', color: '#f8f8ff' },
-    { name: 'Rose', priority: 'medium', color: '#ff69b4' },
-    { name: 'Apple', priority: 'best seller', color: '#ff4500' },
-    { name: 'Citronella', priority: 'high', color: '#9acd32' },
-    { name: 'Peppermint', priority: 'high', color: '#00ff7f' },
-    { name: 'Lime', priority: 'high', color: '#32cd32' },
-    { name: 'Raspberry', priority: 'medium', color: '#dc143c' },
-    { name: 'Cherry Blossoms', priority: 'medium', color: '#ffb6c1' },
-    { name: 'Dark Vanilla', priority: 'medium', color: '#8b4513' },
-  ];
+const scentPriorities = [
+  { name: 'Cinnamon', priority: 'popular', color: '#d2691e' },
+  { name: 'Citronella', priority: 'normal', color: '#d3d3d3' },
+  { name: 'Lemongrass', priority: 'popular', color: '#9acd32' },
+
+  { name: 'Vanilla', priority: 'best seller', color: '#daa520' },
+  { name: 'Honeydew', priority: 'best seller', color: '#98fb98' },
+  { name: 'Cafe', priority: 'best seller', color: '#8b4513' },
+
+  { name: 'Peppermint', priority: 'popular', color: '#00ff7f' },
+  { name: 'Tea & Lime', priority: 'normal', color: '#d3d3d3' },
+
+  { name: 'Raspberry', priority: 'best seller', color: '#dc143c' },
+  { name: 'Apple', priority: 'popular', color: '#ff4500' },
+  { name: 'Green Tea', priority: 'normal', color: '#d3d3d3' },
+  { name: 'Aqua', priority: 'normal', color: '#d3d3d3' },
+  { name: 'Tea Leaf', priority: 'normal', color: '#d3d3d3' },
+
+  { name: 'Jasmine', priority: 'best seller', color: '#f8f8ff' },
+  { name: 'Rose', priority: 'popular', color: '#ff69b4' },
+  { name: 'Always Rose', priority: 'normal', color: '#d3d3d3' },
+  { name: 'Sweet Flower', priority: 'popular', color: '#ffb6c1' },
+
+  { name: 'Roasted Coffee', priority: 'best seller', color: '#6f4e37' },
+
+  { name: 'Sweetheart', priority: 'normal', color: '#d3d3d3' },
+
+  { name: 'Apple Spice', priority: 'normal', color: '#d3d3d3' },
+  { name: 'Dark Vanilla', priority: 'normal', color: '#d3d3d3' },
+
+  { name: 'Strawberry', priority: 'normal', color: '#d3d3d3' }
+];
+
 
   return (
     <div style={styles.container}>

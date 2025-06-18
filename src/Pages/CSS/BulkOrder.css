@@ -348,7 +348,7 @@
 }
 
 .bulk-order-particle-1 { top: 20%; left: 10%; }
-.bulk-order-particle-2 { top: 30%; right: 10%; }
+.bulk-order-particle-2 { top: 50%; right: 10%; }
 .bulk-order-particle-3 { bottom: 40%; left: 15%; }
 .bulk-order-particle-4 { top: 60%; right: 20%; }
 .bulk-order-particle-5 { bottom: 20%; left: 20%; }
@@ -996,6 +996,111 @@
   100% {
     transform: scale(1) rotate(-1deg);
   }
+}
+/* Mobile Process Visualization Styles - ADD THIS SECTION */
+.bulk-order-mobile-process {
+  width: 100%;
+  max-width: 350px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.bulk-order-mobile-step-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.bulk-order-mobile-step-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 107, 53, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bulk-order-mobile-step-btn:hover {
+  background: rgba(255, 107, 53, 0.2);
+  border-color: #ff6b35;
+  color: white;
+  transform: scale(1.1);
+}
+
+.bulk-order-mobile-step-btn.active {
+  background: rgba(255, 107, 53, 0.3);
+  border-color: #ff6b35;
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.bulk-order-mobile-step-content {
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.bulk-order-mobile-step-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff6b35 0%, #e98074 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: white;
+  animation: pulse 2s infinite;
+}
+
+.bulk-order-mobile-step-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: white;
+}
+
+.bulk-order-mobile-step-desc {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: #f0f0f0;
+}
+
+.bulk-order-mobile-step-details {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: #ff6b35;
+  font-style: italic;
+}
+
+.bulk-order-mobile-step-counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.bulk-order-mobile-step-counter span:first-child,
+.bulk-order-mobile-step-counter span:last-child {
+  color: #ff6b35;
+  font-weight: 600;
 }
 
 /* Responsive Design */

@@ -1,20 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { 
-  Phone, 
-  Mail, 
   MessageCircle,
   Heart,
-  Sparkles,
   CheckCircle,
-  Flame,
-  Star,
   Users,
   ArrowRight,
-  Package,
   FileText,
   CreditCard,
   Factory,
-  Truck,
   Shield,
   Clock,
   Calculator,
@@ -30,10 +23,10 @@ const BulkOrder = () => {
   const [isVisible, setIsVisible] = useState({});
   const [activeStep, setActiveStep] = useState(0);
   const [rotationAngle, setRotationAngle] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRefs = useRef({});
   const rotationIntervalRef = useRef(null);
 
-  // Process steps for the rotating circle
   const processSteps = [
     {
       icon: MessageSquare,
@@ -112,10 +105,9 @@ const BulkOrder = () => {
   ];
 
   const calculateActiveStep = (angle) => {
-    const stepAngle = 360 / processSteps.length; // 60 degrees for 6 steps
+    const stepAngle = 360 / processSteps.length;
     const normalizedAngle = ((angle % 360) + 360) % 360;
     
-    // Find which step is closest to the top (0 degrees)
     let closestStep = 0;
     let minDistance = 360;
     
@@ -136,7 +128,15 @@ const BulkOrder = () => {
   };
 
   useEffect(() => {
-    // Setup intersection observers for other sections
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    // Setup intersection observers
     const observers = {};
     
     Object.keys(sectionRefs.current).forEach(key => {
@@ -153,45 +153,46 @@ const BulkOrder = () => {
       }
     });
 
-    // Auto-rotation for the process circle
+    // Auto-rotation for desktop only
     const startRotation = () => {
-      rotationIntervalRef.current = setInterval(() => {
-        setRotationAngle(prevAngle => {
-          const rotationSpeed = 0.5;
-          const newAngle = (prevAngle + rotationSpeed) % 360;
-          
-          // Calculate and set active step immediately
-          const newActiveStep = calculateActiveStep(newAngle);
-          setActiveStep(newActiveStep);
-          
-          return newAngle;
-        });
-      }, 50); // ~20fps for smooth rotation
+      if (!isMobile) {
+        rotationIntervalRef.current = setInterval(() => {
+          setRotationAngle(prevAngle => {
+            const rotationSpeed = 0.5;
+            const newAngle = (prevAngle + rotationSpeed) % 360;
+            const newActiveStep = calculateActiveStep(newAngle);
+            setActiveStep(newActiveStep);
+            return newAngle;
+          });
+        }, 50);
+      }
     };
 
     startRotation();
 
     return () => {
       Object.values(observers).forEach(observer => observer.disconnect());
+      window.removeEventListener('resize', checkMobile);
       if (rotationIntervalRef.current) {
         clearInterval(rotationIntervalRef.current);
       }
     };
-  }, [activeStep, processSteps.length]);
+  }, [isMobile]);
 
-  // Handle manual step selection
   const handleStepClick = (stepIndex) => {
-    // Stop auto-rotation temporarily
+    if (isMobile) {
+      setActiveStep(stepIndex);
+      return;
+    }
+
     if (rotationIntervalRef.current) {
       clearInterval(rotationIntervalRef.current);
     }
     
-    // Set new active step and rotation angle
     setActiveStep(stepIndex);
     const targetAngle = stepIndex * (360 / processSteps.length);
     setRotationAngle(targetAngle);
     
-    // Resume auto-rotation after 5 seconds
     setTimeout(() => {
       if (rotationIntervalRef.current) {
         clearInterval(rotationIntervalRef.current);
@@ -256,69 +257,105 @@ const BulkOrder = () => {
           </div>
           
           <div className="bulk-order-hero-visual-section">
-            {/* Fixed Active Indicator at Top */}
-            {/* <div className="bulk-order-active-indicator-fixed">
-              <div className="bulk-order-indicator-dot"></div>
-            </div> */}
-            
-            {/* Rotating Process Circle */}
-            <div 
-              className="bulk-order-process-circle"
-              style={{ 
-                transform: `rotate(${rotationAngle}deg)`,
-                transition: 'none'
-              }}
-            >
-              {/* Rotating steps - rendered in reverse order for clockwise rotation */}
-              {processSteps.map((step, index) => {
-                // Reverse the index for positioning (last step first, etc.)
-                const reversedIndex = processSteps.length - 1 - index;
-                const stepAngle = (360 / processSteps.length) * reversedIndex;
-                const radius = 225; // Distance from center
-                const x = Math.sin((stepAngle * Math.PI) / 180) * radius;
-                const y = -Math.cos((stepAngle * Math.PI) / 180) * radius;
+            {!isMobile ? (
+              <>
+                {/* Desktop: Rotating Process Circle */}
+                <div 
+                  className="bulk-order-process-circle"
+                  style={{ 
+                    transform: `rotate(${rotationAngle}deg)`,
+                    transition: 'none'
+                  }}
+                >
+                  {processSteps.map((step, index) => {
+                    const reversedIndex = processSteps.length - 1 - index;
+                    const stepAngle = (360 / processSteps.length) * reversedIndex;
+                    const radius = 225;
+                    const x = Math.sin((stepAngle * Math.PI) / 180) * radius;
+                    const y = -Math.cos((stepAngle * Math.PI) / 180) * radius;
+                    
+                    return (
+                      <div
+                        key={index}
+                        className={`bulk-order-process-step ${
+                          index === activeStep ? 'active' : ''
+                        }`}
+                        style={{
+                          position: 'absolute',
+                          left: `calc(50% + ${x}px)`,
+                          top: `calc(50% + ${y}px)`,
+                          transform: `translate(-50%, -50%) rotate(${-rotationAngle}deg)`
+                        }}
+                        onClick={() => handleStepClick(index)}
+                      >
+                        <div className="bulk-order-step-icon">
+                          {React.createElement(step.icon, { size: 18 })}
+                        </div>
+                        <div className="bulk-order-step-tooltip">
+                          <h4>{step.title}</h4>
+                          <p>{step.details}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
                 
-                return (
-                  <div
-                    key={index}
-                    className={`bulk-order-process-step ${
-                      index === activeStep ? 'active' : ''
-                    }`}
-                    style={{
-                      position: 'absolute',
-                      left: `calc(50% + ${x}px)`,
-                      top: `calc(50% + ${y}px)`,
-                      transform: `translate(-50%, -50%) rotate(${-rotationAngle}deg)` // Counter-rotate content
-                    }}
-                    onClick={() => handleStepClick(index)}
-                  >
-                    <div className="bulk-order-step-icon">
-                      {React.createElement(step.icon, { size: 18 })}
-                    </div>
-                    <div className="bulk-order-step-tooltip">
-                      <h4>{step.title}</h4>
-                      <p>{step.details}</p>
-                    </div>
+                <div className="bulk-order-process-center">
+                  <div className="bulk-order-process-icon-wrapper">
+                    {React.createElement(processSteps[activeStep].icon, {
+                      className: "bulk-order-process-center-icon",
+                      size: 32
+                    })}
                   </div>
-                );
-              })}
-            </div>
-            
-            {/* Fixed Center Content */}
-            <div className="bulk-order-process-center">
-              <div className="bulk-order-process-icon-wrapper">
-                {React.createElement(processSteps[activeStep].icon, {
-                  className: "bulk-order-process-center-icon",
-                  size: 32
-                })}
-              </div>
-              <h3 className="bulk-order-process-center-title">
-                {processSteps[activeStep].title}
-              </h3>
-              <p className="bulk-order-process-center-desc">
-                {processSteps[activeStep].description}
-              </p>
-            </div>
+                  <h3 className="bulk-order-process-center-title">
+                    {processSteps[activeStep].title}
+                  </h3>
+                  <p className="bulk-order-process-center-desc">
+                    {processSteps[activeStep].description}
+                  </p>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* Mobile: Simple Step Navigator */}
+                <div className="bulk-order-mobile-process">
+                  <div className="bulk-order-mobile-step-nav">
+                    {processSteps.map((step, index) => (
+                      <button
+                        key={index}
+                        className={`bulk-order-mobile-step-btn ${
+                          index === activeStep ? 'active' : ''
+                        }`}
+                        onClick={() => handleStepClick(index)}
+                      >
+                        {React.createElement(step.icon, { size: 16 })}
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <div className="bulk-order-mobile-step-content">
+                    <div className="bulk-order-mobile-step-icon">
+                      {React.createElement(processSteps[activeStep].icon, { size: 28 })}
+                    </div>
+                    <h3 className="bulk-order-mobile-step-title">
+                      {processSteps[activeStep].title}
+                    </h3>
+                    <p className="bulk-order-mobile-step-desc">
+                      {processSteps[activeStep].description}
+                    </p>
+                    <p className="bulk-order-mobile-step-details">
+                      {processSteps[activeStep].details}
+                    </p>
+                  </div>
+                  
+                  <div className="bulk-order-mobile-step-counter">
+                    <span>{activeStep + 1}</span>
+                    <span>/</span>
+                    <span>{processSteps.length}</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         

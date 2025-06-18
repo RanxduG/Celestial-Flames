@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import './CatalogItems.css';
 import { ShopContext } from '../../Context/ShopContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Filter, ChevronDown, ChevronUp, FileText, Download, Eye } from 'lucide-react';
+import { ArrowRight, Filter, ChevronDown, ChevronUp, FileText, Download, Eye, X } from 'lucide-react';
 
 const CatalogItems = () => {
     const { allProducts } = useContext(ShopContext);
@@ -19,13 +19,15 @@ const CatalogItems = () => {
         season: true,
         waxType: true
     });
+    const [showPdfPreview, setShowPdfPreview] = useState(false);
+    const [pdfLoading, setPdfLoading] = useState(false);
 
     // Seasons and wax types for filters
     const seasons = ['Christmas', 'Valentine', 'Halloween', 'Summer', 'Spring'];
     const waxTypes = ['Soy Wax', 'Gel Wax'];
 
-    // PDF catalog path
-    const catalogPdfPath = '../Assets/Catalog/Celestial Flames Product Catalog Presentation.pdf';
+    // PDF catalog path - corrected to use public folder
+    const catalogPdfPath = '/Assets/Catalog/Celestial Flames Product Catalog Presentation.pdf';
 
     // Initialize products when data is loaded
     useEffect(() => {
@@ -35,6 +37,26 @@ const CatalogItems = () => {
             setLoading(false);
         }
     }, [allProducts]);
+
+    // Close filter on outside click for mobile
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (isFilterOpen && window.innerWidth <= 768) {
+                const filterSidebar = document.querySelector('.catalog-filters');
+                const filterToggle = document.querySelector('.mobile-filter-toggle');
+                
+                if (filterSidebar && !filterSidebar.contains(event.target) && 
+                    filterToggle && !filterToggle.contains(event.target)) {
+                    setIsFilterOpen(false);
+                }
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isFilterOpen]);
 
     // Get all unique categories including "All"
     const getAllCategories = () => {
@@ -119,19 +141,54 @@ const CatalogItems = () => {
         applyFilters('All', clearedFilters);
     };
 
+    // Handle mobile filter toggle
+    const handleMobileFilterToggle = () => {
+        setIsFilterOpen(!isFilterOpen);
+    };
+
     // Handle PDF preview
-    const handlePdfPreview = () => {
-        window.open(catalogPdfPath, '_blank');
+    const handlePdfPreview = async () => {
+        setPdfLoading(true);
+        try {
+            // Check if PDF exists
+            const response = await fetch(catalogPdfPath, { method: 'HEAD' });
+            if (response.ok) {
+                setShowPdfPreview(true);
+            } else {
+                alert('PDF catalog is currently unavailable. Please try downloading instead.');
+            }
+        } catch (error) {
+            console.error('Error checking PDF:', error);
+            alert('Error loading PDF preview. Please try downloading the catalog instead.');
+        } finally {
+            setPdfLoading(false);
+        }
     };
 
     // Handle PDF download
-    const handlePdfDownload = () => {
-        const link = document.createElement('a');
-        link.href = catalogPdfPath;
-        link.download = 'Celestial Flames Product Catalog.pdf';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    const handlePdfDownload = async () => {
+        setPdfLoading(true);
+        try {
+            const response = await fetch(catalogPdfPath);
+            if (!response.ok) {
+                throw new Error('PDF not found');
+            }
+            
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Celestial Flames Product Catalog.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error downloading PDF:', error);
+            alert('Error downloading PDF. Please try again later.');
+        } finally {
+            setPdfLoading(false);
+        }
     };
 
     // Get seasonal indicator color
@@ -213,7 +270,7 @@ const CatalogItems = () => {
                             {expandedSections.waxType ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                         </div>
                         {expandedSections.waxType && (
-                            <div className="filter-options">
+                            <div className="catalog-filter-options">
                                 {waxTypes.map(type => (
                                     <label key={type} className="filter-checkbox">
                                         <input
@@ -241,18 +298,20 @@ const CatalogItems = () => {
                             <button 
                                 className="pdf-preview-btn"
                                 onClick={handlePdfPreview}
+                                disabled={pdfLoading}
                                 title="Preview PDF"
                             >
                                 <Eye size={16} />
-                                Preview
+                                {pdfLoading ? 'Loading...' : 'Preview'}
                             </button>
                             <button 
                                 className="pdf-download-btn"
                                 onClick={handlePdfDownload}
+                                disabled={pdfLoading}
                                 title="Download PDF"
                             >
                                 <Download size={16} />
-                                Download
+                                {pdfLoading ? 'Downloading...' : 'Download'}
                             </button>
                         </div>
                     </div>
@@ -262,7 +321,7 @@ const CatalogItems = () => {
                     {/* Mobile filter toggle */}
                     <button 
                         className="mobile-filter-toggle" 
-                        onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        onClick={handleMobileFilterToggle}
                     >
                         <Filter size={18} />
                         {isFilterOpen ? 'Hide Filters' : 'Show Filters'}
@@ -345,6 +404,43 @@ const CatalogItems = () => {
                     </div>
                 </div>
             </div>
+
+            {/* PDF Preview Modal */}
+            {showPdfPreview && (
+                <div className="pdf-preview-modal">
+                    <div className="pdf-modal-backdrop" onClick={() => setShowPdfPreview(false)}></div>
+                    <div className="pdf-modal-content">
+                        <div className="pdf-modal-header">
+                            <h3>Product Catalog Preview</h3>
+                            <button 
+                                className="pdf-modal-close"
+                                onClick={() => setShowPdfPreview(false)}
+                            >
+                                <X size={24} />
+                            </button>
+                        </div>
+                        <div className="pdf-modal-body">
+                            <iframe
+                                src={catalogPdfPath}
+                                title="PDF Preview"
+                                width="100%"
+                                height="100%"
+                                style={{ border: 'none' }}
+                            />
+                        </div>
+                        <div className="pdf-modal-footer">
+                            <button 
+                                className="pdf-download-btn"
+                                onClick={handlePdfDownload}
+                                disabled={pdfLoading}
+                            >
+                                <Download size={16} />
+                                {pdfLoading ? 'Downloading...' : 'Download PDF'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
