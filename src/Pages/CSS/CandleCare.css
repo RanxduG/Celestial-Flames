@@ -119,7 +119,7 @@
 
 .care-candle-body {
   width: 80px;
-  height: 180px; /* Reduced from 250px to make it shorter */
+  height: 180px;
   background: linear-gradient(to bottom, #d4af37 0%, #b8941f 50%, #8b6914 100%);
   border-radius: 15px 15px 8px 8px;
   position: relative;
@@ -146,7 +146,6 @@
   background: radial-gradient(circle, rgba(255, 107, 53, 0.4) 0%, transparent 70%);
   position: absolute;
   top: -50px; /* Adjusted position */
-  left: 50%;
   transform: translateX(-50%);
   border-radius: 50%;
   animation: pulse 3s infinite;
@@ -764,6 +763,9 @@
     text-align: center;
     gap: 3rem;
   }
+  .care-hero-text-section{
+    margin-bottom: 50px;
+  }
   
   .care-hero-title {
     font-size: 3rem;
@@ -774,8 +776,12 @@
   }
   
   .care-icons-orbit {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
+  }
+  .care-candle-body {
+    height: 130px;
+    width: 50px;
   }
 }
 

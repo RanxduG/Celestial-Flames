@@ -1,4 +1,4 @@
-/* AboutCandles.css - All classes prefixed with ac- */
+/* AboutCandles.css - Responsive Design */
 
 /* Base Styles */
 .ac-container {
@@ -9,7 +9,7 @@
     overflow-x: hidden;
 }
 
-/* Hero Section Animations */
+/* Animations */
 @keyframes ac-fadeInUp {
     from {
         opacity: 0;
@@ -63,15 +63,6 @@
     }
 }
 
-@keyframes ac-glow {
-    0%, 100% {
-        box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
-    }
-    50% {
-        box-shadow: 0 0 30px rgba(255, 107, 53, 0.6);
-    }
-}
-
 @keyframes ac-pulse {
     0%, 100% {
         transform: scale(1);
@@ -94,14 +85,14 @@
 
 /* Hero Section */
 .ac-hero {
-    height: 80vh;
-    position: relative;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #2c1810 0%, #4a2c2a 50%, #6b4423 100%);
     color: white;
-    overflow: hidden;
+    position: relative;
+    padding: 2rem;
 }
 
 .ac-hero::before {
@@ -117,23 +108,21 @@
 }
 
 .ac-hero-content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    justify-content: space-between;
+    gap: 3rem;
     max-width: 1200px;
     width: 100%;
-    padding: 0 2rem;
     z-index: 2;
-    position: relative;
 }
 
 .ac-hero-text {
-    flex: 1;
-    max-width: 600px;
+    text-align: left;
 }
 
 .ac-hero-title {
-    font-size: 4rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     margin-bottom: 1.5rem;
     display: flex;
@@ -146,17 +135,17 @@
     color: #ff6b35;
     filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.6));
     animation: ac-flicker 2s infinite alternate;
+    flex-shrink: 0;
 }
 
 .ac-hero-subtitle {
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
     opacity: 0.9;
     line-height: 1.6;
     animation: ac-fadeInUp 1s ease-out 0.3s both;
 }
 
 .ac-hero-visual {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -174,7 +163,6 @@
     height: 120px;
     border-radius: 8px 8px 3px 3px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    position: relative;
 }
 
 .ac-candle1 {
@@ -207,7 +195,7 @@
 
 /* Section Styles */
 .ac-section {
-    padding: 6rem 2rem;
+    padding: clamp(3rem, 8vw, 6rem) 2rem;
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: translateY(50px);
     opacity: 0;
@@ -233,13 +221,13 @@
 
 .ac-section-icon {
     color: #e98074;
-    width: 3rem;
-    height: 3rem;
+    width: clamp(2rem, 5vw, 3rem);
+    height: clamp(2rem, 5vw, 3rem);
     animation: ac-pulse 2s infinite;
 }
 
 .ac-section-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     color: #2b2b2b;
     text-align: center;
@@ -248,14 +236,14 @@
 /* Wax Types Section */
 .ac-wax-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
 }
 
 .ac-wax-card {
     background: white;
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     box-shadow: 0 15px 40px rgba(233, 128, 116, 0.1);
     transition: all 0.3s ease;
     position: relative;
@@ -327,6 +315,7 @@
     width: 1.2rem;
     height: 1.2rem;
     color: #e98074;
+    flex-shrink: 0;
 }
 
 .ac-wax-properties {
@@ -364,7 +353,7 @@
 
 .ac-scents-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 1.5rem;
 }
 
@@ -375,8 +364,6 @@
     box-shadow: 0 10px 25px rgba(233, 128, 116, 0.1);
     transition: all 0.3s ease;
     animation: ac-slideInUp 0.6s ease-out both;
-    position: relative;
-    overflow: hidden;
 }
 
 .ac-scent-card:hover {
@@ -388,6 +375,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .ac-scent-name {
@@ -402,7 +391,7 @@
     font-size: 0.8rem;
     font-weight: 500;
     color: white;
-    animation: ac-glow 2s infinite;
+    white-space: nowrap;
 }
 
 .ac-priority-best-seller {
@@ -420,14 +409,14 @@
 /* Wick Section */
 .ac-wick-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
 }
 
 .ac-wick-card {
     background: white;
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 2rem;
     box-shadow: 0 15px 40px rgba(233, 128, 116, 0.1);
     transition: all 0.3s ease;
 }
@@ -445,11 +434,6 @@
 
 .ac-wick-icon {
     font-size: 2.5rem;
-}
-
-.ac-wick-content {
-    position: relative;
-    z-index: 1;
 }
 
 .ac-wick-features {
@@ -477,6 +461,7 @@
     font-weight: 600;
     color: #2b2b2b;
     min-width: 120px;
+    flex-shrink: 0;
 }
 
 .ac-checkmark {
@@ -495,26 +480,11 @@
     font-size: 0.9rem;
     color: #666;
     font-style: italic;
-}
+    }
 
 /* Care Tips Section */
 .ac-care-section {
-    background: linear-gradient(135deg, #2b2b2b 0%, #404040 100%);
-    color: white;
-    position: relative;
-    overflow: hidden;
-}
-
-.ac-care-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(233, 128, 116, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
-    pointer-events: none;
+    background: linear-gradient(135deg, #fff 0%, #f8f6f2 100%);
 }
 
 .ac-tips-grid {
@@ -524,115 +494,132 @@
 }
 
 .ac-tip-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 2.5rem;
+    background: white;
     border-radius: 20px;
+    padding: 2rem;
     text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 40px rgba(233, 128, 116, 0.1);
     transition: all 0.3s ease;
     position: relative;
-    z-index: 1;
+    overflow: hidden;
 }
 
-.ac-tip-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.2);
+.ac-tip-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e98074, #d4af37, #ff6b35);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
 }
 
 .ac-tip-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
     display: block;
-    animation: ac-float 4s ease-in-out infinite;
+    animation: ac-pulse 2s infinite;
 }
 
 .ac-tip-card h4 {
     font-size: 1.3rem;
     font-weight: 600;
+    color: #2b2b2b;
     margin-bottom: 1rem;
-    color: #fff;
 }
 
 .ac-tip-card p {
     font-size: 1rem;
+    color: #666;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Responsive Design */
-@media (max-width: 1024px) {
+
+/* Large Desktop (1200px and up) */
+@media (min-width: 1200px) {
     .ac-hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 2rem;
+        max-width: 1400px;
     }
     
-    .ac-hero-title {
-        font-size: 3rem;
-    }
-    
-    .ac-section-title {
-        font-size: 2.5rem;
+    .ac-section-content {
+        max-width: 1400px;
     }
 }
 
-@media (max-width: 768px) {
-    .ac-hero {
-        height: 60vh;
-        padding: 2rem 1rem;
+/* Desktop (992px to 1199px) */
+@media (max-width: 1199px) {
+    .ac-wax-grid,
+    .ac-wick-grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
+    
+    .ac-scents-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+/* Tablet (768px to 991px) */
+@media (max-width: 991px) {
+    .ac-hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .ac-hero-text {
+        text-align: center;
     }
     
     .ac-hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .ac-hero-subtitle {
-        font-size: 1.1rem;
-    }
-    
-    .ac-section {
-        padding: 4rem 1rem;
-    }
-    
-    .ac-section-title {
-        font-size: 2rem;
+        justify-content: center;
     }
     
     .ac-wax-grid,
     .ac-wick-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
     }
     
-    .ac-scents-grid,
+    .ac-scents-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.2rem;
+    }
+    
     .ac-tips-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
     
     .ac-candle-group {
-        scale: 0.8;
+        gap: 15px;
     }
     
     .ac-mini-candle {
-        width: 30px;
+        width: 35px;
         height: 100px;
     }
     
     .ac-candle2 {
         height: 120px;
     }
+    
+    .ac-center-flame {
+        width: 20px;
+        height: 30px;
+    }
 }
 
-@media (max-width: 480px) {
-    .ac-hero-title {
-        font-size: 2rem;
-        flex-direction: column;
-        gap: 0.5rem;
+/* Small Tablet (576px to 767px) */
+@media (max-width: 767px) {
+    .ac-hero {
+        padding: 1rem;
+        min-height: 80vh;
     }
     
-    .ac-section-title {
-        font-size: 1.8rem;
+    .ac-section {
+        padding: clamp(2rem, 6vw, 4rem) 1rem;
     }
     
     .ac-wax-card,
@@ -641,83 +628,184 @@
         padding: 1.5rem;
     }
     
-    .ac-candle-group {
-        scale: 0.6;
+    .ac-scents-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .ac-scent-card {
+        padding: 1.2rem;
+    }
+    
+    .ac-scent-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+    }
+    
+    .ac-priority-badge {
+        align-self: flex-start;
+    }
+    
+    .ac-wick-feature {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        text-align: left;
+    }
+    
+    .ac-feature-label {
+        min-width: auto;
+    }
+    
+    .ac-benefit {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        text-align: left;
+    }
+    
+    .ac-tips-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 }
 
-/* Print Styles */
-@media print {
+/* Mobile (up to 575px) */
+@media (max-width: 575px) {
     .ac-hero {
-        height: auto;
-        background: #2b2b2b;
-        color: black;
+        padding: 0.5rem;
+        min-height: 70vh;
+    }
+    
+    .ac-hero-content {
+        gap: 1.5rem;
     }
     
     .ac-section {
-        padding: 2rem 0;
+        padding: clamp(1.5rem, 5vw, 3rem) 0.5rem;
+    }
+    
+    .ac-icon-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
     }
     
     .ac-wax-card,
     .ac-wick-card,
-    .ac-scent-card,
     .ac-tip-card {
-        box-shadow: none;
-        border: 1px solid #ddd;
+        padding: 1.2rem;
+        border-radius: 15px;
     }
     
-    .ac-care-section {
-        background: white;
-        color: black;
+    .ac-scent-card {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .ac-scents-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .ac-candle-group {
+        gap: 10px;
+    }
+    
+    .ac-mini-candle {
+        width: 30px;
+        height: 80px;
+    }
+    
+    .ac-candle2 {
+        height: 100px;
+    }
+    
+    .ac-center-flame {
+        width: 18px;
+        height: 25px;
+        top: -12px;
+    }
+    
+    .ac-wax-properties,
+    .ac-caution-box {
+        padding: 1.2rem;
+        border-radius: 12px;
+    }
+    
+    .ac-tip-icon {
+        font-size: 2.5rem;
+    }
+    
+    .ac-wax-icon {
+        font-size: 2rem;
+    }
+    
+    .ac-wick-icon {
+        font-size: 2rem;
     }
 }
 
-/* Accessibility Enhancements */
+/* Extra Small Mobile (up to 320px) */
+@media (max-width: 320px) {
+    .ac-hero-title {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .ac-wax-card,
+    .ac-wick-card,
+    .ac-tip-card,
+    .ac-scent-card {
+        padding: 1rem;
+    }
+    
+    .ac-candle-group {
+        gap: 8px;
+    }
+    
+    .ac-mini-candle {
+        width: 25px;
+        height: 70px;
+    }
+    
+    .ac-candle2 {
+        height: 85px;
+    }
+    
+    .ac-center-flame {
+        width: 15px;
+        height: 20px;
+        top: -10px;
+    }
+}
+
+/* High DPI / Retina Display Optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .ac-center-flame {
+        filter: blur(0.8px);
+    }
+    
+    .ac-flame-icon {
+        filter: drop-shadow(0 0 15px rgba(255, 107, 53, 0.5));
+    }
+}
+
+/* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    * {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
     }
-}
-
-.ac-sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Focus Styles */
-.ac-wax-card:focus,
-.ac-wick-card:focus,
-.ac-scent-card:focus,
-.ac-tip-card:focus {
-    outline: 2px solid #e98074;
-    outline-offset: 2px;
-}
-
-/* High Contrast Mode Support */
-@media (prefers-contrast: high) {
-    .ac-hero {
-        background: #000;
-        color: #fff;
+    
+    .ac-center-flame,
+    .ac-flame-icon {
+        animation: none;
     }
     
-    .ac-section-title {
-        color: #000;
-    }
-    
-    .ac-wax-card,
-    .ac-wick-card,
-    .ac-scent-card {
-        border: 2px solid #000;
+    .ac-candle-group {
+        animation: none;
     }
 }

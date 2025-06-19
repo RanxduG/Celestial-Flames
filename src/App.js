@@ -1,8 +1,7 @@
 import './App.css';
 import Navbar from './Components/Navbar/Navbar';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginSignup from './Pages/LoginSignup';
-import Shop from './Pages/ShopTest';
+import Shop from './Pages/Shop';
 import ShopCategory from './Pages/ShopCategory';
 import Product from './Pages/Product';
 import Cart from './Pages/Cart';
@@ -56,10 +55,6 @@ function App() {
           </Route>
 
           <Route path="/cart" element={<Cart />} />
-          <Route path="/loginsignup">
-            <Route index element={<LoginSignup />} />
-            <Route path=":state" element={<LoginSignup />} />
-          </Route>
           <Route path="/contactus" element={<Contact />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/Catalog" element={<Catalog />} />

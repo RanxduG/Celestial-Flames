@@ -5,7 +5,6 @@ import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
 import CustomizationProcess from '../Components/CustomizationProcess/CustomizationProcess';
 import TestimonialSlider from '../Components/TestimonialSlider/TestimonialSlider';
 import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
-// import NewsletterSection from '../Components/NewsletterSection/NewsletterSection';
 
 const Home = () => {
   return (
@@ -15,7 +14,6 @@ const Home = () => {
       <CollectionsShowcase />
       <CustomizationProcess />
       <TestimonialSlider />
-      {/* <NewsletterSection /> */}
     </div>
   );
 };

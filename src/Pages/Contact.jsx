@@ -144,8 +144,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Call or WhatsApp",
-      info: "+94 77 700 8359",
-      link: "https://wa.me/94777008359",
+      info: "+94 77 008 1559",
+      link: "https://wa.me/94770081559",
       description: "Available 9 AM - 8 PM (GMT+5:30)",
       color: "#25D366"
     },

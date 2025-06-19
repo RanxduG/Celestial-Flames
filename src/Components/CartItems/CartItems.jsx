@@ -271,7 +271,7 @@ const CartItems = () => {
 
                         <div className="summary-line">
                             <span>Shipping</span>
-                            <span>FREE</span>
+                            <span>Depends on location</span>
                         </div>
 
                         <div className="summary-line total">

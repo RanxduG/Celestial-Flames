@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './CSS/ShopTest.css';
+import './CSS/Shop.css';
 import ShopHero from '../Components/ShopHero/ShopHero';
 import ProductGallery from '../Components/ProductGallery/ProductGallery';
 import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';

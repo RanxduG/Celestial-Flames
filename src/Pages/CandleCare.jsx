@@ -322,7 +322,7 @@ const CandleCare = () => {
             <div className="care-contact-info">
               <div className="care-contact-item">
                 <span>📱 WhatsApp:</span>
-                <a href="https://wa.me/94777008359">+94 77 700 8359</a>
+                <a href="https://wa.me/94770081559">+94 77 008 1559</a>
               </div>
               <div className="care-contact-item">
                 <span>✉️ Email:</span>
