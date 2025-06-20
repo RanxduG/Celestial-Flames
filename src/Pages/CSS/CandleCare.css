@@ -132,8 +132,8 @@
   background: linear-gradient(to top, #ff4500 0%, #ff6b35 30%, #ffaa00 60%, #fff700 100%);
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   position: absolute;
-  top: -25px; /* Adjusted to sit properly on top of candle */
-  left: 50%;
+  top: -35px; /* Adjusted to sit properly on top of candle */
+  left: 38%;
   transform: translateX(-50%);
   animation: flicker 2s infinite alternate;
   filter: drop-shadow(0 0 10px rgba(255, 107, 53, 0.6));
@@ -145,7 +145,8 @@
   height: 100px;
   background: radial-gradient(circle, rgba(255, 107, 53, 0.4) 0%, transparent 70%);
   position: absolute;
-  top: -50px; /* Adjusted position */
+  top: -70px; /* Adjusted position */
+  left: -10%;
   transform: translateX(-50%);
   border-radius: 50%;
   animation: pulse 3s infinite;
