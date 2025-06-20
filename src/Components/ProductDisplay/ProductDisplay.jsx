@@ -12,7 +12,8 @@ const ProductDisplay = ({ product }) => {
   const [selectedScent, setSelectedScent] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedColorName, setSelectedColorName] = useState(null);
-  const [colorOption, setColorOption] = useState('Existing'); // Default to Existing colors
+  const [selectedDesign, setSelectedDesign] = useState(null);
+  const [colorOption, setColorOption] = useState('Colors'); // Default to Colors
   const [customColorName, setCustomColorName] = useState('');
 
   // List of scents
@@ -29,6 +30,22 @@ const ProductDisplay = ({ product }) => {
 
   // Combined scent list (without duplicates)
   const allScents = [...regularScents, ...specialScents.filter(scent => !regularScents.includes(scent))];
+
+// Design options for Glass Collection with applicable product IDs
+const allDesignOptions = [
+  { name: 'Marble', description: 'Marbled design', productIds: ['CC2024003', 'CC2024004'] },
+  { name: 'Coffee Latte', description: 'Looks like an iced coffee', productIds: ['CC2024001'] },
+  { name: 'Beachy Vibes', description: 'Represents a beach', productIds: ['CC2024007'] },
+  { name: 'Floral Mist', description: 'Gel wax with flowers under it', productIds: ['CC2024007'] },
+  { name: 'Sparkle', description: 'Gold Flakes with a small layer of soy wax on top', productIds: ['CC2024001', 'CC2024003'] },
+  { name: 'Jar Of Hearts', description: 'Hearts with gel wax filled', productIds: ['CC2024003', 'CC2024004'] },
+  { name: 'Jade Palace', description: 'Jade stars with gel wax on top', productIds: ['CC2024001'] }
+];
+
+// Filter designs based on current product ID
+const designOptions = allDesignOptions.filter(design => 
+  design.productIds.includes(product.id)
+);
 
   // Calculate filled stars for rating display
   const getFilledStars = () => {
@@ -58,6 +75,9 @@ const ProductDisplay = ({ product }) => {
 
   const { name, description, category } = getProductDetails();
 
+  // Check if product is from Glass Collection
+  const isGlassCollection = category === 'Glass Collection';
+
   // Product images - always use the 3 standard images
   const productImages = [
     product.img1Url,
@@ -69,47 +89,75 @@ const ProductDisplay = ({ product }) => {
     // Set main image to first available image when product changes
     setMainImage(productImages[0] || product.img1Url);
   }, [product]);
+
   useEffect(() => {
-  if (product.rating && product.rating.length > 0) {
-    const totalRating = product.rating.reduce((acc, r) => acc + r, 0);
-    const calculatedAverage = totalRating / product.rating.length;
-    setAverageRating(calculatedAverage);
-  } else {
-    setAverageRating(0);
-  }
-}, [product.rating]);
+    if (product.rating && product.rating.length > 0) {
+      const totalRating = product.rating.reduce((acc, r) => acc + r, 0);
+      const calculatedAverage = totalRating / product.rating.length;
+      setAverageRating(calculatedAverage);
+    } else {
+      setAverageRating(0);
+    }
+  }, [product.rating]);
 
   const handleColorOptionChange = (option) => {
     setColorOption(option);
-    // Reset color selection when switching between options
+    // Reset selections when switching between options
     setSelectedColor(null);
     setSelectedColorName(null);
+    setSelectedDesign(null);
     setCustomColorName('');
   };
 
-  const handleColorChange = (color) => {
+const handleColorChange = (color) => {
+  if (selectedColor === color.code) {
+    // If clicking the same color, deselect it
+    setSelectedColor(null);
+    setSelectedColorName(null);
+  } else {
+    // Select the new color
     setSelectedColor(color.code);
     setSelectedColorName(color.name);
-  };
+  }
+  setSelectedDesign(null); // Reset design when color is selected
+};
+
+const handleDesignChange = (design) => {
+  if (selectedDesign === design.name) {
+    // If clicking the same design, deselect it
+    setSelectedDesign(null);
+  } else {
+    // Select the new design
+    setSelectedDesign(design.name);
+  }
+  setSelectedColor(null); // Reset color when design is selected
+  setSelectedColorName(null);
+};
 
   const handleCustomColorChange = (e) => {
     setCustomColorName(e.target.value);
     setSelectedColorName(e.target.value);
     // For custom colors, we don't have a color code, so we'll use a placeholder
     setSelectedColor('#FFFFFF');
+    setSelectedDesign(null); // Reset design when custom is selected
   };
 
-  const handleScentChange = (scent) => {
+const handleScentChange = (scent) => {
+  if (selectedScent === scent) {
+    // If clicking the same scent, deselect it
+    setSelectedScent(null);
+  } else {
+    // Select the new scent
     setSelectedScent(scent);
-  };
-
+  }
+};
   // Calculate the price based on requirements
   const calculatePrice = () => {
     // Base price is always soy wax price
     let basePrice = product.soy_price || product.new_price || product.price;
     
     // Add 100 Rs for custom design
-    if (colorOption === 'Custom') {
+    if (colorOption === 'Custom Design') {
       basePrice += 100;
     }
     
@@ -120,8 +168,15 @@ const ProductDisplay = ({ product }) => {
     // Default wax type is 'Soy Wax' as per requirements
     const waxType = 'Soy Wax';
     
-    // Use either selected color name or custom color name
-    const finalColorName = colorOption === 'Custom' ? customColorName : selectedColorName;
+    // Use either selected color name, design name, or custom color name
+    let finalColorName = '';
+    if (colorOption === 'Colors') {
+      finalColorName = selectedColorName;
+    } else if (colorOption === 'Designs') {
+      finalColorName = selectedDesign;
+    } else if (colorOption === 'Custom Design') {
+      finalColorName = customColorName;
+    }
     
     addToCart(
       product.id,
@@ -159,9 +214,11 @@ const ProductDisplay = ({ product }) => {
     : 0;
 
   const areAllOptionsSelected = () => {
-    if (colorOption === 'Existing') {
+    if (colorOption === 'Colors') {
       return selectedColor && selectedScent;
-    } else { // Custom color option
+    } else if (colorOption === 'Designs') {
+      return selectedDesign && selectedScent;
+    } else { // Custom Design option
       return customColorName && selectedScent;
     }
   };
@@ -239,25 +296,35 @@ const ProductDisplay = ({ product }) => {
           </div>
         </div>
 
-        {/* Color Selection */}
+        {/* Color/Design Selection */}
         <div className="product-color-selection">
-          <h3>Color Options</h3>
+          <h3>Color/Design Options</h3>
           <div className="color-option-selector">
             <div 
-              className={`option ${colorOption === 'Existing' ? 'selected' : ''}`} 
-              onClick={() => handleColorOptionChange('Existing')}
+              className={`option ${colorOption === 'Colors' ? 'selected' : ''}`} 
+              onClick={() => handleColorOptionChange('Colors')}
             >
-              Existing Colors
+              Colors
             </div>
-            <div 
-              className={`option ${colorOption === 'Custom' ? 'selected' : ''}`} 
-              onClick={() => handleColorOptionChange('Custom')}
-            >
-              Custom Design (+Rs. 100)
-            </div>
+            {isGlassCollection && (
+              <>
+                <div 
+                  className={`option ${colorOption === 'Designs' ? 'selected' : ''}`} 
+                  onClick={() => handleColorOptionChange('Designs')}
+                >
+                  Designs
+                </div>
+                <div 
+                  className={`option ${colorOption === 'Custom Design' ? 'selected' : ''}`} 
+                  onClick={() => handleColorOptionChange('Custom Design')}
+                >
+                  Custom Design (+Rs. 100)
+                </div>
+              </>
+            )}
           </div>
           
-          {colorOption === 'Existing' ? (
+          {colorOption === 'Colors' && (
             <div className="color-palette">
               {pastelColors.map(color => (
                 <div
@@ -270,7 +337,30 @@ const ProductDisplay = ({ product }) => {
                 </div>
               ))}
             </div>
-          ) : (
+          )}
+
+          {colorOption === 'Designs' && isGlassCollection && (
+            <div className="design-options">
+              {designOptions.length > 0 ? (
+                designOptions.map(design => (
+                  <div 
+                    key={design.name}
+                    className={`design-option ${selectedDesign === design.name ? 'selected' : ''}`}
+                    onClick={() => handleDesignChange(design)}
+                  >
+                    <div className="design-name">{design.name}</div>
+                    <div className="design-description">{design.description}</div>
+                  </div>
+                ))
+              ) : (
+                <div className="no-designs-message">
+                  No special designs available for this product.
+                </div>
+              )}
+            </div>
+          )}
+
+          {colorOption === 'Custom Design' && isGlassCollection && (
             <div className="custom-design-section">
               <div className="custom-design-input">
                 <input 

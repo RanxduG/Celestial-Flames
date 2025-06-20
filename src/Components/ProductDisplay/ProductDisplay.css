@@ -474,13 +474,75 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
-.custom-design-input input{
-  width: 100%;
-  height: 100px;
-  padding: 10px 15px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  font-size: 1rem;
+/* Design Options Styling */
+.design-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.design-option {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  border: 2px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.design-option:hover {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.design-option.selected {
+  background-color: #B76E79;
+  color: white;
+  border-color: #B76E79;
+  box-shadow: 0 3px 10px rgba(183, 110, 121, 0.3);
+}
+
+.design-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.design-description {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.design-option.selected .design-description {
+  opacity: 0.9;
+}
+
+/* Custom design note styling */
+.custom-design-note {
+  font-size: 0.85rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #B76E79;
+}
+.no-designs-message {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #ddd;
 }
 @keyframes slideIn {
   from {
