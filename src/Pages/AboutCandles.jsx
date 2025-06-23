@@ -235,7 +235,7 @@ const AboutCandles = () => {
                   </div>
                   <div className="ac-wick-feature">
                     <span className="ac-feature-label">Soot Production:</span>
-                    <span className="ac-question">?</span>
+                    <span className="ac-question">⚠️</span>
                     <span className="ac-feature-note">If low quality</span>
                   </div>
                   <div className="ac-wick-feature">
@@ -244,7 +244,7 @@ const AboutCandles = () => {
                   </div>
                   <div className="ac-wick-feature">
                     <span className="ac-feature-label">Sustainability:</span>
-                    <span className="ac-question">?</span>
+                    <span className="ac-question">⚠️</span>
                     <span className="ac-feature-note">Depends on source</span>
                   </div>
                 </div>
