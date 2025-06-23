@@ -63,7 +63,7 @@ const WelcomeBanner = () => {
             <button className="btn-primary" onClick={() => window.location.href = '/catalog'}>
               Explore Collection
             </button>
-            <button className="btn-secondary">
+            <button className="btn-secondary" onClick={() => window.location.href = '/catalog'}>
               Custom Design
             </button>
           </div>

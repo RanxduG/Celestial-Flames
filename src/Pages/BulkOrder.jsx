@@ -249,7 +249,7 @@ const BulkOrder = () => {
                 <MessageCircle size={20} />
                 Start Your Order on WhatsApp
               </a>
-              <Link to="/contact" className="bulk-order-cta-secondary">
+              <Link to="/contactus" className="bulk-order-cta-secondary">
                 Contact Us
                 <ArrowRight size={18} />
               </Link>
@@ -442,7 +442,7 @@ const BulkOrder = () => {
           
           <div className="bulk-order-pricing-note">
             <Clock size={20} />
-            <p>Lead time varies based on candle type. Custom cement molds require additional setting time.</p>
+            <p>Lead time varies based on candle type.</p>
           </div>
         </div>
       </section>
