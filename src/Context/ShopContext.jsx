@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
 import ready_made_products from '../Components/Assets/Data/readymade.js';
-import all_products from '../Components/Assets/Data/all_data.js';
 import { getAllStock, getAllProducts, getHomeBanner, getCategoryBanner, getSeasonalBanner } from './api';
 
 export const ShopContext = createContext(null);
@@ -134,7 +133,6 @@ const ShopContextProvider = (props) => {
     };
 
     const contextValue = {
-        all_products,
         ready_made_products,
         cartItems,
         addToCart,
