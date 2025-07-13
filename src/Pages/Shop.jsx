@@ -3,6 +3,7 @@ import './CSS/Shop.css';
 import ShopHero from '../Components/ShopHero/ShopHero';
 import ProductGallery from '../Components/ProductGallery/ProductGallery';
 import ProductShowcase from '../Components/ProductShowcase/ProductShowcase';
+import CollectionsShowcase from '../Components/CollectionsShowcase/CollectionsShowcase';
 
 const ShopTest = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -43,6 +44,7 @@ const ShopTest = () => {
         <ProductGallery />
       </div>
       <ProductShowcase productGalleryRef={productGalleryRef}/>
+      <CollectionsShowcase />
     </div>
   );
 };

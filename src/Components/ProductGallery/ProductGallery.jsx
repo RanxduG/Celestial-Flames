@@ -16,6 +16,7 @@ const ProductGallery = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [sortOrder, setSortOrder] = useState('featured');
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [alertVisible, setAlertVisible] = useState(false);
 
   // Fragrance options
   const fragranceOptions = [
@@ -165,10 +166,23 @@ const ProductGallery = () => {
   };
 
   const handleAddToCart = (product) => {
-    if (addToCart && product.stock > 0) {
-      addToCart(product.id);
-    }
+    addToCart(
+      product.id, 
+      getProductNameByStockId(product.item_id), 
+      product.waxtype, 
+      product.getFragranceType, 
+      product.color, 
+      product.scent, 
+      product.new_price, 
+      product.old_price,
+      1
+    );
+    setAlertVisible(true);
+    setTimeout(() => {
+      setAlertVisible(false);
+    }, 3000);
   };
+
 
   const formatPrice = (price) => {
     return `Rs. ${price}`;
@@ -596,6 +610,14 @@ const ProductGallery = () => {
           </svg>
         </Link>
       </div>
+      {alertVisible && (
+        <div className="product-alert">
+          <div className="alert-content">
+            <span className="alert-icon">✓</span>
+            <span className="alert-message">Added to cart successfully!</span>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

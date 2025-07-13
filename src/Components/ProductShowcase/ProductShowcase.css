@@ -450,7 +450,6 @@
   font-size: 1.2rem;
   font-weight: bold;
 }
-
 @keyframes slideIn {
   from {
     transform: translateX(100%);
