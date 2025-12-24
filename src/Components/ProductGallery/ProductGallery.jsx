@@ -48,7 +48,7 @@ const ProductGallery = () => {
     { id: 'sweetFlower', name: 'Sweet Flower' },
     
     // Coffee and Beans
-    { id: 'roastedCoffee', name: 'Roasted Coffee' },
+    { id: 'coffee', name: 'Coffee' },
     
     // Sweet and Floral
     { id: 'sweetheart', name: 'Sweetheart' },
@@ -437,13 +437,14 @@ const ProductGallery = () => {
   };
 
   return (
-    <section className={`product-gallery ${isVisible ? 'visible' : ''}`}>
-      <div className="gallery-header">
-        <div className="gallery-title">
-          <h2>Browse Our Products</h2>
-          <p>Discover our handcrafted candles made with love and natural ingredients</p>
+    <>
+      <section className={`product-gallery ${isVisible ? 'visible' : ''}`}>
+        <div className="gallery-header">
+          <div className="gallery-title">
+            <h2>Browse Our Products</h2>
+            <p>Discover our handcrafted candles made with love and natural ingredients</p>
+          </div>
         </div>
-      </div>
       
       <div className="gallery-filter-container">
         <div className="filter-categories">
@@ -610,6 +611,8 @@ const ProductGallery = () => {
           </svg>
         </Link>
       </div>
+      </section>
+      
       {alertVisible && (
         <div className="product-alert">
           <div className="alert-content">
@@ -618,7 +621,7 @@ const ProductGallery = () => {
           </div>
         </div>
       )}
-    </section>
+    </>
   );
 };
 

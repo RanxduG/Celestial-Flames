@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './ShopHero.css';
 import { Link } from 'react-router-dom';
-import gelCandleImage from '../Assets/Good/Avurudu Photos/IMG-20250426-WA0020.jpg';
-import soyCandleImage from '../Assets/Good/Avurudu Photos/IMG-20250426-WA0015.jpg';
-import customCandleImage from '../Assets/Good/Avurudu Photos/IMG-20250426-WA0010.jpg';
+import gelCandleImage from '../Assets/Banners/IMG-20250426-WA0020.jpg';
+import soyCandleImage from '../Assets/Banners/IMG-20250426-WA0015.jpg';
+import customCandleImage from '../Assets/Banners/IMG-20250426-WA0010.jpg';
 
 const ShopHero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

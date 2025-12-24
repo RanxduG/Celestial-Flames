@@ -279,13 +279,6 @@ const CartItems = () => {
                             <span>Rs. {discountedAmount.toFixed(2)}</span>
                         </div>
 
-                        <div className="shipping-info">
-                            <p>
-                                <Truck size={16} style={{ marginRight: '0.5rem', verticalAlign: 'middle' }} />
-                                Free delivery via our trusted partner Prompt Express (PVT) Ltd, Nugegoda
-                            </p>
-                        </div>
-
                         <a 
                             href={`https://wa.me/+94770081559?text=${whatsappMessage}`} 
                             target="_blank" 

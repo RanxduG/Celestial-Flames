@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './CSS/ShopCategory.css';
 import { ShopContext } from '../Context/ShopContext';
 import Item from '../Components/Item/Item';
@@ -48,8 +48,18 @@ const ShopCategory = (props) => {
     return bannerImages[props.collection] || bannerImages['Soy'];
   };
 
-  // Filter products by wax type (collection ID)
-  const filteredProducts = allStocks.filter((item) => item.waxtype === props.collection);
+  // Filter products by tags (collection ID)
+  const filteredProducts = allStocks.filter((item) => {
+    // Check if item has tags array and if props.collection is included
+    if (item.tags && Array.isArray(item.tags)) {
+      console.log("Tags:"+item.tags);
+      console.log("collection:"+props.collection);
+      return item.tags.includes(props.collection);
+    }
+    // Fallback to waxtype for backward compatibility
+    console.log("Using waxtype for filtering");
+    return item.waxtype === props.collection;
+  });
 
   // Sort products based on selected option
   const sortProducts = (products, sortBy) => {

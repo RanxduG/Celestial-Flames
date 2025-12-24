@@ -37,7 +37,7 @@ const CollectionsShowcase = () => {
       id: "Seasonal",
       name: "Seasonal Candle Delights",
       description: "Celebrate every season with our exclusive candle collection",
-      imageUrl: "",
+      imageUrl: "/src/Components/Assets/Banners/All gel wax candles.jpg",
       totalProducts: 10,
       featured: true
     },
